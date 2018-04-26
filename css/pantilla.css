@@ -1,0 +1,69 @@
+header {
+width: 100;
+background-color: #5e2129;
+color:black;
+}
+
+footer{
+	position: absolute;
+	background: #5e2129;
+	width: 100%;
+	color: white;
+	margin: 0px;
+	padding: 0px;
+}
+
+img.rounded.float-left.ejemplo {
+	margin : 10px;
+	cursor: pointer;
+}
+
+footer .row{
+margin:10px -15px 0px;	
+	
+}
+#footer .col-md-12{
+	color:black;
+	/*background :white ;*/
+	height:11px;
+}
+
+
+div.col-md-9{
+	margin:20px 0px 0px;	
+	
+}
+ejemplo{
+margin : 10px;
+}  
+
+.bg-light {
+    background-color: #ffff !important;
+}
+
+
+aside.col-md-3{
+	margin : 20px 0px 0px;
+}
+
+ section.main.row
+{
+	margin :30px 0px 60px;/*mirar el margen de la parte de abajo*/	
+}
+
+/*
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+{
+	background-color: #5e2129;
+	
+}
+
+/*button.btn.btn-secondary
+{
+	background:#154672;
+}*/
+
+.row.ejemplo
+{
+	background :white;
+}

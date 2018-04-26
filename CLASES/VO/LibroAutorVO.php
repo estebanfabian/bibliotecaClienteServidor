@@ -1,0 +1,42 @@
+<?php
+
+class LibroAutor {
+
+    private $idAutorLibro;
+    private $Isbn;
+    private $idautor;
+    private $listaLibro;
+    function getIdAutorLibro() {
+        return $this->idAutorLibro;
+    }
+
+    function getIsbn() {
+        return $this->Isbn;
+    }
+
+    function getIdautor() {
+        return $this->idautor;
+    }
+
+    function getListaLibro() {
+        return $this->listaLibro;
+    }
+
+    function setIdAutorLibro($idAutorLibro) {
+        $this->idAutorLibro = $idAutorLibro;
+    }
+
+    function setIsbn($Isbn) {
+        $this->Isbn = $Isbn;
+    }
+
+    function setIdautor($idautor) {
+        $this->idautor = $idautor;
+    }
+
+    function setListaLibro($listaLibro) {
+        $this->listaLibro = $listaLibro;
+    }
+
+
+}

@@ -1,0 +1,42 @@
+<?php
+
+class PresInterBibliotecario {
+
+    private $idPrestamoInterBiblio;
+    private $idPrestamo;
+    private $idPrestemoInterBibliotecario;
+    private $IsbnPrestamoInt;
+
+    function getIdPrestamoInterBiblio() {
+        return $this->idPrestamoInterBiblio;
+    }
+
+    function getIdPrestamo() {
+        return $this->idPrestamo;
+    }
+
+    function getIdPrestemoInterBibliotecario() {
+        return $this->idPrestemoInterBibliotecario;
+    }
+
+    function getIsbnPrestamoInt() {
+        return $this->IsbnPrestamoInt;
+    }
+
+    function setIdPrestamoInterBiblio($idPrestamoInterBiblio) {
+        $this->idPrestamoInterBiblio = $idPrestamoInterBiblio;
+    }
+
+    function setIdPrestamo($idPrestamo) {
+        $this->idPrestamo = $idPrestamo;
+    }
+
+    function setIdPrestemoInterBibliotecario($idPrestemoInterBibliotecario) {
+        $this->idPrestemoInterBibliotecario = $idPrestemoInterBibliotecario;
+    }
+
+    function setIsbnPrestamoInt($IsbnPrestamoInt) {
+        $this->IsbnPrestamoInt = $IsbnPrestamoInt;
+    }
+
+}
