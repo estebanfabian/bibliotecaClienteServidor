@@ -4,23 +4,23 @@ class UsuarioDAO {
 
     function CrearUsuario($array) {
         $Usuariovo = new UsuarioVO();
-        $Usuariovo->setCodigo($array["Codigo"]);
-        $Usuariovo->setCodigo($array["apellido"]);
-        $Usuariovo->setCodigo($array["nombre"]);
-        $Usuariovo->setCodigo($array["sexo"]);
-        $Usuariovo->setCodigo($array["direccion"]);
-        $Usuariovo->setCodigo($array["direccion2"]);
-        $Usuariovo->setCodigo($array["telefonoPrincipal"]);
-        $Usuariovo->setCodigo($array["telefonoSecundario"]);
-        $Usuariovo->setCodigo($array["telefonoOtro"]);
-        $Usuariovo->setCodigo($array["emailPrincipal"]);
-        $Usuariovo->setCodigo($array["contactoApellido"]);
-        $Usuariovo->setCodigo($array["contactoNombre"]);
-        $Usuariovo->setCodigo($array["contactoDireccion"]);
-        $Usuariovo->setCodigo($array["contactoDireccion2"]);
-        $Usuariovo->setCodigo($array["contactoTelefono"]);
-        $Usuariovo->setCodigo($array["CodigoEmpleado"]);
-        $Usuariovo->setCodigo($array["contrasena"]);
+        $Usuariovo->setCodigo($array->Codigo);
+        $Usuariovo->setCodigo($array->apellido);
+        $Usuariovo->setCodigo($array->nombre);
+        $Usuariovo->setCodigo($array->sexo);
+        $Usuariovo->setCodigo($array->direccion);
+        $Usuariovo->setCodigo($array->direccion2);
+        $Usuariovo->setCodigo($array->telefonoPrincipal);
+        $Usuariovo->setCodigo($array->telefonoSecundario);
+        $Usuariovo->setCodigo($array->telefonoOtro);
+        $Usuariovo->setCodigo($array->emailPrincipal);
+        $Usuariovo->setCodigo($array->contactoApellido);
+        $Usuariovo->setCodigo($array->contactoNombre);
+        $Usuariovo->setCodigo($array->contactoDireccion);
+        $Usuariovo->setCodigo($array->contactoDireccion2);
+        $Usuariovo->setCodigo($array->contactoTelefono);
+        $Usuariovo->setCodigo($array->CodigoEmpleado);
+        $Usuariovo->setCodigo($array->contrasena);
 
         if ($Usuariovo->getCodigo() != "null") {
             $this->modificarProveedor($Autorvo);
@@ -67,9 +67,9 @@ class UsuarioDAO {
 
     function Login($Array) {
         $Usuariovo = new UsuarioVO();
-        $Usuariovo->setCodigo($array["Codigo"]);
-        $Usuariovo->setCodigo($array["contrasena"]);
-        $sql = 'SELECT * FROM `tbl_usuario` WHERE `codigo`= ?  and `contrasena`= ?;';
+        $Usuariovo->setCodigo($array->Codigo);
+        $Usuariovo->setCodigo($array->contrasena);
+        $sql = 'SELECT * FROM `tbl_usuario` WHERE `codigo`= ?  and `contrasena` like binary ?;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -89,8 +89,8 @@ class UsuarioDAO {
 
     function elminarUsuario($array) {
         $Usuariovo = new UsuarioVO();
-        $Usuariovo->setCodigo($array["Codigo"]);
-        $Usuariovo->setCodigo($array["contrasena"]);
+        $Usuariovo->setCodigo($array->Codigo);
+        $Usuariovo->setCodigo($array->contrasena);
         $sql = 'DELETE FROM `tbl_usuario` WHERE `codigo`=?';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
@@ -110,23 +110,23 @@ class UsuarioDAO {
 
     function ActualizarUsuario($array) {
         $Usuariovo = new UsuarioVO();
-        $Usuariovo->setCodigo($array["Codigo"]);
-        $Usuariovo->setCodigo($array["apellido"]);
-        $Usuariovo->setCodigo($array["nombre"]);
-        $Usuariovo->setCodigo($array["sexo"]);
-        $Usuariovo->setCodigo($array["direccion"]);
-        $Usuariovo->setCodigo($array["direccion2"]);
-        $Usuariovo->setCodigo($array["telefonoPrincipal"]);
-        $Usuariovo->setCodigo($array["telefonoSecundario"]);
-        $Usuariovo->setCodigo($array["telefonoOtro"]);
-        $Usuariovo->setCodigo($array["emailPrincipal"]);
-        $Usuariovo->setCodigo($array["contactoApellido"]);
-        $Usuariovo->setCodigo($array["contactoNombre"]);
-        $Usuariovo->setCodigo($array["contactoDireccion"]);
-        $Usuariovo->setCodigo($array["contactoDireccion2"]);
-        $Usuariovo->setCodigo($array["contactoTelefono"]);
-        $Usuariovo->setCodigo($array["CodigoEmpleado"]);
-        $Usuariovo->setCodigo($array["contrasena"]);
+        $Usuariovo->setCodigo($array->Codigo);
+        $Usuariovo->setCodigo($array->apellido);
+        $Usuariovo->setCodigo($array->nombre);
+        $Usuariovo->setCodigo($array->sexo);
+        $Usuariovo->setCodigo($array->direccion);
+        $Usuariovo->setCodigo($array->direccion2);
+        $Usuariovo->setCodigo($array->telefonoPrincipal);
+        $Usuariovo->setCodigo($array->telefonoSecundario);
+        $Usuariovo->setCodigo($array->telefonoOtro);
+        $Usuariovo->setCodigo($array->emailPrincipal);
+        $Usuariovo->setCodigo($array->contactoApellido);
+        $Usuariovo->setCodigo($array->contactoNombre);
+        $Usuariovo->setCodigo($array->contactoDireccion);
+        $Usuariovo->setCodigo($array->contactoDireccion2);
+        $Usuariovo->setCodigo($array->contactoTelefono);
+        $Usuariovo->setCodigo($array->CodigoEmpleado);
+        $Usuariovo->setCodigo($array->contrasena);
 
         if ($Usuariovo->getCodigo() != "null") {
             $this->modificarProveedor($Autorvo);
