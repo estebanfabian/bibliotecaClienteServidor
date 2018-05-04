@@ -12,11 +12,12 @@
               <link href= "../css/pantilla.css" rel="stylesheet" type="text/css" style="display:none;visibility:hidden"https://www.googletagmanager.com/ns.html?id=GTM-MWD3VXM" height="0" width="0">
 
 
-        <!--<script src="JS/jquery-3.3.1.js" type="text/javascript"></script>
-        <script src="JS/jquery.validate.js" type="text/javascript"></script>
-        <script src="JS/additional-methods.js" type="text/javascript"></script>
-        <script src="JS/localization/messages_es.js" type="text/javascript"></script>-->
-        <script src="JS/MiLogica.js" type="text/javascript"></script>
+        <script src="../js/jquery-3.3.1.js" type="text/javascript"></script>
+        <script src="../js/jquery.validate.js" type="text/javascript"></script>
+        <script src="../js/additional-methods.js" type="text/javascript"></script>
+        <script src="../js/localization/messages_es.js" type="text/javascript"></script>-->
+        <script src="" type="text/javascript"></script>
+        <script src="../js/MiLogica.js" type="text/javascript"></script>
 
 
         <title>Red Distrital de Bibliotecas Públicas - Biblored</title>
@@ -47,14 +48,14 @@
                             <div id="div-forms">
 
                                 <!-- Begin # Login Form -->
-                                <form id="login-form">
+                                <form id="login-form" name ="login-form" >
                                     <div class="modal-body">
                                         <div id="div-login-msg">
                                             <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
                                             <span id="text-login-msg">Ingrese su código y contraseña</span>
                                         </div>
-                                        <input id="login_username" class="form-control" type="text" placeholder="Código" required>
-                                        <input id="login_password" class="form-control" type="password" placeholder="Contraseña" required>
+                                        <input id="login_username" name = "login_username" class="form-control" type="text" placeholder="Código" required>
+                                        <input id="login_password" name =  "login_password"class="form-control" type="password" placeholder="Contraseña" required>
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox"> Recuerdame
@@ -63,7 +64,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <div>
-                                            <button type="submit" id = "botto" class="btn btn-primary btn-lg btn-block">Ingresar</button>
+                                            <button type="submit"  class="btn btn-primary btn-lg btn-block">Ingresar</button>
                                         </div>
                                         <div>
                                             <button id="login_lost_btn" type="button" class="btn btn-link">¿Olvidaste tu contraseña?</button>
