@@ -65,7 +65,7 @@ class EmpleadoDAO {
         $Empleadovo = new EmpleadoVO();
         $Empleadovo->setCodigoEmpleado($array->codigoEmpleado);
 
-        $sql = 'DELETE FROM `tbl_empleado` WHERE `codigo`=?';
+        $sql = 'DELETE FROM `tbl_empleado` WHERE `codigo`=?;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);

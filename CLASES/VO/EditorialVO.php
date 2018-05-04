@@ -7,6 +7,7 @@ class EditorialVO {
     private $direccionEditorial;
     private $telefonoEditorial;
     private $anoPublicacion;
+
     function getIdEditorial() {
         return $this->idEditorial;
     }
@@ -46,6 +47,5 @@ class EditorialVO {
     function setAnoPublicacion($anoPublicacion) {
         $this->anoPublicacion = $anoPublicacion;
     }
-
 
 }

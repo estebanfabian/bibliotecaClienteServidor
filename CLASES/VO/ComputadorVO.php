@@ -7,7 +7,7 @@ class ComputadorVO {
     private $observaciones;
     private $cargadorId;
 
-}
+
 
 function getIdcomputador() {
     return $this->idcomputador;
@@ -41,4 +41,4 @@ function getIdcomputador() {
     $this->cargadorId = $cargadorId;
 }
 
-
+}
