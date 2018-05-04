@@ -3,24 +3,20 @@
 class UsuarioVO {
 
     private $codigo;
-    private $apellido;
     private $nombre;
+    private $apellido;
     private $fechaNacimiento;
     private $sexo;
     private $direccion;
     private $direccion2;
-    private $cuidad;
-    private $pais;
     private $telefonoPrincipal;
     private $telefonoSecundario;
     private $telefonoOtro;
     private $emailPrincipal;
-    private $contactoApellido;
     private $contactoNombre;
+    private $contactoApellido;
     private $contactoDireccion;
     private $contactoDireccion2;
-    private $contactoCiudad;
-    private $contactoPais;
     private $contactoTelefono;
     private $CodigoEmpleado;
     private $contrasena;
@@ -29,12 +25,12 @@ class UsuarioVO {
         return $this->codigo;
     }
 
-    function getApellido() {
-        return $this->apellido;
-    }
-
     function getNombre() {
         return $this->nombre;
+    }
+
+    function getApellido() {
+        return $this->apellido;
     }
 
     function getFechaNacimiento() {
@@ -53,14 +49,6 @@ class UsuarioVO {
         return $this->direccion2;
     }
 
-    function getCuidad() {
-        return $this->cuidad;
-    }
-
-    function getPais() {
-        return $this->pais;
-    }
-
     function getTelefonoPrincipal() {
         return $this->telefonoPrincipal;
     }
@@ -77,12 +65,12 @@ class UsuarioVO {
         return $this->emailPrincipal;
     }
 
-    function getContactoApellido() {
-        return $this->contactoApellido;
-    }
-
     function getContactoNombre() {
         return $this->contactoNombre;
+    }
+
+    function getContactoApellido() {
+        return $this->contactoApellido;
     }
 
     function getContactoDireccion() {
@@ -91,14 +79,6 @@ class UsuarioVO {
 
     function getContactoDireccion2() {
         return $this->contactoDireccion2;
-    }
-
-    function getContactoCiudad() {
-        return $this->contactoCiudad;
-    }
-
-    function getContactoPais() {
-        return $this->contactoPais;
     }
 
     function getContactoTelefono() {
@@ -117,12 +97,12 @@ class UsuarioVO {
         $this->codigo = $codigo;
     }
 
-    function setApellido($apellido) {
-        $this->apellido = $apellido;
-    }
-
     function setNombre($nombre) {
         $this->nombre = $nombre;
+    }
+
+    function setApellido($apellido) {
+        $this->apellido = $apellido;
     }
 
     function setFechaNacimiento($fechaNacimiento) {
@@ -141,14 +121,6 @@ class UsuarioVO {
         $this->direccion2 = $direccion2;
     }
 
-    function setCuidad($cuidad) {
-        $this->cuidad = $cuidad;
-    }
-
-    function setPais($pais) {
-        $this->pais = $pais;
-    }
-
     function setTelefonoPrincipal($telefonoPrincipal) {
         $this->telefonoPrincipal = $telefonoPrincipal;
     }
@@ -165,12 +137,12 @@ class UsuarioVO {
         $this->emailPrincipal = $emailPrincipal;
     }
 
-    function setContactoApellido($contactoApellido) {
-        $this->contactoApellido = $contactoApellido;
-    }
-
     function setContactoNombre($contactoNombre) {
         $this->contactoNombre = $contactoNombre;
+    }
+
+    function setContactoApellido($contactoApellido) {
+        $this->contactoApellido = $contactoApellido;
     }
 
     function setContactoDireccion($contactoDireccion) {
@@ -179,14 +151,6 @@ class UsuarioVO {
 
     function setContactoDireccion2($contactoDireccion2) {
         $this->contactoDireccion2 = $contactoDireccion2;
-    }
-
-    function setContactoCiudad($contactoCiudad) {
-        $this->contactoCiudad = $contactoCiudad;
-    }
-
-    function setContactoPais($contactoPais) {
-        $this->contactoPais = $contactoPais;
     }
 
     function setContactoTelefono($contactoTelefono) {
@@ -200,5 +164,6 @@ class UsuarioVO {
     function setContrasena($contrasena) {
         $this->contrasena = $contrasena;
     }
+
 
 }

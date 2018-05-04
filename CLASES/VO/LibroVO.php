@@ -1,6 +1,6 @@
 <?php
 
-class Libro {
+class LibroVO {
 
     private $Isbn;
     private $idEditorial;
@@ -9,7 +9,7 @@ class Libro {
     private $categoriaLibro;
     private $resena;
 
-}
+
 
 function getIsbn() {
     return $this->Isbn;
@@ -60,3 +60,4 @@ function getIsbn() {
 }
 
 
+}

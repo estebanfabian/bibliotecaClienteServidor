@@ -23,15 +23,12 @@ class UsuarioDAO {
         $Usuariovo->setCodigo($array->contrasena);
 
         if ($Usuariovo->getCodigo() != "null") {
-            $this->modificarProveedor($Autorvo);
+            $this->ActualizarUsuario($Usuariovo);
         } else {
             $sql = 'INSERT INTO `tbl_usuario` (`codigo`, `nombre`, `apellido`, `fechaNacimiento`, `sexo`, `direccion`, `direccion2`, `telefonoPrincipal`, `telefonoSecundario`, `telefonoOtro`, `emailPrincipal`, `contactoNombre`, `contactoApellido`, `contactoDireccion`, `contactoDireccion2`, `contactoTelefono`, `contrasena`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
-
-            $notaAutor = $Usuariovo->getNotaAutor();
-// $idAutor = $Autorvo->getIdautor();
 
             $codigo = $Usuariovo->getCodigo();
             $nombre = $Usuariovo->getNombre();
@@ -90,7 +87,7 @@ class UsuarioDAO {
     function elminarUsuario($array) {
         $Usuariovo = new UsuarioVO();
         $Usuariovo->setCodigo($array->Codigo);
-        $Usuariovo->setCodigo($array->contrasena);
+        
         $sql = 'DELETE FROM `tbl_usuario` WHERE `codigo`=?';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();

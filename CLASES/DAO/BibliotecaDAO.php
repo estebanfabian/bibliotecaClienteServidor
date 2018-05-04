@@ -1,0 +1,105 @@
+<?php
+
+class BibliotecaDAO {
+
+    function CrearBiblioteca($array) {
+        $BibliotecaVo = new BibliotecaVO();
+        $BibliotecaVo->setNombreAutor($array->idBiblioteca);
+        $BibliotecaVo->setNombreAutor($array->nombreBiblioteca);
+        $BibliotecaVo->setNombreAutor($array->direccionBiblioteca);
+        $BibliotecaVo->setNombreAutor($array->telefonoBiblioteca);
+        $BibliotecaVo->setNombreAutor($array->personaResponsabe);
+        $BibliotecaVo->setNombreAutor($array->obervacionBiblioteca);
+
+        if ($BibliotecaVo->getIdautor() != "null") {
+            $this->modificarBiblioteca($BibliotecaVo);
+        } else {
+            $sql = 'INSERT INTO `tbl_biblioteca` (`idBiblioteca`, `nombreBiblioteca`, `direccionBiblioteca`, `telefonoBiblioteca`, `personaResponsabe`, `obervacionBiblioteca`) VALUES (?,?,?,?, ?,?);';
+            $BD = new ConectarBD();
+            $conn = $BD->getMysqli();
+            $stmp = $conn->prepare($sql);
+
+            $idBiblioteca = $BibliotecaVo->getIdBiblioteca();
+            $nombreBiblioteca = $BibliotecaVo->getNombreBiblioteca();
+            $direcionBiblioteca = $BibliotecaVo->getDireccionBiblioteca();
+            $telefonoBiblioteca = $BibliotecaVo->getTelefonoBiblioteca();
+            $personaBiblioteca = $BibliotecaVo->getPersonaResponsabe();
+            $observacionesBiblioteca = $BibliotecaVo->getObervacionBiblioteca();
+
+
+            $stmp->bind_param("issssss", $idBiblioteca, $nombreBiblioteca, $direcionBiblioteca, $telefonoBiblioteca, $personaBiblioteca, $observacionesBiblioteca);
+            $this->respuesta($conn, $stmp);
+            $respuesta = array();
+            if ($stmp->execute() == 1) {
+                $respuesta["sucess"] = "ok";
+            } else {
+                $respuesta["sucess"] = "no";
+            }
+            $stmp->close();
+            $conn->close();
+            echo json_encode($respuesta);
+        }
+    }
+
+    function modificarBiblioteca($Array) {
+        $BibliotecaVo = new BibliotecaVO();
+        $BibliotecaVo->setNombreAutor($array->idBiblioteca);
+        $BibliotecaVo->setNombreAutor($array->nombreBiblioteca);
+        $BibliotecaVo->setNombreAutor($array->direccionBiblioteca);
+        $BibliotecaVo->setNombreAutor($array->telefonoBiblioteca);
+        $BibliotecaVo->setNombreAutor($array->personaResponsabe);
+        $BibliotecaVo->setNombreAutor($array->obervacionBiblioteca);
+
+
+        $sql = 'UPDATE `tbl_biblioteca` SET `nombreBiblioteca` = ?, `direccionBiblioteca` = ?, `telefonoBiblioteca` = ?, `personaResponsabe` = ?, `obervacionBiblioteca` = ? WHERE `tbl_biblioteca`.`idBiblioteca` = ?;';
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $idBiblioteca = $BibliotecaVo->getIdBiblioteca();
+        $nombreBiblioteca = $BibliotecaVo->getNombreBiblioteca();
+        $direcionBiblioteca = $BibliotecaVo->getDireccionBiblioteca();
+        $telefonoBiblioteca = $BibliotecaVo->getTelefonoBiblioteca();
+        $personaBiblioteca = $BibliotecaVo->getPersonaResponsabe();
+        $observacionesBiblioteca = $BibliotecaVo->getObervacionBiblioteca();
+
+
+        $stmp->bind_param("ssssssi", $nombreBiblioteca, $direcionBiblioteca, $telefonoBiblioteca, $personaBiblioteca, $observacionesBiblioteca, $idBiblioteca);
+        $this->respuesta($conn, $stmp);
+        $respuesta = array();
+        if ($stmp->execute() == 1) {
+            $respuesta["sucess"] = "ok";
+        } else {
+            $respuesta["sucess"] = "no";
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
+    function eliminarBiblioteca($array) {
+        $BibliotecaVo = new BibliotecaVO();
+        $BibliotecaVo->setNombreAutor($array->idBiblioteca);
+
+        $sql = 'DELETE FROM `tbl_biblioteca` WHERE `idBiblioteca`=?';
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $idBiblioteca = $BibliotecaVo->getIdBiblioteca();
+
+
+        $stmp->bind_param("i", $idBiblioteca);
+        $this->respuesta($conn, $stmp);
+        $respuesta = array();
+        if ($stmp->execute() == 1) {
+            $respuesta["sucess"] = "ok";
+        } else {
+            $respuesta["sucess"] = "no";
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
+}

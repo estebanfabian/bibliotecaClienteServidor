@@ -1,6 +1,6 @@
 <?php
 
-class PresInterBibliotecario {
+class PresInterBibliotecarioVO {
 
     private $idPrestamoInterBiblio;
     private $idPrestamo;

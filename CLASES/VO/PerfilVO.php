@@ -1,6 +1,6 @@
 <?php
 
-class Perfil {
+class PerfilVO {
 
 
 private $CodigoEmpleado;

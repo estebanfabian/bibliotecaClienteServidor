@@ -1,6 +1,6 @@
 <?php
 
-class LibroAutor {
+class LibroAutorVO {
 
     private $idAutorLibro;
     private $Isbn;

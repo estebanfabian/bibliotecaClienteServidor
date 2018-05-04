@@ -1,6 +1,6 @@
 <?php
 
-class Biblioteca {
+class BibliotecaVO {
 
     private $idBiblioteca;
     private $nombreBiblioteca;

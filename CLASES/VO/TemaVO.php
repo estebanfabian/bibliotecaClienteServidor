@@ -1,7 +1,7 @@
 <?php
 
 
-class Tema {
+class TemaVO {
     private $idTema;
     private $nombreTema;
     private $Descricion;

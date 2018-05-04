@@ -1,11 +1,11 @@
 <?php
 
 
-class LibrosTema {
+class LibrosTemaVO {
     private $Isbn;
     private $idTema;
     
-}
+
 
 function getIsbn() {
     return $this->Isbn;
@@ -24,3 +24,4 @@ function getIsbn() {
 }
 
 
+}

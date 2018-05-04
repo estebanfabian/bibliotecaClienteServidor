@@ -1,6 +1,6 @@
 <?php
 
-class Prestamo {
+class PrestamoVO {
 
     private $idPrestamo;
     private $estadoLibro;

@@ -1,6 +1,6 @@
 <?php
 
-class Computador {
+class ComputadorVO {
 
     private $idcomputador;
     private $fabricante;

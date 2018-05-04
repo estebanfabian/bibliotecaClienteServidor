@@ -1,6 +1,6 @@
 <?php
 
-class Editorial {
+class EditorialVO {
 
     private $idEditorial;
     private $nombreEditorial;
