@@ -1,16 +1,100 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of LibrosTemaDAO
- *
- * @author esteban
- */
 class LibrosTemaDAO {
-    //put your code here
+
+    function CrearLibrosTema($array) {
+        $LibrosTemaVo = new LibrosTemaVO();
+        $LibrosTemaVo->setIdAutorLibro($array->idAutorLibro);
+        $LibrosTemaVo->setIsbn($array->Isbn);
+        $LibrosTemaVo->setIdTema($array->idTema);
+
+        if ($LibrosTemaVo->setIdAutorLibro() != "null") {
+            $this->ModificarLibrosTema($LibrosTemaVo);
+        } else {
+            $sql = 'INSERT INTO `tbl_libro_temas` (`idLibroTema`,`Isbn`, `idTema`) VALUES (?,?,?);';
+            $BD = new ConectarBD();
+            $conn = $BD->getMysqli();
+            $stmp = $conn->prepare($sql);
+
+
+            $idLibroTema = $LibrosTemaVo->getIdLibroTema();
+            $Isbn = $LibrosTemaVo->getIsbn();
+            $idTema = $LibrosTemaVo->getIdTema();
+
+            $stmp->bind_param("isis", $idLibroTema, $Isbn, $idTema);
+
+            $respuesta = array();
+            if ($stmp->execute() == 1) {
+                $respuesta["sucess"];
+                $respuesta["sucess"] = "ok";
+            } else {
+                $respuesta["sucess"] = "no";
+            }
+            $stmp->close();
+            $conn->close();
+            echo json_encode($respuesta);
+        }
+    }
+
+    function ModificarLibrosTema($param) {
+        $LibrosTemaVo = new LibrosTemaVO();
+        $LibrosTemaVo->setIdAutorLibro($array->idAutorLibro);
+        $LibrosTemaVo->setIsbn($array->Isbn);
+        $LibrosTemaVo->setIdTema($array->idTema);
+
+        if ($LibrosTemaVo->setIdAutorLibro() != "null") {
+            $this->ModificarLibrosTema($LibrosTemaVo);
+        } else {
+            $sql = 'UPDATE `tbl_libro_temas` SET  `Isbn`=?, `idTema`=? WHERE `tbl_libro_temas`.`idLibroTema` =? ;';
+            $BD = new ConectarBD();
+            $conn = $BD->getMysqli();
+            $stmp = $conn->prepare($sql);
+
+
+            $idLibroTema = $LibrosTemaVo->getIdLibroTema();
+            $Isbn = $LibrosTemaVo->getIsbn();
+            $idTema = $LibrosTemaVo->getIdTema();
+
+            $stmp->bind_param("sii", $idLibroTema, $Isbn, $idTema);
+
+            $respuesta = array();
+            if ($stmp->execute() == 1) {
+                $respuesta["sucess"];
+                $respuesta["sucess"] = "ok";
+            } else {
+                $respuesta["sucess"] = "no";
+            }
+            $stmp->close();
+            $conn->close();
+            echo json_encode($respuesta);
+        }
+    }
+
+    function EliminarrLibrosTema($array) {
+        $LibrosTemaVo = new LibrosTemaVO();
+        $LibrosTemaVo->setIdAutorLibro($array->idAutorLibro);
+
+
+        $sql = 'DELETE FROM `tbl_computador` WHERE `tbl_libro_temas`.`idLibroTema` =?;';
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+
+        $idLibroTema = $LibrosTemaVo->getIdLibroTema();
+     
+        $stmp->bind_param("i", $idLibroTema);
+
+        $respuesta = array();
+        if ($stmp->execute() == 1) {
+            $respuesta["sucess"];
+            $respuesta["sucess"] = "ok";
+        } else {
+            $respuesta["sucess"] = "no";
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
 }

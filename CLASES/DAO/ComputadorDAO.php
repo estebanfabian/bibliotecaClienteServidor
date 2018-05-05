@@ -82,7 +82,7 @@ class ComputadorDAO {
         $computadorVo = new ComputadorVO();
         $computadorVo->setIdcomputador($array->idcomputador);
         
-        $sql = 'DELETE FROM `tbl_computador` WHERE `codigo`=?;';
+        $sql = 'DELETE FROM `tbl_computador` WHERE `tbl_computador`.`idcomputador` =?;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);

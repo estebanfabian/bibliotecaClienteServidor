@@ -82,39 +82,39 @@ class EditorialDAO {
             echo json_encode($respuesta);
         }
     }
+
     function EliminarEditorial($array) {
-        
-        
+
+
         $editorialVo = new EditorialVO();
         $editorialVo->setIdEditorial($array->idEditorial);
-        
-
-       
-            $sql = 'DELETE FROM `tbl_editorial` WHERE ``tbl_editorial`.`idEditorial` = ?;';
-            $BD = new ConectarBD();
-            $conn = $BD->getMysqli();
-            $stmp = $conn->prepare($sql);
 
 
-            $idEditorial = $editorialVo->getIdEditorial();
-            $nombreEditorial = $editorialVo->getNombreEditorial();
-            $direccionEditorial = $editorialVo->getDireccionEditorial();
-            $telefonoEditorial = $editorialVo->getTelefonoEditorial();
-            $anoPublicacion = $editorialVo->getAnoPublicacion();
 
-            $stmp->bind_param("isssss", $idEditorial, $nombreEditorial, $direccionEditorial, $telefonoEditorial, $anoPublicacion);
+        $sql = 'DELETE FROM `tbl_editorial` WHERE ``tbl_editorial`.`idEditorial` = ?;';
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
 
-            $respuesta = array();
-            if ($stmp->execute() == 1) {
-                $respuesta["sucess"];
-                $respuesta["sucess"] = "ok";
-            } else {
-                $respuesta["sucess"] = "no";
-            }
-            $stmp->close();
-            $conn->close();
-            echo json_encode($respuesta);
+
+        $idEditorial = $editorialVo->getIdEditorial();
+        $nombreEditorial = $editorialVo->getNombreEditorial();
+        $direccionEditorial = $editorialVo->getDireccionEditorial();
+        $telefonoEditorial = $editorialVo->getTelefonoEditorial();
+        $anoPublicacion = $editorialVo->getAnoPublicacion();
+
+        $stmp->bind_param("isssss", $idEditorial, $nombreEditorial, $direccionEditorial, $telefonoEditorial, $anoPublicacion);
+
+        $respuesta = array();
+        if ($stmp->execute() == 1) {
+            $respuesta["sucess"];
+            $respuesta["sucess"] = "ok";
+        } else {
+            $respuesta["sucess"] = "no";
         }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
     }
 
 }

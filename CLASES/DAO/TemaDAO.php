@@ -1,16 +1,106 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of TemaDAO
- *
- * @author esteban
- */
 class TemaDAO {
-    //put your code here
+
+    function CrearTema($array) {
+        $TemaVo = new TemaVO();
+        $TemaVo->setIdTema($array->idTema);
+        $TemaVo->setNombreTema($array->nombreTema);
+        $TemaVo->setDescricion($array->Descricion);
+
+
+        if ($TemaVo->setIdTema() != "null") {
+            $this->ModificarTema($TemaVo);
+        } else {
+            $sql = 'INSERT INTO `tbl_temas`(`idTema`, `nombreTema`, `Descricion`) VALUES (?,?,?);';
+            $BD = new ConectarBD();
+            $conn = $BD->getMysqli();
+            $stmp = $conn->prepare($sql);
+
+
+            $idLibroTema = $TemaVo->getIdLibroTema();
+
+            $idTema = $TemaVo->getIdTema();
+            $nombreTema = $TemaVo->getNombreTema();
+            $Descricion = $TemaVo->getDescricion();
+
+            $stmp->bind_param("iss", $idTema, $nombreTema, $Descricion);
+
+            $respuesta = array();
+            if ($stmp->execute() == 1) {
+                $respuesta["sucess"];
+                $respuesta["sucess"] = "ok";
+            } else {
+                $respuesta["sucess"] = "no";
+            }
+            $stmp->close();
+            $conn->close();
+            echo json_encode($respuesta);
+        }
+    }
+
+    function ModificarTema($array) {
+        $TemaVo = new TemaVO();
+        $TemaVo->setIdTema($array->idTema);
+        $TemaVo->setNombreTema($array->nombreTema);
+        $TemaVo->setDescricion($array->Descricion);
+
+
+        if ($TemaVo->setIdTema() != "null") {
+            $this->ModificarTema($TemaVo);
+        } else {
+            $sql = 'UPDATE `tbl_temas` SET `nombreTema`=?,`Descricion`=? WHERE `idTema`=?;';
+            $BD = new ConectarBD();
+            $conn = $BD->getMysqli();
+            $stmp = $conn->prepare($sql);
+
+
+
+
+            $idTema = $TemaVo->getIdTema();
+            $nombreTema = $TemaVo->getNombreTema();
+            $Descricion = $TemaVo->getDescricion();
+
+            $stmp->bind_param("sis", $nombreTema, $Descricion, $idTema);
+
+            $respuesta = array();
+            if ($stmp->execute() == 1) {
+                $respuesta["sucess"];
+                $respuesta["sucess"] = "ok";
+            } else {
+                $respuesta["sucess"] = "no";
+            }
+            $stmp->close();
+            $conn->close();
+            echo json_encode($respuesta);
+        }
+    }
+
+    function EliminarTema($array) {
+        $TemaVo = new TemaVO();
+        $TemaVo->setIdTema($array->idTema);
+
+
+
+        $sql = 'DELETE FROM `tbl_temas` WHERE `idTema`=?;';
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $idTema = $TemaVo->getIdTema();
+
+        $stmp->bind_param("i", $idTema);
+
+        $respuesta = array();
+        if ($stmp->execute() == 1) {
+            $respuesta["sucess"];
+            $respuesta["sucess"] = "ok";
+        } else {
+            $respuesta["sucess"] = "no";
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
 }
