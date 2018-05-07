@@ -20,6 +20,7 @@ class UsuarioVO {
     private $contactoTelefono;
     private $CodigoEmpleado;
     private $contrasena;
+    private $multa;
 
     function getCodigo() {
         return $this->codigo;
@@ -91,6 +92,10 @@ class UsuarioVO {
 
     function getContrasena() {
         return $this->contrasena;
+    }
+
+    function getMulta() {
+        return $this->multa;
     }
 
     function setCodigo($codigo) {
@@ -165,5 +170,8 @@ class UsuarioVO {
         $this->contrasena = $contrasena;
     }
 
+    function setMulta($multa) {
+        $this->multa = $multa;
+    }
 
 }
