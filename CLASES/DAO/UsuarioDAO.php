@@ -63,26 +63,37 @@ class UsuarioDAO {
     }
 
     function Login($Array) {
-        $Usuariovo = new UsuarioVO();
-        $Usuariovo->setCodigo($array->Codigo);
-        $Usuariovo->setCodigo($array->contrasena);
-        $sql = 'SELECT * FROM `tbl_usuario` WHERE `codigo`= ?  and `contrasena` like binary ?;';
+    $sql='SELECT `codigo`,`contrasena`FROM `tbl_usuario`  WHERE `codigo`= ?  and `contrasena` like binary ? ;';
+        
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
-        $codigo = $Usuariovo->getCodigo();
-        $contrasena = $Usuariovo->getContrasena();
-        $stmp->bind_param("is", $codigo, $contrasena);
-        if ($stmp->execute() == 1) {
-            $respuesta["sucess"] = "ok";
-        } else {
-            $respuesta["sucess"] = "no";
-        }
+        
+        $UsuarioVO = new UsuarioVO();
+        $UsuarioVO->setCodigo($array->codigo);
+        $UsuarioVO->setContrasena($array->password);
+        
+        
+         $codigo = $UsuarioVO->getCodigo();
+         $password=$UsuarioVO->getContrasena();
+         
 
+        $stmp->bind_param("is",$codigo,$password);
+        
+       $stmp->execute();
+       $stmp->bind_result($codigo,$password);
+       $respuesta=array();
+       while ($stmp->fetch()){
+           $tmp=array();
+           $tmp["codigo"]=$codigo;
+           $tmp["contrasena"]=$password;
+       $respuesta[sizeof($respuesta)]=$tmp;
+           
+       }
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
-    }
+     }
 
     function elminarUsuario($array) {
         $Usuariovo = new UsuarioVO();
