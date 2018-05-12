@@ -1,99 +1,88 @@
 <?php
 
+require("../../PHPMailer-master/src/PHPMailer.php");
+require("../../PHPMailer-master/src/SMTP.php");
+require("../../PHPMailer-master/src/Exception.php");
+
 class UsuarioDAO {
 
-    function CrearUsuario($array) {
-        $Usuariovo = new UsuarioVO();
-        $Usuariovo->setCodigo($array->Codigo);
-        $Usuariovo->setApellido($array->apellido);
-        $Usuariovo->setNombre($array->nombre);
-        $Usuariovo->setSexo($array->sexo);
-        $Usuariovo->setDireccion($array->direccion);
-        $Usuariovo->setDireccion2($array->direccion2);
-        $Usuariovo->setTelefonoPrincipal($array->telefonoPrincipal);
-        $Usuariovo->setTelefonoSecundario($array->telefonoSecundario);
-        $Usuariovo->setTelefonoOtro($array->telefonoOtro);
-        $Usuariovo->setEmailPrincipal($array->emailPrincipal);
-        $Usuariovo->setContactoApellido($array->contactoApellido);
-        $Usuariovo->setContactoNombre($array->contactoNombre);
-        $Usuariovo->setContactoDireccion($array->contactoDireccion);
-        $Usuariovo->setContactoDireccion2($array->contactoDireccion2);
-        $Usuariovo->setContactoTelefono($array->contactoTelefono);
-        $Usuariovo->setCodigoEmpleado($array->CodigoEmpleado);
-        $Usuariovo->setContrasena($array->contrasena);
+    public function CrearUsuario($array) {
 
-        if ($Usuariovo->getCodigo() != "null") {
-            $this->ActualizarUsuario($Usuariovo);
+
+        $sql = 'INSERT INTO `tbl_usuario` (`codigo`, `nombre`, `apellido`, `fechaNacimiento`, `sexo`, `direccion`, `telefonoPrincipal`, `emailPrincipal`,  `contrasena`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);';
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $UsuarioVO = new UsuarioVO();
+        $UsuarioVO->setCodigo($array->Codigo);
+        $UsuarioVO->setApellido($array->apellido);
+        $UsuarioVO->setNombre($array->nombre);
+        $UsuarioVO->setTelefonoPrincipal($array->telefonoPrincipal);
+        $UsuarioVO->setFechaNacimiento($array->FechaNacimiento);
+        $UsuarioVO->setSexo($array->sexo);
+        $UsuarioVO->setDireccion($array->direccion);
+        $UsuarioVO->setEmailPrincipal($array->emailPrincipal);
+        $UsuarioVO->setContrasena($array->contrasena);
+
+
+        $codigo = $UsuarioVO->getCodigo();
+        $nombre = $UsuarioVO->getNombre();
+        $apellido = $UsuarioVO->getApellido();
+        $fechaNacimiento = $UsuarioVO->getFechaNacimiento();
+        $sexo = $UsuarioVO->getSexo();
+        $direccion = $UsuarioVO->getDireccion();
+        $telefonoPrincipal = $UsuarioVO->getTelefonoPrincipal();
+        $emailPrincipal = $UsuarioVO->getEmailPrincipal();
+        $contrasena = $UsuarioVO->getContrasena();
+
+        $stmp->bind_param("issssssss", $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $telefonoPrincipal, $emailPrincipal, $contrasena);
+
+        $resultado = array();
+
+        if ($stmp->execute()) {
+            $respuesta["sucess"] = "ok";
         } else {
-            $sql = 'INSERT INTO `tbl_usuario` (`codigo`, `nombre`, `apellido`, `fechaNacimiento`, `sexo`, `direccion`, `direccion2`, `telefonoPrincipal`, `telefonoSecundario`, `telefonoOtro`, `emailPrincipal`, `contactoNombre`, `contactoApellido`, `contactoDireccion`, `contactoDireccion2`, `contactoTelefono`, `contrasena`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
-            $BD = new ConectarBD();
-            $conn = $BD->getMysqli();
-            $stmp = $conn->prepare($sql);
+            $respuesta["sucess"] = "no";
+        }
 
-            $codigo = $Usuariovo->getCodigo();
-            $nombre = $Usuariovo->getNombre();
-            $apellido = $Usuariovo->getApellido();
-            $fechaNacimiento = $Usuariovo->getFechaNacimiento();
-            $sexo = $Usuariovo->getSexo();
-            $direccion = $Usuariovo->getDireccion();
-            $direccion2 = $Usuariovo->getDireccion2();
-            $telefonoPrincipal = $Usuariovo->getTelefonoPrincipal();
-            $telefonoSecundario = $Usuariovo->getTelefonoSecundario();
-            $telefonoOtro = $Usuariovo->getTelefonoOtro();
-            $emailPrincipal = $Usuariovo->getEmailPrincipal();
-            $contactoNombre = $Usuariovo->getContactoNombre();
-            $contactoApellido = $Usuariovo->getContactoApellido();
-            $contactoDireccion = $Usuariovo->getContactoDireccion();
-            $contactoDireccion2 = $Usuariovo->getContactoDireccion2();
-            $contactoTelefono = $Usuariovo->getContactoTelefono();
-            $contrasena = $Usuariovo->getContrasena();
+        $stmp->close();
+        $conn->close();
 
-            $stmp->bind_param("issssssssssssssss", $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $direccion2, $telefonoPrincipal, $telefonoSecundario, $telefonoOtro, $emailPrincipal, $contactoNombre, $contactoApellido, $contactoDireccion, $contactoDireccion2, $contactoTelefono, $contrasena);
-            $this->respuesta($conn, $stmp);
+        echo json_encode($respuesta);
+    }
 
-            if ($stmp->execute() == 1) {
-                $respuesta["sucess"] = "ok";
-            } else {
-                $respuesta["sucess"] = "no";
-            }
+    public function Login($array) {
+        $sql = 'SELECT `codigo`,`contrasena`FROM `tbl_usuario`  WHERE `codigo`= ?  and `contrasena` like binary ? ;';
+
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $UsuarioVO = new UsuarioVO();
+        $UsuarioVO->setCodigo($array->codigo);
+        $UsuarioVO->setContrasena($array->password);
+
+
+        $codigo = $UsuarioVO->getCodigo();
+        $password = $UsuarioVO->getContrasena();
+
+
+        $stmp->bind_param("is", $codigo, $password);
+
+        $stmp->execute();
+        $stmp->bind_result($codigo, $password);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["codigo"] = $codigo;
+            $tmp["contrasena"] = $password;
+            $respuesta[sizeof($respuesta)] = $tmp;
         }
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
     }
-
-    function Login($Array) {
-    $sql='SELECT `codigo`,`contrasena`FROM `tbl_usuario`  WHERE `codigo`= ?  and `contrasena` like binary ? ;';
-        
-        $BD = new ConectarBD();
-        $conn = $BD->getMysqli();
-        $stmp = $conn->prepare($sql);
-        
-        $UsuarioVO = new UsuarioVO();
-        $UsuarioVO->setCodigo($array->codigo);
-        $UsuarioVO->setContrasena($array->password);
-        
-        
-         $codigo = $UsuarioVO->getCodigo();
-         $password=$UsuarioVO->getContrasena();
-         
-
-        $stmp->bind_param("is",$codigo,$password);
-        
-       $stmp->execute();
-       $stmp->bind_result($codigo,$password);
-       $respuesta=array();
-       while ($stmp->fetch()){
-           $tmp=array();
-           $tmp["codigo"]=$codigo;
-           $tmp["contrasena"]=$password;
-       $respuesta[sizeof($respuesta)]=$tmp;
-           
-       }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
-     }
 
     function elminarUsuario($array) {
         $Usuariovo = new UsuarioVO();
@@ -182,7 +171,7 @@ class UsuarioDAO {
         $Usuariovo->setCodigo($array->Codigo);
         $Usuariovo->setEmailPrincipal($array->emailPrincipal);
 
-        $sql = 'SELECT `emailPrincipal` FROM `tbl_usuario` WHERE `codigo`= ? and `emailPrincipal` =  ?;';
+        $sql = 'SELECT `emailPrincipal`,`contrasena` FROM `tbl_usuario` WHERE `codigo`= ? and `emailPrincipal` =  ?;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -194,6 +183,14 @@ class UsuarioDAO {
         $stmp->bind_param("is", $codigo, $emailPrincipal);
         $this->respuesta($conn, $stmp);
 
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["emailPrincipal"] = $codigo;
+            $tmp["contrasena"] = $password;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+
+        enviar($codigo, $password);
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";
         } else {
@@ -203,6 +200,28 @@ class UsuarioDAO {
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
+    }
+
+    function enviar($correo, $contrasena) {
+        $mail = new PHPMailer\PHPMailer\PHPMailer();
+
+        $mail->Host = 'smtp.gmail.com'; /* Specify main and backup SMTP servers */
+        $mail->Port = 587;
+        $mail->SMTPAuth = true; /* Enable SMTP authentication */
+        $mail->Username = "biblocur@gmail.com"; /* SMTP username */
+        $mail->Password = "Prueba12345"; /* SMTP password */
+        $mail->SMTPSecure = 'tls';
+        $mail->From = "biblocur@gmail.com";
+        $mail->FromName = "esteban";
+        $mail->addAddress($correo); /* Add a recipient */
+        $mail->isHTML(true); /* Set email format to HTML (default = true) */
+        $mail->Body = "Su contraseña es " . $contrasena;
+        if (!$mail->send()) {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            echo "funciono";
+        }
     }
 
 }
