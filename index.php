@@ -55,8 +55,8 @@
                                             <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
                                             <span id="text-login-msg">Ingrese su código y contraseña</span>
                                         </div>
-                                        <input id="login_username" name = "login_username" class="form-control" type="text" placeholder="Código" required>
-                                        <input id="login_password" name =  "login_password"class="form-control" type="password" placeholder="Contraseña" required>
+                                        <input id="codigo" name = "codigo" class="form-control" type="text" placeholder="Código" required>
+                                        <input id="contrasena" name =  "contrasena" class="form-control" type="password" placeholder="Contraseña" required>
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox"> Recuerdame

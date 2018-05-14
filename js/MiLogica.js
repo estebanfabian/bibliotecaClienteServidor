@@ -1,15 +1,5 @@
 $(document).ready(function () {
-
-
-    /**
-     * esta es la funcion ajax que permite soliciatr al servidor datros
-     * @param {type} URL
-     * @param {type} parametros
-     * @param {type} metodo
-     * @return {undefined}
-     */
-
-
+    var myJson = new Array();
     function fajax(URL, parametros, metodo) {
         $.ajax({
             url: URL,
@@ -30,30 +20,56 @@ $(document).ready(function () {
         var url = "";
         var parameto = "hola";
         var metodo = function (ssw) {
-            //  $("#carouselExampleIndicators").html(ssw);
+            //  $("#login-form").html(ssw);
 
-        }
+        };
         $("#login-form").validate({
             rules: {
-                login_username: {
+                codigo: {
                     required: true,
                     number: true,
                     digits: true
                 },
-                login_password: {
+                contrasena: {
                     required: true,
-                    minlength: 8
+                    minlength: 1
                 }
             },
             messages: {
-                login_username: {
+                codigo: {
                     digits: "Este campo no puede tener ni comas, ni puntos",
                     number: "Este campo solo permite número"
                 }
+            }, submitHandler: function () {
+
+                var formulario = {
+                    codigo: $("#codigo").val(),
+                    contrasena: $("#contrasena").val()
+                };
+                myJson.push(formulario);
+                var myString = JSON.stringify(formulario);
+                var url1 = "Controlador/UsuarioControlador/Validar_Usuario.php";
+                var parametro1 = myString;
+                var metodo1 = function (respuesta) {
+                    var data = $.parseJSON(respuesta);
+                   
+                    if (data.length==0){
+                        alert("El código o clave esta errada ")
+                    }else{
+                        
+                    }
+//                    if (data.sucess == "ok") {
+//                        // $("#limpiar").trigger("click");
+//                        //idProvedorModi = "null";
+//                        alert("Los datos fueron registrados en la BD");
+//                    } else {
+//                        alert("Los datos NO fueron registrados en la BD");
+//                    }
+                };
+                fajax(url1, parametro1, metodo1);
             }
         });
         fajax(url, parameto, metodo);
-        alert(url + parameto + metodo);
     }
     $("#BTNIngresar").click(function () {
         login();

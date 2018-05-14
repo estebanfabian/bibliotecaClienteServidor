@@ -45,40 +45,40 @@ class UsuarioDAO {
         } else {
             $respuesta["sucess"] = "no";
         }
-
         $stmp->close();
         $conn->close();
-
         echo json_encode($respuesta);
     }
 
     public function Login($array) {
+        
+        
         $sql = 'SELECT `codigo`,`contrasena`FROM `tbl_usuario`  WHERE `codigo`= ?  and `contrasena` like binary ? ;';
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
-
         $UsuarioVO = new UsuarioVO();
+        
         $UsuarioVO->setCodigo($array->codigo);
-        $UsuarioVO->setContrasena($array->password);
-
+        $UsuarioVO->setContrasena($array->contrasena);
 
         $codigo = $UsuarioVO->getCodigo();
-        $password = $UsuarioVO->getContrasena();
+        $contrasena = $UsuarioVO->getContrasena();
 
+        $stmp->bind_param("is", $codigo, $contrasena);
 
-        $stmp->bind_param("is", $codigo, $password);
-
-        $stmp->execute();
-        $stmp->bind_result($codigo, $password);
-        $respuesta = array();
-        while ($stmp->fetch()) {
-            $tmp = array();
-            $tmp["codigo"] = $codigo;
-            $tmp["contrasena"] = $password;
-            $respuesta[sizeof($respuesta)] = $tmp;
-        }
+       $stmp->execute();
+            $stmp->bind_result($codigo, $contrasena);
+            $respuesta = array();
+            while ($stmp->fetch()) {
+                $tmp = array();
+                $tmp["codigo"] = $codigo;
+                $tmp["contrasena"] = $contrasena;
+                $respuesta[sizeof($respuesta)] = $tmp;
+                
+            }
+        
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
@@ -186,11 +186,11 @@ class UsuarioDAO {
         while ($stmp->fetch()) {
             $tmp = array();
             $tmp["emailPrincipal"] = $codigo;
-            $tmp["contrasena"] = $password;
+            $tmp["contrasena"] = $contrasena;
             $respuesta[sizeof($respuesta)] = $tmp;
         }
 
-        enviar($codigo, $password);
+        enviar($codigo, $contrasena);
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";
         } else {
