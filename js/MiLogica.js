@@ -42,29 +42,29 @@ $(document).ready(function () {
                 }
             }, submitHandler: function () {
 
-//                var formulario = {
-//                    codigo: $("#codigo").val(),
-//                   contrasena: $("#contrasena").val()
-//                };
-
-
                 var formulario = {
-                    codigo: "122",
-                    nombre: "es",
-                    apellido: "es",
-                    fechaNacimiento: "2018-05-02",
-                    sexo: "0",
-                    direccion: "q",
-                    telefonoPrincipal: "w",
-                    emailPrincipal: "s",
-                    contrasena: "w",
-                    foto: "2"
+                    codigo: $("#codigo").val(),
+                   contrasena: $("#contrasena").val()
                 };
+
+//
+//                var formulario = {
+//                    codigo: "122",
+//                    nombre: "es",
+//                    apellido: "es",
+//                    fechaNacimiento: "2018-05-02",
+//                    sexo: "0",
+//                    direccion: "q",
+//                    telefonoPrincipal: "w",
+//                    emailPrincipal: "s",
+//                    contrasena: "w",
+//                    foto: "2"
+//                };
 
 
                 myJson.push(formulario);
                 var myString = JSON.stringify(formulario);
-                var url1 = "Insert_user";
+                var url1 = "Validar";
                 var parametro1 = myString;
                 var metodo1 = function (respuesta) {
                     console.log(respuesta);

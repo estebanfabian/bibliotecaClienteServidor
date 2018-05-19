@@ -16,23 +16,13 @@ class LibrosTemaDAO {
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
 
-
             $idLibroTema = $LibrosTemaVo->getIdLibroTema();
             $Isbn = $LibrosTemaVo->getIsbn();
             $idTema = $LibrosTemaVo->getIdTema();
 
             $stmp->bind_param("isis", $idLibroTema, $Isbn, $idTema);
 
-            $respuesta = array();
-            if ($stmp->execute() == 1) {
-                $respuesta["sucess"];
-                $respuesta["sucess"] = "ok";
-            } else {
-                $respuesta["sucess"] = "no";
-            }
-            $stmp->close();
-            $conn->close();
-            echo json_encode($respuesta);
+            $this->respuesta($conn, $stmp);
         }
     }
 
@@ -50,23 +40,13 @@ class LibrosTemaDAO {
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
 
-
             $idLibroTema = $LibrosTemaVo->getIdLibroTema();
             $Isbn = $LibrosTemaVo->getIsbn();
             $idTema = $LibrosTemaVo->getIdTema();
 
             $stmp->bind_param("sii", $idLibroTema, $Isbn, $idTema);
 
-            $respuesta = array();
-            if ($stmp->execute() == 1) {
-                $respuesta["sucess"];
-                $respuesta["sucess"] = "ok";
-            } else {
-                $respuesta["sucess"] = "no";
-            }
-            $stmp->close();
-            $conn->close();
-            echo json_encode($respuesta);
+            $this->respuesta($conn, $stmp);
         }
     }
 
@@ -74,24 +54,26 @@ class LibrosTemaDAO {
         $LibrosTemaVo = new LibrosTemaVO();
         $LibrosTemaVo->setIdAutorLibro($array->idAutorLibro);
 
-
         $sql = 'DELETE FROM `tbl_computador` WHERE `tbl_libro_temas`.`idLibroTema` =?;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
-
         $idLibroTema = $LibrosTemaVo->getIdLibroTema();
-     
+
         $stmp->bind_param("i", $idLibroTema);
 
+        $this->respuesta($conn, $stmp);
+    }
+
+    function respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
-            $respuesta["sucess"];
             $respuesta["sucess"] = "ok";
         } else {
             $respuesta["sucess"] = "no";
         }
+
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);

@@ -21,7 +21,6 @@ class PrestamoDAO {
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
 
-
             $idPrestamo = $PrestamoVo->getIdPrestamo();
             $estadoLibro = $PrestamoVo->getEstadoLibro();
             $diaPrestamo = $PrestamoVo->getDiaPrestamo();
@@ -34,20 +33,12 @@ class PrestamoDAO {
             $CodigoEmpleado = $PrestamoVo->getCodigoEmpleado();
             $stmp->bind_param("sssssisisi", $idPrestamo, $estadoLibro, $diaPrestamo, $preInterBibliotecarios, $Isbn, $idVideoBeam, $idcomputador, $codigo, $estado, $CodigoEmpleado);
 
-            $respuesta = array();
-            if ($stmp->execute() == 1) {
-                $respuesta["sucess"];
-                $respuesta["sucess"] = "ok";
-            } else {
-                $respuesta["sucess"] = "no";
-            }
-            $stmp->close();
-            $conn->close();
-            echo json_encode($respuesta);
+            $this->respuesta($conn, $stmp);
         }
     }
 
     function ModificarPrestamo($array) {
+        
         $PrestamoVo = new PrestamoVO();
         $PrestamoVo->setIdPrestamo($array->idPrestamo);
         $PrestamoVo->setEstadoLibro($array->estadoLibro);
@@ -58,12 +49,10 @@ class PrestamoDAO {
         $PrestamoVo->setIdcomputador($array->idcomputador);
         $PrestamoVo->setCodigo($array->codigo);
 
-
         $sql = 'UPDATE `tbl_prestamo` SET `estadoLibro`=?,`diaPrestamo`=?,`preInterBibliotecarios`=?,`Isbn`=?,`idVideoBeam`=?,`idcomputador`=?,`codigo`=?,`estado`=?,`CodigoEmpleado`=? WHERE `idPrestamo`=?;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
-
 
         $idPrestamo = $PrestamoVo->getIdPrestamo();
         $estadoLibro = $PrestamoVo->getEstadoLibro();
@@ -77,16 +66,7 @@ class PrestamoDAO {
         $CodigoEmpleado = $PrestamoVo->getCodigoEmpleado();
         $stmp->bind_param("ssssisisis", $estadoLibro, $diaPrestamo, $preInterBibliotecarios, $Isbn, $idVideoBeam, $idcomputador, $codigo, $estado, $CodigoEmpleado, $idPrestamo);
 
-        $respuesta = array();
-        if ($stmp->execute() == 1) {
-            $respuesta["sucess"];
-            $respuesta["sucess"] = "ok";
-        } else {
-            $respuesta["sucess"] = "no";
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $this->respuesta($conn, $stmp);
     }
 
     function EliminarPrestamo($array) {
@@ -101,13 +81,17 @@ class PrestamoDAO {
         $idPrestamo = $PrestamoVo->getIdPrestamo();
         $stmp->bind_param("s", $idPrestamo);
 
+        $this->respuesta($conn, $stmp);
+    }
+
+    function respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
-            $respuesta["sucess"];
             $respuesta["sucess"] = "ok";
         } else {
             $respuesta["sucess"] = "no";
         }
+
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);

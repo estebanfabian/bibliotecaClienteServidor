@@ -7,7 +7,6 @@ class AutorDao {
         $Autorvo->setNombreAutor($array->NombreAutor);
         $Autorvo->setNotaAutor($array->NotaAutor);
 
-
         if ($Autorvo->getIdautor() != "null") {
             $this->modificarProveedor($Autorvo);
         } else {
@@ -19,18 +18,9 @@ class AutorDao {
             $nomAutor = $Autorvo->getNombreAutor();
             $notaAutor = $Autorvo->getNotaAutor();
 
-
             $stmp->bind_param("ss", $nomAutor, $notaAutor);
 
-            $respuesta = array();
-            if ($stmp->execute() == 1) {
-                $respuesta["sucess"] = "ok";
-            } else {
-                $respuesta["sucess"] = "no";
-            }
-            $stmp->close();
-            $conn->close();
-            echo json_encode($respuesta);
+            $this->respuesta($conn, $stmp);
         }
     }
 
@@ -43,22 +33,14 @@ class AutorDao {
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
-        
+
         $idAutor = $Autorvo->getIdautor();
         $nomAutor = $Autorvo->getNombreAutor();
         $notaAutor = $Autorvo->getNotaAutor();
         $stmp->bind_param("ssi", $nomAutor, $notaAutor, $idAutor);
         $this->respuesta($stmp);
 
-        $respuesta = array();
-        if ($stmp->execute() == 1) {
-            $respuesta["sucess"] = "ok";
-        } else {
-            $respuesta["sucess"] = "no";
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $this->respuesta($conn, $stmp);
     }
 
     function eliminarBiblioteca($array) {
@@ -70,17 +52,20 @@ class AutorDao {
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
-           $idAutor = $Autorvo->getIdautor();
-
+        $idAutor = $Autorvo->getIdautor();
 
         $stmp->bind_param("i", $idAutor);
         $this->respuesta($conn, $stmp);
+    }
+
+    function respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";
         } else {
             $respuesta["sucess"] = "no";
         }
+
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);

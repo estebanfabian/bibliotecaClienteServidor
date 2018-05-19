@@ -17,8 +17,6 @@ class ComputadorDAO {
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
 
-
-
             $idcomputador = $computadorVo->getIdcomputador();
             $fabricante = $computadorVo->getFabricante();
             $observaciones = $computadorVo->getObservaciones();
@@ -26,16 +24,7 @@ class ComputadorDAO {
 
             $stmp->bind_param("ssss", $idcomputador, $fabricante, $observaciones, $cargadorId);
 
-            $respuesta = array();
-            if ($stmp->execute() == 1) {
-                $respuesta["sucess"];
-                $respuesta["sucess"] = "ok";
-            } else {
-                $respuesta["sucess"] = "no";
-            }
-            $stmp->close();
-            $conn->close();
-            echo json_encode($respuesta);
+            $this->respuesta($conn, $stmp);
         }
     }
 
@@ -47,41 +36,26 @@ class ComputadorDAO {
         $computadorVo->setObservaciones($array->observaciones);
         $computadorVo->setCargadorId($array->cargadorId);
 
-        if ($computadorVo->getIdcomputador() != "null") {
-            $this->ModificarComputador($computadorVo);
-        } else {
-            $sql = 'UPDATE `tbl_computador` SET `fabricante` = ?, `observaciones` =?, `cargadorId` = ? WHERE `tbl_computador`.`idcomputador` = ?;';
-            $BD = new ConectarBD();
-            $conn = $BD->getMysqli();
-            $stmp = $conn->prepare($sql);
+        $sql = 'UPDATE `tbl_computador` SET `fabricante` = ?, `observaciones` =?, `cargadorId` = ? WHERE `tbl_computador`.`idcomputador` = ?;';
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
 
+        $idcomputador = $computadorVo->getIdcomputador();
+        $fabricante = $computadorVo->getFabricante();
+        $observaciones = $computadorVo->getObservaciones();
+        $cargadorId = $computadorVo->getCargadorId();
 
+        $stmp->bind_param("ssss", $fabricante, $observaciones, $cargadorId, $idcomputador);
 
-            $idcomputador = $computadorVo->getIdcomputador();
-            $fabricante = $computadorVo->getFabricante();
-            $observaciones = $computadorVo->getObservaciones();
-            $cargadorId = $computadorVo->getCargadorId();
-
-            $stmp->bind_param("ssss", $fabricante, $observaciones, $cargadorId, $idcomputador);
-
-            $respuesta = array();
-            if ($stmp->execute() == 1) {
-                $respuesta["sucess"];
-                $respuesta["sucess"] = "ok";
-            } else {
-                $respuesta["sucess"] = "no";
-            }
-            $stmp->close();
-            $conn->close();
-            echo json_encode($respuesta);
-        }
+        $this->respuesta($conn, $stmp);
     }
 
     function EliminarComputador($array) {
 
         $computadorVo = new ComputadorVO();
         $computadorVo->setIdcomputador($array->idcomputador);
-        
+
         $sql = 'DELETE FROM `tbl_computador` WHERE `tbl_computador`.`idcomputador` =?;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
@@ -91,13 +65,17 @@ class ComputadorDAO {
 
         $stmp->bind_param("s", $idcomputador);
 
+        $this->respuesta($conn, $stmp);
+    }
+
+    function respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
-            $respuesta["sucess"];
             $respuesta["sucess"] = "ok";
         } else {
             $respuesta["sucess"] = "no";
         }
+
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);

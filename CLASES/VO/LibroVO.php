@@ -8,6 +8,7 @@ class LibroVO {
     private $editorial;
     private $categoriaLibro;
     private $resena;
+    private $estado;
     private $imagen;
 
     function getIsbn() {
@@ -32,6 +33,10 @@ class LibroVO {
 
     function getResena() {
         return $this->resena;
+    }
+
+    function getEstado() {
+        return $this->estado;
     }
 
     function getImagen() {
@@ -60,6 +65,10 @@ class LibroVO {
 
     function setResena($resena) {
         $this->resena = $resena;
+    }
+
+    function setEstado($estado) {
+        $this->estado = $estado;
     }
 
     function setImagen($imagen) {

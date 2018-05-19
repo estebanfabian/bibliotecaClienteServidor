@@ -18,20 +18,10 @@ class UsuarioVO {
     private $contactoDireccion;
     private $contactoDireccion2;
     private $contactoTelefono;
-    private $CodigoEmpleado;
     private $contrasena;
     private $multa;
-    private $foto;
     private $perfil;
-    private $ejemplo; //esto es un ejemplo
-
-    function getEjemplo() {
-        return $this->ejemplo;
-    }
-
-    function setEjemplo($ejemplo) {
-        $this->ejemplo = $ejemplo;
-    }
+    private $foto;
 
     function getCodigo() {
         return $this->codigo;
@@ -97,10 +87,6 @@ class UsuarioVO {
         return $this->contactoTelefono;
     }
 
-    function getCodigoEmpleado() {
-        return $this->CodigoEmpleado;
-    }
-
     function getContrasena() {
         return $this->contrasena;
     }
@@ -109,12 +95,12 @@ class UsuarioVO {
         return $this->multa;
     }
 
-    function getFoto() {
-        return $this->foto;
-    }
-
     function getPerfil() {
         return $this->perfil;
+    }
+
+    function getFoto() {
+        return $this->foto;
     }
 
     function setCodigo($codigo) {
@@ -181,10 +167,6 @@ class UsuarioVO {
         $this->contactoTelefono = $contactoTelefono;
     }
 
-    function setCodigoEmpleado($CodigoEmpleado) {
-        $this->CodigoEmpleado = $CodigoEmpleado;
-    }
-
     function setContrasena($contrasena) {
         $this->contrasena = $contrasena;
     }
@@ -193,12 +175,12 @@ class UsuarioVO {
         $this->multa = $multa;
     }
 
-    function setFoto($foto) {
-        $this->foto = $foto;
-    }
-
     function setPerfil($perfil) {
         $this->perfil = $perfil;
+    }
+
+    function setFoto($foto) {
+        $this->foto = $foto;
     }
 
 }

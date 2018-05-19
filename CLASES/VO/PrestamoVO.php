@@ -11,6 +11,7 @@ class PrestamoVO {
     private $idcomputador;
     private $codigo;
     private $CodigoEmpleado;
+    private $diaEntraga;
 
     function getIdPrestamo() {
         return $this->idPrestamo;
@@ -48,6 +49,10 @@ class PrestamoVO {
         return $this->CodigoEmpleado;
     }
 
+    function getDiaEntraga() {
+        return $this->diaEntraga;
+    }
+
     function setIdPrestamo($idPrestamo) {
         $this->idPrestamo = $idPrestamo;
     }
@@ -83,5 +88,10 @@ class PrestamoVO {
     function setCodigoEmpleado($CodigoEmpleado) {
         $this->CodigoEmpleado = $CodigoEmpleado;
     }
+
+    function setDiaEntraga($diaEntraga) {
+        $this->diaEntraga = $diaEntraga;
+    }
+
 
 }

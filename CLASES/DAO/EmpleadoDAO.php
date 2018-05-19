@@ -21,16 +21,7 @@ class EmpleadoDAO {
             $puestoEmpleado = $Empleadovo->getPuesto();
 
             $stmp->bind_param("iss", $codigoEmpleado, $nombreEmpleado, $puestoEmpleado);
-            // $this->respuesta($conn, $stmp);
-            $respuesta = array();
-            if ($stmp->execute() == 1) {
-                $respuesta["sucess"] = "ok";
-            } else {
-                $respuesta["sucess"] = "no";
-            }
-            $stmp->close();
-            $conn->close();
-            echo json_encode($respuesta);
+            $this->respuesta($conn, $stmp);
         }
     }
 
@@ -48,16 +39,8 @@ class EmpleadoDAO {
         $nombreEmpleado = $Empleadovo->getNombreEmpleado();
         $puestoEmpleado = $Empleadovo->getPuesto();
 
-        $stmp->bind_param("ssi", $nombreEmpleado,$puestoEmpleado,$codigoEmpleado);
-        if ($stmp->execute() == 1) {
-            $respuesta["sucess"] = "ok";
-        } else {
-            $respuesta["sucess"] = "no";
-        }
-
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $stmp->bind_param("ssi", $nombreEmpleado, $puestoEmpleado, $codigoEmpleado);
+        $this->respuesta($conn, $stmp);
     }
 
     function elminarEmpleado($array) {
@@ -71,6 +54,11 @@ class EmpleadoDAO {
         $stmp = $conn->prepare($sql);
         $codigo = $Empleadovo->getCodigoEmpleado();
         $stmp->bind_param("i", $codigo);
+        $this->respuesta($conn, $stmp);
+    }
+
+    function respuesta($conn, $stmp) {
+        $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";
         } else {

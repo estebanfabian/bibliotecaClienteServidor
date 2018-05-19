@@ -9,7 +9,6 @@ class PresInterBibliotecarioDAO {
         $PresInterBibliotecarioVo->setIdPrestemoInterBibliotecario($array->idPrestemoInterBibliotecario);
         $PresInterBibliotecarioVo->setIsbnPrestamoInt($array->IsbnPrestamoInt);
 
-
         if ($PresInterBibliotecarioVo->setIdPrestamoInterBiblio() != "null") {
             $this->ModificarPresInterBibliotecario($PresInterBibliotecarioVo);
         } else {
@@ -18,7 +17,6 @@ class PresInterBibliotecarioDAO {
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
 
-
             $Isbn = $PresInterBibliotecarioVo->getIsbn();
             $idPrestamoInterBiblio = $PresInterBibliotecarioVo->getIdPrestamoInterBiblio();
             $idPrestamo = $PresInterBibliotecarioVo->getIdPrestamo();
@@ -26,16 +24,7 @@ class PresInterBibliotecarioDAO {
             $IsbnPrestamoInt = $PresInterBibliotecarioVo->getIsbnPrestamoInt();
             $stmp->bind_param("isis", $idPrestamoInterBiblio, $idPrestamo, $idPrestemoInterBibliotecario, $IsbnPrestamoInt);
 
-            $respuesta = array();
-            if ($stmp->execute() == 1) {
-                $respuesta["sucess"];
-                $respuesta["sucess"] = "ok";
-            } else {
-                $respuesta["sucess"] = "no";
-            }
-            $stmp->close();
-            $conn->close();
-            echo json_encode($respuesta);
+            $this->respuesta($conn, $stmp);
         }
     }
 
@@ -46,12 +35,10 @@ class PresInterBibliotecarioDAO {
         $PresInterBibliotecarioVo->setIdPrestemoInterBibliotecario($array->idPrestemoInterBibliotecario);
         $PresInterBibliotecarioVo->setIsbnPrestamoInt($array->IsbnPrestamoInt);
 
-
         $sql = 'UPDATE `tbl_pestemointerbibliotecario` SET `idPrestamo`=?,`idPrestemoInterBibliotecario`=?,`IsbnPrestamoInt`=? WHERE `idPrestamoInterBiblio` = ?';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
-
 
         $Isbn = $PresInterBibliotecarioVo->getIsbn();
         $idPrestamoInterBiblio = $PresInterBibliotecarioVo->getIdPrestamoInterBiblio();
@@ -60,40 +47,33 @@ class PresInterBibliotecarioDAO {
         $IsbnPrestamoInt = $PresInterBibliotecarioVo->getIsbnPrestamoInt();
         $stmp->bind_param("sisi", $idPrestamo, $idPrestemoInterBibliotecario, $IsbnPrestamoInt, $idPrestamoInterBiblio);
 
-        $respuesta = array();
-        if ($stmp->execute() == 1) {
-            $respuesta["sucess"];
-            $respuesta["sucess"] = "ok";
-        } else {
-            $respuesta["sucess"] = "no";
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $this->respuesta($conn, $stmp);
     }
 
     function EliminarPresInterBibliotecario($array) {
         $PresInterBibliotecarioVo = new PresInterBibliotecarioVO();
         $PresInterBibliotecarioVo->setIdPrestamoInterBiblio($array->idPrestamoInterBiblio);
 
-
         $sql = 'DELETE FROM `tbl_pestemointerbibliotecario` WHERE  WHERE `idPrestamoInterBiblio` = ?';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
-
         $Isbn = $PresInterBibliotecarioVo->getIsbn();
         $idPrestamoInterBiblio = $PresInterBibliotecarioVo->getIdPrestamoInterBiblio();
         $stmp->bind_param("i", $idPrestamoInterBiblio);
 
+        $this->respuesta($conn, $stmp);
+    }
+
+    function respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
-            $respuesta["sucess"];
             $respuesta["sucess"] = "ok";
         } else {
             $respuesta["sucess"] = "no";
         }
+
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);

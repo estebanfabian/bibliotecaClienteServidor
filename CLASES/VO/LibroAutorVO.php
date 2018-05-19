@@ -6,6 +6,7 @@ class LibroAutorVO {
     private $Isbn;
     private $idautor;
     private $listaLibro;
+
     function getIdAutorLibro() {
         return $this->idAutorLibro;
     }
@@ -37,6 +38,5 @@ class LibroAutorVO {
     function setListaLibro($listaLibro) {
         $this->listaLibro = $listaLibro;
     }
-
 
 }

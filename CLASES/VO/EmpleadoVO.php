@@ -17,6 +17,7 @@ class EmpleadoVO {
     private $codigoEmpleado;
     private $nombreEmpleado;
     private $puesto;
+
     function getCodigoEmpleado() {
         return $this->codigoEmpleado;
     }
@@ -40,7 +41,5 @@ class EmpleadoVO {
     function setPuesto($puesto) {
         $this->puesto = $puesto;
     }
-
-
 
 }

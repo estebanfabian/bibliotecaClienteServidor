@@ -8,12 +8,11 @@ class UsuarioDAO {
 
     public function CrearUsuario($array) {
 
-        //echo "Entra";
         $sql = 'INSERT INTO `tbl_usuario` (`codigo`, `nombre`, `apellido`, `fechaNacimiento`, `sexo`, `direccion`, `direccion2`, `telefonoPrincipal`, `telefonoSecundario`, `telefonoOtro`, `emailPrincipal`, `contactoNombre`, `contactoApellido`, `contactoDireccion`, `contactoDireccion2`, `contactoTelefono`, `contrasena`, `multa`, `perfil`, `foto`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
-        //echo "vamos bn";
+
         $UsuarioVO = new UsuarioVO();
         $UsuarioVO->setCodigo($array->codigo);
         $UsuarioVO->setNombre($array->nombre);
@@ -25,10 +24,9 @@ class UsuarioDAO {
         $UsuarioVO->setEmailPrincipal($array->emailPrincipal);
         $UsuarioVO->setContrasena($array->contrasena);
         $UsuarioVO->setFoto($array->foto);
-       
 
         if (count((array) $array, COUNT_RECURSIVE) > 10) {
-            //echo "dento del if";
+
             $UsuarioVO->setDireccion2($array->direccion2);
             $UsuarioVO->setTelefonoSecundario($array->telefonoSecundario);
             $UsuarioVO->setTelefonoOtro($array->telefonoOtro);
@@ -40,7 +38,7 @@ class UsuarioDAO {
             $UsuarioVO->setMulta($array->multa);
             $UsuarioVO->setPerfil($array->perfil);
         } else {
-           // echo "en el sino";
+
             $UsuarioVO->setDireccion2("");
             $UsuarioVO->setTelefonoSecundario("");
             $UsuarioVO->setTelefonoOtro("");
@@ -53,12 +51,11 @@ class UsuarioDAO {
             $UsuarioVO->setPerfil("");
         }
 
-        //echo "Salio del si";
         $codigo = $UsuarioVO->getCodigo();
         $nombre = $UsuarioVO->getNombre();
         $apellido = $UsuarioVO->getApellido();
         $fechaNacimiento = $UsuarioVO->getFechaNacimiento();
-        $sexo = $UsuarioVO->getSexo(); //ALTER TABLE `tbl_usuario` CHANGE `sexo` `sexo` BOOLEAN NOT NULL;
+        $sexo = $UsuarioVO->getSexo();
         $direccion = $UsuarioVO->getDireccion();
         $direccion2 = $UsuarioVO->getDireccion2();
         $telefonoPrincipal = $UsuarioVO->getTelefonoPrincipal();
@@ -75,74 +72,10 @@ class UsuarioDAO {
         $perfil = $UsuarioVO->getPerfil();
         $foto = $UsuarioVO->getFoto();
 
-        //echo $codigo." , ". $nombre." , ". $apellido." , ". $fechaNacimiento." , ". $sexo." , ". $direccion." , ". $direccion2." , ". $telefonoPrincipal." , ". $telefonoSecundario." , ". $telefonoOtro." , ". $emailPrincipal." , ". $contactoNombre." , ". $contactoApellido." , ". $contactoDireccion." , ". $contactoDireccion2." , ". $contactoTelefono." , ". $contrasena." , ". $multa." , ". $perfil." , ". $foto;
-
         $stmp->bind_param("isssbssssssssssssiss", $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $direccion2, $telefonoPrincipal, $telefonoSecundario, $telefonoOtro, $emailPrincipal, $contactoNombre, $contactoApellido, $contactoDireccion, $contactoDireccion2, $contactoTelefono, $contrasena, $multa, $perfil, $foto);
 
-        $resultado = array();
-
-        if ($stmp->execute()) {
-            $respuesta["foto"] = $foto;
-            $respuesta["nombre"] = $nombre;
-            $respuesta["sucess"] = "ok";
-        } else {
-            $respuesta["sucess"] = "no";
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $this->respuesta($conn, $stmp);
     }
-
-//    public function CrearUsuario($array) {
-//
-//
-//        $sql = 'INSERT INTO `tbl_usuario` (`codigo`, `nombre`, `apellido`, `fechaNacimiento`, `sexo`, `direccion`, `telefonoPrincipal`, `emailPrincipal`,  `contrasena`,foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);';
-//        $BD = new ConectarBD();
-//        $conn = $BD->getMysqli();
-//        $stmp = $conn->prepare($sql);
-//
-//        $UsuarioVO = new UsuarioVO();
-//        $UsuarioVO->setCodigo($array->Codigo);
-//        $UsuarioVO->setApellido($array->apellido);
-//        $UsuarioVO->setNombre($array->nombre);
-//        $UsuarioVO->setTelefonoPrincipal($array->telefonoPrincipal);
-//        $UsuarioVO->setFechaNacimiento($array->FechaNacimiento);
-//        $UsuarioVO->setSexo($array->sexo);
-//        $UsuarioVO->setDireccion($array->direccion);
-//        $UsuarioVO->setEmailPrincipal($array->emailPrincipal);
-//        $UsuarioVO->setContrasena($array->contrasena);
-//        $UsuarioVO->setFoto(md5(time()));
-//
-//
-//        $codigo = $UsuarioVO->getCodigo();
-//        $nombre = $UsuarioVO->getNombre();
-//        $apellido = $UsuarioVO->getApellido();
-//        $fechaNacimiento = $UsuarioVO->getFechaNacimiento();
-//        $sexo = $UsuarioVO->getSexo();
-//        $direccion = $UsuarioVO->getDireccion();
-//        $telefonoPrincipal = $UsuarioVO->getTelefonoPrincipal();
-//        $emailPrincipal = $UsuarioVO->getEmailPrincipal();
-//        $contrasena = $UsuarioVO->getContrasena();
-//        $foto = $UsuarioVO->getFoto();
-//
-//
-//        $stmp->bind_param("isssssssss", $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $telefonoPrincipal, $emailPrincipal, $contrasena,$foto);
-//
-//        $resultado = array();
-//
-//        if ($stmp->execute()) {
-//            $respuesta["sucess"] = "ok";
-//            $respuesta["foto"] = $foto;
-//            $respuesta["nombre"] = $nombre;
-//        } else {
-//            $respuesta["sucess"] = "no";
-//        }
-//
-//        $stmp->close();
-//        $conn->close();
-//
-//        echo json_encode($respuesta);
-//    }
 
     function ActualizarUsuario($array) {
 
@@ -166,46 +99,32 @@ class UsuarioDAO {
         $UsuarioVO->setContrasena($array->contrasena);
         $UsuarioVO->setFoto($array->foto);
 
-        if ($Usuariovo->getCodigo() != "null") {
-            $this->modificarProveedor($Autorvo);
-        } else {
-            $sql = 'UPDATE `tbl_usuario` SET `nombre`=?,`apellido`=?,`fechaNacimiento`=?,`sexo`=?,`direccion`=?,`direccion2`=?,`telefonoPrincipal`=?,`telefonoSecundario`=?,`telefonoOtro`=?,`emailPrincipal`=?,`contactoNombre`=?,`contactoApellido`=?,`contactoDireccion`=?,`contactoDireccion2`=?,`contactoTelefono`=?,`contrasena`=? ,foto =?WHERE `codigo`=?;';
-            $BD = new ConectarBD();
-            $conn = $BD->getMysqli();
-            $stmp = $conn->prepare($sql);
+        $sql = 'UPDATE `tbl_usuario` SET `nombre`=?,`apellido`=?,`fechaNacimiento`=?,`sexo`=?,`direccion`=?,`direccion2`=?,`telefonoPrincipal`=?,`telefonoSecundario`=?,`telefonoOtro`=?,`emailPrincipal`=?,`contactoNombre`=?,`contactoApellido`=?,`contactoDireccion`=?,`contactoDireccion2`=?,`contactoTelefono`=?,`contrasena`=? ,foto =?WHERE `codigo`=?;';
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
 
-            $codigo = $UsuarioVO->getCodigo();
-            $nombre = $UsuarioVO->getNombre();
-            $apellido = $UsuarioVO->getApellido();
-            $fechaNacimiento = $UsuarioVO->getFechaNacimiento();
-            $sexo = $UsuarioVO->getSexo(); //ALTER TABLE `tbl_usuario` CHANGE `sexo` `sexo` BOOLEAN NOT NULL;
-            $direccion = $UsuarioVO->getDireccion();
-            $direccion2 = $UsuarioVO->getDireccion2();
-            $telefonoPrincipal = $UsuarioVO->getTelefonoPrincipal();
-            $telefonoSecundario = $UsuarioVO->getTelefonoSecundario();
-            $telefonoOtro = $UsuarioVO->getTelefonoOtro();
-            $emailPrincipal = $UsuarioVO->getEmailPrincipal();
-            $contactoNombre = $UsuarioVO->getContactoNombre();
-            $contactoApellido = $UsuarioVO->getContactoApellido();
-            $contactoDireccion = $UsuarioVO->getContactoDireccion();
-            $contactoDireccion2 = $UsuarioVO->getContactoDireccion2();
-            $contactoTelefono = $UsuarioVO->getContactoTelefono();
-            $contrasena = $UsuarioVO->getContrasena();
-            $foto = $UsuarioVO->getFoto();
+        $codigo = $UsuarioVO->getCodigo();
+        $nombre = $UsuarioVO->getNombre();
+        $apellido = $UsuarioVO->getApellido();
+        $fechaNacimiento = $UsuarioVO->getFechaNacimiento();
+        $sexo = $UsuarioVO->getSexo();
+        $direccion = $UsuarioVO->getDireccion();
+        $direccion2 = $UsuarioVO->getDireccion2();
+        $telefonoPrincipal = $UsuarioVO->getTelefonoPrincipal();
+        $telefonoSecundario = $UsuarioVO->getTelefonoSecundario();
+        $telefonoOtro = $UsuarioVO->getTelefonoOtro();
+        $emailPrincipal = $UsuarioVO->getEmailPrincipal();
+        $contactoNombre = $UsuarioVO->getContactoNombre();
+        $contactoApellido = $UsuarioVO->getContactoApellido();
+        $contactoDireccion = $UsuarioVO->getContactoDireccion();
+        $contactoDireccion2 = $UsuarioVO->getContactoDireccion2();
+        $contactoTelefono = $UsuarioVO->getContactoTelefono();
+        $contrasena = $UsuarioVO->getContrasena();
+        $foto = $UsuarioVO->getFoto();
 
-
-            $stmp->bind_param("sssssssssssssssssi", $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $direccion2, $telefonoPrincipal, $telefonoSecundario, $telefonoOtro, $emailPrincipal, $contactoNombre, $contactoApellido, $contactoDireccion, $contactoDireccion2, $contactoTelefono, $contrasena, $foto);
-            $this->respuesta($conn, $stmp);
-
-            if ($stmp->execute() == 1) {
-                $respuesta["sucess"] = "ok";
-            } else {
-                $respuesta["sucess"] = "no";
-            }
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $stmp->bind_param("sssssssssssssssssi", $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $direccion2, $telefonoPrincipal, $telefonoSecundario, $telefonoOtro, $emailPrincipal, $contactoNombre, $contactoApellido, $contactoDireccion, $contactoDireccion2, $contactoTelefono, $contrasena, $foto);
+        $this->respuesta($conn, $stmp);
     }
 
     function elminarUsuario($array) {
@@ -218,55 +137,23 @@ class UsuarioDAO {
         $stmp = $conn->prepare($sql);
         $codigo = $Usuariovo->getCodigo();
         $stmp->bind_param("i", $codigo);
-        if ($stmp->execute() == 1) {
-            $respuesta["sucess"] = "ok";
-        } else {
-            $respuesta["sucess"] = "no";
-        }
 
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $this->respuesta($conn, $stmp);
     }
 
     public function Login($array) {
-        // echo "esta es la cantidad ".$array.length."/n"; 
-     //   echo "entrado en ejemplo ";
-       // echo count((array) $array, COUNT_RECURSIVE);
-        //count($array, COUNT_RECURSIVE);
-       // echo " saliendo de ejemplo";
+
         $sql = 'SELECT codigo,nombre , foto, perfil  FROM `tbl_usuario`  WHERE `codigo`= ?  and `contrasena` like binary ? ;';
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
         $UsuarioVO = new UsuarioVO();
-
         $UsuarioVO->setCodigo($array->codigo);
         $UsuarioVO->setContrasena($array->contrasena);
-        //$ejemplo = 
-        /* if (sizeof($array) == 2) {
-          $UsuarioVO->setEjemplo($array->ejemplo);
-          } else {
-          $UsuarioVO->setEjemplo(null);
-          } */
-
-//        if (in_array('ejemplo', $array)) {
-//            $UsuarioVO->setEjemplo($array->ejemplo);
-//        } else {
-//            $UsuarioVO->setEjemplo(null);
-//        }
 
         $codigo = $UsuarioVO->getCodigo();
         $contrasena = $UsuarioVO->getContrasena();
-
-//        try {
-//            $ejemplo = $UsuarioVO->getEjemplo();
-//        } catch (Exception $exc) {
-//            $UsuarioVO->setEjemplo("");
-//        }
-
-
 
         $stmp->bind_param("is", $codigo, $contrasena);
 
@@ -297,7 +184,6 @@ class UsuarioDAO {
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
-
 
         $codigo = $Usuariovo->getCodigo();
         $emailPrincipal = $Usuariovo->getEmailPrincipal();
@@ -344,6 +230,19 @@ class UsuarioDAO {
         } else {
             echo "funciono";
         }
+    }
+
+    function respuesta($conn, $stmp) {
+        $respuesta = array();
+        if ($stmp->execute() == 1) {
+            $respuesta["sucess"] = "ok";
+        } else {
+            $respuesta["sucess"] = "no";
+        }
+
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
     }
 
 }

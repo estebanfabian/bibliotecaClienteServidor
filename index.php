@@ -18,7 +18,7 @@
         <script src="js/additional-methods.js" type="text/javascript"></script>
         <script src="js/localization/messages_es.js" type="text/javascript"></script>
         <script src="" type="text/javascript"></script>
-        <script src="js/MiLogica.js" type="text/javascript"></script>
+        <script src="gato.jsp" type="text/javascript"></script>
 
 
         <title>Red Distrital de Bibliotecas Públicas - Biblored</title>

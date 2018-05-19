@@ -1,6 +1,6 @@
 <?php
 
-class LibroPrestamoVO {
+class LibroPrestamointVO {
 
     private $IsbnPrestamoInt;
     private $titulo;

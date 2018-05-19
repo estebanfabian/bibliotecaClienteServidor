@@ -9,7 +9,5 @@ require '../../CLASES/VO/UsuarioVO.php';
 
 $json= file_get_contents("php://input");
 $local= json_decode($json);
-
-//print_r($local);
 $UsuarioDAO=new UsuarioDAO();
 $UsuarioDAO->CrearUsuario($local);

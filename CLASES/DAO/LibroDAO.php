@@ -20,7 +20,6 @@ class LibroDAO {
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
 
-
             $Isbn = $libroVo->getIsbn();
             $idEditorial = $libroVo->getIdEditorial();
             $titulo = $libroVo->getTitulo();
@@ -31,16 +30,7 @@ class LibroDAO {
 
             $stmp->bind_param("sissss", $Isbn, $idEditorial, $titulo, $editorial, $categoriaLibro, $resena, $imagen);
 
-            $respuesta = array();
-            if ($stmp->execute() == 1) {
-                $respuesta["sucess"];
-                $respuesta["sucess"] = "ok";
-            } else {
-                $respuesta["sucess"] = "no";
-            }
-            $stmp->close();
-            $conn->close();
-            echo json_encode($respuesta);
+            $this->respuesta($conn, $stmp);
         }
     }
 
@@ -69,16 +59,7 @@ class LibroDAO {
 
         $stmp->bind_param("sisi", $idEditorial, $titulo, $editorial, $categoriaLibro, $resena, $imagen, $Isbn);
 
-        $respuesta = array();
-        if ($stmp->execute() == 1) {
-            $respuesta["sucess"];
-            $respuesta["sucess"] = "ok";
-        } else {
-            $respuesta["sucess"] = "no";
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $this->respuesta($conn, $stmp);
     }
 
     function EliminarLibro($array) {
@@ -94,16 +75,7 @@ class LibroDAO {
         $Isbn = $libroVo->getIsbn();
         $stmp->bind_param("i", $Isbn);
 
-        $respuesta = array();
-        if ($stmp->execute() == 1) {
-            $respuesta["sucess"];
-            $respuesta["sucess"] = "ok";
-        } else {
-            $respuesta["sucess"] = "no";
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $this->respuesta($conn, $stmp);
     }
 
     public function listarXid($array) {
@@ -121,24 +93,8 @@ class LibroDAO {
         $Consulta = $LibroVO->getIsbn();
 
         $stmp->bind_param("i", $Consulta);
-        $stmp->execute();
-        $stmp->bind_result($Isbn, $titulo, $autor, $tema, $editorial, $facultad, $estado);
 
-        $respuesta = array();
-        while ($stmp->fetch()) {
-            $tmp = array();
-            $tmp["Isbn"] = $Isbn;
-            $tmp["titulo"] = $titulo;
-            $tmp["autor"] = $autor;
-            $tmp["tema"] = $tema;
-            $tmp["editorial"] = $editorial;
-            $tmp["facultad"] = $facultad;
-            $tmp["estado"] = $estado;
-            $respuesta[sizeof($respuesta)] = $tmp;
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $this->respuestaLibros($conn, $stmp);
     }
 
     public function listarXtitulo($array) {
@@ -156,24 +112,7 @@ class LibroDAO {
         $Consulta = $LibroVO->getTitulo();
 
         $stmp->bind_param("s", $Consulta);
-        $stmp->execute();
-        $stmp->bind_result($Isbn, $titulo, $autor, $tema, $editorial, $facultad, $estado);
-
-        $respuesta = array();
-        while ($stmp->fetch()) {
-            $tmp = array();
-            $tmp["Isbn"] = $Isbn;
-            $tmp["titulo"] = $titulo;
-            $tmp["autor"] = $autor;
-            $tmp["tema"] = $tema;
-            $tmp["editorial"] = $editorial;
-            $tmp["facultad"] = $facultad;
-            $tmp["estado"] = $estado;
-            $respuesta[sizeof($respuesta)] = $tmp;
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $this->respuestaLibros($conn, $stmp);
     }
 
     public function listarXautor($array) {
@@ -191,24 +130,7 @@ class LibroDAO {
         $Consulta = $AutorVO->getNombreAutor();
 
         $stmp->bind_param("s", $Consulta);
-        $stmp->execute();
-        $stmp->bind_result($Isbn, $titulo, $autor, $tema, $editorial, $facultad, $estado);
-
-        $respuesta = array();
-        while ($stmp->fetch()) {
-            $tmp = array();
-            $tmp["Isbn"] = $Isbn;
-            $tmp["titulo"] = $titulo;
-            $tmp["autor"] = $autor;
-            $tmp["tema"] = $tema;
-            $tmp["editorial"] = $editorial;
-            $tmp["facultad"] = $facultad;
-            $tmp["estado"] = $estado;
-            $respuesta[sizeof($respuesta)] = $tmp;
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $this->respuestaLibros($conn, $stmp);
     }
 
     public function listarXtema($array) {
@@ -226,24 +148,7 @@ class LibroDAO {
         $Consulta = $TemaVO->getNombreTema();
 
         $stmp->bind_param("s", $Consulta);
-        $stmp->execute();
-        $stmp->bind_result($Isbn, $titulo, $autor, $tema, $editorial, $facultad, $estado);
-
-        $respuesta = array();
-        while ($stmp->fetch()) {
-            $tmp = array();
-            $tmp["Isbn"] = $Isbn;
-            $tmp["titulo"] = $titulo;
-            $tmp["autor"] = $autor;
-            $tmp["tema"] = $tema;
-            $tmp["editorial"] = $editorial;
-            $tmp["facultad"] = $facultad;
-            $tmp["estado"] = $estado;
-            $respuesta[sizeof($respuesta)] = $tmp;
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $this->respuestaLibros($conn, $stmp);
     }
 
     public function listarXeditorial($array) {
@@ -261,24 +166,7 @@ class LibroDAO {
         $Consulta = $EditorialVO->getNombreEditorial();
 
         $stmp->bind_param("s", $Consulta);
-        $stmp->execute();
-        $stmp->bind_result($Isbn, $titulo, $autor, $tema, $editorial, $facultad, $estado);
-
-        $respuesta = array();
-        while ($stmp->fetch()) {
-            $tmp = array();
-            $tmp["Isbn"] = $Isbn;
-            $tmp["titulo"] = $titulo;
-            $tmp["autor"] = $autor;
-            $tmp["tema"] = $tema;
-            $tmp["editorial"] = $editorial;
-            $tmp["facultad"] = $facultad;
-            $tmp["estado"] = $estado;
-            $respuesta[sizeof($respuesta)] = $tmp;
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $this->respuestaLibros($conn, $stmp);
     }
 
     public function listarXfacultad($array) {
@@ -296,24 +184,7 @@ class LibroDAO {
         $Consulta = $LibroAutorVO->getListaLibro();
 
         $stmp->bind_param("s", $Consulta);
-        $stmp->execute();
-        $stmp->bind_result($Isbn, $titulo, $autor, $tema, $editorial, $facultad, $estado);
-
-        $respuesta = array();
-        while ($stmp->fetch()) {
-            $tmp = array();
-            $tmp["Isbn"] = $Isbn;
-            $tmp["titulo"] = $titulo;
-            $tmp["autor"] = $autor;
-            $tmp["tema"] = $tema;
-            $tmp["editorial"] = $editorial;
-            $tmp["facultad"] = $facultad;
-            $tmp["estado"] = $estado;
-            $respuesta[sizeof($respuesta)] = $tmp;
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $this->respuestaLibros($conn, $stmp);
     }
 
     public function listarXPortada($array) {
@@ -333,6 +204,40 @@ class LibroDAO {
             $tmp = array();
             $tmp["resena"] = $resena;
             $tmp["imagen"] = $imagen;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
+    function respuesta($conn, $stmp) {
+        $respuesta = array();
+        if ($stmp->execute() == 1) {
+            $respuesta["sucess"] = "ok";
+        } else {
+            $respuesta["sucess"] = "no";
+        }
+
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
+    function respuestaLibros($conn, $stmp) {
+        $stmp->execute();
+        $stmp->bind_result($Isbn, $titulo, $autor, $tema, $editorial, $facultad, $estado);
+
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["Isbn"] = $Isbn;
+            $tmp["titulo"] = $titulo;
+            $tmp["autor"] = $autor;
+            $tmp["tema"] = $tema;
+            $tmp["editorial"] = $editorial;
+            $tmp["facultad"] = $facultad;
+            $tmp["estado"] = $estado;
             $respuesta[sizeof($respuesta)] = $tmp;
         }
         $stmp->close();

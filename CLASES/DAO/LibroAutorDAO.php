@@ -23,16 +23,7 @@ class LibroAutorDAO {
 
             $stmp->bind_param("isis", $idAutorLibro, $Isbn, $idautor, $listaLibro);
 
-            $respuesta = array();
-            if ($stmp->execute() == 1) {
-                $respuesta["sucess"];
-                $respuesta["sucess"] = "ok";
-            } else {
-                $respuesta["sucess"] = "no";
-            }
-            $stmp->close();
-            $conn->close();
-            echo json_encode($respuesta);
+            $this->respuesta($conn, $stmp);
         }
     }
 
@@ -55,16 +46,7 @@ class LibroAutorDAO {
 
         $stmp->bind_param("isis", $idAutorLibro, $Isbn, $idautor, $listaLibro);
 
-        $respuesta = array();
-        if ($stmp->execute() == 1) {
-            $respuesta["sucess"];
-            $respuesta["sucess"] = "ok";
-        } else {
-            $respuesta["sucess"] = "no";
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $this->respuesta($conn, $stmp);
     }
 
     function EliminarLibroAutor($array) {
@@ -80,13 +62,17 @@ class LibroAutorDAO {
 
         $stmp->bind_param("i", $idAutorLibro);
 
+        $this->respuesta($conn, $stmp);
+    }
+
+    function respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
-            $respuesta["sucess"];
             $respuesta["sucess"] = "ok";
         } else {
             $respuesta["sucess"] = "no";
         }
+
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);

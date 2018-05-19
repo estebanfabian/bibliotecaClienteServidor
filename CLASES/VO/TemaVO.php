@@ -1,10 +1,10 @@
 <?php
 
-
 class TemaVO {
+
     private $idTema;
     private $nombreTema;
-    private $Descricion;
+    private $descripcion;
 
     function getIdTema() {
         return $this->idTema;
@@ -14,8 +14,8 @@ class TemaVO {
         return $this->nombreTema;
     }
 
-    function getDescricion() {
-        return $this->Descricion;
+    function getDescripcion() {
+        return $this->descripcion;
     }
 
     function setIdTema($idTema) {
@@ -26,9 +26,8 @@ class TemaVO {
         $this->nombreTema = $nombreTema;
     }
 
-    function setDescricion($Descricion) {
-        $this->Descricion = $Descricion;
+    function setDescripcion($descripcion) {
+        $this->descripcion = $descripcion;
     }
-
 
 }

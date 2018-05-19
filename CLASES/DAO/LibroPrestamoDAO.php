@@ -19,7 +19,6 @@ class LibroPrestamoDAO {
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
 
-
             $IsbnPrestamoInt = $libroVo->getIsbnPrestamoInt();
             $idEditorial = $libroVo->getIdEditorial();
             $titulo = $libroVo->getTitulo();
@@ -29,16 +28,7 @@ class LibroPrestamoDAO {
 
             $stmp->bind_param("isis", $IsbnPrestamoInt, $idEditorial, $titulo, $editorial, $categoriaLibro, $resena);
 
-            $respuesta = array();
-            if ($stmp->execute() == 1) {
-                $respuesta["sucess"];
-                $respuesta["sucess"] = "ok";
-            } else {
-                $respuesta["sucess"] = "no";
-            }
-            $stmp->close();
-            $conn->close();
-            echo json_encode($respuesta);
+            $this->respuesta($conn, $stmp);
         }
     }
 
@@ -50,7 +40,6 @@ class LibroPrestamoDAO {
         $libroVo->setEditorial($array->editorial);
         $libroVo->setCategoriaLibro($array->categoriaLibro);
         $libroVo->setResena($array->resena);
-
 
         $sql = 'UPDATE `tbl_libro` SET `idEditorial` = ?, `titulo` = ?, `editorial` = ?, `categoriaLibro` = ?, `resena` = ? WHERE `tbl_libro`.`IsbnPrestamoInt` = ?;';
         $BD = new ConectarBD();
@@ -66,16 +55,7 @@ class LibroPrestamoDAO {
 
         $stmp->bind_param("sisi", $idEditorial, $titulo, $editorial, $categoriaLibro, $resena, $IsbnPrestamoInt);
 
-        $respuesta = array();
-        if ($stmp->execute() == 1) {
-            $respuesta["sucess"];
-            $respuesta["sucess"] = "ok";
-        } else {
-            $respuesta["sucess"] = "no";
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $this->respuesta($conn, $stmp);
     }
 
     function EliminarLibro($array) {
@@ -91,13 +71,17 @@ class LibroPrestamoDAO {
         $IsbnPrestamoInt = $libroVo->getIsbnPrestamoInt();
         $stmp->bind_param("i", $IsbnPrestamoInt);
 
+        $this->respuesta($conn, $stmp);
+    }
+
+    function respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
-            $respuesta["sucess"];
             $respuesta["sucess"] = "ok";
         } else {
             $respuesta["sucess"] = "no";
         }
+
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
