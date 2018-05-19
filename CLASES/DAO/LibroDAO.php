@@ -10,11 +10,12 @@ class LibroDAO {
         $libroVo->setEditorial($array->editorial);
         $libroVo->setCategoriaLibro($array->categoriaLibro);
         $libroVo->setResena($array->resena);
+        $libroVo->setImagen($array->imagen);
 
         if ($libroVo->setIdAutorLibro() != "null") {
             $this->ModificarLibro($libroVo);
         } else {
-            $sql = 'INSERT INTO `tbl_libro` (`Isbn`, `idEditorial`, `titulo`, `editorial`, `categoriaLibro`, `resena`) VALUES (?, ?, ?, ?, ?, ?)';
+            $sql = 'INSERT INTO `tbl_libro` (`Isbn`, `idEditorial`, `titulo`, `editorial`, `categoriaLibro`, `resena`,imagen) VALUES (?, ?, ?, ?, ?,?,?, ?)';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
@@ -26,8 +27,9 @@ class LibroDAO {
             $editorial = $libroVo->getEditorial();
             $categoriaLibro = $libroVo->getCategoriaLibro();
             $resena = $libroVo->getResena();
+            $imagen = $libroVo->getImagen();
 
-            $stmp->bind_param("isis", $Isbn, $idEditorial, $titulo, $editorial, $categoriaLibro, $resena);
+            $stmp->bind_param("sissss", $Isbn, $idEditorial, $titulo, $editorial, $categoriaLibro, $resena, $imagen);
 
             $respuesta = array();
             if ($stmp->execute() == 1) {
@@ -50,9 +52,9 @@ class LibroDAO {
         $libroVo->setEditorial($array->editorial);
         $libroVo->setCategoriaLibro($array->categoriaLibro);
         $libroVo->setResena($array->resena);
+        $libroVo->setImagen($array->imagen);
 
-
-        $sql = 'UPDATE `tbl_libro` SET `idEditorial` = ?, `titulo` = ?, `editorial` = ?, `categoriaLibro` = ?, `resena` = ? WHERE `tbl_libro`.`Isbn` = ?;';
+        $sql = 'UPDATE `tbl_libro` SET `idEditorial` = ?, `titulo` = ?, `editorial` = ?, `categoriaLibro` = ?, `resena` = ?,imagen=? WHERE `tbl_libro`.`Isbn` = ?;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -63,8 +65,9 @@ class LibroDAO {
         $editorial = $libroVo->getEditorial();
         $categoriaLibro = $libroVo->getCategoriaLibro();
         $resena = $libroVo->getResena();
+        $imagen = $libroVo->getImagen();
 
-        $stmp->bind_param("sisi", $idEditorial, $titulo, $editorial, $categoriaLibro, $resena, $Isbn);
+        $stmp->bind_param("sisi", $idEditorial, $titulo, $editorial, $categoriaLibro, $resena, $imagen, $Isbn);
 
         $respuesta = array();
         if ($stmp->execute() == 1) {
@@ -306,6 +309,30 @@ class LibroDAO {
             $tmp["editorial"] = $editorial;
             $tmp["facultad"] = $facultad;
             $tmp["estado"] = $estado;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
+    public function listarXPortada($array) {
+        $sql = 'SELECT `resena`,`imagen` FROM `tbl_libro` WHERE `Isbn`=?';
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+        $LibroVO = new LibroVO();
+        $LibroVO->setIsbn($array->Isbn);
+        $Isbn = $LibroVO->getIsbn();
+        $stmp->bind_param("i", $Isbn);
+        $stmp->execute();
+        $stmp->bind_result($resena, $imagen);
+
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["resena"] = $resena;
+            $tmp["imagen"] = $imagen;
             $respuesta[sizeof($respuesta)] = $tmp;
         }
         $stmp->close();

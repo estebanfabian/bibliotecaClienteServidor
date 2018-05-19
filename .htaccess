@@ -1,0 +1,12 @@
+RewriteEngine on
+RewriteRule ^Insert_user$ Controlador/Usuario/Insertar_Usuario.php
+RewriteRule ^Validar$ Controlador/Usuario/Validar_Usuario.php
+
+RewriteRule tablaXid$ controlador/libro/Consultar_LibroXid.php
+RewriteRule tablaXtitulo$ controlador/libro/Consultar_LibroXtitulo.php
+RewriteRule tablaXautor$ controlador/libro/Consultar_LibroXautor.php
+RewriteRule tablaXtema$ controlador/libro/Consultar_LibroXtema.php
+RewriteRule tablaXEditorial$ controlador/libro/Consultar_LibroXeditorial.php
+RewriteRule tablaXFacultad$ controlador/libro/Consultar_LibroXfacultad.php
+RewriteRule olvidar$ controlador/Usuario/Olvido_Contraseña.php
+RewriteRule Portada$ controlador/libro/Consultar_LibroXPortada.php

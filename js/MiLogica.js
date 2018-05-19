@@ -42,21 +42,38 @@ $(document).ready(function () {
                 }
             }, submitHandler: function () {
 
+//                var formulario = {
+//                    codigo: $("#codigo").val(),
+//                   contrasena: $("#contrasena").val()
+//                };
+
+
                 var formulario = {
-                    codigo: $("#codigo").val(),
-                    contrasena: $("#contrasena").val()
+                    codigo: "122",
+                    nombre: "es",
+                    apellido: "es",
+                    fechaNacimiento: "2018-05-02",
+                    sexo: "0",
+                    direccion: "q",
+                    telefonoPrincipal: "w",
+                    emailPrincipal: "s",
+                    contrasena: "w",
+                    foto: "2"
                 };
+
+
                 myJson.push(formulario);
                 var myString = JSON.stringify(formulario);
-                var url1 = "Controlador/UsuarioControlador/Validar_Usuario.php";
+                var url1 = "Insert_user";
                 var parametro1 = myString;
                 var metodo1 = function (respuesta) {
+                    console.log(respuesta);
+                    alert(respuesta);
                     var data = $.parseJSON(respuesta);
-                   
-                    if (data.length==0){
+                    if (data.length == 0) {
                         alert("El código o clave esta errada ")
-                    }else{
-                        
+                    } else {
+
                     }
 //                    if (data.sucess == "ok") {
 //                        // $("#limpiar").trigger("click");

@@ -8,56 +8,62 @@ class LibroVO {
     private $editorial;
     private $categoriaLibro;
     private $resena;
+    private $imagen;
 
+    function getIsbn() {
+        return $this->Isbn;
+    }
 
+    function getIdEditorial() {
+        return $this->idEditorial;
+    }
 
-function getIsbn() {
-    return $this->Isbn;
-}
+    function getTitulo() {
+        return $this->titulo;
+    }
 
- function getIdEditorial() {
-    return $this->idEditorial;
-}
+    function getEditorial() {
+        return $this->editorial;
+    }
 
- function getTitulo() {
-    return $this->titulo;
-}
+    function getCategoriaLibro() {
+        return $this->categoriaLibro;
+    }
 
- function getEditorial() {
-    return $this->editorial;
-}
+    function getResena() {
+        return $this->resena;
+    }
 
- function getCategoriaLibro() {
-    return $this->categoriaLibro;
-}
+    function getImagen() {
+        return $this->imagen;
+    }
 
- function getResena() {
-    return $this->resena;
-}
+    function setIsbn($Isbn) {
+        $this->Isbn = $Isbn;
+    }
 
- function setIsbn($Isbn) {
-    $this->Isbn = $Isbn;
-}
+    function setIdEditorial($idEditorial) {
+        $this->idEditorial = $idEditorial;
+    }
 
- function setIdEditorial($idEditorial) {
-    $this->idEditorial = $idEditorial;
-}
+    function setTitulo($titulo) {
+        $this->titulo = $titulo;
+    }
 
- function setTitulo($titulo) {
-    $this->titulo = $titulo;
-}
+    function setEditorial($editorial) {
+        $this->editorial = $editorial;
+    }
 
- function setEditorial($editorial) {
-    $this->editorial = $editorial;
-}
+    function setCategoriaLibro($categoriaLibro) {
+        $this->categoriaLibro = $categoriaLibro;
+    }
 
- function setCategoriaLibro($categoriaLibro) {
-    $this->categoriaLibro = $categoriaLibro;
-}
+    function setResena($resena) {
+        $this->resena = $resena;
+    }
 
- function setResena($resena) {
-    $this->resena = $resena;
-}
-
+    function setImagen($imagen) {
+        $this->imagen = $imagen;
+    }
 
 }
