@@ -1,4 +1,3 @@
-
 <?php ?>
 
 <!DOCTYPE html>
@@ -6,7 +5,7 @@
 
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-Type" content="text/html; char	set=utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href= "css/login.css" rel="stylesheet" type="text/css" style="display:none;visibility:hidden"https://www.googletagmanager.com/ns.html?id=GTM-MWD3VXM" height="0" width="0">
@@ -65,10 +64,10 @@
                                     </div>
                                     <div class="modal-footer">
                                         <div>
-                                            <button    id ="BTNIngresar" class="btn btn-primary btn-lg btn-block">Ingresar</button>
+                                            <button id ="BTNIngresar" class="btn btn-primary btn-lg btn-block">Ingresar</button>
                                         </div>
                                         <div>
-                                            <button id="login_lost_btn" type="button" class="btn btn-link">¿Olvidaste tu contraseña?</button>
+                                            <button id="login_lost_btn" class="btn btn-link" >¿Olvidaste tu contraseña?</button>
                                         </div>
                                     </div>
                                 </form>
@@ -79,17 +78,17 @@
                                     <div class="modal-body">
                                         <div id="div-lost-msg">
                                             <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
-                                            <span id="text-lost-msg">Type your e-mail.</span>
+                                            <span id="text-lost-msg">Ingrese su código y correo registrado</span>
                                         </div>
-                                        <input id="lost_email" class="form-control" type="text" placeholder="E-Mail (type ERROR for error effect)" required>
+                                        <input id="lost_codigo" name="lost_codigo" class="form-control" type="text" placeholder="Còdigo" required>
+                                        <input id="lost_email" name ="lost_email" class="form-control" type="email" placeholder="Correo electrònico" required>
                                     </div>
                                     <div class="modal-footer">
                                         <div>
-                                            <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
+                                            <button id="Enviar_correo" class="btn btn-primary btn-lg btn-block">Eniviar Correo</button>
                                         </div>
                                         <div>
-                                            <button id="lost_login_btn" type="button" class="btn btn-link">Log In</button>
-                                            <button id="lost_register_btn" type="button" class="btn btn-link">Register</button>
+                                            <button id="lost_login_btn" type="button" class="btn btn-link">Login</button>
                                         </div>
                                     </div>
                                 </form>
@@ -121,7 +120,7 @@
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
-            
+
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav">
@@ -165,7 +164,7 @@
                 </div>
             </div>
 
-           
+
         </header>
         <div class ="container ">
             <section class ="main row">

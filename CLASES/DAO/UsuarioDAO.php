@@ -176,11 +176,13 @@ class UsuarioDAO {
     }
 
     function correo($array) {
+
+        $sql = 'SELECT `contrasena` FROM `tbl_usuario` WHERE `codigo`= ? and `emailPrincipal` =  ?;';
+
         $Usuariovo = new UsuarioVO();
-        $Usuariovo->setCodigo($array->Codigo);
+        $Usuariovo->setCodigo($array->codigo);
         $Usuariovo->setEmailPrincipal($array->emailPrincipal);
 
-        $sql = 'SELECT `emailPrincipal`,`contrasena` FROM `tbl_usuario` WHERE `codigo`= ? and `emailPrincipal` =  ?;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -189,22 +191,21 @@ class UsuarioDAO {
         $emailPrincipal = $Usuariovo->getEmailPrincipal();
 
         $stmp->bind_param("is", $codigo, $emailPrincipal);
-        $this->respuesta($conn, $stmp);
 
+        $stmp->execute();
+        $stmp->bind_result($contrasena);
+
+        $respuesta = array();
         while ($stmp->fetch()) {
             $tmp = array();
-            $tmp["emailPrincipal"] = $codigo;
             $tmp["contrasena"] = $contrasena;
+            $tmp["emailPrincipal"] = $emailPrincipal;
+
             $respuesta[sizeof($respuesta)] = $tmp;
         }
-
-        enviar($codigo, $contrasena);
-        if ($stmp->execute() == 1) {
-            $respuesta["sucess"] = "ok";
-        } else {
-            $respuesta["sucess"] = "no";
+        if ($contrasena != NULL) {
+            $this->enviar($emailPrincipal, $contrasena);
         }
-
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
@@ -220,15 +221,14 @@ class UsuarioDAO {
         $mail->Password = "Prueba12345"; /* SMTP password */
         $mail->SMTPSecure = 'tls';
         $mail->From = "biblocur@gmail.com";
-        $mail->FromName = "esteban";
+        $mail->FromName = "Corporacion Univservistario Republicana";
+        $mail->Subject = "Recuperacion de su clave";
         $mail->addAddress($correo); /* Add a recipient */
         $mail->isHTML(true); /* Set email format to HTML (default = true) */
         $mail->Body = "Su contraseña es " . $contrasena;
         if (!$mail->send()) {
             echo 'Message could not be sent.';
             echo 'Mailer Error: ' . $mail->ErrorInfo;
-        } else {
-            echo "funciono";
         }
     }
 

@@ -3,6 +3,7 @@ RewriteEngine on
 RewriteRule ^gato.jsp$ js/MiLogica.js
 RewriteRule ^Insert_user$ Controlador/Usuario/Insertar_Usuario.php
 RewriteRule ^Validar$ Controlador/Usuario/Validar_Usuario.php
+RewriteRule ^Correo$ Controlador/Usuario/Correo_Usuario.php
 RewriteRule tablaXid$ controlador/libro/Consultar_LibroXid.php
 RewriteRule tablaXtitulo$ controlador/libro/Consultar_LibroXtitulo.php
 RewriteRule tablaXautor$ controlador/libro/Consultar_LibroXautor.php

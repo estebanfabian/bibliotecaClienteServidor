@@ -1,5 +1,10 @@
 $(document).ready(function () {
+
     var myJson = new Array();
+    var $formLogin = $('#login-form');
+    var $formLost = $('#lost-form');
+    var $divForms = $('#div-forms');
+    var $modalAnimateTime = 300;
     function fajax(URL, parametros, metodo) {
         $.ajax({
             url: URL,
@@ -44,23 +49,8 @@ $(document).ready(function () {
 
                 var formulario = {
                     codigo: $("#codigo").val(),
-                   contrasena: $("#contrasena").val()
+                    contrasena: $("#contrasena").val()
                 };
-
-//
-//                var formulario = {
-//                    codigo: "122",
-//                    nombre: "es",
-//                    apellido: "es",
-//                    fechaNacimiento: "2018-05-02",
-//                    sexo: "0",
-//                    direccion: "q",
-//                    telefonoPrincipal: "w",
-//                    emailPrincipal: "s",
-//                    contrasena: "w",
-//                    foto: "2"
-//                };
-
 
                 myJson.push(formulario);
                 var myString = JSON.stringify(formulario);
@@ -75,20 +65,88 @@ $(document).ready(function () {
                     } else {
 
                     }
-//                    if (data.sucess == "ok") {
-//                        // $("#limpiar").trigger("click");
-//                        //idProvedorModi = "null";
-//                        alert("Los datos fueron registrados en la BD");
-//                    } else {
-//                        alert("Los datos NO fueron registrados en la BD");
-//                    }
                 };
                 fajax(url1, parametro1, metodo1);
             }
         });
         fajax(url, parameto, metodo);
     }
+
+    function Correo() {
+        var url = "";
+        var parameto = "hola";
+        var metodo = function (ssw) {
+            //  $("#login-form").html(ssw);
+        };
+        $("#lost-form").validate({
+            rules: {
+                lost_codigo: {
+                    required: true,
+                    number: true,
+                    digits: true
+                },
+                lost_email: {
+                    required: true,
+                    minlength: 1
+                }
+            },
+            messages: {
+                lost_codigo: {
+                    digits: "Este campo no puede tener ni comas, ni puntos",
+                    number: "Este campo solo permite número"
+                }
+            }, submitHandler: function () {
+
+                var formulario = {
+                    codigo: $("#lost_codigo").val(),
+                    emailPrincipal: $("#lost_email").val()
+                };
+
+                myJson.push(formulario);
+                var myString = JSON.stringify(formulario);
+                var url1 = "Correo";
+                var parametro1 = myString;
+                var metodo1 = function (respuesta) {
+                    console.log(respuesta);
+                    alert(respuesta);
+                    var data = $.parseJSON(respuesta);
+                    if (data.length == 0) {
+                        alert("El código o clave esta errada ")
+                    } else {
+
+                    }
+                };
+                fajax(url1, parametro1, metodo1);
+            }
+        });
+        fajax(url, parameto, metodo);
+    }
+
     $("#BTNIngresar").click(function () {
         login();
     });
+
+    $("#Enviar_correo").click(function () {
+        Correo();
+    });
+    $("#login_lost_btn").click(function () {
+        modalAnimate($formLogin, $formLost);
+    });
+    $("#lost_login_btn").click(function () {
+        modalAnimate($formLost, $formLogin);
+    });
+    function modalAnimate($oldForm, $newForm) {
+
+        var $oldH = $oldForm.height();
+        var $newH = $newForm.height();
+
+        $divForms.css("height", $oldH);
+        $oldForm.fadeToggle($modalAnimateTime, function () {
+            $divForms.animate({height: $newH}, $modalAnimateTime, function () {
+                $newForm.fadeToggle($modalAnimateTime);
+            });
+        });
+
+    }
+
 });

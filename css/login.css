@@ -62,7 +62,9 @@
 #icon-register-msg.success {
     background-color: #68c3a3 !important;
 }
-
+input#lost_codigo{
+    margin: 10px;
+}
 #icon-login-msg.error,
 #icon-lost-msg.error,
 #icon-register-msg.error {
