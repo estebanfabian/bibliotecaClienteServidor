@@ -57,13 +57,13 @@ $(document).ready(function () {
                 var url1 = "Validar";
                 var parametro1 = myString;
                 var metodo1 = function (respuesta) {
-                    console.log(respuesta);
-                    alert(respuesta);
+                    $("#codigo").val("");
+                    $("#contrasena").val("");
                     var data = $.parseJSON(respuesta);
                     if (data.length == 0) {
                         alert("El código o clave esta errada ")
                     } else {
-
+                        $('#login-modal').modal('hide');
                     }
                 };
                 fajax(url1, parametro1, metodo1);
@@ -107,13 +107,14 @@ $(document).ready(function () {
                 var url1 = "Correo";
                 var parametro1 = myString;
                 var metodo1 = function (respuesta) {
-                    console.log(respuesta);
-                    alert(respuesta);
+                  
+                    $("#lost_codigo").val("");
+                    $("#lost_email").val("");
                     var data = $.parseJSON(respuesta);
-                    if (data.length == 0) {
+                    if (data == "no") {
                         alert("El código o clave esta errada ")
                     } else {
-
+                        $('#login-modal').modal('hide');
                     }
                 };
                 fajax(url1, parametro1, metodo1);

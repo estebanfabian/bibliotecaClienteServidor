@@ -38,7 +38,7 @@ class PrestamoDAO {
     }
 
     function ModificarPrestamo($array) {
-        
+
         $PrestamoVo = new PrestamoVO();
         $PrestamoVo->setIdPrestamo($array->idPrestamo);
         $PrestamoVo->setEstadoLibro($array->estadoLibro);
@@ -77,10 +77,30 @@ class PrestamoDAO {
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
-
         $idPrestamo = $PrestamoVo->getIdPrestamo();
         $stmp->bind_param("s", $idPrestamo);
 
+        $this->respuesta($conn, $stmp);
+    }
+
+    public function reservar_libro($array) {
+        $sql = 'INSERT INTO `tbl_prestamo` (`diaPrestamo`,  `isbn`,  `codigo`, `diaEntrega`) VALUES (?, ?, ?, ?);';
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $PrestamoVO = new PrestamoVO();
+        $PrestamoVO->setDiaPrestamo($array->diaPrestamo);
+        $PrestamoVO->setIsbn($array->isbn);
+        $PrestamoVO->setCodigo($array->codigo);
+        $PrestamoVO->setDiaEntrega($array->diaEntrega);
+
+        $diaPrestamo = $PrestamoVO->getDiaPrestamo();
+        $isbn = $PrestamoVO->getIsbn();
+        $codigo = $PrestamoVO->getCodigo();
+        $diaEntrega = $PrestamoVO->getDiaEntrega();
+
+        $stmp->bind_param("siis", $diaPrestamo, $isbn, $codigo, $diaEntrega);
         $this->respuesta($conn, $stmp);
     }
 

@@ -63,7 +63,7 @@
     background-color: #68c3a3 !important;
 }
 input#lost_codigo{
-    margin: 10px;
+    margin-bottom:  10px;
 }
 #icon-login-msg.error,
 #icon-lost-msg.error,

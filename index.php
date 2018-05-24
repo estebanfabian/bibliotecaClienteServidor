@@ -11,7 +11,6 @@
         <link href= "css/login.css" rel="stylesheet" type="text/css" style="display:none;visibility:hidden"https://www.googletagmanager.com/ns.html?id=GTM-MWD3VXM" height="0" width="0">
               <link href= "css/pantilla.css" rel="stylesheet" type="text/css" style="display:none;visibility:hidden"https://www.googletagmanager.com/ns.html?id=GTM-MWD3VXM" height="0" width="0">
 
-
         <script src="js/jquery-3.3.1.js" type="text/javascript"></script>
         <script src="js/jquery.validate.js" type="text/javascript"></script>
         <script src="js/additional-methods.js" type="text/javascript"></script>
@@ -19,8 +18,7 @@
         <script src="" type="text/javascript"></script>
         <script src="gato.jsp" type="text/javascript"></script>
 
-
-        <title>Red Distrital de Bibliotecas Públicas - Biblored</title>
+        <title>BiblioCur</title>
     </head>
     <body>
         <header> 
@@ -32,8 +30,6 @@
                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#login-modal">Login</button>
                     </div>
                 </div>
-
-
                 <!-- BEGIN # MODAL LOGIN -->
                 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog">
@@ -46,7 +42,6 @@
                             </div>
                             <!-- Begin # DIV Form -->
                             <div id="div-forms">
-
                                 <!-- Begin # Login Form -->
                                 <form id="login-form" name ="login-form" method="POST" >
                                     <div class="modal-body">
@@ -64,15 +59,14 @@
                                     </div>
                                     <div class="modal-footer">
                                         <div>
-                                            <button id ="BTNIngresar" class="btn btn-primary btn-lg btn-block">Ingresar</button>
+                                            <button id ="BTNIngresar" type="submit" class="btn btn-primary btn-lg btn-block">Ingresar</button>
                                         </div>
                                         <div>
-                                            <button id="login_lost_btn" class="btn btn-link" >¿Olvidaste tu contraseña?</button>
+                                            <button id="login_lost_btn" type="reset" class="btn btn-link" >¿Olvidaste tu contraseña?</button>
                                         </div>
                                     </div>
                                 </form>
                                 <!-- End # Login Form -->
-
                                 <!-- Begin | Lost Password Form -->
                                 <form id="lost-form" style="display:none;">
                                     <div class="modal-body">
@@ -80,8 +74,8 @@
                                             <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
                                             <span id="text-lost-msg">Ingrese su código y correo registrado</span>
                                         </div>
-                                        <input id="lost_codigo" name="lost_codigo" class="form-control" type="text" placeholder="Còdigo" required>
-                                        <input id="lost_email" name ="lost_email" class="form-control" type="email" placeholder="Correo electrònico" required>
+                                        <input id="lost_codigo" name = "lost_codigo" class="form-control" type="text" placeholder="Código" required>
+                                        <input id="lost_email" name =  "lost_email" class="form-control" type="email" placeholder="Contraseña" required>
                                     </div>
                                     <div class="modal-footer">
                                         <div>
@@ -93,16 +87,12 @@
                                     </div>
                                 </form>
                                 <!-- End | Lost Password Form -->
-
-
                             </div>
                             <!-- End # DIV Form -->
-
                         </div>
                     </div>
                 </div>
                 <!-- END # MODAL LOGIN -->
-
                 <div class="row">
                     <div class="col-4">
                         <img src="img/recurso/cur.png">
@@ -114,20 +104,16 @@
                         <img src="img/recurso/escudo.png">
                     </div>
                 </div>
-
-
                 <div class="row ejemplo">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
-
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav">
                                 <li class="nav-item active">
                                     <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
                                 </li>
-
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Quiénes somos 
@@ -139,7 +125,6 @@
                                         <a class="dropdown-item" href="#">Cur</a>
                                     </div>
                                 </li>
-
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Prestamo
@@ -150,21 +135,17 @@
                                         <a class="dropdown-item" href="#">Material audiovisual</a>
                                     </div>
                                 </li>
-
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Noticias</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Contactanos</a>
                                 </li>
-
                             </ul>
                         </div>
                     </nav>
                 </div>
             </div>
-
-
         </header>
         <div class ="container ">
             <section class ="main row">
@@ -250,22 +231,12 @@
             <div class = "container-fluid">
                 <div class="row">
                     <div class="col-md-4">
-                        <!--Institución de Educación Superior Sujeta a Inspección y Vigilancia por el Ministerio de Educación Nacional, con Personería jurídica reconocida mediante resolución No 3061 del 02 de diciembre de 1999, expedida por el Ministerio de Educación Nacional.
-                        <br>
-                        <br>
-                        -->
                         <address>
                             <img src="img/recurso/if_building-o_1608589.png" width="16" height="16" class="d-inline-block align-top" alt=""> Sede Administrativa: Cr 7 No 19-38 <br>
                             <img src="img/recurso/if_f095_213074.png" width="11" height="16" class="d-inline-block align-top" alt=""> Teléfono :
                             (57)(1) 2862384 Ext.110<br>
                             Bogotá, Colombia
                         </address>
-
-                        <!--
-                        <address>
-                        <strong>Full Name</strong><br>
-                        <a href="mailto:#">first.last@example.com</a>
-                        </address>-->
                     </div>
                     <div class="col-md-4">
                         <address>
@@ -294,11 +265,8 @@
                         </p>
                     </div> 
                 </div>
-
             </div>
-
         </footer>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script></body>
-
 </html>

@@ -205,6 +205,9 @@ class UsuarioDAO {
         }
         if ($contrasena != NULL) {
             $this->enviar($emailPrincipal, $contrasena);
+            $respuesta= $respuesta["sucess"] = "ok";
+        }else{
+            $respuesta= $respuesta["sucess"] = "no";
         }
         $stmp->close();
         $conn->close();

@@ -2,7 +2,7 @@
 
 class LibroVO {
 
-    private $Isbn;
+    private $isbn;
     private $idEditorial;
     private $titulo;
     private $editorial;
@@ -12,7 +12,7 @@ class LibroVO {
     private $imagen;
 
     function getIsbn() {
-        return $this->Isbn;
+        return $this->isbn;
     }
 
     function getIdEditorial() {
@@ -43,8 +43,8 @@ class LibroVO {
         return $this->imagen;
     }
 
-    function setIsbn($Isbn) {
-        $this->Isbn = $Isbn;
+    function setIsbn($isbn) {
+        $this->isbn = $isbn;
     }
 
     function setIdEditorial($idEditorial) {

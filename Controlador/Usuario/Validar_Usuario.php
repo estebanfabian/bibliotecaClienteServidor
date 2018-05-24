@@ -9,6 +9,4 @@ require '../../CLASES/VO/UsuarioVO.php';
 $json = file_get_contents("php://input");
 $local = json_decode($json);
 $UsuarioDAO = new UsuarioDAO;
-//print_r($local);
-//print_r(count($local));
 $UsuarioDAO->Login($local);
