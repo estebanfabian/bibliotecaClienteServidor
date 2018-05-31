@@ -22,12 +22,7 @@ $(document).ready(function () {
     }
 
     function login() {
-        var url = "";
-        var parameto = "hola";
-        var metodo = function (ssw) {
-            //  $("#login-form").html(ssw);
 
-        };
         $("#login-form").validate({
             rules: {
                 codigo: {
@@ -61,17 +56,37 @@ $(document).ready(function () {
                     $("#contrasena").val("");
                     var data = $.parseJSON(respuesta);
                     if (data.length == 0) {
-                        alert("El código o clave esta errada ")
-                    } else {
+                        alert("El código o clave esta errada ");
                         $('#login-modal').modal('hide');
+                    } else {
+                        console.log("primero");
+                        // $('#login-modal').modal('hide');
+                        console.log("entra1");
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
+                        envio();
                     }
                 };
+
+
                 fajax(url1, parametro1, metodo1);
+
             }
         });
-        fajax(url, parameto, metodo);
+
+        alert("entra1");
     }
 
+    function envio() {
+        var url = "Ingreso";
+        var parameto = "hola";
+        var metodo = function (ssw) {
+            $("#cabezara").html(ssw);
+              
+        };
+        fajax(url, parameto, metodo);
+
+    }
     function Correo() {
         var url = "";
         var parameto = "hola";
@@ -107,7 +122,7 @@ $(document).ready(function () {
                 var url1 = "Correo";
                 var parametro1 = myString;
                 var metodo1 = function (respuesta) {
-                  
+
                     $("#lost_codigo").val("");
                     $("#lost_email").val("");
                     var data = $.parseJSON(respuesta);

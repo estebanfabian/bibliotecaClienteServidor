@@ -24,7 +24,7 @@ class PresInterBibliotecarioDAO {
             $IsbnPrestamoInt = $PresInterBibliotecarioVo->getIsbnPrestamoInt();
             $stmp->bind_param("isis", $idPrestamoInterBiblio, $idPrestamo, $idPrestemoInterBibliotecario, $IsbnPrestamoInt);
 
-            $this->respuesta($conn, $stmp);
+            $this->Respuesta($conn, $stmp);
         }
     }
 
@@ -47,7 +47,7 @@ class PresInterBibliotecarioDAO {
         $IsbnPrestamoInt = $PresInterBibliotecarioVo->getIsbnPrestamoInt();
         $stmp->bind_param("sisi", $idPrestamo, $idPrestemoInterBibliotecario, $IsbnPrestamoInt, $idPrestamoInterBiblio);
 
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
     function EliminarPresInterBibliotecario($array) {
@@ -63,10 +63,10 @@ class PresInterBibliotecarioDAO {
         $idPrestamoInterBiblio = $PresInterBibliotecarioVo->getIdPrestamoInterBiblio();
         $stmp->bind_param("i", $idPrestamoInterBiblio);
 
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
-    function respuesta($conn, $stmp) {
+    function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";

@@ -20,11 +20,11 @@ class AutorDao {
 
             $stmp->bind_param("ss", $nomAutor, $notaAutor);
 
-            $this->respuesta($conn, $stmp);
+            $this->Respuesta($conn, $stmp);
         }
     }
 
-    private function modificarAutor($array) {
+    private function ModificarAutor($array) {
         $Autorvo = new AutorVO();
         $Autorvo->setIdautor($array->idAutor);
         $Autorvo->setNombreAutor($array->NombreAutor);
@@ -40,10 +40,10 @@ class AutorDao {
         $stmp->bind_param("ssi", $nomAutor, $notaAutor, $idAutor);
         $this->respuesta($stmp);
 
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
-    function eliminarBiblioteca($array) {
+    function EliminarBiblioteca($array) {
         $Autorvo = new AutorVO();
         $Autorvo->setIdautor($array->idAutor);
 
@@ -55,10 +55,10 @@ class AutorDao {
         $idAutor = $Autorvo->getIdautor();
 
         $stmp->bind_param("i", $idAutor);
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
-    function respuesta($conn, $stmp) {
+    function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";

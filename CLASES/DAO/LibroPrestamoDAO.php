@@ -28,7 +28,7 @@ class LibroPrestamoDAO {
 
             $stmp->bind_param("isis", $IsbnPrestamoInt, $idEditorial, $titulo, $editorial, $categoriaLibro, $resena);
 
-            $this->respuesta($conn, $stmp);
+            $this->Respuesta($conn, $stmp);
         }
     }
 
@@ -55,7 +55,7 @@ class LibroPrestamoDAO {
 
         $stmp->bind_param("sisi", $idEditorial, $titulo, $editorial, $categoriaLibro, $resena, $IsbnPrestamoInt);
 
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
     function EliminarLibro($array) {
@@ -71,10 +71,10 @@ class LibroPrestamoDAO {
         $IsbnPrestamoInt = $libroVo->getIsbnPrestamoInt();
         $stmp->bind_param("i", $IsbnPrestamoInt);
 
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
-    function respuesta($conn, $stmp) {
+    function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";

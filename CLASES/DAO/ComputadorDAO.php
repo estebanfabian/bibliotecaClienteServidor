@@ -24,7 +24,7 @@ class ComputadorDAO {
 
             $stmp->bind_param("ssss", $idcomputador, $fabricante, $observaciones, $cargadorId);
 
-            $this->respuesta($conn, $stmp);
+            $this->Respuesta($conn, $stmp);
         }
     }
 
@@ -48,7 +48,7 @@ class ComputadorDAO {
 
         $stmp->bind_param("ssss", $fabricante, $observaciones, $cargadorId, $idcomputador);
 
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
     function EliminarComputador($array) {
@@ -65,10 +65,10 @@ class ComputadorDAO {
 
         $stmp->bind_param("s", $idcomputador);
 
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
-    function respuesta($conn, $stmp) {
+    function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";

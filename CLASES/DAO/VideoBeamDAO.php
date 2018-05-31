@@ -73,7 +73,7 @@ class VideoBeamDAO {
         $this->respuesta($conn, $stmp);
     }
 
-    function respuesta($conn, $stmp) {
+    function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";

@@ -21,11 +21,11 @@ class EmpleadoDAO {
             $puestoEmpleado = $Empleadovo->getPuesto();
 
             $stmp->bind_param("iss", $codigoEmpleado, $nombreEmpleado, $puestoEmpleado);
-            $this->respuesta($conn, $stmp);
+            $this->Respuesta($conn, $stmp);
         }
     }
 
-    function modificarEmpleado($array) {
+    function ModificarEmpleado($array) {
         $Empleadovo = new EmpleadoVO();
         $Empleadovo->setCodigoEmpleado($array->codigoEmpleado);
         $Empleadovo->setNombreEmpleado($array->NombreAutor);
@@ -40,10 +40,10 @@ class EmpleadoDAO {
         $puestoEmpleado = $Empleadovo->getPuesto();
 
         $stmp->bind_param("ssi", $nombreEmpleado, $puestoEmpleado, $codigoEmpleado);
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
-    function elminarEmpleado($array) {
+    function ElminarEmpleado($array) {
 
         $Empleadovo = new EmpleadoVO();
         $Empleadovo->setCodigoEmpleado($array->codigoEmpleado);
@@ -54,10 +54,10 @@ class EmpleadoDAO {
         $stmp = $conn->prepare($sql);
         $codigo = $Empleadovo->getCodigoEmpleado();
         $stmp->bind_param("i", $codigo);
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
-    function respuesta($conn, $stmp) {
+    function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";

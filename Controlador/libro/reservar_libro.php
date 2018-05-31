@@ -10,6 +10,5 @@ require '../../CLASES/DAO/PrestamoDAO.php';
 
 $json= file_get_contents("php://input");
 $local= json_decode($json);
-print_r($local);
 $PrestamoDAO=new PrestamoDAO();
-$PrestamoDAO->reservar_libro($local);
+$PrestamoDAO->Reservar_libro($local);

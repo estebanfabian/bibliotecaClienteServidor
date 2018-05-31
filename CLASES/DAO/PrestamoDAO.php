@@ -33,7 +33,7 @@ class PrestamoDAO {
             $CodigoEmpleado = $PrestamoVo->getCodigoEmpleado();
             $stmp->bind_param("sssssisisi", $idPrestamo, $estadoLibro, $diaPrestamo, $preInterBibliotecarios, $Isbn, $idVideoBeam, $idcomputador, $codigo, $estado, $CodigoEmpleado);
 
-            $this->respuesta($conn, $stmp);
+            $this->Respuesta($conn, $stmp);
         }
     }
 
@@ -66,7 +66,7 @@ class PrestamoDAO {
         $CodigoEmpleado = $PrestamoVo->getCodigoEmpleado();
         $stmp->bind_param("ssssisisis", $estadoLibro, $diaPrestamo, $preInterBibliotecarios, $Isbn, $idVideoBeam, $idcomputador, $codigo, $estado, $CodigoEmpleado, $idPrestamo);
 
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
     function EliminarPrestamo($array) {
@@ -80,10 +80,11 @@ class PrestamoDAO {
         $idPrestamo = $PrestamoVo->getIdPrestamo();
         $stmp->bind_param("s", $idPrestamo);
 
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
-    public function reservar_libro($array) {
+    public function Reservar_libro($array) {
+
         $sql = 'INSERT INTO `tbl_prestamo` (`diaPrestamo`,  `isbn`,  `codigo`, `diaEntrega`) VALUES (?, ?, ?, ?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
@@ -100,11 +101,38 @@ class PrestamoDAO {
         $codigo = $PrestamoVO->getCodigo();
         $diaEntrega = $PrestamoVO->getDiaEntrega();
 
-        $stmp->bind_param("siis", $diaPrestamo, $isbn, $codigo, $diaEntrega);
-        $this->respuesta($conn, $stmp);
+        $this->validacionReserva($isbn);
+//        if(respuesta de la funcion == "libre") {
+//            $stmp->bind_param("siis", $diaPrestamo, $isbn, $codigo, $diaEntrega);
+//            $this->respuesta($conn, $stmp);
+//        }else
+//        {
+//            $respuesta["sucess"] = "no";
+//        }
     }
 
-    function respuesta($conn, $stmp) {
+    function ValidacionReserva($param) {
+        $sql = 'SELECT `estado` FROM `tbl_libro` WHERE `Isbn` = ?';
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $isbn = $PrestamoVO->getIsbn();
+
+        $stmp->bind_param("s", $isbn);
+
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["estado"] = $resena;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
+    function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";

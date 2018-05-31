@@ -23,7 +23,7 @@ class LibroAutorDAO {
 
             $stmp->bind_param("isis", $idAutorLibro, $Isbn, $idautor, $listaLibro);
 
-            $this->respuesta($conn, $stmp);
+            $this->Respuesta($conn, $stmp);
         }
     }
 
@@ -46,7 +46,7 @@ class LibroAutorDAO {
 
         $stmp->bind_param("isis", $idAutorLibro, $Isbn, $idautor, $listaLibro);
 
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
     function EliminarLibroAutor($array) {
@@ -62,10 +62,10 @@ class LibroAutorDAO {
 
         $stmp->bind_param("i", $idAutorLibro);
 
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
-    function respuesta($conn, $stmp) {
+    function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";

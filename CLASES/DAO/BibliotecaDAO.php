@@ -27,11 +27,11 @@ class BibliotecaDAO {
             $observacionesBiblioteca = $BibliotecaVo->getObervacionBiblioteca();
 
             $stmp->bind_param("issssss", $idBiblioteca, $nombreBiblioteca, $direcionBiblioteca, $telefonoBiblioteca, $personaBiblioteca, $observacionesBiblioteca);
-            $this->respuesta($conn, $stmp);
+            $this->Respuesta($conn, $stmp);
         }
     }
 
-    function modificarBiblioteca($Array) {
+    function ModificarBiblioteca($Array) {
         $BibliotecaVo = new BibliotecaVO();
         $BibliotecaVo->setNombreAutor($array->idBiblioteca);
         $BibliotecaVo->setNombreAutor($array->nombreBiblioteca);
@@ -53,10 +53,10 @@ class BibliotecaDAO {
         $observacionesBiblioteca = $BibliotecaVo->getObervacionBiblioteca();
 
         $stmp->bind_param("ssssssi", $nombreBiblioteca, $direcionBiblioteca, $telefonoBiblioteca, $personaBiblioteca, $observacionesBiblioteca, $idBiblioteca);
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
-    function eliminarBiblioteca($array) {
+    function EliminarBiblioteca($array) {
         $BibliotecaVo = new BibliotecaVO();
         $BibliotecaVo->setNombreAutor($array->idBiblioteca);
 
@@ -68,10 +68,10 @@ class BibliotecaDAO {
         $idBiblioteca = $BibliotecaVo->getIdBiblioteca();
 
         $stmp->bind_param("i", $idBiblioteca);
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
-    function respuesta($conn, $stmp) {
+    function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";

@@ -2,12 +2,12 @@
 
 class AutorVO {
 
-    private $idautor;
+    private $idAutor;
     private $nombreAutor;
     private $notaAutor;
 
-    function getIdautor() {
-        return $this->idautor;
+    function getIdAutor() {
+        return $this->idAutor;
     }
 
     function getNombreAutor() {
@@ -18,8 +18,8 @@ class AutorVO {
         return $this->notaAutor;
     }
 
-    function setIdautor($idautor) {
-        $this->idautor = $idautor;
+    function setIdAutor($idAutor) {
+        $this->idAutor = $idAutor;
     }
 
     function setNombreAutor($nombreAutor) {

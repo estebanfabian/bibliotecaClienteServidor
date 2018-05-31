@@ -127,7 +127,7 @@ class UsuarioDAO {
         $this->respuesta($conn, $stmp);
     }
 
-    function elminarUsuario($array) {
+    function ElminarUsuario($array) {
         $Usuariovo = new UsuarioVO();
         $Usuariovo->setCodigo($array->Codigo);
 
@@ -175,7 +175,7 @@ class UsuarioDAO {
         echo json_encode($respuesta);
     }
 
-    function correo($array) {
+    function Correo($array) {
 
         $sql = 'SELECT `contrasena` FROM `tbl_usuario` WHERE `codigo`= ? and `emailPrincipal` =  ?;';
 
@@ -205,16 +205,16 @@ class UsuarioDAO {
         }
         if ($contrasena != NULL) {
             $this->enviar($emailPrincipal, $contrasena);
-            $respuesta= $respuesta["sucess"] = "ok";
-        }else{
-            $respuesta= $respuesta["sucess"] = "no";
+            $respuesta = $respuesta["sucess"] = "ok";
+        } else {
+            $respuesta = $respuesta["sucess"] = "no";
         }
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
     }
 
-    function enviar($correo, $contrasena) {
+    function Enviar($correo, $contrasena) {
         $mail = new PHPMailer\PHPMailer\PHPMailer();
 
         $mail->Host = 'smtp.gmail.com'; /* Specify main and backup SMTP servers */
@@ -235,7 +235,7 @@ class UsuarioDAO {
         }
     }
 
-    function respuesta($conn, $stmp) {
+    function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";
@@ -246,6 +246,30 @@ class UsuarioDAO {
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
+    }
+
+    public function Foto($array) {
+        $sql = "UPDATE `tbl_usuario` SET `foto` = ?' WHERE codigo` =?;";
+
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $UsuarioVO = new UsuarioVO();
+        $UsuarioVO->setCodigo($array->codigo);
+        $UsuarioVO->setFoto($array->foto);
+        $codigo = $UsuarioVO->getCodigo();
+        $foto = $UsuarioVO->getFoto();
+        $smtp->bind_param("si", $foto, $codigo);
+
+        if ($stmp->execute()) {
+            echo "ok";
+        } else {
+            echo 'no';
+        }
+
+        $stmp->close();
+        $conn->close();
     }
 
 }

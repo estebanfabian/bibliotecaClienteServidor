@@ -57,7 +57,7 @@ class TemaDAO {
         $stmp->bind_param("i", $idTema);
     }
 
-    function respuesta($conn, $stmp) {
+    function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";

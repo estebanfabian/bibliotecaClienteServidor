@@ -22,7 +22,7 @@ class LibrosTemaDAO {
 
             $stmp->bind_param("isis", $idLibroTema, $Isbn, $idTema);
 
-            $this->respuesta($conn, $stmp);
+            $this->Respuesta($conn, $stmp);
         }
     }
 
@@ -46,7 +46,7 @@ class LibrosTemaDAO {
 
             $stmp->bind_param("sii", $idLibroTema, $Isbn, $idTema);
 
-            $this->respuesta($conn, $stmp);
+            $this->Respuesta($conn, $stmp);
         }
     }
 
@@ -63,10 +63,10 @@ class LibrosTemaDAO {
 
         $stmp->bind_param("i", $idLibroTema);
 
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
-    function respuesta($conn, $stmp) {
+    function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";

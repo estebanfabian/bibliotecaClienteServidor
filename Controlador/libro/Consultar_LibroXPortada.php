@@ -9,5 +9,5 @@ require '../../CLASES/DAO/LibroDAO.php';
 $json = file_get_contents("php://input");
 $local = json_decode($json);
 $LibroDAO = new LibroDAO();
-$LibroDAO->listarXPortada($local);
+$LibroDAO->ListarXPortada($local);
 

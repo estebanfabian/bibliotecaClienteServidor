@@ -27,7 +27,7 @@ class EditorialDAO {
 
             $stmp->bind_param("isssss", $idEditorial, $nombreEditorial, $direccionEditorial, $telefonoEditorial, $anoPublicacion);
 
-            $this->respuesta($conn, $stmp);
+            $this->Respuesta($conn, $stmp);
         }
     }
 
@@ -53,7 +53,7 @@ class EditorialDAO {
 
         $stmp->bind_param("sssssI", $nombreEditorial, $direccionEditorial, $telefonoEditorial, $anoPublicacion, $idEditorial);
 
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
     function EliminarEditorial($array) {
@@ -74,10 +74,10 @@ class EditorialDAO {
 
         $stmp->bind_param("isssss", $idEditorial, $nombreEditorial, $direccionEditorial, $telefonoEditorial, $anoPublicacion);
 
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
-    function respuesta($conn, $stmp) {
+    function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";

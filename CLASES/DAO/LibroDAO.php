@@ -3,6 +3,7 @@
 class LibroDAO {
 
     function CrearLibro($array) {
+        
         $libroVo = new LibroVO;
         $libroVo->setIsbn($array->isbn);
         $libroVo->setIdEditorial($array->editorial);
@@ -30,11 +31,12 @@ class LibroDAO {
 
             $stmp->bind_param("sissss", $isbn, $idEditorial, $titulo, $editorial, $categoriaLibro, $resena, $imagen);
 
-            $this->respuesta($conn, $stmp);
+            $this->Respuesta($conn, $stmp);
         }
     }
 
     function ModificarLibro($array) {
+        
         $libroVo = new LibroVO;
         $libroVo->setIsbn($array->isbn);
         $libroVo->setIdEditorial($array->editorial);
@@ -59,7 +61,7 @@ class LibroDAO {
 
         $stmp->bind_param("sisi", $idEditorial, $titulo, $editorial, $categoriaLibro, $resena, $imagen, $isbn);
 
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
     function EliminarLibro($array) {
@@ -75,10 +77,10 @@ class LibroDAO {
         $isbn = $libroVo->getIsbn();
         $stmp->bind_param("i", $isbn);
 
-        $this->respuesta($conn, $stmp);
+        $this->Respuesta($conn, $stmp);
     }
 
-    public function listarXid($array) {
+    public function ListarXid($array) {
         $sql = 'SELECT tbl_libro.isbn AS isbn,tbl_libro.titulo AS titulo,tbl_autor.nombreAutor AS autor,tbl_temas.nombreTema AS tema,tbl_editorial.nombreEditorial AS editorial,tbl_libroautor.listaLibro AS facultad, tbl_libro.estado AS estado
                 FROM  tbl_libro INNER JOIN  tbl_editorial INNER JOIN  tbl_libroautor INNER JOIN tbl_autor INNER JOIN  tbl_temas INNER JOIN  tbl_libro_temas 
                 WHERE tbl_libro.idEditorial =tbl_editorial.idEditorial AND  tbl_libro.isbn=tbl_libroautor.isbn=tbl_libro_temas.isbn AND tbl_libroautor.idautor=tbl_autor.idautor AND tbl_libro_temas.idTema=tbl_temas.idTema AND
@@ -94,10 +96,10 @@ class LibroDAO {
         $Consulta = "%" . $Consulta . "%";
 
         $stmp->bind_param("i", $Consulta);
-        $this->respuestaLibros($conn, $stmp);
+        $this->RespuestaLibros($conn, $stmp);
     }
 
-    public function listarXtitulo($array) {
+    public function ListarXtitulo($array) {
         $sql = 'SELECT tbl_libro.isbn AS isbn,tbl_libro.titulo AS titulo,tbl_autor.nombreAutor AS autor,tbl_temas.nombreTema AS tema,tbl_editorial.nombreEditorial AS editorial,tbl_libroautor.listaLibro AS facultad, tbl_libro.estado AS estado
                 FROM  tbl_libro INNER JOIN  tbl_editorial INNER JOIN  tbl_libroautor INNER JOIN tbl_autor INNER JOIN  tbl_temas INNER JOIN  tbl_libro_temas 
                 WHERE tbl_libro.idEditorial =tbl_editorial.idEditorial AND  tbl_libro.isbn=tbl_libroautor.isbn=tbl_libro_temas.isbn AND tbl_libroautor.idautor=tbl_autor.idautor AND tbl_libro_temas.idTema=tbl_temas.idTema AND
@@ -113,10 +115,10 @@ class LibroDAO {
         $Consulta = "%" . $Consulta . "%";
 
         $stmp->bind_param("s", $Consulta);
-        $this->respuestaLibros($conn, $stmp);
+        $this->RespuestaLibros($conn, $stmp);
     }
 
-    public function listarXautor($array) {
+    public function ListarXautor($array) {
         $sql = 'SELECT tbl_libro.isbn AS isbn,tbl_libro.titulo AS titulo,tbl_autor.nombreAutor AS autor,tbl_temas.nombreTema AS tema,tbl_editorial.nombreEditorial AS editorial,tbl_libroautor.listaLibro AS facultad, tbl_libro.estado AS estado
                 FROM  tbl_libro INNER JOIN  tbl_editorial INNER JOIN  tbl_libroautor INNER JOIN tbl_autor INNER JOIN  tbl_temas INNER JOIN  tbl_libro_temas 
                 WHERE tbl_libro.idEditorial =tbl_editorial.idEditorial AND  tbl_libro.isbn=tbl_libroautor.isbn=tbl_libro_temas.isbn AND tbl_libroautor.idautor=tbl_autor.idautor AND tbl_libro_temas.idTema=tbl_temas.idTema AND
@@ -132,10 +134,10 @@ class LibroDAO {
         $Consulta = "%" . $Consulta . "%";
 
         $stmp->bind_param("s", $Consulta);
-        $this->respuestaLibros($conn, $stmp);
+        $this->RespuestaLibros($conn, $stmp);
     }
 
-    public function listarXtema($array) {
+    public function ListarXtema($array) {
         $sql = 'SELECT tbl_libro.isbn AS isbn,tbl_libro.titulo AS titulo,tbl_autor.nombreAutor AS autor,tbl_temas.nombreTema AS tema,tbl_editorial.nombreEditorial AS editorial,tbl_libroautor.listaLibro AS facultad, tbl_libro.estado AS estado
                 FROM  tbl_libro INNER JOIN  tbl_editorial INNER JOIN  tbl_libroautor INNER JOIN tbl_autor INNER JOIN  tbl_temas INNER JOIN  tbl_libro_temas 
                 WHERE tbl_libro.idEditorial =tbl_editorial.idEditorial AND  tbl_libro.isbn=tbl_libroautor.isbn=tbl_libro_temas.isbn AND tbl_libroautor.idautor=tbl_autor.idautor AND tbl_libro_temas.idTema=tbl_temas.idTema AND
@@ -152,10 +154,10 @@ class LibroDAO {
         $Consulta = "%" . $Consulta . "%";
 
         $stmp->bind_param("s", $Consulta);
-        $this->respuestaLibros($conn, $stmp);
+        $this->RespuestaLibros($conn, $stmp);
     }
 
-    public function listarXeditorial($array) {
+    public function ListarXeditorial($array) {
         $sql = 'SELECT tbl_libro.isbn AS isbn,tbl_libro.titulo AS titulo,tbl_autor.nombreAutor AS autor,tbl_temas.nombreTema AS tema,tbl_editorial.nombreEditorial AS editorial,tbl_libroautor.listaLibro AS facultad, tbl_libro.estado AS estado
                 FROM  tbl_libro INNER JOIN  tbl_editorial INNER JOIN  tbl_libroautor INNER JOIN tbl_autor INNER JOIN  tbl_temas INNER JOIN  tbl_libro_temas 
                 WHERE tbl_libro.idEditorial =tbl_editorial.idEditorial AND  tbl_libro.isbn=tbl_libroautor.isbn=tbl_libro_temas.isbn AND tbl_libroautor.idautor=tbl_autor.idautor AND tbl_libro_temas.idTema=tbl_temas.idTema AND
@@ -171,10 +173,10 @@ class LibroDAO {
         $Consulta = "%" . $Consulta . "%";
 
         $stmp->bind_param("s", $Consulta);
-        $this->respuestaLibros($conn, $stmp);
+        $this->RespuestaLibros($conn, $stmp);
     }
 
-    public function listarXfacultad($array) {
+    public function ListarXfacultad($array) {
         $sql = 'SELECT tbl_libro.isbn AS isbn,tbl_libro.titulo AS titulo,tbl_autor.nombreAutor AS autor,tbl_temas.nombreTema AS tema,tbl_editorial.nombreEditorial AS editorial,tbl_libroautor.listaLibro AS facultad, tbl_libro.estado AS estado
                 FROM  tbl_libro INNER JOIN  tbl_editorial INNER JOIN  tbl_libroautor INNER JOIN tbl_autor INNER JOIN  tbl_temas INNER JOIN  tbl_libro_temas 
                 WHERE tbl_libro.idEditorial =tbl_editorial.idEditorial AND  tbl_libro.isbn=tbl_libroautor.isbn=tbl_libro_temas.isbn AND tbl_libroautor.idautor=tbl_autor.idautor AND tbl_libro_temas.idTema=tbl_temas.idTema AND
@@ -190,10 +192,10 @@ class LibroDAO {
         $Consulta = "%" . $Consulta . "%";
 
         $stmp->bind_param("s", $Consulta);
-        $this->respuestaLibros($conn, $stmp);
+        $this->RespuestaLibros($conn, $stmp);
     }
 
-    public function listarXPortada($array) {
+    public function ListarXPortada($array) {
         $sql = 'SELECT `resena`,`imagen` FROM `tbl_libro` WHERE `isbn`=?';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
@@ -217,7 +219,8 @@ class LibroDAO {
         echo json_encode($respuesta);
     }
 
-    function respuesta($conn, $stmp) {
+    
+    function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";
@@ -230,7 +233,7 @@ class LibroDAO {
         echo json_encode($respuesta);
     }
 
-    function respuestaLibros($conn, $stmp) {
+    function RespuestaLibros($conn, $stmp) {
         $stmp->execute();
         $stmp->bind_result($isbn, $titulo, $autor, $tema, $editorial, $facultad, $estado);
 
