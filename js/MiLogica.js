@@ -59,39 +59,29 @@ $(document).ready(function () {
                         alert("El código o clave esta errada ");
                         $('#login-modal').modal('hide');
                     } else {
-                        console.log("primero");
-                        // $('#login-modal').modal('hide');
-                        console.log("entra1");
+                        console.log(respuesta);
                         $('body').removeClass('modal-open');
                         $('.modal-backdrop').remove();
-                        envio();
+                        envio(respuesta);
                     }
                 };
-
-
                 fajax(url1, parametro1, metodo1);
-
             }
         });
-
-        alert("entra1");
     }
 
-    function envio() {
-        var url = "Ingreso";
-        var parameto = "hola";
+    function envio(respusta) {
+        var url = "inicioSesion.php";
+        var parameto = respusta;
         var metodo = function (ssw) {
-            $("#cabezara").html(ssw);
-              
         };
         fajax(url, parameto, metodo);
-
+        location.href = "inicioSesion.php";
     }
     function Correo() {
         var url = "";
         var parameto = "hola";
         var metodo = function (ssw) {
-            //  $("#login-form").html(ssw);
         };
         $("#lost-form").validate({
             rules: {
@@ -138,8 +128,13 @@ $(document).ready(function () {
         fajax(url, parameto, metodo);
     }
 
+
     $("#BTNIngresar").click(function () {
         login();
+    });
+
+    $("#CerrarSesion").click(function () {
+        location.href = "cerrarSesion.php";
     });
 
     $("#Enviar_correo").click(function () {
@@ -162,7 +157,5 @@ $(document).ready(function () {
                 $newForm.fadeToggle($modalAnimateTime);
             });
         });
-
     }
-
 });

@@ -25,6 +25,11 @@ class UsuarioDAO {
         $UsuarioVO->setContrasena($array->contrasena);
         $UsuarioVO->setFoto($array->foto);
 
+//        $_SESSION["usuario"] = array(
+//        "codigo" => $UsuarioVO->getCodigo(),
+//        "perfil" => $UsuarioVO->getPerfil(),
+//        );
+
         if (count((array) $array, COUNT_RECURSIVE) > 10) {
 
             $UsuarioVO->setDireccion2($array->direccion2);
@@ -79,6 +84,9 @@ class UsuarioDAO {
 
     function ActualizarUsuario($array) {
 
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+
         $UsuarioVO = new UsuarioVO();
         $UsuarioVO->setCodigo($array->codigo);
         $UsuarioVO->setNombre($array->nombre);
@@ -86,22 +94,28 @@ class UsuarioDAO {
         $UsuarioVO->setFechaNacimiento($array->fechaNacimiento);
         $UsuarioVO->setSexo($array->sexo);
         $UsuarioVO->setDireccion($array->direccion);
-        $UsuarioVO->setDireccion2($array->direccion2);
         $UsuarioVO->setTelefonoPrincipal($array->telefonoPrincipal);
-        $UsuarioVO->setTelefonoSecundario($array->telefonoSecundario);
-        $UsuarioVO->setTelefonoOtro($array->telefonoOtro);
         $UsuarioVO->setEmailPrincipal($array->emailPrincipal);
-        $UsuarioVO->setContactoNombre($array->contactoNombre);
-        $UsuarioVO->setContactoApellido($array->contactoApellido);
-        $UsuarioVO->setContactoDireccion($array->contactoDireccion);
-        $UsuarioVO->setContactoDireccion2($array->contactoDireccion2);
-        $UsuarioVO->setContactoTelefono($array->contactoTelefono);
         $UsuarioVO->setContrasena($array->contrasena);
         $UsuarioVO->setFoto($array->foto);
 
-        $sql = 'UPDATE `tbl_usuario` SET `nombre`=?,`apellido`=?,`fechaNacimiento`=?,`sexo`=?,`direccion`=?,`direccion2`=?,`telefonoPrincipal`=?,`telefonoSecundario`=?,`telefonoOtro`=?,`emailPrincipal`=?,`contactoNombre`=?,`contactoApellido`=?,`contactoDireccion`=?,`contactoDireccion2`=?,`contactoTelefono`=?,`contrasena`=? ,foto =?WHERE `codigo`=?;';
-        $BD = new ConectarBD();
-        $conn = $BD->getMysqli();
+        if (count((array) $array, COUNT_RECURSIVE) > 10) {
+            $UsuarioVO->setDireccion2($array->direccion2);
+            $UsuarioVO->setTelefonoSecundario($array->telefonoSecundario);
+            $UsuarioVO->setTelefonoOtro($array->telefonoOtro);
+            $UsuarioVO->setContactoNombre($array->contactoNombre);
+            $UsuarioVO->setContactoApellido($array->contactoApellido);
+            $UsuarioVO->setContactoDireccion($array->contactoDireccion);
+            $UsuarioVO->setContactoDireccion2($array->contactoDireccion2);
+            $UsuarioVO->setContactoTelefono($array->contactoTelefono);
+            $UsuarioVO->setMulta($array->multa);
+            $UsuarioVO->setPerfil($array->perfil);
+            $sql = 'UPDATE `tbl_usuario` SET `nombre`=?,`apellido`=?,`fechaNacimiento`=?,`sexo`=?,`direccion`=?,`direccion2`=?,`telefonoPrincipal`=?,`telefonoSecundario`=?,`telefonoOtro`=?,`emailPrincipal`=?,`contactoNombre`=?,`contactoApellido`=?,`contactoDireccion`=?,`contactoDireccion2`=?,`contactoTelefono`=?,`contrasena`=? ,foto =?WHERE `codigo`=?;';
+        } else {
+            $sql = 'UPDATE `tbl_usuario` SET `nombre`=?,`apellido`=?,`fechaNacimiento`=?,`sexo`=?,`direccion`=?,`telefonoPrincipal`=?,`emailPrincipal`=?,`contrasena`=? ,foto =?WHERE `codigo`=?;';
+        }
+
+
         $stmp = $conn->prepare($sql);
 
         $codigo = $UsuarioVO->getCodigo();
@@ -122,8 +136,11 @@ class UsuarioDAO {
         $contactoTelefono = $UsuarioVO->getContactoTelefono();
         $contrasena = $UsuarioVO->getContrasena();
         $foto = $UsuarioVO->getFoto();
-
-        $stmp->bind_param("sssssssssssssssssi", $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $direccion2, $telefonoPrincipal, $telefonoSecundario, $telefonoOtro, $emailPrincipal, $contactoNombre, $contactoApellido, $contactoDireccion, $contactoDireccion2, $contactoTelefono, $contrasena, $foto);
+        if (count((array) $array, COUNT_RECURSIVE) > 10) {
+            $stmp->bind_param("sssssssssssssssssi", $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $direccion2, $telefonoPrincipal, $telefonoSecundario, $telefonoOtro, $emailPrincipal, $contactoNombre, $contactoApellido, $contactoDireccion, $contactoDireccion2, $contactoTelefono, $contrasena, $foto);
+        } else {
+            $stmp->bind_param("sssssssssi", $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $telefonoPrincipal, $emailPrincipal, $contrasena, $foto, $codigo);
+        }
         $this->respuesta($conn, $stmp);
     }
 
@@ -228,7 +245,7 @@ class UsuarioDAO {
         $mail->Subject = "Recuperacion de su clave";
         $mail->addAddress($correo); /* Add a recipient */
         $mail->isHTML(true); /* Set email format to HTML (default = true) */
-        $mail->Body = "Su contraseña es " . $contrasena;
+        $mail->Body = "Su clave de acceso para la biblioteca  es: <b> " . $contrasena . " </b> <br> Se le recomienda cambiar su clave por seguridad<br><br><img src ='https://image.ibb.co/hVSO7d/Captura.jpg' width='412' height='122'/>";
         if (!$mail->send()) {
             echo 'Message could not be sent.';
             echo 'Mailer Error: ' . $mail->ErrorInfo;
