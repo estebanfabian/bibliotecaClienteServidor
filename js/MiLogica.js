@@ -74,9 +74,13 @@ $(document).ready(function () {
         var url = "inicioSesion.php";
         var parameto = respusta;
         var metodo = function (ssw) {
+        
         };
+        
         fajax(url, parameto, metodo);
-        location.href = "inicioSesion.php";
+        alert(parameto);
+        alert("funciona");
+       location.href = "index.php";
     }
     function Correo() {
         var url = "";

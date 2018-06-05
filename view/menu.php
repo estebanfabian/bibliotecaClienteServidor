@@ -1,24 +1,22 @@
 <?php
 if ($_POST) {
-    
-
-session_start();
-
-if ($_SESSION != null) {
-    echo $_SESSION["usuario"]["codigo"];
+    session_start();
     echo $_SESSION["usuario"]["perfil"];
-} 
-?>
-<div  id ="cabezara" class ="container">
-
-    <div class="row justify-content-end">
-
-        <div class="col-4">
-            <img src="img/usuario/icono_foto.png" class="rounded float-left" alt=""  width="40" height="40"/>
-            <button id = "btnPrueba" type="button" class="btn btn-dark" data-toggle="modal" data-target="#login-modal"> <?php 
-            //echo $array[0]->nombre; 
-             echo $_SESSION["usuario"]["nombre"];
-            ?></button>
+    ?>
+    <div  id ="cabezara" class ="container">
+        <div class="row justify-content-end">
+            <div class="col-4">
+                <img src="img/usuario/icono_foto.png" class="rounded float-left" alt=""  width="40" height="40"/>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php echo $_SESSION["usuario"]["nombre"]; ?>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="cerrarSesion.php">Cerrar Sesión</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -70,13 +68,24 @@ if ($_SESSION != null) {
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contactanos</a>
                     </li>
+                    <?php if ($_SESSION["usuario"]["perfil"] == "administrador") { ?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Administraciòn
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="view/registrarUsuario.php">Registrar Usuario</a>
+                                <a class="dropdown-item" href="#">Video Beam</a>
+                                <a class="dropdown-item" href="#">Material audiovisual</a>
+                            </div>
+                        <?php } ?>
                 </ul>
             </div>
         </nav>
     </div>
-</div>
-<?php
 
-  } else {
-  header("location: ../index.php");
-  } ?>
+    <?php
+} else {
+    header("location: ../index.php");
+}
+?>

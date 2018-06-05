@@ -16,12 +16,13 @@ $(document).ready(function () {
     }
 
     function envio() {
-        var url = "Ingreso";
+        var url = "view/menu.php";
         var parameto = "ejemplo";
         var metodo = function (ssw) {
             $("#cabezara").html(ssw);
         };
         fajax(url, parameto, metodo);
     }
+    alert("entra");
     envio();
 });

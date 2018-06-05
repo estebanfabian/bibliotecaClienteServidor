@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 $json = file_get_contents("php://input");
 $array = json_decode($json);
@@ -7,6 +8,5 @@ $_SESSION["usuario"] = array(
     "nombre" => $array[0]->nombre,
     "perfil" => $array[0]->perfil,
 );
-header("location: ./");
 ?>
 
