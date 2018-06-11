@@ -145,4 +145,123 @@ class PrestamoDAO {
         echo json_encode($respuesta);
     }
 
+      public function reservar_libro($array) {
+        $sql = 'INSERT INTO `tbl_prestamo` (`diaPrestamo`,  `isbn`,  `codigo`, `diaEntrega`) VALUES (?, ?, ?, ?);';
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $PrestamoVO = new PrestamoVO();
+        $PrestamoVO->setDiaPrestamo($array->diaPrestamo);
+        $PrestamoVO->setIsbn($array->isbn);
+        $PrestamoVO->setCodigo($array->codigo);
+        $PrestamoVO->setDiaEntrega($array->diaEntrega);
+
+        $diaPrestamo = $PrestamoVO->getDiaPrestamo();
+        $isbn = $PrestamoVO->getIsbn();
+        $codigo = $PrestamoVO->getCodigo();
+        $diaEntrega = $PrestamoVO->getDiaEntrega();
+
+        $stmp->bind_param("siis", $diaPrestamo, $isbn, $codigo, $diaEntrega);
+        $resultado = array();
+
+        if ($stmp->execute()) {
+            $respuesta["sucess"] = "ok";
+        } else {
+            $respuesta["sucess"] = "no";
+        }
+
+        $stmp->close();
+        $conn->close();
+
+        echo json_encode($respuesta);
+    }
+
+    public function Contador($array) {
+        $sql = "SELECT COUNT(`codigo`) FROM tbl_prestamo WHERE (actividad=1||actividad=2) && `codigo`=?;";
+
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $PrestamoVO = new PrestamoVO();
+        $PrestamoVO->setCodigo($array->codigo);
+        $codigo = $PrestamoVO->getCodigo();
+
+        $stmp->bind_param("i", $codigo);
+        $stmp->execute();
+        $stmp->bind_result($cont);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["count"] = $cont;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
+    public function Mostrar_tarjeta($array) {
+        $sql = "SELECT tbl_libro.isbn AS isbn,tbl_libro.titulo AS titulo,tbl_libro.resena AS resena,tbl_libro.imagen AS imagen, tbl_prestamo.diaPrestamo AS diaPrestamo,tbl_prestamo.diaEntrega AS diaEntrega,tbl_prestamo.idPrestamo AS idprestamo,tbl_prestamo.actividad,tbl_usuario.foto AS foto "
+                . "FROM tbl_libro INNER JOIN tbl_prestamo INNER JOIN tbl_usuario "
+                . "WHERE tbl_prestamo.isbn=tbl_libro.isbn && tbl_prestamo.codigo=tbl_usuario.codigo && (tbl_libro.estado='reservado'|| tbl_libro.estado='prestamo') && (tbl_prestamo.actividad=1 ||tbl_prestamo.actividad=2) "
+                . "&& tbl_prestamo.codigo=?";
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $PrestamoVO = new PrestamoVO();
+        $PrestamoVO->setCodigo($array->codigo);
+        $codigo = $PrestamoVO->getCodigo();
+
+        $stmp->bind_param("i", $codigo);
+        $stmp->execute();
+        $stmp->bind_result($isbn, $titulo, $resena, $imagen, $diaPrestamo, $diaEntrega, $idPrestamo,$actividad ,$foto);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["isbn"] = $isbn;
+            $tmp["titulo"] = $titulo;
+            $tmp["resena"] = $resena;
+            $tmp["imagen"] = $imagen;
+            $tmp["diaPrestamo"] = $diaPrestamo;
+            $tmp["diaEntrega"] = $diaEntrega;
+            $tmp["idPrestamo"] = $idPrestamo;
+            $tmp["actividad"] = $actividad;
+            $tmp["foto"] = $foto;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
+    public function Cancelar($array) {
+        $sql = "UPDATE  `tbl_prestamo` SET `actividad` = '0' WHERE `idPrestamo`=?";
+
+
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $PrestamoVO = new PrestamoVO();
+        $PrestamoVO->setIdPrestamo($array->idPrestamo);
+        $idPrestamo = $PrestamoVO->getIdPrestamo();
+
+        $stmp->bind_param("i", $idPrestamo);
+        $resultado = array();
+
+        if ($stmp->execute()) {
+            $respuesta["sucess"] = "ok";
+        } else {
+            $respuesta["sucess"] = "no";
+        }
+
+        $stmp->close();
+        $conn->close();
+
+        echo json_encode($respuesta);
+    }
+
 }

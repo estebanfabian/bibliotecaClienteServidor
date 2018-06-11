@@ -3,6 +3,20 @@ if ($_POST) {
     session_start();
     echo $_SESSION["usuario"]["perfil"];
     ?>
+    <style>
+        .dropdown-submenu {
+            position: relative;
+        }
+
+        .dropdown-submenu .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -1px;
+        }
+    </style>
+
+
+
     <div  id ="cabezara" class ="container">
         <div class="row justify-content-end">
             <div class="col-4">
@@ -59,7 +73,6 @@ if ($_POST) {
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="#">Libro</a>
                             <a class="dropdown-item" href="#">Video Beam</a>
-                            <a class="dropdown-item" href="#">Material audiovisual</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -71,18 +84,24 @@ if ($_POST) {
                     <?php if ($_SESSION["usuario"]["perfil"] == "administrador") { ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Administraciòn
+                                Gestion
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="view/registrarUsuario.php">Registrar Usuario</a>
-                                <a class="dropdown-item" href="#">Video Beam</a>
-                                <a class="dropdown-item" href="#">Material audiovisual</a>
-                            </div>
-                        <?php } ?>
-                </ul>
-            </div>
-        </nav>
+                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                     <a class="dropdown-item" href="view/registrarUsuario.php">Registrar Usuario</a>
+                                        <a class="dropdown-item" href="#">Video Beam</a>
+                                        <a class="dropdown-item" href="#">Material audiovisual</a>
+                                    </div>
+                        </li>
+                </div>
+                <div>
+
+
+                </div>
+            <?php } ?>
+            </ul>
     </div>
+    <!--    </nav>
+        </div>-->
 
     <?php
 } else {

@@ -1,0 +1,228 @@
+# ---------------------------------------------------------------------- #
+# Script generated with: DeZign for Databases V8.1.2                     #
+# Target DBMS:           MySQL 5                                         #
+# Project file:          tercer forma tema.dez                           #
+# Project name:                                                          #
+# Author:                                                                #
+# Script type:           Database drop script                            #
+# Created on:            2018-06-10 21:25                                #
+# ---------------------------------------------------------------------- #
+
+
+# ---------------------------------------------------------------------- #
+# Drop foreign key constraints                                           #
+# ---------------------------------------------------------------------- #
+
+ALTER TABLE `tbl_libro` DROP FOREIGN KEY `Editorial_Libro`;
+
+ALTER TABLE `tbl_prestamo` DROP FOREIGN KEY `TBL_Video_Beam_TBL_Prestamo`;
+
+ALTER TABLE `tbl_prestamo` DROP FOREIGN KEY `TBL_Computador_TBL_Prestamo`;
+
+ALTER TABLE `tbl_prestamo` DROP FOREIGN KEY `tbl_usuario_tbl_prestamo`;
+
+ALTER TABLE `tbl_prestamo` DROP FOREIGN KEY `tbl_empleado_tbl_prestamo`;
+
+ALTER TABLE `tbl_prestamo` DROP FOREIGN KEY `tbl_libro_tbl_prestamo`;
+
+ALTER TABLE `tbl_libroautor` DROP FOREIGN KEY `tbl_libro_tbl_libroautor`;
+
+ALTER TABLE `tbl_libroautor` DROP FOREIGN KEY `tbl_autor_tbl_libroautor`;
+
+ALTER TABLE `tbl_prestamoInterBibliotecario` DROP FOREIGN KEY `tbl_biblioteca_tbl_prestamoInterBibliotecario`;
+
+ALTER TABLE `tbl_prestamoInterBibliotecario` DROP FOREIGN KEY `tbl_libro_prestamoint_tbl_prestamoInterBibliotecario`;
+
+ALTER TABLE `tbl_prestamoInterBibliotecario` DROP FOREIGN KEY `tbl_prestamo_tbl_prestamoInterBibliotecario`;
+
+ALTER TABLE `tbl_libro_temas` DROP FOREIGN KEY `tbl_temas_tbl_libro_temas`;
+
+ALTER TABLE `tbl_libro_temas` DROP FOREIGN KEY `tbl_libro_tbl_libro_temas`;
+
+# ---------------------------------------------------------------------- #
+# Drop table "tbl_libro_temas"                                           #
+# ---------------------------------------------------------------------- #
+
+# Remove autoinc for PK drop #
+
+ALTER TABLE `tbl_libro_temas` MODIFY `idLibroTema` INTEGER NOT NULL;
+
+# Drop constraints #
+
+ALTER TABLE `tbl_libro_temas` DROP PRIMARY KEY;
+
+DROP TABLE `tbl_libro_temas`;
+
+# ---------------------------------------------------------------------- #
+# Drop table "tbl_prestamoInterBibliotecario"                            #
+# ---------------------------------------------------------------------- #
+
+# Remove autoinc for PK drop #
+
+ALTER TABLE `tbl_prestamoInterBibliotecario` MODIFY `idPrestamoInterBiblio` INTEGER NOT NULL;
+
+# Drop constraints #
+
+ALTER TABLE `tbl_prestamoInterBibliotecario` DROP PRIMARY KEY;
+
+DROP TABLE `tbl_prestamoInterBibliotecario`;
+
+# ---------------------------------------------------------------------- #
+# Drop table "tbl_libroautor"                                            #
+# ---------------------------------------------------------------------- #
+
+# Remove autoinc for PK drop #
+
+ALTER TABLE `tbl_libroautor` MODIFY `idAutorLibro` INTEGER NOT NULL;
+
+# Drop constraints #
+
+ALTER TABLE `tbl_libroautor` DROP PRIMARY KEY;
+
+DROP TABLE `tbl_libroautor`;
+
+# ---------------------------------------------------------------------- #
+# Drop table "tbl_prestamo"                                              #
+# ---------------------------------------------------------------------- #
+
+# Remove autoinc for PK drop #
+
+ALTER TABLE `tbl_prestamo` MODIFY `idPrestamo` INTEGER NOT NULL;
+
+# Drop constraints #
+
+ALTER TABLE `tbl_prestamo` DROP PRIMARY KEY;
+
+DROP TABLE `tbl_prestamo`;
+
+# ---------------------------------------------------------------------- #
+# Drop table "tbl_libro"                                                 #
+# ---------------------------------------------------------------------- #
+
+# Drop constraints #
+
+ALTER TABLE `tbl_libro` ALTER COLUMN `estado` DROP DEFAULT;
+
+ALTER TABLE `tbl_libro` DROP PRIMARY KEY;
+
+DROP TABLE `tbl_libro`;
+
+# ---------------------------------------------------------------------- #
+# Drop table "tbl_temas"                                                 #
+# ---------------------------------------------------------------------- #
+
+# Remove autoinc for PK drop #
+
+ALTER TABLE `tbl_temas` MODIFY `idTema` INTEGER NOT NULL;
+
+# Drop constraints #
+
+ALTER TABLE `tbl_temas` DROP PRIMARY KEY;
+
+DROP TABLE `tbl_temas`;
+
+# ---------------------------------------------------------------------- #
+# Drop table "tbl_libro_prestamoint"                                     #
+# ---------------------------------------------------------------------- #
+
+# Drop constraints #
+
+ALTER TABLE `tbl_libro_prestamoint` DROP PRIMARY KEY;
+
+DROP TABLE `tbl_libro_prestamoint`;
+
+# ---------------------------------------------------------------------- #
+# Drop table "tbl_biblioteca"                                            #
+# ---------------------------------------------------------------------- #
+
+# Remove autoinc for PK drop #
+
+ALTER TABLE `tbl_biblioteca` MODIFY `idBiblioteca` INTEGER NOT NULL;
+
+# Drop constraints #
+
+ALTER TABLE `tbl_biblioteca` DROP PRIMARY KEY;
+
+DROP TABLE `tbl_biblioteca`;
+
+# ---------------------------------------------------------------------- #
+# Drop table "tbl_computador"                                            #
+# ---------------------------------------------------------------------- #
+
+# Drop constraints #
+
+ALTER TABLE `tbl_computador` ALTER COLUMN `estadoComputador` DROP DEFAULT;
+
+ALTER TABLE `tbl_computador` DROP PRIMARY KEY;
+
+DROP TABLE `tbl_computador`;
+
+# ---------------------------------------------------------------------- #
+# Drop table "tbl_video_beam"                                            #
+# ---------------------------------------------------------------------- #
+
+# Drop constraints #
+
+ALTER TABLE `tbl_video_beam` ALTER COLUMN `estadoVideoBeam` DROP DEFAULT;
+
+ALTER TABLE `tbl_video_beam` DROP PRIMARY KEY;
+
+DROP TABLE `tbl_video_beam`;
+
+# ---------------------------------------------------------------------- #
+# Drop table "tbl_editorial"                                             #
+# ---------------------------------------------------------------------- #
+
+# Remove autoinc for PK drop #
+
+ALTER TABLE `tbl_editorial` MODIFY `idEditorial` INTEGER NOT NULL;
+
+# Drop constraints #
+
+ALTER TABLE `tbl_editorial` DROP PRIMARY KEY;
+
+DROP TABLE `tbl_editorial`;
+
+# ---------------------------------------------------------------------- #
+# Drop table "tbl_autor"                                                 #
+# ---------------------------------------------------------------------- #
+
+# Remove autoinc for PK drop #
+
+ALTER TABLE `tbl_autor` MODIFY `idAutor` INTEGER NOT NULL;
+
+# Drop constraints #
+
+ALTER TABLE `tbl_autor` ALTER COLUMN `nombreAutor` DROP DEFAULT;
+
+ALTER TABLE `tbl_autor` DROP PRIMARY KEY;
+
+DROP TABLE `tbl_autor`;
+
+# ---------------------------------------------------------------------- #
+# Drop table "tbl_empleado"                                              #
+# ---------------------------------------------------------------------- #
+
+# Remove autoinc for PK drop #
+
+ALTER TABLE `tbl_empleado` MODIFY `codigoEmpleado` INTEGER NOT NULL;
+
+# Drop constraints #
+
+ALTER TABLE `tbl_empleado` DROP PRIMARY KEY;
+
+DROP TABLE `tbl_empleado`;
+
+# ---------------------------------------------------------------------- #
+# Drop table "tbl_usuario"                                               #
+# ---------------------------------------------------------------------- #
+
+# Drop constraints #
+
+ALTER TABLE `tbl_usuario` ALTER COLUMN `multa` DROP DEFAULT;
+
+ALTER TABLE `tbl_usuario` ALTER COLUMN `perfil` DROP DEFAULT;
+
+ALTER TABLE `tbl_usuario` DROP PRIMARY KEY;
+
+DROP TABLE `tbl_usuario`;

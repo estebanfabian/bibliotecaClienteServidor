@@ -218,8 +218,7 @@ class LibroDAO {
         $conn->close();
         echo json_encode($respuesta);
     }
-
-    
+   
     function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
