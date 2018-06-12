@@ -16,6 +16,7 @@ session_start();
         <script src="../js/localization/messages_es.js" type="text/javascript"></script>
         <script src="" type="text/javascript"></script>
         <script src="../js/MiLogica.js" type="text/javascript"></script>
+        <link href="../css/fileuploader.css" rel="stylesheet" type="text/css"/>
         <title>BiblioCur</title>
     </head>
     <body>   
@@ -118,20 +119,32 @@ session_start();
                 <div class = "col-md-9">
                     <form id="registar_usuario" name ="registar_usuario" method="POST">
 
-                        <fieldset class="border p-1">|
+                        <fieldset class="border p-1">
                             <legend  class="w-auto">Datos de Usuario</legend>
                             <div class="form-row">
                                 <div class="form-group col-md-2">
                                     <label for="inputEmail4">Código</label>
                                     <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
                                 </div>
-                                <div class="form-group col-md-5">
+                                <div class="form-group col-md-4">
                                     <label for="inputEmail4">Nombres</label>
                                     <input type="tetx" class="form-control" id="nombre" name="nombre" placeholder="Nombres" >
                                 </div>
-                                <div class="form-group col-md-5">
+                                <div class="form-group col-md-4">
                                     <label for="inputEmail4">Apellidos</label>
                                     <input type="tetx" class="form-control" id="apellido" name="apellido" placeholder="Apellidos" >
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label class="uploader" ondragover="return false">
+                                        <i class="icon-upload icon"></i>
+                                        <img src="" class="" id = "foto" name = "foto">
+                                        <input type="file" accept="image/*" id ="file" name="file">
+                                    </label>
+
+                                    <script src="../js/FileUploader.js" type="text/javascript"></script>
+                                    <script type="text/javascript">
+                            new FileUploader('.uploader');
+                                    </script> 
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="inputPassword4">Fecha de nacimiento</label>               
@@ -181,11 +194,8 @@ session_start();
                                     <label for="inputAddress2">Contraseña</label>
                                     <input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña" >
                                 </div>
-                                <div class="custom-file col-md-5" >
-                                    <input type="file" class="custom-file-input" id="validatedCustomFile" name="validatedCustomFile" >
-                                    <label class="custom-file-label" for="validatedCustomFile">Seleccione su foto de perfil</label>
-                                    <div class="invalid-feedback">Example invalid custom file feedback</div>
-                                </div>
+                               
+
                             </div>
                         </fieldset>
                         <fieldset class="border p-1">

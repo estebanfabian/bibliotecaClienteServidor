@@ -1,7 +1,6 @@
 <?php
 if ($_POST) {
     session_start();
-    echo $_SESSION["usuario"]["perfil"];
     ?>
     <style>
         .dropdown-submenu {
@@ -14,8 +13,6 @@ if ($_POST) {
             margin-top: -1px;
         }
     </style>
-
-
 
     <div  id ="cabezara" class ="container">
         <div class="row justify-content-end">
@@ -60,9 +57,9 @@ if ($_POST) {
                             Quiénes somos 
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Miscion</a>
-                            <a class="dropdown-item" href="#">Viscion action</a>
-                            <a class="dropdown-item" href="#">Acerca de XXX</a>
+                            <a class="dropdown-item" href="#">Misión</a>
+                            <a class="dropdown-item" href="#">Visión</a>
+                            <a class="dropdown-item" href="#">Acerca de BilioCur</a>
                             <a class="dropdown-item" href="#">Cur</a>
                         </div>
                     </li>
@@ -100,8 +97,7 @@ if ($_POST) {
             <?php } ?>
             </ul>
     </div>
-    <!--    </nav>
-        </div>-->
+   
 
     <?php
 } else {

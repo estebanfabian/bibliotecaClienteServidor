@@ -1,5 +1,4 @@
 <?php
-//if ($_POST) {
 session_start();
 echo $_SESSION["usuario"]["perfil"];
 ?>
@@ -19,7 +18,6 @@ echo $_SESSION["usuario"]["perfil"];
         </div>
     </div>
 </div>
-
 <div class="row">
     <div class="col-4">
         <img src="../img/recurso/cur.png">
@@ -83,8 +81,6 @@ echo $_SESSION["usuario"]["perfil"];
         </div>
     </nav>
 </div>
-
-
 
 
 <div id ="pie" class = "container-fluid">

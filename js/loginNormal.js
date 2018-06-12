@@ -15,16 +15,15 @@ $(document).ready(function () {
     }
 
     function envio() {
-         alert("entra1");
-        var url = "pieYcabeza.php";
+
+        var url = "menu1.php";
         var parameto = "ejemplo";
         var metodo = function (ssw) {
-           // $("#cabezara").html(ssw);
-            $("#pie").html(ssw);
-            
+            $("#cabezara1").html(ssw);
+            // $("#pie").html(ssw);      
         };
         fajax(url, parameto, metodo);
     }
     alert("entra");
- envio();
+    envio();
 });

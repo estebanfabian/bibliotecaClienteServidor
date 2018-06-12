@@ -23,6 +23,5 @@ $(document).ready(function () {
         };
         fajax(url, parameto, metodo);
     }
-    alert("entra");
-    envio();
+       envio();
 });

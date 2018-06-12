@@ -1,7 +1,6 @@
 <?php
 
 header('Access-Control-Allow-Origin: *');
-
 require '../../CLASES/BD/MySql.php';
 require '../../CLASES/BD/datosbd.php';
 require '../../CLASES/DAO/UsuarioDAO.php';

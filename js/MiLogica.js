@@ -5,7 +5,7 @@ $(document).ready(function () {
     var $formLost = $('#lost-form');
     var $divForms = $('#div-forms');
     var $modalAnimateTime = 300;
-    
+
     function fajax(URL, parametros, metodo) {
         $.ajax({
             url: URL,
@@ -21,7 +21,7 @@ $(document).ready(function () {
             }
         });
     }
-    
+
     function login() {
         $("#login-form").validate({
             rules: {
@@ -68,68 +68,49 @@ $(document).ready(function () {
             }
         });
     }
-    
-    function registar() {
+
+    function registarUsuario() {
         $("#registar_usuario").validate({
             rules: {
-                codigo: {
-                    required: true,
-                    number: true,
-                    digits: true,
-                    minlength: 6
-                },
-                nombre: {
-                    required: true,
-                    minlength: 3
-                },
-                apellido: {
-                    required: true,
-                    minlength: 3
-                },
-                fechaNacimiento: {
-                    required: true,
-                    minlength: 3
-                },
-                sexo: {
-                    required: true,
-                },
-                Perfil: {
-                    required: true,
-                },
-                direccion: {
-                    required: true,
-                    minlength: 3
-                },
-                direccion2: {
-                },
-                telefono: {
-                    required: true,
-                    minlength: 3
-                },
-                telefono2: {
-                },
-                telefonoOtro: {
-                },
-                coreeo: {
-                    required: true,
-                    minlength: 3
-                },
-                nombreContacto: {
-                },
-                apellidoContacto: {
-                },
-                dirrecionContacto: {
-                },
-                dirrecionContacto2: {
-                },
-                telefonoContacto: {
-                },
-                validatedCustomFile: {
-                },
-                contrasena: {
-                    required: true,
-                    minlength: 1
-                }
+//                codigo: {
+//                    required: true,
+//                    number: true,
+//                    digits: true,
+//                    minlength: 1
+//                },
+//                nombre: {
+//                    required: true,
+//                    minlength: 1
+//                },
+//                apellido: {
+//                    required: true,
+//                    minlength: 1
+//                },
+//                fechaNacimiento: {
+//                    required: true,
+//                    minlength: 1
+//                },
+//                sexo: {
+//                    required: true,
+//                },
+//                Perfil: {
+//                    required: true,
+//                },
+//                direccion: {
+//                    required: true,
+//                    minlength: 1
+//                },
+//                telefono: {required: true,
+//                    minlength: 1
+//                },
+//                coreeo: {
+//                    required: true,
+//                    minlength: 1
+//                },
+//                contrasena: {
+//                    required: true,
+//                    minlength: 1
+//                }
             },
             messages: {
                 codigo: {
@@ -137,6 +118,9 @@ $(document).ready(function () {
                     number: "Este campo solo permite número"
                 }
             }, submitHandler: function () {
+
+                var NombreFoto = $("#file").val();
+                NombreFoto = palabra(NombreFoto);
                 var formulario = {
                     codigo: $("#codigo").val(),
                     nombre: $("#nombre").val(),
@@ -146,8 +130,7 @@ $(document).ready(function () {
                     direccion: $("#direccion").val(),
                     telefonoPrincipal: $("#telefono").val(),
                     emailPrincipal: $("#coreeo").val(),
-                    contrasena: $("#clave").val(),
-                    foto: $("#validatedCustomFile").val(),
+                    contrasena: $("#clave").val(), foto: NombreFoto,
                     direccion2: $("#direccion2").val(),
                     telefonoSecundario: $("#telefono2").val(),
                     telefonoOtro: $("#telefonoOtro").val(),
@@ -158,7 +141,6 @@ $(document).ready(function () {
                     contactoTelefono: $("#telefonoContacto").val(),
                     perfil: $("#Perfil").val()
                 };
-                alert($("#contrasena").val());
                 console.log(formulario);
                 myJson.push(formulario);
                 var myString = JSON.stringify(formulario);
@@ -168,33 +150,35 @@ $(document).ready(function () {
                     $("#codigo").val("");
                     $("#contrasena").val("");
                     var data = $.parseJSON(respuesta);
-                    if (data.susses == "ok ") {
+                    if (data.sucess == 'ok') {
                         alert("el usuario se registro con exito");
-                        envio(respuesta);
+                        // LimpiarUsuario();
+                        var url1 = "../Controlador/Usuario/Cargar_Foto.php";
+                        var parametro1 = NombreFoto;
+                        var metodo1 = function (respuesta) {
+                        };
+                        fajax(url1, parametro1, metodo1);
                     } else {
                         alert("No se pude registar al usuario");
                         console.log(respuesta);
-                        console.log(data);
-
-
+                        console.log(data.sucess);
                     }
                 };
                 fajax(url1, parametro1, metodo1);
             }
         });
     }
-    
+
     function envio(respusta) {
-        var url = "../inde.php";
+        var url = "inicioSesion.php";
         var parameto = respusta;
         var metodo = function (ssw) {
-
         };
         fajax(url, parameto, metodo);
-        alert(parameto);
+        //alert(parameto);
         location.href = "index.php";
     }
-    
+
     function Correo() {
         var url = "";
         var parameto = "hola";
@@ -206,15 +190,13 @@ $(document).ready(function () {
                     required: true,
                     number: true,
                     digits: true
-                },
-                lost_email: {
+                }, lost_email: {
                     required: true,
                     minlength: 1
                 }
             },
             messages: {
-                lost_codigo: {
-                    digits: "Este campo no puede tener ni comas, ni puntos",
+                lost_codigo: {digits: "Este campo no puede tener ni comas, ni puntos",
                     number: "Este campo solo permite número"
                 }
             }, submitHandler: function () {
@@ -243,8 +225,8 @@ $(document).ready(function () {
         });
         fajax(url, parameto, metodo);
     }
-    
-    function Limpiar() {
+
+    function LimpiarUsuario() {
         $("#codigo").val("");
         $("#nombre").val("");
         $("#apellido").val("");
@@ -265,35 +247,7 @@ $(document).ready(function () {
         $("#telefonoContacto").val("");
         $("#Perfil").val("");
     }
-    
-    $("#BTNIngresar").click(function () {
-        login();
-    });
-    
-    $("#CerrarSesion").click(function () {
-        location.href = "cerrarSesion.php";
-    });
-    
-    $("#Enviar_correo").click(function () {
-        Correo();
-    });
-    
-    $("#btnRegistrar").click(function () {
-        registar();
-    });
-    
-    $("#btnLimpiar").click(function () {
-        Limpiar();
-    });
-    
-    $("#login_lost_btn").click(function () {
-        modalAnimate($formLogin, $formLost);
-    });
-    
-    $("#lost_login_btn").click(function () {
-        modalAnimate($formLost, $formLogin);
-    });
-    
+
     function modalAnimate($oldForm, $newForm) {
         var $oldH = $oldForm.height();
         var $newH = $newForm.height();
@@ -304,4 +258,54 @@ $(document).ready(function () {
             });
         });
     }
+
+    function palabra($palabra) {
+
+        var listaNombres = $palabra.split('\\');
+        var i = listaNombres.length;
+        return listaNombres[i - 1];
+    }
+
+    function  cargarFoto() {
+
+        var formulario = {
+            photo: $("#file").val()
+        };
+        myJson.push(formulario);
+        var myString = JSON.stringify(formulario);
+
+        var url = "../Controlador/Usuario/Cargar_Foto.php";
+        var parameto = myString;
+        var metodo = function () {};
+        fajax(url, parameto, metodo);
+    }
+
+    $("#BTNIngresar").click(function () {
+        login();
+    });
+
+    $("#CerrarSesion").click(function () {
+        location.href = "cerrarSesion.php";
+    });
+
+    $("#Enviar_correo").click(function () {
+        Correo();
+    });
+
+    $("#btnRegistrar").click(function () {
+       // registarUsuario();
+	   cargarFoto();
+    });
+
+    $("#btnLimpiar").click(function () {
+        cargarFoto();
+    });
+
+    $("#login_lost_btn").click(function () {
+        modalAnimate($formLogin, $formLost);
+    });
+
+    $("#lost_login_btn").click(function () {
+        modalAnimate($formLost, $formLogin);
+    });
 });
