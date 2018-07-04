@@ -17,79 +17,23 @@ session_start();
         <script src="" type="text/javascript"></script>
         <script src="../js/MiLogica.js" type="text/javascript"></script>
         <link href="../css/fileuploader.css" rel="stylesheet" type="text/css"/>
+        
+        
+        <link rel="stylesheet" href="../css/jquery.fileupload.css">
+        <link rel="stylesheet" href="../css/jquery.fileupload-ui.css">
+        
+        
+        <script src="../js/jquery.fileupload-image.js" type="text/javascript"></script>
         <title>BiblioCur</title>
     </head>
     <body>   
-        <header> 
-            <div  id ="cabezara" class ="container">
-                <div class="row justify-content-end">
-                    <div class="col-4">
-                        <img src="../img/usuario/icono_foto.png" class="rounded float-left" alt=""  width="40" height="40"/>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <?php echo $_SESSION["usuario"]["nombre"]; ?>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Configuración</a>
-                                <a class="dropdown-item" href="../cerrarSesion.php">Cerrar Sesión</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-4">
-                        <img src="../img/recurso/cur.png">
-                    </div>
-                    <div class="col-4">
-                        <img src="../img/recurso/mensaje.png">
-                    </div>
-                    <div class="col-4">
-                        <img src="../img/recurso/escudo.png">
-                    </div>
-                </div>
-                <div class="row ejemplo">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <ul class="navbar-nav">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="../index.php">Inicio <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Quiénes somos 
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="#">Miscion</a>
-                                        <a class="dropdown-item" href="#">Viscion action</a>
-                                        <a class="dropdown-item" href="#">Acerca de XXX</a>
-                                        <a class="dropdown-item" href="#">Cur</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Prestamo
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="#">Libro</a>
-                                        <a class="dropdown-item" href="#">Video Beam</a>
-                                        <a class="dropdown-item" href="#">Material audiovisual</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Noticias</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Contactanos</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-
+        <header > <?php if ($_SESSION) { ?>
+                <div id = "cabezara1"></div>
+                <script src="../js/loginNormal.js" type="text/javascript"></script>
+            <?php } else { ?>
+                <div id = "cabezara"></div>
+                <script src="../js/loginNormal.js" type="text/javascript"></script>
+            <?php } ?> 
         </header>
         <div class ="container ">
             <section class ="main row">
@@ -98,7 +42,7 @@ session_start();
                         <button type="button" class="btn btn-secondary">Catalogo en línea   </button>
                         <button type="button" class="btn btn-secondary">Préstamos, consulta y renovación   </button>
                         <button type="button" class="btn btn-secondary">Sugerir títulos    </button>
-                        <button type="button" id="CerrarSesion"   class="btn btn-secondary" data-toggle="modal" data-target="#login-modal"> Cerrar sesión </button>
+                        <button type="button" id="../CerrarSesion"   class="btn btn-secondary" data-toggle="modal" data-target="#login-modal"> Cerrar sesión </button>
                     </div>
                     <a class="twitter-timeline" data-width="220" data-height="220" href="https://twitter.com/fabi_die?ref_src=twsrc%5Etfw">Tweets by fabi_die</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                     <!-- Load Facebook SDK for JavaScript -->
@@ -117,7 +61,7 @@ session_start();
                     <div class="fb-comment-embed" data-href="https://www.facebook.com/zuck/posts/10102577175875681?comment_id=1193531464007751&amp;reply_comment_id=654912701278942" data-width="220" data-include-parent="false"></div>
                 </aside>
                 <div class = "col-md-9">
-                    <form id="registar_usuario" name ="registar_usuario" method="POST">
+<!--                    <form id="registar_usuario" name ="registar_usuario" method="POST" enctype=" multipart/form-data">
 
                         <fieldset class="border p-1">
                             <legend  class="w-auto">Datos de Usuario</legend>
@@ -138,13 +82,14 @@ session_start();
                                     <label class="uploader" ondragover="return false">
                                         <i class="icon-upload icon"></i>
                                         <img src="" class="" id = "foto" name = "foto">
-                                        <input type="file" accept="image/*" id ="file" name="file">
+                                        <input type="photo" name="photo[]" multiple>
+                                                                                      <input type="file" accept="image/*" id ="photo" name="photo">
                                     </label>
 
                                     <script src="../js/FileUploader.js" type="text/javascript"></script>
-                                    <script type="text/javascript">
-                            new FileUploader('.uploader');
-                                    </script> 
+                                   <script type="text/javascript">
+                           new FileUploader('.uploader');
+                                   </script>  
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="inputPassword4">Fecha de nacimiento</label>               
@@ -194,8 +139,6 @@ session_start();
                                     <label for="inputAddress2">Contraseña</label>
                                     <input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña" >
                                 </div>
-                               
-
                             </div>
                         </fieldset>
                         <fieldset class="border p-1">
@@ -209,17 +152,14 @@ session_start();
                                     <label for="inputAddress2">Apellido contacto</label>
                                     <input type="text" class="form-control" id="apellidoContacto" name="apellidoContacto" placeholder="Apellido contacto">
                                 </div>
-
                                 <div class="form-group col-md-4">
                                     <label for="inputAddress2">Dirección contacto</label>
                                     <input type="text" class="form-control" id="dirrecionContacto" name="dirrecionContacto" placeholder="Dirección contacto">
                                 </div>
-
                                 <div class="form-group col-md-4">
                                     <label for="inputAddress2">Dirección 2 contacto</label>
                                     <input type="text" class="form-control" id="dirrecionContacto2" name="dirrecionContacto2" placeholder="Direccion contacot">
                                 </div>
-
                                 <div class="form-group col-md-4">
                                     <label for="inputAddress2">Teléfono contacto</label>
                                     <input type="text" class="form-control" id="telefonoContacto" name="telefonoContacto" placeholder="Telefono">
@@ -229,6 +169,160 @@ session_start();
                         <button  class="btn btn-primary" id="btnRegistrar">Registrar</button>
                         <button  class="btn btn-primary" id="btnLimpiar">Limpiar</button>
                     </form>
+                    <div class="navbar navbar-default navbar-fixed-top">
+                        <div class="container">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-fixed-top .navbar-collapse">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="https://github.com/blueimp/jQuery-File-Upload">jQuery File Upload</a>
+                            </div>
+                            <div class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="https://github.com/blueimp/jQuery-File-Upload/tags">Download</a></li>
+                                    <li><a href="https://github.com/blueimp/jQuery-File-Upload">Source Code</a></li>
+                                    <li><a href="https://github.com/blueimp/jQuery-File-Upload/wiki">Documentation</a></li>
+                                    <li><a href="https://blueimp.net">&copy; Sebastian Tschan</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="container">
+                        <form id="fileupload" action="https://jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
+                            <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
+                            <div class="row fileupload-buttonbar">
+                                <div class="col-lg-7">
+                                    <span class="btn btn-success fileinput-button">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        <span>Add files...</span>
+                                        <input type="file" name="files[]" multiple>
+                                    </span>
+                                    <button type="submit" class="btn btn-primary start">
+                                        <i class="glyphicon glyphicon-upload"></i>
+                                        <span>Start upload</span>
+                                    </button>
+                                    <button type="reset" class="btn btn-warning cancel">
+                                        <i class="glyphicon glyphicon-ban-circle"></i>
+                                        <span>Cancel upload</span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger delete">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                        <span>Delete</span>
+                                    </button>
+                                    <input type="checkbox" class="toggle">
+                                    <span class="fileupload-process"></span>
+                                </div>
+                                <div class="col-lg-5 fileupload-progress fade">
+                                    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                                    </div>
+                                    <div class="progress-extended">&nbsp;</div>
+                                </div>
+                            </div>
+                            <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+                        </form>
+                        <br>
+                    </div>
+                    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+                        <div class="slides"></div>
+                        <h3 class="title"></h3>
+                        <a class="prev">‹</a>
+                        <a class="next">›</a>
+                        <a class="close">×</a>
+                        <a class="play-pause"></a>
+                        <ol class="indicator"></ol>
+                    </div>
+                    <script id="template-upload" type="text/x-tmpl">
+                        {% for (var i=0, file; file=o.files[i]; i++) { %}
+                        <tr class="template-upload fade">
+                        <td>
+                        <span class="preview"></span>
+                        </td>
+                        <td>
+                        <p class="name">{%=file.name%}</p>
+                        <strong class="error text-danger"></strong>
+                        </td>
+                        <td>
+                        <p class="size">Processing...</p>
+                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+                        </td>
+                        <td>
+                        {% if (!i && !o.options.autoUpload) { %}
+                        <button class="btn btn-primary start" disabled>
+                        <i class="glyphicon glyphicon-upload"></i>
+                        <span>Start</span>
+                        </button>
+                        {% } %}
+                        {% if (!i) { %}
+                        <button class="btn btn-warning cancel">
+                        <i class="glyphicon glyphicon-ban-circle"></i>
+                        <span>Cancel</span>
+                        </button>
+                        {% } %}
+                        </td>
+                        </tr>
+                        {% } %}
+                    </script>
+                    <script id="template-download" type="text/x-tmpl">
+                        {% for (var i=0, file; file=o.files[i]; i++) { %}
+                        <tr class="template-download fade">
+                        <td>
+                        <span class="preview">
+                        {% if (file.thumbnailUrl) { %}
+                        <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                        {% } %}
+                        </span>
+                        </td>
+                        <td>
+                        <p class="name">
+                        {% if (file.url) { %}
+                        <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                        {% } else { %}
+                        <span>{%=file.name%}</span>
+                        {% } %}
+                        </p>
+                        {% if (file.error) { %}
+                        <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+                        {% } %}
+                        </td>
+                        <td>
+                        <span class="size">{%=o.formatFileSize(file.size)%}</span>
+                        </td>
+                        <td>
+                        {% if (file.deleteUrl) { %}
+                        <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                        <i class="glyphicon glyphicon-trash"></i>
+                        <span>Delete</span>
+                        </button>
+                        <input type="checkbox" name="delete" value="1" class="toggle">
+                        {% } else { %}
+                        <button class="btn btn-warning cancel">
+                        <i class="glyphicon glyphicon-ban-circle"></i>
+                        <span>Cancel</span>
+                        </button>
+                        {% } %}
+                        </td>
+                        </tr>
+                        {% } %}
+                    </script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                    <script src="../js/vendor/jquery.ui.widget.js"></script>
+                    <script src="https://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
+                    <script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+                    <script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+                    <script src="https://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+                    <script src="../js/jquery.iframe-transport.js"></script>
+                    <script src="../js/jquery.fileupload.js"></script>
+                    <script src="../js/jquery.fileupload-process.js"></script>
+                    <script src="../js/jquery.fileupload-image.js"></script>
+                    <script src="../js/jquery.fileupload-audio.js"></script>
+                    <script src="../js/jquery.fileupload-video.js"></script>
+                    <script src="../js/jquery.fileupload-validate.js"></script>
+                    <script src="../js/jquery.fileupload-ui.js"></script>
+                    <script src="../js/main.js"></script> 
                 </div>
             </section>
         </div>

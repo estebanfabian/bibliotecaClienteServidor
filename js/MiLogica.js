@@ -267,17 +267,33 @@ $(document).ready(function () {
     }
 
     function  cargarFoto() {
-
+        var file = document.getElementById('foto').files[0];
         var formulario = {
-            photo: $("#file").val()
+            photo: file
         };
+
+
         myJson.push(formulario);
         var myString = JSON.stringify(formulario);
 
         var url = "../Controlador/Usuario/Cargar_Foto.php";
-        var parameto = myString;
-        var metodo = function () {};
+        var parameto = file;
+        var metodo = function () {
+        };
+        console.log(formulario);
+
         fajax(url, parameto, metodo);
+        alert("dentro de la funciona");
+
+
+        console.log(file);
+//        if (file) {
+//            var reader = new FileReader();
+//            reader.readAsText(file);
+//            reader.onload = function (e) {
+//                alert(e.target.result);
+//            };
+//        }
     }
 
     $("#BTNIngresar").click(function () {
@@ -293,11 +309,14 @@ $(document).ready(function () {
     });
 
     $("#btnRegistrar").click(function () {
-       // registarUsuario();
-	   cargarFoto();
+        //registarUsuario();
+        alert("entra");
+        cargarFoto();
+
     });
 
     $("#btnLimpiar").click(function () {
+                alert("entra");
         cargarFoto();
     });
 

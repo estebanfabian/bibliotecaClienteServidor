@@ -39,7 +39,7 @@ if ($_POST) {
             <img src="img/recurso/mensaje.png">
         </div>
         <div class="col-4">
-            <img src="img/recurso/escudo.png">
+            <img src="img/recurso/escudo.png" width="100" height="100">
         </div>
     </div>
     <div class="row ejemplo">

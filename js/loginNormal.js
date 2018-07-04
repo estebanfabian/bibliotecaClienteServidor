@@ -20,10 +20,33 @@ $(document).ready(function () {
         var parameto = "ejemplo";
         var metodo = function (ssw) {
             $("#cabezara1").html(ssw);
-            // $("#pie").html(ssw);      
         };
         fajax(url, parameto, metodo);
     }
-    alert("entra");
+    function pie() {
+
+        var url = "pie.php";
+        var parameto = "ejemplo";
+        var metodo = function (ssw) {
+            $("#pie").html(ssw);
+        };
+        fajax(url, parameto, metodo);
+    }
+
+    function envio1() {
+
+        var url = "menu2.php";
+        var parameto = "ejemplo";
+        var metodo = function (ssw) {
+            $("#cabezara").html(ssw);
+        };
+        fajax(url, parameto, metodo);
+    }
+    pie();
     envio();
+    envio1();
+
+    $("#CerrarSesion1").click(function () {
+        location.href = "../cerrarSesion.php";
+    });
 });
