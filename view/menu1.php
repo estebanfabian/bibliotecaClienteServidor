@@ -21,7 +21,7 @@ if ($_POST) {
                         <?php echo $_SESSION["usuario"]["nombre"]; ?>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="configuracion.php">Configuración</a>
                         <a class="dropdown-item" href="../cerrarSesion.php">Cerrar Sesión</a>
                     </div>
                 </div>

@@ -107,10 +107,9 @@
                             Quiénes somos 
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Misión</a>
-                            <a class="dropdown-item" href="#">Visión</a>
-                            <a class="dropdown-item" href="#">Acerca de BilioCur</a>
-                            <a class="dropdown-item" href="#">Cur</a>
+                            <a class="dropdown-item" href="misionYvision.php">Misión y Visión </a>
+                            <a class="dropdown-item" href="AcercaBiblioCur.php">Acerca de BilioCur</a>
+                            <a class="dropdown-item" href="http://urepublicana.edu.co">Cur</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -120,11 +119,10 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="#">Libro</a>
                             <a class="dropdown-item" href="#">Video Beam</a>
-                            <a class="dropdown-item" href="#">Material audiovisual</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Noticias</a>
+                        <a class="nav-link" href="noticias.php">Noticias</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contactanos</a>

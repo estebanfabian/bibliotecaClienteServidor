@@ -9,4 +9,4 @@ require '../../CLASES/VO/PrestamoVO.php';
 $json= file_get_contents("php://input");
 $local= json_decode($json);
 $PrestamoDAO=new PrestamoDAO();
-$PrestamoDAO->mostrar_tarjeta($local);
+$PrestamoDAO->Mostrar_tarjeta($local);

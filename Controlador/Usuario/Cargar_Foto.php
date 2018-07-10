@@ -8,6 +8,14 @@ require '../../CLASES/VO/UsuarioVO.php';
 
 $json = file_get_contents("php://input");
 $local = json_decode($json);
-$target_dir = "";
+$target_dir = "../../img/usuario/";
 $target_file = $target_dir.basename($_FILES["photo"]["name"]);
 move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file); 
+
+
+
+
+
+//$target_dir = "../../img/usuario/";
+//$target_file = $target_dir . basename($_FILES["photo"]["name"]);
+//move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);

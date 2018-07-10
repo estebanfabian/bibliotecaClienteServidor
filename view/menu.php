@@ -23,7 +23,7 @@ if ($_POST) {
                         <?php echo $_SESSION["usuario"]["nombre"]; ?>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="view/configuracion.php">Configuración</a>
                         <a class="dropdown-item" href="cerrarSesion.php">Cerrar Sesión</a>
                     </div>
                 </div>
@@ -57,10 +57,9 @@ if ($_POST) {
                             Quiénes somos 
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Misión</a>
-                            <a class="dropdown-item" href="#">Visión</a>
-                            <a class="dropdown-item" href="#">Acerca de BilioCur</a>
-                            <a class="dropdown-item" href="#">Cur</a>
+                            <a class="dropdown-item" href="misionYvision.php">Misión y Visión </a>
+                            <a class="dropdown-item" href="AcercaBiblioCur.php">Acerca de BilioCur</a>
+                            <a class="dropdown-item" href="http://urepublicana.edu.co">Cur</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -68,8 +67,8 @@ if ($_POST) {
                             Prestamo
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Libro</a>
-                            <a class="dropdown-item" href="#">Video Beam</a>
+                            <a class="dropdown-item" href="PrestamoLibro.php">Libro</a>
+                            <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -83,11 +82,11 @@ if ($_POST) {
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Gestion
                             </a>
-                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                     <a class="dropdown-item" href="view/registrarUsuario.php">Registrar Usuario</a>
-                                        <a class="dropdown-item" href="#">Video Beam</a>
-                                        <a class="dropdown-item" href="#">Material audiovisual</a>
-                                    </div>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="view/registrarUsuario.php">Registrar Usuario</a>
+                                <a class="dropdown-item" href="#">Video Beam</a>
+                                <a class="dropdown-item" href="#">Material audiovisual</a>
+                            </div>
                         </li>
                 </div>
                 <div>
@@ -97,7 +96,7 @@ if ($_POST) {
             <?php } ?>
             </ul>
     </div>
-   
+
 
     <?php
 } else {

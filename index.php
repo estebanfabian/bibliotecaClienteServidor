@@ -117,17 +117,16 @@ session_start();
                             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                                 <ul class="navbar-nav">
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+                                        <a class="nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Quiénes somos 
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="#">Misión</a>
-                                            <a class="dropdown-item" href="#">Visión</a>
-                                            <a class="dropdown-item" href="#">Acerca de BilioCur</a>
-                                            <a class="dropdown-item" href="#">Cur</a>
+                                            <a class="dropdown-item" href="view/misionYvision.php">Misión y Visión</a>
+                                            <a class="dropdown-item" href="view/AcercaBiblioCur.php">Acerca de BilioCur</a>
+                                            <a class="dropdown-item" href="http://urepublicana.edu.co/">Cur</a>
                                         </div>
                                     </li>
                                     <li class="nav-item dropdown">
@@ -135,13 +134,12 @@ session_start();
                                             Prestamo
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="#">Libro</a>
-                                            <a class="dropdown-item" href="#">Video Beam</a>
-                                            <a class="dropdown-item" href="#">Material audiovisual</a>
+                                            <a class="dropdown-item" href="view/Catalogo.php">Libro</a>
+                                            <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Noticias</a>
+                                        <a class="nav-link" href="view/noticias.php">Noticias</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Contactanos</a>

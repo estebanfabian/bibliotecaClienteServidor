@@ -22,12 +22,12 @@ session_start();
     </head>
     <body>
         <header > <?php if ($_SESSION) { ?>
-            <div id = "cabezara1"></div>
-            <script src="../js/loginNormal.js" type="text/javascript"></script>
-               <?php } else { ?>
-             <div id = "cabezara"></div>
-            <script src="../js/loginNormal.js" type="text/javascript"></script>
-              <?php } ?> 
+                <div id = "cabezara1"></div>
+                <script src="../js/loginNormal.js" type="text/javascript"></script>
+            <?php } else { ?>
+                <div id = "cabezara"></div>
+                <script src="../js/loginNormal.js" type="text/javascript"></script>
+            <?php } ?> 
         </header>
         <div class ="container ">
             <section class ="main row">

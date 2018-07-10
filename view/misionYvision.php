@@ -22,12 +22,12 @@ session_start();
     </head>
     <body>
         <header > <?php if ($_SESSION) { ?>
-            <div id = "cabezara1"></div>
-            <script src="../js/loginNormal.js" type="text/javascript"></script>
-               <?php } else { ?>
-             <div id = "cabezara"></div>
-            <script src="../js/loginNormal.js" type="text/javascript"></script>
-              <?php } ?> 
+                <div id = "cabezara1"></div>
+                <script src="../js/loginNormal.js" type="text/javascript"></script>
+            <?php } else { ?>
+                <div id = "cabezara"></div>
+                <script src="../js/loginNormal.js" type="text/javascript"></script>
+            <?php } ?> 
         </header>
         <div class ="container ">
             <section class ="main row">
@@ -43,7 +43,17 @@ session_start();
                         <?php } ?>
                     </div>
                 </aside>
+                <div class = "col-md-9">
+                    <h3>Vision</h3> 
+                    <p align="justify">La CORPORACIÓN UNIVERSITARIA REPUBLICANA espera constituirse en el pilar de la formación permanente e integral, capaz de generar cambios de profunda resignificación en el contexto nacional e internacional; fomentando los valores éticos y morales, el respeto a los derechos de los demás, el cultivo de los talentos profesionales y el estímulo a las vocaciones intelectuales y científicas siendo imprescindibles para mejorar la convivencia social, el domino técnico de los problemas, la comprensión del mundo globalizado contemporáneo y la calidad de vida.
+                    </p>     
+                    <br>
+                    <br>
+                    <h3>Mision</h3> 
+                    <p align="justify">La misión Institucional de la CORPORACIÓN UNIVERSITARIA REPUBLICANA apunta esencialmente a la preparación integral de nuestros educandos, mediante estrategias participativas de enseñanza, aprendizaje y formación, que integren la docencia, la investigación y la extensión, dentro de claros principios humanísticos, éticos y ecológicos, para viabilizar el progreso individual y colectivo, en todos los campos del saber, acordes con el carácter institucional legalmente reconocido.</p> 
+                </div>       
             </section>
+
         </div>
         <footer > 
             <div id = "pie">
