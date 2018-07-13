@@ -282,7 +282,7 @@ class UsuarioDAO {
     }
 
     public function Mostrar($array) {
-        $sql = "SELECT `nombre`, `apellido`, `fechaNacimiento`, `sexo`, `direccion`, `telefonoPrincipal`, `emailPrincipal`,  `contrasena`,`foto`  FROM tbl_usuario  WHERE `codigo`=? ";
+        $sql = "SELECT codigo, `nombre`, `apellido`, `fechaNacimiento`, `sexo`, `direccion`, `telefonoPrincipal`, `emailPrincipal`,  `contrasena`,`foto`  FROM tbl_usuario  WHERE `codigo`=? ";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -292,10 +292,11 @@ class UsuarioDAO {
 
         $stmp->bind_param("i", $codigo);
         $stmp->execute();
-        $stmp->bind_result($nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $telefonoPrincipal, $emailPrincipal, $contrasena, $foto);
+        $stmp->bind_result($codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $telefonoPrincipal, $emailPrincipal, $contrasena, $foto);
         $respuesta = array();
         while ($stmp->fetch()) {
             $tmp = array();
+            $tmp["codigo"] = $codigo;
             $tmp["nombre"] = $nombre;
             $tmp["apellido"] = $apellido;
             $tmp["fechaNacimiento"] = $fechaNacimiento;
@@ -313,7 +314,7 @@ class UsuarioDAO {
         echo json_encode($respuesta);
     }
 
-	public function Modificar($array) {// cuando se realiza desde el celular 
+    public function Modificar($array) {// cuando se realiza desde el celular 
         $sql = "UPDATE `tbl_usuario` SET `nombre`=?, `apellido`=?, `fechaNacimiento`=?, `sexo`=?, `direccion`=?, `telefonoPrincipal`=?, `emailPrincipal`=?,  `contrasena`=?,foto=? WHERE codigo =?";
 
         $BD = new ConectarBD();
@@ -357,6 +358,32 @@ class UsuarioDAO {
         $stmp->close();
         $conn->close();
 
+        echo json_encode($respuesta);
+    }
+
+    public function Mis_multa($array) {
+
+
+        $sql = "SELECT `foto`, multa FROM `tbl_usuario` WHERE `codigo`= ?";
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+        $UsuarioVO = new UsuarioVO();
+        $UsuarioVO->setCodigo($array->codigo);
+        $codigo = $UsuarioVO->getCodigo();
+
+        $stmp->bind_param("i", $codigo);
+        $stmp->execute();
+        $stmp->bind_result($foto, $multa);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["foto"] = $foto;
+            $tmp["multa"] = $multa;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
         echo json_encode($respuesta);
     }
 
