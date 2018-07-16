@@ -3,7 +3,7 @@
 class LibroDAO {
 
     function CrearLibro($array) {
-        
+
         $libroVo = new LibroVO;
         $libroVo->setIsbn($array->isbn);
         $libroVo->setIdEditorial($array->editorial);
@@ -36,7 +36,7 @@ class LibroDAO {
     }
 
     function ModificarLibro($array) {
-        
+
         $libroVo = new LibroVO;
         $libroVo->setIsbn($array->isbn);
         $libroVo->setIdEditorial($array->editorial);
@@ -89,14 +89,16 @@ class LibroDAO {
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
-        $LibroVO = new LibroVO();
-        $LibroVO->setIsbn($array->Consulta);
+        $LibroVo = new LibroVO();
+        $LibroVo->setIsbn($array->Consulta);
 
-        $Consulta = $LibroVO->getIsbn();
-        $Consulta = "%" . $Consulta . "%";
+        $Consulta = $LibroVo->getIsbn();
+ 
+ $Consulta = $Consulta . "%";
 
         $stmp->bind_param("i", $Consulta);
-        $this->RespuestaLibros($conn, $stmp);
+
+          $this->RespuestaLibros($conn, $stmp);
     }
 
     public function ListarXtitulo($array) {
@@ -143,6 +145,7 @@ class LibroDAO {
                 WHERE tbl_libro.idEditorial =tbl_editorial.idEditorial AND  tbl_libro.isbn=tbl_libroautor.isbn=tbl_libro_temas.isbn AND tbl_libroautor.idautor=tbl_autor.idautor AND tbl_libro_temas.idTema=tbl_temas.idTema AND
                 tbl_temas.nombreTema LIKE ?;';
         $BD = new ConectarBD();
+
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
@@ -218,7 +221,7 @@ class LibroDAO {
         $conn->close();
         echo json_encode($respuesta);
     }
-   
+
     function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {

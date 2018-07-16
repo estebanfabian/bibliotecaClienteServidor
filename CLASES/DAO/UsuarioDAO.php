@@ -315,7 +315,7 @@ class UsuarioDAO {
     }
 
     public function Modificar($array) {// cuando se realiza desde el celular 
-        $sql = "UPDATE `tbl_usuario` SET `nombre`=?, `apellido`=?, `fechaNacimiento`=?, `sexo`=?, `direccion`=?, `telefonoPrincipal`=?, `emailPrincipal`=?,  `contrasena`=?,foto=? WHERE codigo =?";
+        $sql = "UPDATE `tbl_usuario` SET  `direccion`=?, `telefonoPrincipal`=?, `emailPrincipal`=?,foto=? WHERE codigo =?";
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
@@ -323,29 +323,18 @@ class UsuarioDAO {
 
         $UsuarioVO = new UsuarioVO();
         $UsuarioVO->setCodigo($array->codigo);
-        $UsuarioVO->setApellido($array->apellido);
-        $UsuarioVO->setNombre($array->nombre);
         $UsuarioVO->setTelefonoPrincipal($array->telefonoPrincipal);
-        $UsuarioVO->setFechaNacimiento($array->fechaNacimiento);
-        $UsuarioVO->setSexo($array->sexo);
         $UsuarioVO->setDireccion($array->direccion);
         $UsuarioVO->setEmailPrincipal($array->emailPrincipal);
-        $UsuarioVO->setContrasena($array->contrasena);
         $UsuarioVO->setFoto($array->foto);
 
-
         $codigo = $UsuarioVO->getCodigo();
-        $nombre = $UsuarioVO->getNombre();
-        $apellido = $UsuarioVO->getApellido();
-        $fechaNacimiento = $UsuarioVO->getFechaNacimiento();
-        $sexo = $UsuarioVO->getSexo();
         $direccion = $UsuarioVO->getDireccion();
         $telefonoPrincipal = $UsuarioVO->getTelefonoPrincipal();
         $emailPrincipal = $UsuarioVO->getEmailPrincipal();
-        $contrasena = $UsuarioVO->getContrasena();
         $foto = $UsuarioVO->getFoto();
 
-        $stmp->bind_param("sssssssssi", $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $telefonoPrincipal, $emailPrincipal, $contrasena, $foto, $codigo);
+        $stmp->bind_param("ssssi", $direccion, $telefonoPrincipal, $emailPrincipal, $foto, $codigo);
 
         $resultado = array();
 

@@ -4,8 +4,8 @@ RewriteRule ^gato.jsp$ js/MiLogica.js
 RewriteRule ^Ingreso$ view/menu.php
 RewriteRule Insert_user$ Controlador/Usuario/Insertar_Usuario.php
 RewriteRule Validar$ Controlador/Usuario/Validar_Usuario.php
-RewriteRule tablaXid$ Controlador/libro/Consultar_LibroXid.php
-RewriteRule tablaXtitulo$ Controlador/libro/Consultar_LibroXtitulo.php
+RewriteRule tablaXid$ Controlador/Libro/Consultar_LibroXid.php
+RewriteRule tablaXtitulo$ Controlador/Libro/Consultar_LibroXtitulo.php
 RewriteRule tablaXautor$ Controlador/libro/Consultar_LibroXautor.php
 RewriteRule tablaXtema$ Controlador/libro/Consultar_LibroXtema.php
 RewriteRule tablaXEditorial$ Controlador/libro/Consultar_LibroXeditorial.php
