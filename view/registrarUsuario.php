@@ -17,12 +17,12 @@ session_start();
         <script src="" type="text/javascript"></script>
         <script src="../js/MiLogica.js" type="text/javascript"></script>
         <link href="../css/fileuploader.css" rel="stylesheet" type="text/css"/>
-        
-        
+
+
         <link rel="stylesheet" href="../css/jquery.fileupload.css">
         <link rel="stylesheet" href="../css/jquery.fileupload-ui.css">
-        
-        
+
+
         <script src="../js/jquery.fileupload-image.js" type="text/javascript"></script>
         <title>BiblioCur</title>
     </head>
@@ -44,151 +44,152 @@ session_start();
                         <button type="button" class="btn btn-secondary">Sugerir títulos    </button>
                         <button type="button" id="../CerrarSesion"   class="btn btn-secondary" data-toggle="modal" data-target="#login-modal"> Cerrar sesión </button>
                     </div>
-                    <a class="twitter-timeline" data-width="220" data-height="220" href="https://twitter.com/fabi_die?ref_src=twsrc%5Etfw">Tweets by fabi_die</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                    <!-- Load Facebook SDK for JavaScript -->
-                    <div id="fb-root"></div>
-                    <script>(function (d, s, id) {
-                            var js, fjs = d.getElementsByTagName(s)[0];
-                            if (d.getElementById(id))
-                                return;
-                            js = d.createElement(s);
-                            js.id = id;
-                            js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.0';
-                            fjs.parentNode.insertBefore(js, fjs);
-                        }(document, 'script', 'facebook-jssdk'));</script>
+                    <div class="d-none d-lg-block">
+                        <a class="twitter-timeline" data-width="220" data-height="220" href="https://twitter.com/fabi_die?ref_src=twsrc%5Etfw">Tweets by fabi_die</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <!-- Load Facebook SDK for JavaScript -->
+                        <div id="fb-root"></div>
+                        <script>(function (d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0];
+                                if (d.getElementById(id))
+                                    return;
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.0';
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));</script>
 
-                    <!-- Your embedded comments code -->
-                    <div class="fb-comment-embed" data-href="https://www.facebook.com/zuck/posts/10102577175875681?comment_id=1193531464007751&amp;reply_comment_id=654912701278942" data-width="220" data-include-parent="false"></div>
-                </aside>
+                        <!-- Your embedded comments code -->
+                        <div class="fb-comment-embed" data-href="https://www.facebook.com/zuck/posts/10102577175875681?comment_id=1193531464007751&amp;reply_comment_id=654912701278942" data-width="220" data-include-parent="false"></div>
+                    </div>        </aside>
                 <div class = "col-md-9">
-<!--                    <form id="registar_usuario" name ="registar_usuario" method="POST" enctype=" multipart/form-data">
-
-                        <fieldset class="border p-1">
-                            <legend  class="w-auto">Datos de Usuario</legend>
-                            <div class="form-row">
-                                <div class="form-group col-md-2">
-                                    <label for="inputEmail4">Código</label>
-                                    <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputEmail4">Nombres</label>
-                                    <input type="tetx" class="form-control" id="nombre" name="nombre" placeholder="Nombres" >
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputEmail4">Apellidos</label>
-                                    <input type="tetx" class="form-control" id="apellido" name="apellido" placeholder="Apellidos" >
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="uploader" ondragover="return false">
-                                        <i class="icon-upload icon"></i>
-                                        <img src="" class="" id = "foto" name = "foto">
-                                        <input type="photo" name="photo[]" multiple>
-                                                                                      <input type="file" accept="image/*" id ="photo" name="photo">
-                                    </label>
-
-                                    <script src="../js/FileUploader.js" type="text/javascript"></script>
-                                   <script type="text/javascript">
-                           new FileUploader('.uploader');
-                                   </script>  
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="inputPassword4">Fecha de nacimiento</label>               
-                                    <input type="date" class="form-control"   id="fechaNacimiento" name="fechaNacimiento" placeholder="Fecha de nacimeino" >
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="exampleSelect1">Sexo</label>
-                                    <select class="form-control" name="sexo" id="sexo"  >
-                                        <option value="" selected disabled>Sexo</option>
-                                        <option value="1">Masculino</option>
-                                        <option value="0">Femenino</option>
-                                    </select>
-                                </div>  
-                                <div class="form-group col-md-3">
-                                    <label for="exampleSelect1">Perfil</label>
-                                    <select class="form-control" name="Perfil" id="Perfil"  >
-                                        <option value="" selected disabled>Perfil</option>
-                                        <option value="administradir">Administrador</option>
-                                        <option value="usario">Usuario</option>
-                                    </select>
-                                </div>  
-                                <div class="form-group col-md-6 ">
-                                    <label for="inputAddress">Dirección</label>
-                                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección" >
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputAddress2">Dirección 2</label>
-                                    <input type="text" class="form-control" id="direccion2" name="direccion2" placeholder="Dirección">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputAddress">Teléfono</label>
-                                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono" >
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputAddress2">Teléfono 2</label>
-                                    <input type="text" class="form-control" id="telefono2" name="telefono2" placeholder="Teléfono">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputAddress2">Teléfono otro</label>
-                                    <input type="text" class="form-control" id="telefonoOtro" name="telefonoOtro" placeholder="Teléfono">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputAddress2">Correo</label>
-                                    <input type="email" class="form-control" id="coreeo" name="coreeo" placeholder="Correo" >
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputAddress2">Contraseña</label>
-                                    <input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña" >
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="border p-1">
-                            <legend  class="w-auto">Datos de Contactos</legend>
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="inputAddress2">Nombre de contacto</label>
-                                    <input type="text" class="form-control" id="nombreContacto" name="nombreContacto" placeholder="Nombre">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputAddress2">Apellido contacto</label>
-                                    <input type="text" class="form-control" id="apellidoContacto" name="apellidoContacto" placeholder="Apellido contacto">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputAddress2">Dirección contacto</label>
-                                    <input type="text" class="form-control" id="dirrecionContacto" name="dirrecionContacto" placeholder="Dirección contacto">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputAddress2">Dirección 2 contacto</label>
-                                    <input type="text" class="form-control" id="dirrecionContacto2" name="dirrecionContacto2" placeholder="Direccion contacot">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputAddress2">Teléfono contacto</label>
-                                    <input type="text" class="form-control" id="telefonoContacto" name="telefonoContacto" placeholder="Telefono">
-                                </div>
-                            </div>
-                        </fieldset>
-                        <button  class="btn btn-primary" id="btnRegistrar">Registrar</button>
-                        <button  class="btn btn-primary" id="btnLimpiar">Limpiar</button>
-                    </form>
-                    <div class="navbar navbar-default navbar-fixed-top">
-                        <div class="container">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-fixed-top .navbar-collapse">
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                                <a class="navbar-brand" href="https://github.com/blueimp/jQuery-File-Upload">jQuery File Upload</a>
-                            </div>
-                            <div class="navbar-collapse collapse">
-                                <ul class="nav navbar-nav">
-                                    <li><a href="https://github.com/blueimp/jQuery-File-Upload/tags">Download</a></li>
-                                    <li><a href="https://github.com/blueimp/jQuery-File-Upload">Source Code</a></li>
-                                    <li><a href="https://github.com/blueimp/jQuery-File-Upload/wiki">Documentation</a></li>
-                                    <li><a href="https://blueimp.net">&copy; Sebastian Tschan</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>-->
+                    <!--                    <form id="registar_usuario" name ="registar_usuario" method="POST" enctype=" multipart/form-data">
+                    
+                                            <fieldset class="border p-1">
+                                                <legend  class="w-auto">Datos de Usuario</legend>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-2">
+                                                        <label for="inputEmail4">Código</label>
+                                                        <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputEmail4">Nombres</label>
+                                                        <input type="tetx" class="form-control" id="nombre" name="nombre" placeholder="Nombres" >
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputEmail4">Apellidos</label>
+                                                        <input type="tetx" class="form-control" id="apellido" name="apellido" placeholder="Apellidos" >
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label class="uploader" ondragover="return false">
+                                                            <i class="icon-upload icon"></i>
+                                                            <img src="" class="" id = "foto" name = "foto">
+                                                            <input type="photo" name="photo[]" multiple>
+                                                                                                          <input type="file" accept="image/*" id ="photo" name="photo">
+                                                        </label>
+                    
+                                                        <script src="../js/FileUploader.js" type="text/javascript"></script>
+                                                       <script type="text/javascript">
+                                               new FileUploader('.uploader');
+                                                       </script>  
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label for="inputPassword4">Fecha de nacimiento</label>               
+                                                        <input type="date" class="form-control"   id="fechaNacimiento" name="fechaNacimiento" placeholder="Fecha de nacimeino" >
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="exampleSelect1">Sexo</label>
+                                                        <select class="form-control" name="sexo" id="sexo"  >
+                                                            <option value="" selected disabled>Sexo</option>
+                                                            <option value="1">Masculino</option>
+                                                            <option value="0">Femenino</option>
+                                                        </select>
+                                                    </div>  
+                                                    <div class="form-group col-md-3">
+                                                        <label for="exampleSelect1">Perfil</label>
+                                                        <select class="form-control" name="Perfil" id="Perfil"  >
+                                                            <option value="" selected disabled>Perfil</option>
+                                                            <option value="administradir">Administrador</option>
+                                                            <option value="usario">Usuario</option>
+                                                        </select>
+                                                    </div>  
+                                                    <div class="form-group col-md-6 ">
+                                                        <label for="inputAddress">Dirección</label>
+                                                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección" >
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputAddress2">Dirección 2</label>
+                                                        <input type="text" class="form-control" id="direccion2" name="direccion2" placeholder="Dirección">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputAddress">Teléfono</label>
+                                                        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono" >
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputAddress2">Teléfono 2</label>
+                                                        <input type="text" class="form-control" id="telefono2" name="telefono2" placeholder="Teléfono">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputAddress2">Teléfono otro</label>
+                                                        <input type="text" class="form-control" id="telefonoOtro" name="telefonoOtro" placeholder="Teléfono">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputAddress2">Correo</label>
+                                                        <input type="email" class="form-control" id="coreeo" name="coreeo" placeholder="Correo" >
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputAddress2">Contraseña</label>
+                                                        <input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña" >
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset class="border p-1">
+                                                <legend  class="w-auto">Datos de Contactos</legend>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputAddress2">Nombre de contacto</label>
+                                                        <input type="text" class="form-control" id="nombreContacto" name="nombreContacto" placeholder="Nombre">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputAddress2">Apellido contacto</label>
+                                                        <input type="text" class="form-control" id="apellidoContacto" name="apellidoContacto" placeholder="Apellido contacto">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputAddress2">Dirección contacto</label>
+                                                        <input type="text" class="form-control" id="dirrecionContacto" name="dirrecionContacto" placeholder="Dirección contacto">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputAddress2">Dirección 2 contacto</label>
+                                                        <input type="text" class="form-control" id="dirrecionContacto2" name="dirrecionContacto2" placeholder="Direccion contacot">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputAddress2">Teléfono contacto</label>
+                                                        <input type="text" class="form-control" id="telefonoContacto" name="telefonoContacto" placeholder="Telefono">
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <button  class="btn btn-primary" id="btnRegistrar">Registrar</button>
+                                            <button  class="btn btn-primary" id="btnLimpiar">Limpiar</button>
+                                        </form>
+                                        <div class="navbar navbar-default navbar-fixed-top">
+                                            <div class="container">
+                                                <div class="navbar-header">
+                                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-fixed-top .navbar-collapse">
+                                                        <span class="icon-bar"></span>
+                                                        <span class="icon-bar"></span>
+                                                        <span class="icon-bar"></span>
+                                                    </button>
+                                                    <a class="navbar-brand" href="https://github.com/blueimp/jQuery-File-Upload">jQuery File Upload</a>
+                                                </div>
+                                                <div class="navbar-collapse collapse">
+                                                    <ul class="nav navbar-nav">
+                                                        <li><a href="https://github.com/blueimp/jQuery-File-Upload/tags">Download</a></li>
+                                                        <li><a href="https://github.com/blueimp/jQuery-File-Upload">Source Code</a></li>
+                                                        <li><a href="https://github.com/blueimp/jQuery-File-Upload/wiki">Documentation</a></li>
+                                                        <li><a href="https://blueimp.net">&copy; Sebastian Tschan</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>-->
                     <div class="container">
                         <form id="fileupload" action="https://jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
                             <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>

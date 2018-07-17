@@ -42,7 +42,29 @@ session_start();
                             <button type="button"   class="btn btn-secondary" data-toggle="modal" data-target="#login-modal"> Iniciar sesión </button>
                         <?php } ?>
                     </div>
+                    <div class="d-none d-lg-block">
+                        <a class="twitter-timeline" data-width="220" data-height="220" href="https://twitter.com/fabi_die?ref_src=twsrc%5Etfw">Tweets by fabi_die</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <!-- Load Facebook SDK for JavaScript -->
+                        <div id="fb-root"></div>
+                        <script>(function (d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0];
+                                if (d.getElementById(id))
+                                    return;
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.0';
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));</script>
+
+                        <!-- Your embedded comments code -->
+                        <div class="fb-comment-embed" data-href="https://www.facebook.com/zuck/posts/10102577175875681?comment_id=1193531464007751&amp;reply_comment_id=654912701278942" data-width="220" data-include-parent="false"></div>
+                    </div>
                 </aside>
+                <div class = "col-md-9">
+                    <h3>BiblioCur</h3> 
+                    <p align="justify">Biblocur es un proyecto que nace de la necesidad de mejora... bka bla bla</p>
+                </div>  
+
             </section>
         </div>
         <footer > 

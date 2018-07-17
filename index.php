@@ -99,13 +99,14 @@ session_start();
                     </div>
                     <!-- END # MODAL LOGIN -->
                     <div class="row">
-                        <div class="col-4">
+
+                        <div class="col-xs-1 col-md-4 ">
                             <img src="img/recurso/cur.png">
                         </div>
-                        <div class="col-4">
+                        <div class="col-4 d-none d-lg-block">
                             <img src="img/recurso/mensaje.png">
                         </div>
-                        <div class="col-4">
+                        <div class="col-xs-4 col-md-4">
                             <img src="img/recurso/escudo.png" width="100" height="100">
                         </div>
                     </div>
@@ -163,10 +164,27 @@ session_start();
                             <button type="button"   class="btn btn-secondary" data-toggle="modal" data-target="#login-modal"> Iniciar sesión </button>
                         <?php } ?>
                     </div>
-                </aside>
+                    <div class="d-none d-lg-block">
+                        <br>
+                        <a class="twitter-timeline" data-width="220" data-height="220" href="https://twitter.com/fabi_die?ref_src=twsrc%5Etfw">Tweets by fabi_die</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <!-- Load Facebook SDK for JavaScript -->
+                        <div id="fb-root"></div>
+                        <script>(function (d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0];
+                                if (d.getElementById(id))
+                                    return;
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.0';
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));</script>
 
+                        <!-- Your embedded comments code -->
+                        <div class="fb-comment-embed" data-href="https://www.facebook.com/zuck/posts/10102577175875681?comment_id=1193531464007751&amp;reply_comment_id=654912701278942" data-width="220" data-include-parent="false"></div>
+                    </div>
+                </aside>
                 <div class = "col-md-9">
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <div id="carouselExampleIndicators" class="carousel slide d-none d-lg-block" data-ride="carousel">
                         <ol class="carousel-indicators">
                             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
