@@ -253,7 +253,6 @@ class UsuarioDAO {
         } else {
             $respuesta["sucess"] = "no";
         }
-
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
@@ -374,6 +373,27 @@ class UsuarioDAO {
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
+    }
+
+    public function CambioClave($array) {
+
+        $sql = 'UPDATE `tbl_usuario` SET `contrasena`=? WHERE `codigo`=?;';
+
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+        
+        
+        $UsuarioVO = new UsuarioVO();
+        $UsuarioVO->setCodigo($array->codigo);
+        $UsuarioVO->setContrasena($array->contrasena);
+
+        $codigo = $UsuarioVO->getCodigo();
+        $contrasena = $UsuarioVO->getContrasena();
+
+        $stmp->bind_param("si", $contrasena, $codigo);
+
+        $this->respuesta($conn, $stmp);
     }
 
 }
