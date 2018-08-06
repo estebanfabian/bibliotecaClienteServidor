@@ -9,4 +9,3 @@ $_SESSION["usuario"] = array(
     "perfil" => $array[0]->perfil,
 );
 ?>
-

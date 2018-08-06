@@ -60,7 +60,47 @@ session_start();
                         <div class="fb-comment-embed" data-href="https://www.facebook.com/zuck/posts/10102577175875681?comment_id=1193531464007751&amp;reply_comment_id=654912701278942" data-width="220" data-include-parent="false"></div>
                     </div>
                 </aside>
-                <div class = "col-md-9"></div>
+                <div class = "col-md-9">
+                    <form id="registar_VideoBeam" name ="registar_VideoBeam" method="POST" enctype=" multipart/form-data">
+                        <fieldset class="border p-1">
+                            <legend  class="w-auto">Datos de Usuario</legend>
+                            <div class="form-row">
+
+                                <div class="form-group col-md-2">
+                                    <label for="inputEmail4">Id video Beam (*)</label>
+                                    <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputEmail4">Fabrica (*)</label>
+                                    <input type="tetx" class="form-control" id="nombre" name="nombre" placeholder="Nombres" >
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputEmail4">Cable USB (*)</label>
+                                    <input type="tetx" class="form-control" id="apellido" name="apellido" placeholder="Apellidos" >
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="inputPassword4">Cable HDMI  (*)</label>               
+                                    <input type="date" class="form-control"   id="fechaNacimiento" name="fechaNacimiento" placeholder="Fecha de nacimeino" >
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="exampleSelect1">cable VGA</label>
+                                    <select class="form-control" name="sexo" id="sexo"  >
+                                        <option value="" selected disabled>Sexo</option>
+                                        <option value="1">Masculino</option>
+                                        <option value="0">Femenino</option>
+                                    </select>
+                                </div>  
+                                <div class="form-group col-md-6 ">
+                                    <label for="inputAddress">Observaciones(*)</label>
+                                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección" >
+                                </div>
+                            </div>
+                        </fieldset>
+                        <button  class="btn btn-primary" id="btnRegistrar">Registrar</button>
+                        <button  class="btn btn-primary" id="btnLimpiar">Limpiar</button>
+                    </form>
+                </div>
             </section>
         </div>
         <footer > 

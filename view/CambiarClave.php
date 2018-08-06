@@ -17,14 +17,9 @@ session_start();
         <script src="../js/localization/messages_es.js" type="text/javascript"></script>
         <script src="" type="text/javascript"></script>
         <script src="../gato.jsp" type="text/javascript"></script>
-        <script src="../js/MiLogica.js" type="text/javascript"></script>
-
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-        >
-
 
         <title>BiblioCur</title>
     </head>
@@ -62,8 +57,8 @@ session_start();
                                 js.id = id;
                                 js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.0';
                                 fjs.parentNode.insertBefore(js, fjs);
-                            }(document, 'script', 'facebook-jssdk'));</script>
-
+                            }(document, 'script', 'facebook-jssdk'));
+                        </script>
                         <!-- Your embedded comments code -->
                         <div class="fb-comment-embed" data-href="https://www.facebook.com/zuck/posts/10102577175875681?comment_id=1193531464007751&amp;reply_comment_id=654912701278942" data-width="220" data-include-parent="false"></div>
                     </div>
@@ -72,32 +67,31 @@ session_start();
                     <h2>Cambio de contraseña</h2>
                     <br><br>
                     <p>Se recomienda realizar el cambio de clave preriodicamente y para su mayor segurdad bla bla bla</p>
-
                     <form method="post" id="passwordForm">
-                        <input type="password" class="input-lg form-control" name="password1" id="password1" placeholder="New Password" autocomplete="off">
+                        <label for="other">Codigo</label>
+                        <input type="text" class="input-lg form-control" name="codigo" id="codigo" value=" <?php echo $_SESSION ['usuario']['codigo'] ?>" readonly  >
+
+                        <input type="password" class="input-lg form-control" name="password1" id="password1" placeholder="Nueva Clave" autocomplete="off"  >
                         <div class="row">
                             <div class="col-sm-6">
                                 <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 6 caracteres largos<br>
                                 <span id="ucase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Una letra mayúscula
-
                             </div>
                             <div class="col-sm-6">
                                 <span id="lcase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Una letra minúscula
                                 <br>
                                 <span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Un número
-
                             </div>
                         </div>
-                        <input type="password" class="input-lg form-control" name="password2" id="password2" placeholder="Repeat Password" autocomplete="off">
+                        <input type="password" class="input-lg form-control" name="password2" id="password2" placeholder="Repetir Clave" autocomplete="off">
                         <div class="row">
                             <div class="col-sm-12">
                                 <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Passwords Match
                             </div>
                         </div>
-                        <input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" data-loading-text="Changing Password..." value="Cambio de contraseña">
+                        <input  id="CambioClave" class="col-xs-12 btn btn-primary btn-load btn-lg" data-loading-text="Changing Password..." value="Cambio de contraseña">
+
                     </form>
-
-
                 </div>
             </section>
         </div>

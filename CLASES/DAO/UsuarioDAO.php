@@ -281,6 +281,7 @@ class UsuarioDAO {
     }
 
     public function Mostrar($array) {
+        
         $sql = "SELECT codigo, `nombre`, `apellido`, `fechaNacimiento`, `sexo`, `direccion`, `telefonoPrincipal`, `emailPrincipal`,  `contrasena`,`foto`  FROM tbl_usuario  WHERE `codigo`=? ";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();

@@ -1,10 +1,12 @@
 $(document).ready(function () {
 
+    var cambio = 0;
     var myJson = new Array();
     var $formLogin = $('#login-form');
     var $formLost = $('#lost-form');
     var $divForms = $('#div-forms');
     var $modalAnimateTime = 300;
+    var Codigo;
 
     function fajax(URL, parametros, metodo) {
         $.ajax({
@@ -62,6 +64,7 @@ $(document).ready(function () {
                         $('body').removeClass('modal-open');
                         $('.modal-backdrop').remove();
                         envio(respuesta);
+                        Codigo = $("#codigo").val("");
                     }
                 };
                 fajax(url1, parametro1, metodo1);
@@ -72,99 +75,103 @@ $(document).ready(function () {
     function registarUsuario() {
         $("#registar_usuario").validate({
             rules: {
-//                codigo: {
-//                    required: true,
-//                    number: true,
-//                    digits: true,
-//                    minlength: 1
-//                },
-//                nombre: {
-//                    required: true,
-//                    minlength: 1
-//                },
-//                apellido: {
-//                    required: true,
-//                    minlength: 1
-//                },
-//                fechaNacimiento: {
-//                    required: true,
-//                    minlength: 1
-//                },
-//                sexo: {
-//                    required: true,
-//                },
-//                Perfil: {
-//                    required: true,
-//                },
-//                direccion: {
-//                    required: true,
-//                    minlength: 1
-//                },
-//                telefono: {required: true,
-//                    minlength: 1
-//                },
-//                coreeo: {
-//                    required: true,
-//                    minlength: 1
-//                },
-//                contrasena: {
-//                    required: true,
-//                    minlength: 1
-//                }
+                codigo: {
+                    required: true,
+                    number: true,
+                    digits: true,
+                    minlength: 1
+                },
+                nombre: {
+                    required: true,
+                    minlength: 1
+                },
+                apellido: {
+                    required: true,
+                    minlength: 1
+                },
+                fechaNacimiento: {
+                    required: true,
+                    minlength: 1
+                },
+                sexo: {
+                    required: true,
+                },
+                Perfil: {
+                    required: true,
+                },
+                direccion: {
+                    required: true,
+                    minlength: 1
+                },
+                telefono: {required: true,
+                    minlength: 1
+                },
+                coreeo: {
+                    required: true,
+                    minlength: 1
+                },
+                contrasena: {
+                    required: true,
+                    minlength: 1
+                }
             },
             messages: {
                 codigo: {
                     digits: "Este campo no puede tener ni comas, ni puntos",
                     number: "Este campo solo permite número"
-                }
+                },
+                telefono: {
+                    digits: "Este campo no puede tener ni comas, ni puntos",
+                    number: "Este campo solo permite número"
+                },
             }, submitHandler: function () {
 
-                var NombreFoto = $("#file").val();
-                NombreFoto = palabra(NombreFoto);
-                var formulario = {
-                    codigo: $("#codigo").val(),
-                    nombre: $("#nombre").val(),
-                    apellido: $("#apellido").val(),
-                    fechaNacimiento: $("#fechaNacimiento").val(),
-                    sexo: $("#sexo").val(),
-                    direccion: $("#direccion").val(),
-                    telefonoPrincipal: $("#telefono").val(),
-                    emailPrincipal: $("#coreeo").val(),
-                    contrasena: $("#clave").val(), foto: NombreFoto,
-                    direccion2: $("#direccion2").val(),
-                    telefonoSecundario: $("#telefono2").val(),
-                    telefonoOtro: $("#telefonoOtro").val(),
-                    contactoNombre: $("#nombreContacto").val(),
-                    contactoApellido: $("#apellidoContacto").val(),
-                    contactoDireccion: $("#dirrecionContacto").val(),
-                    contactoDireccion2: $("#dirrecionContacto2").val(),
-                    contactoTelefono: $("#telefonoContacto").val(),
-                    perfil: $("#Perfil").val()
-                };
-                console.log(formulario);
-                myJson.push(formulario);
-                var myString = JSON.stringify(formulario);
-                var url1 = "../Controlador/Usuario/Insertar_Usuario.php";
-                var parametro1 = myString;
-                var metodo1 = function (respuesta) {
-                    $("#codigo").val("");
-                    $("#contrasena").val("");
-                    var data = $.parseJSON(respuesta);
-                    if (data.sucess == 'ok') {
-                        alert("el usuario se registro con exito");
-                        // LimpiarUsuario();
-                        var url1 = "../Controlador/Usuario/Cargar_Foto.php";
-                        var parametro1 = NombreFoto;
-                        var metodo1 = function (respuesta) {
-                        };
-                        fajax(url1, parametro1, metodo1);
-                    } else {
-                        alert("No se pude registar al usuario");
-                        console.log(respuesta);
-                        console.log(data.sucess);
-                    }
-                };
-                fajax(url1, parametro1, metodo1);
+//                var NombreFoto = $("#file").val();
+//                NombreFoto = palabra(NombreFoto);
+//                var formulario = {
+//                    codigo: $("#codigo").val(),
+//                    nombre: $("#nombre").val(),
+//                    apellido: $("#apellido").val(),
+//                    fechaNacimiento: $("#fechaNacimiento").val(),
+//                    sexo: $("#sexo").val(),
+//                    direccion: $("#direccion").val(),
+//                    telefonoPrincipal: $("#telefono").val(),
+//                    emailPrincipal: $("#coreeo").val(),
+//                    contrasena: $("#clave").val(), foto: NombreFoto,
+//                    direccion2: $("#direccion2").val(),
+//                    telefonoSecundario: $("#telefono2").val(),
+//                    telefonoOtro: $("#telefonoOtro").val(),
+//                    contactoNombre: $("#nombreContacto").val(),
+//                    contactoApellido: $("#apellidoContacto").val(),
+//                    contactoDireccion: $("#dirrecionContacto").val(),
+//                    contactoDireccion2: $("#dirrecionContacto2").val(),
+//                    contactoTelefono: $("#telefonoContacto").val(),
+//                    perfil: $("#Perfil").val()
+//                };
+//                console.log(formulario);
+//                myJson.push(formulario);
+//                var myString = JSON.stringify(formulario);
+//                var url1 = "../Controlador/Usuario/Insertar_Usuario.php";
+//                var parametro1 = myString;
+//                var metodo1 = function (respuesta) {
+//                    $("#codigo").val("");
+//                    $("#contrasena").val("");
+//                    var data = $.parseJSON(respuesta);
+//                    if (data.sucess == 'ok') {
+//                        alert("el usuario se registro con exito");
+//                        // LimpiarUsuario();
+//                        var url1 = "../Controlador/Usuario/Cargar_Foto.php";
+//                        var parametro1 = NombreFoto;
+//                        var metodo1 = function (respuesta) {
+//                        };
+//                        fajax(url1, parametro1, metodo1);
+//                    } else {
+//                        alert("No se pude registar al usuario");
+//                        console.log(respuesta);
+//                        console.log(data.sucess);
+//                    }
+//                };
+//                fajax(url1, parametro1, metodo1);
             }
         });
     }
@@ -312,11 +319,10 @@ $(document).ready(function () {
         //registarUsuario();
         alert("entra");
         cargarFoto();
-
     });
 
     $("#btnLimpiar").click(function () {
-                alert("entra");
+        alert("entra");
         cargarFoto();
     });
 
@@ -327,60 +333,105 @@ $(document).ready(function () {
     $("#lost_login_btn").click(function () {
         modalAnimate($formLost, $formLogin);
     });
-    
-    $("input[type=password]").keyup(function(){
-    var ucase = new RegExp("[A-Z]+");
-	var lcase = new RegExp("[a-z]+");
-	var num = new RegExp("[0-9]+");
-	
-	if($("#password1").val().length >= 6){
-		$("#8char").removeClass("glyphicon-remove");
-		$("#8char").addClass("glyphicon-ok");
-		$("#8char").css("color","#00A41E");
-	}else{
-		$("#8char").removeClass("glyphicon-ok");
-		$("#8char").addClass("glyphicon-remove");
-		$("#8char").css("color","#FF0004");
-	}
-	
-	if(ucase.test($("#password1").val())){
-		$("#ucase").removeClass("glyphicon-remove");
-		$("#ucase").addClass("glyphicon-ok");
-		$("#ucase").css("color","#00A41E");
-	}else{
-		$("#ucase").removeClass("glyphicon-ok");
-		$("#ucase").addClass("glyphicon-remove");
-		$("#ucase").css("color","#FF0004");
-	}
-	
-	if(lcase.test($("#password1").val())){
-		$("#lcase").removeClass("glyphicon-remove");
-		$("#lcase").addClass("glyphicon-ok");
-		$("#lcase").css("color","#00A41E");
-	}else{
-		$("#lcase").removeClass("glyphicon-ok");
-		$("#lcase").addClass("glyphicon-remove");
-		$("#lcase").css("color","#FF0004");
-	}
-	
-	if(num.test($("#password1").val())){
-		$("#num").removeClass("glyphicon-remove");
-		$("#num").addClass("glyphicon-ok");
-		$("#num").css("color","#00A41E");
-	}else{
-		$("#num").removeClass("glyphicon-ok");
-		$("#num").addClass("glyphicon-remove");
-		$("#num").css("color","#FF0004");
-	}
-	
-	if($("#password1").val() == $("#password2").val()){
-		$("#pwmatch").removeClass("glyphicon-remove");
-		$("#pwmatch").addClass("glyphicon-ok");
-		$("#pwmatch").css("color","#00A41E");
-	}else{
-		$("#pwmatch").removeClass("glyphicon-ok");
-		$("#pwmatch").addClass("glyphicon-remove");
-		$("#pwmatch").css("color","#FF0004");
-	}
-});
+
+    $("#CambioClave").click(function () {
+        if (cambio == 10) {
+            var formulario = {
+                codigo: $("#codigo").val(),
+                contrasena: $("#password1").val()
+            };
+            myJson.push(formulario);
+            var myString = JSON.stringify(formulario);
+            var url1 = "CambioClave";
+            var parametro1 = myString;
+
+
+            var metodo1 = function (respuesta) {
+                var data = $.parseJSON(respuesta);
+                if (data.sucess == "ok") {
+                    console.log(data);
+                    alert("Se cambio el la contraseña con exito ");
+                    location.href = "../index.php";
+                } else {
+                    alert("No se  cambio el la contraseña con exito ");
+                    $("#password1").val("");
+                    $("#password2").val("");
+                    $("#password1").focus();
+                }
+            };
+            fajax(url1, parametro1, metodo1);
+        }
+        else {
+            alert("ingrese los valores en los campos ");
+            $("#password1").val("");
+            $("#password2").val("");
+        }
+    });
+
+    $("input[type=password]").keyup(function () {
+        var ucase = new RegExp("[A-Z]+");
+        var lcase = new RegExp("[a-z]+");
+        var num = new RegExp("[0-9]+");
+
+        if ($("#password1").val().length >= 6) {
+            cambio++;
+            $("#8char").removeClass("glyphicon-remove");
+            $("#8char").addClass("glyphicon-ok");
+            $("#8char").css("color", "#00A41E");
+        } else {
+            cambio = 0;
+            $("#8char").removeClass("glyphicon-ok");
+            $("#8char").addClass("glyphicon-remove");
+            $("#8char").css("color", "#FF0004");
+        }
+
+        if (ucase.test($("#password1").val())) {
+            cambio++;
+            $("#ucase").removeClass("glyphicon-remove");
+            $("#ucase").addClass("glyphicon-ok");
+            $("#ucase").css("color", "#00A41E");
+        } else {
+            cambio = 0;
+            $("#ucase").removeClass("glyphicon-ok");
+            $("#ucase").addClass("glyphicon-remove");
+            $("#ucase").css("color", "#FF0004");
+        }
+
+        if (lcase.test($("#password1").val())) {
+            cambio++;
+            $("#lcase").removeClass("glyphicon-remove");
+            $("#lcase").addClass("glyphicon-ok");
+            $("#lcase").css("color", "#00A41E");
+        } else {
+            cambio = 0;
+            $("#lcase").removeClass("glyphicon-ok");
+            $("#lcase").addClass("glyphicon-remove");
+            $("#lcase").css("color", "#FF0004");
+        }
+
+        if (num.test($("#password1").val())) {
+            cambio++;
+            $("#num").removeClass("glyphicon-remove");
+            $("#num").addClass("glyphicon-ok");
+            $("#num").css("color", "#00A41E");
+        } else {
+            cambio = 0;
+            $("#num").removeClass("glyphicon-ok");
+            $("#num").addClass("glyphicon-remove");
+            $("#num").css("color", "#FF0004");
+        }
+
+        if ($("#password1").val() == $("#password2").val()) {
+            cambio++;
+            $("#pwmatch").removeClass("glyphicon-remove");
+            $("#pwmatch").addClass("glyphicon-ok");
+            $("#pwmatch").css("color", "#00A41E");
+        } else {
+            cambio = 0;
+            $("#pwmatch").removeClass("glyphicon-ok");
+            $("#pwmatch").addClass("glyphicon-remove");
+            $("#pwmatch").css("color", "#FF0004");
+        }
+    });
+
 });

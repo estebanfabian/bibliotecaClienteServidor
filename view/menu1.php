@@ -83,7 +83,7 @@ if ($_POST) {
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="registrarUsuario.php">Registrar Usuario</a>
-                                    <a class="dropdown-item" href="#">Video Beam</a>
+                                    <a class="dropdown-item" href="videoBeam.php">Video Beam</a>
                                     <a class="dropdown-item" href="#">Material audiovisual</a>
                                 </div>
                             </li>
