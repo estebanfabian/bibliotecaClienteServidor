@@ -2,14 +2,12 @@
     .dropdown-submenu {
         position: relative;
     }
-
     .dropdown-submenu .dropdown-menu {
         top: 0;
         left: 100%;
         margin-top: -1px;
     }
 </style>
-
 <div  id ="cabezara" class ="container">
     <script src="../js/inicio.js" type="text/javascript"></script>
     <div class="row justify-content-end">
@@ -114,11 +112,12 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Prestamo
+                            Prestamo y Reservas
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="#">Libro</a>
                             <a class="dropdown-item" href="#">Video Beam</a>
+                             <a class="dropdown-item" href="#">Prestamo Interbibliotecario</a>
                         </div>
                     </li>
                     <li class="nav-item">

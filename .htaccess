@@ -22,3 +22,4 @@ RewriteRule Tarjeta$ Controlador/Prestamo/Reserva_Tarjeta.php
 RewriteRule reserva$ Controlador/prestamo/reservar_libro.php
 RewriteRule multas$ Controlador/Usuario/Mostrar_multa.php
 RewriteRule CambioClave$ Controlador/Usuario/Cambio_Clave.php
+RewriteRule Suprimir$ Controlador/prestamo/Cancelar_prestamo.php

@@ -1,19 +1,17 @@
 <?php
 if ($_POST) {
-    session_start();
+    session_start();//inicio, quienes somos , prestamos ?? libro ?? video beam,noticias,contactos
     ?>
     <style>
         .dropdown-submenu {
             position: relative;
         }
-
         .dropdown-submenu .dropdown-menu {
             top: 0;
             left: 100%;
             margin-top: -1px;
         }
     </style>
-
     <div  id ="cabezara" class ="container">
         <div class="row justify-content-end">
             <div class="col-4">
@@ -51,15 +49,15 @@ if ($_POST) {
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.php">Inicio1 <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Quiénes somos 
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="misionYvision.php">Misión y Visión </a>
-                            <a class="dropdown-item" href="AcercaBiblioCur.php">Acerca de BilioCur</a>
+                            <a class="dropdown-item" href="view/misionYvision.php">Misión y Visión </a>
+                            <a class="dropdown-item" href="view/AcercaBiblioCur.php">Acerca de BilioCur</a>
                             <a class="dropdown-item" href="http://urepublicana.edu.co">Cur</a>
                         </div>
                     </li>
@@ -68,7 +66,7 @@ if ($_POST) {
                             Prestamo
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="PrestamoLibro.php">Libro</a>
+                            <a class="dropdown-item" href="view/PrestamoLibro.php">Libro</a>
                             <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
                         </div>
                     </li>
@@ -85,20 +83,16 @@ if ($_POST) {
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="view/registrarUsuario.php">Registrar Usuario</a>
-                                <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
+                                <a class="dropdown-item" href="view/registrarVideoBeam.php">Registrar Video Beam</a>
                                 <a class="dropdown-item" href="#">Material audiovisual</a>
                             </div>
                         </li>
                 </div>
                 <div>
-
-
                 </div>
             <?php } ?>
             </ul>
     </div>
-
-
     <?php
 } else {
     header("location: ../index.php");

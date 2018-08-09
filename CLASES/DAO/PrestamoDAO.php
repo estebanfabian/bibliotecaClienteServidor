@@ -102,26 +102,16 @@ class PrestamoDAO {
         $diaEntrega = $PrestamoVO->getDiaEntrega();
         $actividad = 1;
 
-        $stmp->bind_param("siis", $diaPrestamo, $isbn, $codigo, $diaEntrega, $actividad);
-        $resultado = array();
-
-        if ($stmp->execute()) {
+        $stmp->bind_param("siisi", $diaPrestamo, $isbn, $codigo, $diaEntrega, $actividad);
+        $respuesta = array();
+        if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";
         } else {
             $respuesta["sucess"] = "no";
         }
-
         $stmp->close();
         $conn->close();
-
         echo json_encode($respuesta);
-//        if(respuesta de la funcion == "libre") {
-//            $stmp->bind_param("siis", $diaPrestamo, $isbn, $codigo, $diaEntrega);
-//            $this->respuesta($conn, $stmp);
-//        }else
-//        {
-//            $respuesta["sucess"] = "no";
-//        }
     }
 
     function ValidacionReserva($param) {
@@ -147,6 +137,7 @@ class PrestamoDAO {
 
     function Respuesta($conn, $stmp) {
         $respuesta = array();
+
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";
         } else {
