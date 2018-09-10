@@ -85,7 +85,7 @@ class PrestamoDAO {
 
     public function Reservar_libro($array) {
 
-        $sql = 'INSERT INTO `tbl_prestamo` (`diaPrestamo`,  `isbn`,  `codigo`, `diaEntrega`,actividad) VALUES (?, ?, ?, ?,?);'; // cambiar dia de prestamo por dia de reserva
+        $sql = 'INSERT INTO `tbl_prestamo` (`diaPrestamo`,  `isbn`,  `codigo`, `diaReserva`,actividad) VALUES (?, ?, ?, ?,?);'; // cambiar dia de prestamo por dia de reserva
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -175,7 +175,7 @@ class PrestamoDAO {
     }
 
     public function Mostrar_tarjeta($array) {
-        $sql = "SELECT l.isbn , l.titulo , l.resena , l.imagen , p.diaPrestamo , p.diaEntrega , p.idPrestamo , p.actividad, u.foto FROM tbl_prestamo p INNER JOIN tbl_libro l ON p.isbn=l.isbn INNER JOIN tbl_usuario u on u.codigo=p.codigo WHERE p.codigo = ? and (p.actividad=1 or p.actividad=2)";
+        $sql = "SELECT l.isbn , l.titulo , l.resena , l.imagen , p.diaPrestamo ,p.diaReserva, p.diaEntrega , p.idPrestamo , p.actividad, u.foto , p.renovacion FROM tbl_prestamo p INNER JOIN tbl_libro l ON p.isbn=l.isbn INNER JOIN tbl_usuario u on u.codigo=p.codigo WHERE p.codigo = ? and (p.actividad=1 or p.actividad=2)";
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
@@ -186,7 +186,7 @@ class PrestamoDAO {
         $codigo = $PrestamoVO->getCodigo();
         $stmp->bind_param("i", $codigo);
         $stmp->execute();
-        $stmp->bind_result($isbn, $titulo, $resena, $imagen, $diaPrestamo, $diaEntrega, $idPrestamo, $actividad, $foto);
+        $stmp->bind_result($isbn, $titulo, $resena, $imagen, $diaPrestamo,$diaReserva, $diaEntrega, $idPrestamo, $actividad, $foto, $renovacion);
         $respuesta = array();
         while ($stmp->fetch()) {
             $tmp = array();
@@ -195,10 +195,12 @@ class PrestamoDAO {
             $tmp["resena"] = $resena;
             $tmp["imagen"] = $imagen;
             $tmp["diaPrestamo"] = $diaPrestamo;
+            $tmp["diaReserva"] = $diaReserva;
             $tmp["diaEntrega"] = $diaEntrega;
             $tmp["idPrestamo"] = $idPrestamo;
             $tmp["actividad"] = $actividad;
             $tmp["foto"] = $foto;
+            $tmp["renovacion"] = $renovacion;
             $respuesta[sizeof($respuesta)] = $tmp;
         }
         $stmp->close();
@@ -229,6 +231,35 @@ class PrestamoDAO {
         $stmp->close();
         $conn->close();
 
+        echo json_encode($respuesta);
+    }
+
+    function Renovacion($array) {
+        $sql = "UPDATE `tbl_prestamo` SET `renovacion` = '0' , diaEntrega = ? WHERE `tbl_prestamo`.`idPrestamo` =?";
+
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $PrestamoVO = new PrestamoVO();
+        $PrestamoVO->setIdPrestamo($array->idPrestamo);
+        $PrestamoVO->setDiaEntrega($array->diaEntrega);                              
+
+        $idPrestamo = $PrestamoVO->getIdPrestamo();
+        $diaEntrega = $PrestamoVO->getDiaPrestamo();
+
+        $stmp->bind_param("si", $diaEntrega,$idPrestamo);
+        $respuesta = array();
+        
+
+        if ($stmp->execute()) {
+            $respuesta["sucess"] = "ok";
+        } else {
+            $respuesta["sucess"] = "no";
+        }
+
+        $stmp->close();
+        $conn->close();
         echo json_encode($respuesta);
     }
 

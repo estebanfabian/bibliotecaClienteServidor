@@ -155,7 +155,7 @@ session_start();
             <section class ="main row">
                 <aside class="col-md-3">
                     <div class="btn-group-vertical" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-secondary">Catalogo en línea   </button>
+                        <button type="button" id="btnCatalogoLinea" class="btn btn-secondary">Catalogo en línea</button>
                         <button type="button" class="btn btn-secondary">Préstamos, consulta y renovación   </button>
                         <button type="button" class="btn btn-secondary">Sugerir títulos    </button>
                         <?php if ($_SESSION) { ?>
@@ -229,24 +229,8 @@ session_start();
                                 <th scope="col">Handle</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                        <tbody id = "ListarCatalogo">
+                       
                         </tbody>
                     </table>
                 </div>

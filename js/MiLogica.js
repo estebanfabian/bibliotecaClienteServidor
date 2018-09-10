@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+// mis variables de uso Global creo 
     var cambio = 0;
     var myJson = new Array();
     var $formLogin = $('#login-form');
@@ -7,7 +7,7 @@ $(document).ready(function () {
     var $divForms = $('#div-forms');
     var $modalAnimateTime = 300;
     var Codigo;
-
+// la funciona ajax
     function fajax(URL, parametros, metodo) {
         $.ajax({
             url: URL,
@@ -23,7 +23,7 @@ $(document).ready(function () {
             }
         });
     }
-
+// funcion para llammar el login y hacer la valicaciones pertinentes
     function login() {
         $("#login-form").validate({
             rules: {
@@ -71,7 +71,7 @@ $(document).ready(function () {
             }
         });
     }
-
+// funcion para registrar usuario
     function registarUsuario() {
         $("#registar_usuario").validate({
             rules: {
@@ -175,17 +175,16 @@ $(document).ready(function () {
             }
         });
     }
-
+// funcion que se utiliza para crear la variables de seccion
     function envio(respusta) {
         var url = "inicioSesion.php";
         var parameto = respusta;
         var metodo = function (ssw) {
         };
         fajax(url, parameto, metodo);
-        //alert(parameto);
         location.href = "index.php";
     }
-
+// funcion para enviar el correo electronico
     function Correo() {
         var url = "";
         var parameto = "hola";
@@ -232,7 +231,7 @@ $(document).ready(function () {
         });
         fajax(url, parameto, metodo);
     }
-
+// funcion clear de registrar usuario
     function LimpiarUsuario() {
         $("#codigo").val("");
         $("#nombre").val("");
@@ -254,7 +253,7 @@ $(document).ready(function () {
         $("#telefonoContacto").val("");
         $("#Perfil").val("");
     }
-
+//animiacion de modal para el login
     function modalAnimate($oldForm, $newForm) {
         var $oldH = $oldForm.height();
         var $newH = $newForm.height();
@@ -272,7 +271,7 @@ $(document).ready(function () {
         var i = listaNombres.length;
         return listaNombres[i - 1];
     }
-
+// intento para hacer la carga de la foto al server
     function  cargarFoto() {
         var file = document.getElementById('foto').files[0];
         var formulario = {
@@ -303,42 +302,14 @@ $(document).ready(function () {
 //        }
     }
 
-    $("#BTNIngresar").click(function () {
-        login();
-    });
-
-    $("#CerrarSesion").click(function () {
-        location.href = "cerrarSesion.php";
-    });
-
-    $("#Enviar_correo").click(function () {
-        Correo();
-    });
-
-    $("#btnRegistrar").click(function () {
-        //registarUsuario();
-        alert("entra");
-        cargarFoto();
-    });
-
-    $("#btnLimpiar").click(function () {
-        alert("entra");
-        cargarFoto();
-    });
-
-    $("#login_lost_btn").click(function () {
-        modalAnimate($formLogin, $formLost);
-    });
-
-    $("#lost_login_btn").click(function () {
-        modalAnimate($formLost, $formLogin);
-    });
-
+   
+// cambio de clave
     $("#CambioClave").click(function () {
         if (cambio == 10) {
             var formulario = {
                 codigo: $("#codigo").val(),
                 contrasena: $("#password1").val()
+
             };
             myJson.push(formulario);
             var myString = JSON.stringify(formulario);
@@ -367,7 +338,7 @@ $(document).ready(function () {
             $("#password2").val("");
         }
     });
-
+//validaciones  de cambio de clave
     $("input[type=password]").keyup(function () {
         var ucase = new RegExp("[A-Z]+");
         var lcase = new RegExp("[a-z]+");
@@ -433,5 +404,41 @@ $(document).ready(function () {
             $("#pwmatch").css("color", "#FF0004");
         }
     });
+//---------------
+// botones
+
+ $("#BTNIngresar").click(function () {
+        login();
+    });
+
+    $("#CerrarSesion").click(function () {
+        location.href = "cerrarSesion.php";
+    });
+
+    $("#Enviar_correo").click(function () {
+        Correo();
+    });
+
+    $("#btnRegistrar").click(function () {
+        cargarFoto();
+    });
+
+    $("#btnLimpiar").click(function () {
+        cargarFoto();
+    });
+
+    $("#login_lost_btn").click(function () {
+        modalAnimate($formLogin, $formLost);
+    });
+
+    $("#lost_login_btn").click(function () {
+        modalAnimate($formLost, $formLogin);
+    });
+
+    $("#btnCatalogoLinea").click(function () {
+       // Catalogo();
+             location.href = "view/Catalogo.php";
+    });
+//-------------------------------------------------------
 
 });
