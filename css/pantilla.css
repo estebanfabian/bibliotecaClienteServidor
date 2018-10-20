@@ -1,40 +1,49 @@
 header {
-width: 100;
-background-color: #5e2129;
-color:black;
+    width: 100;
+    background-color: #5e2129;
+    color:black;
 }
 
 footer{
-	position: absolute;
-	background: #5e2129;
-	width: 100%;
-	color: white;
-	margin: 0px;
-	padding: 0px;
+    position: absolute;
+    background: #5e2129;
+    width: 100%;
+    color: white;
+    margin: 0px;
+    padding: 0px;
+}
+
+.reservar{
+    cursor: pointer;
+}
+tbody tr:hover{
+background-color: #ddd;
+color: #000;
+font-weight: bolder;
 }
 
 img.rounded.float-left.ejemplo {
-	margin : 10px;
-	cursor: pointer;
+    margin : 10px;
+    cursor: pointer;
 }
 
 footer .row{
-margin:10px -15px 0px;	
-	
+    margin:10px -15px 0px;	
+
 }
 #footer .col-md-12{
-	color:black;
-	/*background :white ;*/
-	height:11px;
+    color:black;
+    /*background :white ;*/
+    height:11px;
 }
 
 
 div.col-md-9{
-	margin:20px 0px 0px;	
-	
+    margin:20px 0px 0px;	
+
 }
 ejemplo{
-margin : 10px;
+    margin : 10px;
 }  
 
 .bg-light {
@@ -43,27 +52,27 @@ margin : 10px;
 
 
 aside.col-md-3{
-	margin : 20px 0px 0px;
+    margin : 20px 0px 0px;
 }
 
- section.main.row
+section.main.row
 {
-	margin :30px 0px 60px;/*mirar el margen de la parte de abajo*/	
+    margin :30px 0px 60px;/*mirar el margen de la parte de abajo*/	
 }
 
 /*
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
 {
-	background-color: #5e2129;
-	
+        background-color: #5e2129;
+        
 }
 
 /*button.btn.btn-secondary
 {
-	background:#154672;
+        background:#154672;
 }*/
 
 .row.ejemplo
 {
-	background :white;
+    background :white;
 }

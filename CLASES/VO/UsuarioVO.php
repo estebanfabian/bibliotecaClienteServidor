@@ -2,6 +2,7 @@
 
 class UsuarioVO {
 
+    private $id;
     private $codigo;
     private $nombre;
     private $apellido;
@@ -22,6 +23,10 @@ class UsuarioVO {
     private $multa;
     private $perfil;
     private $foto;
+
+    function getId() {
+        return $this->id;
+    }
 
     function getCodigo() {
         return $this->codigo;
@@ -101,6 +106,10 @@ class UsuarioVO {
 
     function getFoto() {
         return $this->foto;
+    }
+
+    function setId($id) {
+        $this->id = $id;
     }
 
     function setCodigo($codigo) {

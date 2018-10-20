@@ -8,18 +8,25 @@ session_start();
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link href= "../css/login.css" rel="stylesheet" type="text/css" style="display:none;visibility:hidden"https://www.googletagmanager.com/ns.html?id=GTM-MWD3VXM" height="0" width="0">
-              <link href= "../css/pantilla.css" rel="stylesheet" type="text/css" style="display:none;visibility:hidden"https://www.googletagmanager.com/ns.html?id=GTM-MWD3VXM" height="0" width="0">
+        <link href= "../css/pantilla.css" rel="stylesheet" type="text/css" style="display:none;visibility:hidden"https://www.googletagmanager.com/ns.html?id=GTM-MWD3VXM" height="0" width="0">
 
         <script src="../js/jquery-3.3.1.js" type="text/javascript"></script>
         <script src="../js/jquery.validate.js" type="text/javascript"></script>
         <script src="../js/additional-methods.js" type="text/javascript"></script>
         <script src="../js/localization/messages_es.js" type="text/javascript"></script>
         <script src="" type="text/javascript"></script>
-        <script src="../gato.jsp" type="text/javascript"></script>
+        <script src="../js/MiLogica.js" type="text/javascript"></script>
+        <link href="../css/fileuploader.css" rel="stylesheet" type="text/css"/>
+
+
+        <link rel="stylesheet" href="../css/jquery.fileupload.css">
+        <link rel="stylesheet" href="../css/jquery.fileupload-ui.css">
+
+
+        <script src="../js/jquery.fileupload-image.js" type="text/javascript"></script>
         <title>BiblioCur</title>
     </head>
-    <body >
+    <body>   
         <header > <?php if ($_SESSION) { ?>
                 <div id = "cabezara1"></div>
                 <script src="../js/loginNormal.js" type="text/javascript"></script>
@@ -27,7 +34,6 @@ session_start();
                 <div id = "cabezara"></div>
                 <script src="../js/loginNormal.js" type="text/javascript"></script>
             <?php } ?> 
-            <script src="../js/carga.js" type="text/javascript"></script>
         </header>
         <div class ="container ">
             <section class ="main row">
@@ -36,11 +42,7 @@ session_start();
                         <button type="button" class="btn btn-secondary">Catalogo en línea   </button>
                         <button type="button" class="btn btn-secondary">Préstamos, consulta y renovación   </button>
                         <button type="button" class="btn btn-secondary">Sugerir títulos    </button>
-                        <?php if ($_SESSION) { ?>
-                            <button type="button" id="CerrarSesion1" class="btn btn-secondary" data-toggle="modal" data-target="#login-modal"> Cerrar sesión </button>
-                        <?php } else { ?>
-                            <button type="button"   class="btn btn-secondary" data-toggle="modal" data-target="#login-modal"> Iniciar sesión </button>
-                        <?php } ?>
+                        <button type="button" id="../CerrarSesion"   class="btn btn-secondary" data-toggle="modal" data-target="#login-modal"> Cerrar sesión </button>
                     </div>
                     <div class="d-none d-lg-block">
                         <a class="twitter-timeline" data-width="220" data-height="220" href="https://twitter.com/fabi_die?ref_src=twsrc%5Etfw">Tweets by fabi_die</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -58,49 +60,48 @@ session_start();
 
                         <!-- Your embedded comments code -->
                         <div class="fb-comment-embed" data-href="https://www.facebook.com/zuck/posts/10102577175875681?comment_id=1193531464007751&amp;reply_comment_id=654912701278942" data-width="220" data-include-parent="false"></div>
-                    </div>
+                    </div>       
                 </aside>
-                <div class = " col-9 " >
-
-                    <form class="form-inline">
-                        <div class="form-group ">
-                            <label for="exampleFormControlSelect1">Buscar por :</label>
-                            <select class="form-control " id="exampleFormControlSelect1">
-                                <option>Isbn</option>
-                                <option>Autor</option>
-                                <option>Titulo</option>
-                                <option>Editorial</option>
-                            </select> 
-                            <input type="search" class="input-sm form-control " placeholder="Búsqueda">
-                            <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Buscar</button>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="html/imagenes/prueba.jpg">
                         </div>
-                    </form>
-                    
-                    <table class="table table-bordered table-dark" id ="tabla1" >
-                        <thead>
-                            <tr>
-                                <th scope="col">isbn</th>
-                                <th scope="col">Portada</th>
-                                <th scope="col">Titulo y Autor</th>
-                                <th scope="col">Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody id="respuesta">
-                        </tbody>
-                    </table>
+                        <div class="col-md-6">
+                            <div class="form-group col-md-12">
+                                <p class="isbnReserva"></p>  
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="inputEmail4">titulo (*)</label>
+                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="inputEmail4">Autor (*)</label>
+                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="inputEmail4">Editoria (*)</label>
+                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="inputEmail4">Reseña (*)</label>
+                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
+                            </div>
+
+                        </div>
+                    </div>
+                    <button  class="btn btn-primary" id="btnRegistrar">Reservar</button>
+                    <button  class="btn btn-primary" id="btnLimpiar">Volver</button>
                 </div>
-                <div class="offset-md-3" >
-                    <div class= "align-self-center">
-                        <nav aria-label="Page navigation example">
-                           <ul class="pagination" id="paginador"></ul>
-                        </nav></div></div>
+
+
             </section>
         </div>
         <footer > 
             <div id = "pie">
             </div>
         </footer>
-        <script src="../js/paginator.min.js" type="text/javascript"></script>
+        <script src="../js/carga.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>

@@ -43,7 +43,7 @@ class AutorDao {
         $this->Respuesta($conn, $stmp);
     }
 
-    function EliminarBiblioteca($array) {
+    function EliminarAutor($array) {
         $Autorvo = new AutorVO();
         $Autorvo->setIdautor($array->idAutor);
 

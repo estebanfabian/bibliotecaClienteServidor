@@ -1,11 +1,11 @@
 # ---------------------------------------------------------------------- #
 # Script generated with: DeZign for Databases V8.1.2                     #
 # Target DBMS:           MySQL 5                                         #
-# Project file:          tercer forma tema.dez                           #
+# Project file:          t1.dez                                          #
 # Project name:                                                          #
 # Author:                                                                #
 # Script type:           Database creation script                        #
-# Created on:            2018-06-10 21:25                                #
+# Created on:            2018-10-18 23:29                                #
 # ---------------------------------------------------------------------- #
 
 
@@ -18,7 +18,9 @@
 # ---------------------------------------------------------------------- #
 
 CREATE TABLE `tbl_usuario` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
     `codigo` INTEGER NOT NULL,
+    `cedula` INTEGER NOT NULL,
     `nombre` VARCHAR(40) NOT NULL,
     `apellido` VARCHAR(40) NOT NULL,
     `fechaNacimiento` DATE NOT NULL,
@@ -37,19 +39,8 @@ CREATE TABLE `tbl_usuario` (
     `contrasena` VARCHAR(40) NOT NULL,
     `multa` INTEGER DEFAULT 0,
     `perfil` VARCHAR(10) DEFAULT 'estudiante' COMMENT 'Los perfiles que se manejara administrador, estudiates y trabajador',
-    `foto` VARCHAR(200),
-    CONSTRAINT `PK_Usuario` PRIMARY KEY (`codigo`)
-);
-
-# ---------------------------------------------------------------------- #
-# Add table "tbl_empleado"                                               #
-# ---------------------------------------------------------------------- #
-
-CREATE TABLE `tbl_empleado` (
-    `codigoEmpleado` INTEGER NOT NULL AUTO_INCREMENT,
-    `nombre` VARCHAR(40),
-    `puesto` VARCHAR(40),
-    CONSTRAINT `PK_tbl_empleado` PRIMARY KEY (`codigoEmpleado`)
+    `foto` VARCHAR(200) NOT NULL DEFAULT 'icono_foto.png',
+    CONSTRAINT `PK_Usuario` PRIMARY KEY (`id`)
 );
 
 # ---------------------------------------------------------------------- #
@@ -83,9 +74,9 @@ CREATE TABLE `tbl_editorial` (
 CREATE TABLE `tbl_video_beam` (
     `idVideoBeam` INTEGER NOT NULL,
     `fabricante` VARCHAR(40) NOT NULL,
-    `cableUSB` BOOL NOT NULL COMMENT 'este campo es para saber si el video bem tiene clase USB',
-    `cableHDMI` BOOL NOT NULL COMMENT 'este campo es para saber si el video bem tiene clase HDMI',
-    `cableVGA` BOOL NOT NULL COMMENT 'este campo es para saber si el video bem tiene clase VGA',
+    `cableUSB` BIT NOT NULL COMMENT 'este campo es para saber si el video bem tiene clase USB',
+    `cableHDMI` BIT NOT NULL COMMENT 'este campo es para saber si el video bem tiene clase HDMI',
+    `cableVGA` BIT NOT NULL COMMENT 'este campo es para saber si el video bem tiene clase VGA',
     `observaciones` TEXT,
     `estadoVideoBeam` VARCHAR(9) DEFAULT 'libre' COMMENT 'Este campo indica el estado del video beam si es libre,reservado y prestado ',
     CONSTRAINT `PK_tbl_video_beam` PRIMARY KEY (`idVideoBeam`)
@@ -166,23 +157,25 @@ CREATE TABLE `tbl_prestamo` (
     `idPrestamo` INTEGER NOT NULL AUTO_INCREMENT,
     `estadoLibro` VARCHAR(40),
     `preInterBibliotecarios` VARCHAR(40) COMMENT 'este campo indica si el libro fue de prestamo interbibliotecarios',
-    `actividad` TINYINT(1) COMMENT '0 inactivo , 1 reservado , 2 prestamo',
+    `actividad` TINYINT(1) NOT NULL COMMENT '0 inactivo , 1 reservado , 2 prestamo',
     `diaReserva` DATETIME,
     `diaEntrega` DATETIME,
     `diaPrestamo` DATETIME,
+    `renovacion` BIT DEFAULT 0 COMMENT 'este campo se tiene para que los usuario solo pueda hacer una renovacion ',
+    `codigo` INTEGER,
+    `cod_empleado` INTEGER,
     `idVideoBeam` INTEGER,
     `idcomputador` VARCHAR(40),
-    `codigo` INTEGER,
-    `codigoEmpleado` INTEGER,
     `isbn` VARCHAR(40),
+    `id` INTEGER,
     CONSTRAINT `PK_Prestamo` PRIMARY KEY (`idPrestamo`)
 );
 
 # ---------------------------------------------------------------------- #
-# Add table "tbl_libroautor"                                             #
+# Add table "tbl_libro_autor"                                            #
 # ---------------------------------------------------------------------- #
 
-CREATE TABLE `tbl_libroautor` (
+CREATE TABLE `tbl_libro_autor` (
     `idAutorLibro` INTEGER NOT NULL AUTO_INCREMENT,
     `listaLibro` VARCHAR(40),
     `isbn` VARCHAR(40),
@@ -191,15 +184,15 @@ CREATE TABLE `tbl_libroautor` (
 );
 
 # ---------------------------------------------------------------------- #
-# Add table "tbl_prestamoInterBibliotecario"                             #
+# Add table "tbl_prestamo_InterBibliotecario"                            #
 # ---------------------------------------------------------------------- #
 
-CREATE TABLE `tbl_prestamoInterBibliotecario` (
+CREATE TABLE `tbl_prestamo_InterBibliotecario` (
     `idPrestamoInterBiblio` INTEGER NOT NULL AUTO_INCREMENT,
     `idPrestemoInterBibliotecario` INTEGER NOT NULL,
     `isbnPrestamoInt` VARCHAR(40),
     `idPrestamo` INTEGER,
-    CONSTRAINT `PK_tbl_prestamoInterBibliotecario` PRIMARY KEY (`idPrestamoInterBiblio`)
+    CONSTRAINT `PK_tbl_prestamo_InterBibliotecario` PRIMARY KEY (`idPrestamoInterBiblio`)
 );
 
 # ---------------------------------------------------------------------- #
@@ -227,27 +220,24 @@ ALTER TABLE `tbl_prestamo` ADD CONSTRAINT `TBL_Computador_TBL_Prestamo`
     FOREIGN KEY (`idcomputador`) REFERENCES `tbl_computador` (`idcomputador`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 ALTER TABLE `tbl_prestamo` ADD CONSTRAINT `tbl_usuario_tbl_prestamo` 
-    FOREIGN KEY (`codigo`) REFERENCES `tbl_usuario` (`codigo`);
-
-ALTER TABLE `tbl_prestamo` ADD CONSTRAINT `tbl_empleado_tbl_prestamo` 
-    FOREIGN KEY (`codigoEmpleado`) REFERENCES `tbl_empleado` (`codigoEmpleado`);
+    FOREIGN KEY (`id`) REFERENCES `tbl_usuario` (`id`);
 
 ALTER TABLE `tbl_prestamo` ADD CONSTRAINT `tbl_libro_tbl_prestamo` 
     FOREIGN KEY (`isbn`) REFERENCES `tbl_libro` (`isbn`);
 
-ALTER TABLE `tbl_libroautor` ADD CONSTRAINT `tbl_libro_tbl_libroautor` 
+ALTER TABLE `tbl_libro_autor` ADD CONSTRAINT `tbl_libro_tbl_libro_autor` 
     FOREIGN KEY (`isbn`) REFERENCES `tbl_libro` (`isbn`);
 
-ALTER TABLE `tbl_libroautor` ADD CONSTRAINT `tbl_autor_tbl_libroautor` 
+ALTER TABLE `tbl_libro_autor` ADD CONSTRAINT `tbl_autor_tbl_libro_autor` 
     FOREIGN KEY (`idAutor`) REFERENCES `tbl_autor` (`idAutor`);
 
-ALTER TABLE `tbl_prestamoInterBibliotecario` ADD CONSTRAINT `tbl_biblioteca_tbl_prestamoInterBibliotecario` 
+ALTER TABLE `tbl_prestamo_InterBibliotecario` ADD CONSTRAINT `tbl_biblioteca_tbl_prestamo_InterBibliotecario` 
     FOREIGN KEY (`idPrestemoInterBibliotecario`) REFERENCES `tbl_biblioteca` (`idBiblioteca`);
 
-ALTER TABLE `tbl_prestamoInterBibliotecario` ADD CONSTRAINT `tbl_libro_prestamoint_tbl_prestamoInterBibliotecario` 
+ALTER TABLE `tbl_prestamo_InterBibliotecario` ADD CONSTRAINT `tbl_libro_prestamoint_tbl_prestamo_InterBibliotecario` 
     FOREIGN KEY (`isbnPrestamoInt`) REFERENCES `tbl_libro_prestamoint` (`isbnPrestamoInt`);
 
-ALTER TABLE `tbl_prestamoInterBibliotecario` ADD CONSTRAINT `tbl_prestamo_tbl_prestamoInterBibliotecario` 
+ALTER TABLE `tbl_prestamo_InterBibliotecario` ADD CONSTRAINT `tbl_prestamo_tbl_prestamo_InterBibliotecario` 
     FOREIGN KEY (`idPrestamo`) REFERENCES `tbl_prestamo` (`idPrestamo`);
 
 ALTER TABLE `tbl_libro_temas` ADD CONSTRAINT `tbl_temas_tbl_libro_temas` 

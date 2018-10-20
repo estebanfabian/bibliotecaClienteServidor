@@ -4,14 +4,18 @@ class PrestamoVO {
 
     private $idPrestamo;
     private $estadoLibro;
-    private $diaPrestamo;
     private $preInterBibliotecarios;
-    private $isbn;
+    private $actividad;
+    private $diaReserva;
+    private $diaEntrega;
+    private $diaPrestamo;
+    private $renovacion;
+    private $codigo;
+    private $cod_empleado;
     private $idVideoBeam;
     private $idcomputador;
-    private $codigo;
-    private $codigoEmpleado;
-    private $diaEntrega;
+    private $isbn;
+    private $id;
 
     function getIdPrestamo() {
         return $this->idPrestamo;
@@ -21,16 +25,36 @@ class PrestamoVO {
         return $this->estadoLibro;
     }
 
-    function getDiaPrestamo() {
-        return $this->diaPrestamo;
-    }
-
     function getPreInterBibliotecarios() {
         return $this->preInterBibliotecarios;
     }
 
-    function getIsbn() {
-        return $this->isbn;
+    function getActividad() {
+        return $this->actividad;
+    }
+
+    function getDiaReserva() {
+        return $this->diaReserva;
+    }
+
+    function getDiaEntrega() {
+        return $this->diaEntrega;
+    }
+
+    function getDiaPrestamo() {
+        return $this->diaPrestamo;
+    }
+
+    function getRenovacion() {
+        return $this->renovacion;
+    }
+
+    function getCodigo() {
+        return $this->codigo;
+    }
+
+    function getCod_empleado() {
+        return $this->cod_empleado;
     }
 
     function getIdVideoBeam() {
@@ -41,16 +65,12 @@ class PrestamoVO {
         return $this->idcomputador;
     }
 
-    function getCodigo() {
-        return $this->codigo;
+    function getIsbn() {
+        return $this->isbn;
     }
 
-    function getCodigoEmpleado() {
-        return $this->codigoEmpleado;
-    }
-
-    function getDiaEntrega() {
-        return $this->diaEntrega;
+    function getId() {
+        return $this->id;
     }
 
     function setIdPrestamo($idPrestamo) {
@@ -61,16 +81,36 @@ class PrestamoVO {
         $this->estadoLibro = $estadoLibro;
     }
 
-    function setDiaPrestamo($diaPrestamo) {
-        $this->diaPrestamo = $diaPrestamo;
-    }
-
     function setPreInterBibliotecarios($preInterBibliotecarios) {
         $this->preInterBibliotecarios = $preInterBibliotecarios;
     }
 
-    function setIsbn($isbn) {
-        $this->isbn = $isbn;
+    function setActividad($actividad) {
+        $this->actividad = $actividad;
+    }
+
+    function setDiaReserva($diaReserva) {
+        $this->diaReserva = $diaReserva;
+    }
+
+    function setDiaEntrega($diaEntrega) {
+        $this->diaEntrega = $diaEntrega;
+    }
+
+    function setDiaPrestamo($diaPrestamo) {
+        $this->diaPrestamo = $diaPrestamo;
+    }
+
+    function setRenovacion($renovacion) {
+        $this->renovacion = $renovacion;
+    }
+
+    function setCodigo($codigo) {
+        $this->codigo = $codigo;
+    }
+
+    function setCod_empleado($cod_empleado) {
+        $this->cod_empleado = $cod_empleado;
     }
 
     function setIdVideoBeam($idVideoBeam) {
@@ -81,17 +121,12 @@ class PrestamoVO {
         $this->idcomputador = $idcomputador;
     }
 
-    function setCodigo($codigo) {
-        $this->codigo = $codigo;
+    function setIsbn($isbn) {
+        $this->isbn = $isbn;
     }
 
-    function setCodigoEmpleado($codigoEmpleado) {
-        $this->codigoEmpleado = $codigoEmpleado;
+    function setId($id) {
+        $this->id = $id;
     }
-
-    function setDiaEntrega($diaEntrega) {
-        $this->diaEntrega = $diaEntrega;
-    }
-
 
 }

@@ -302,7 +302,31 @@ $(document).ready(function () {
 //        }
     }
 
-   
+    function Catalogo() {
+        var url = "../controlador/Libro/MasBuscado.php";
+        var parametro = "hola";
+        var metodo = function (respuesta) {
+            var data = $.parseJSON(respuesta);
+            var limite = data.length;
+            for (var i = 0; i < limite; i++) {
+                var local = data[i];
+                item(local, i);
+            }
+        };
+        fajax(url, parametro, metodo);
+    }
+
+    function item(tmp, i) {
+        var ejemplo = boton(i);
+        // console.log(ejemplo);
+        var estr = $("<tr></tr>");
+        estr.append("<td>" + i + "</td>"
+                + "<td><img src=" + tmp.imagen + "   width=100 height=100></td>"
+                + "<td><p> Titulo :" + tmp.titulo + " Autor:" + tmp.nombreAutor + "</p></td>"
+                + ejemplo);
+        $("#respuesta").append(estr);
+    }
+
 // cambio de clave
     $("#CambioClave").click(function () {
         if (cambio == 10) {
@@ -407,7 +431,12 @@ $(document).ready(function () {
 //---------------
 // botones
 
- $("#BTNIngresar").click(function () {
+    $("#tabla").click(function () {
+        console.log("entra");
+        alert("mesaje");
+    });
+
+    $("#BTNIngresar").click(function () {
         login();
     });
 
@@ -436,9 +465,11 @@ $(document).ready(function () {
     });
 
     $("#btnCatalogoLinea").click(function () {
-       // Catalogo();
-             location.href = "view/Catalogo.php";
+        // Catalogo();
+        location.href = "view/Catalogo.php";
     });
+
+    
 //-------------------------------------------------------
 
 });

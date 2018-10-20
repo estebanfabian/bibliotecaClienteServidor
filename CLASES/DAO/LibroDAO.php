@@ -121,17 +121,19 @@ class LibroDAO {
     }
 
     public function LoMasBUscado($array) {
-        $sql = "SELECT libro.titulo,libro.imagen ,autor.nombreAutor FROM tbl_libro libro INNER JOIN tbl_libroautor LAutor on libro.isbn =LAutor.isbn INNER JOIN tbl_autor autor on autor.idAutor = LAutor.idAutor WHERE libro.estado = 'libre' LIMIT 10";
+        $sql = "SELECT libro.isbn ,libro.titulo,libro.imagen ,autor.nombreAutor FROM tbl_libro libro INNER JOIN tbl_libroautor LAutor on libro.isbn =LAutor.isbn INNER JOIN tbl_autor autor on autor.idAutor = LAutor.idAutor WHERE libro.estado = 'libre' LIMIT 10";
+
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
         $stmp->execute();
-        $stmp->bind_result($titulo,$imagen,$nombreAutor);
+        $stmp->bind_result($isbn,$titulo, $imagen, $nombreAutor);
 
         $respuesta = array();
         while ($stmp->fetch()) {
             $tmp = array();
+            $tmp["isbn"] = $isbn;
             $tmp["nombreAutor"] = $nombreAutor;
             $tmp["titulo"] = $titulo;
             $tmp["imagen"] = $imagen;
@@ -277,5 +279,5 @@ class LibroDAO {
         $conn->close();
         echo json_encode($respuesta);
     }
-
+    
 }

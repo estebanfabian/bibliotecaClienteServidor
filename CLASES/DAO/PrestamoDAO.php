@@ -235,7 +235,7 @@ class PrestamoDAO {
     }
 
     function Renovacion($array) {
-        $sql = "UPDATE `tbl_prestamo` SET `renovacion` = '0' , diaEntrega = ? WHERE `tbl_prestamo`.`idPrestamo` =?";
+        $sql = "UPDATE `tbl_prestamo` SET `renovacion` = b'0' , diaEntrega = ? WHERE `tbl_prestamo`.`idPrestamo` =?";
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();

@@ -6,39 +6,46 @@ class ComputadorVO {
     private $fabricante;
     private $observaciones;
     private $cargadorId;
+    private $estadoComputador;
 
+    function getIdcomputador() {
+        return $this->idcomputador;
+    }
 
+    function getFabricante() {
+        return $this->fabricante;
+    }
 
-function getIdcomputador() {
-    return $this->idcomputador;
-}
+    function getObservaciones() {
+        return $this->observaciones;
+    }
 
- function getFabricante() {
-    return $this->fabricante;
-}
+    function getCargadorId() {
+        return $this->cargadorId;
+    }
 
- function getObservaciones() {
-    return $this->observaciones;
-}
+    function getEstadoComputador() {
+        return $this->estadoComputador;
+    }
 
- function getCargadorId() {
-    return $this->cargadorId;
-}
+    function setIdcomputador($idcomputador) {
+        $this->idcomputador = $idcomputador;
+    }
 
- function setIdcomputador($idcomputador) {
-    $this->idcomputador = $idcomputador;
-}
+    function setFabricante($fabricante) {
+        $this->fabricante = $fabricante;
+    }
 
- function setFabricante($fabricante) {
-    $this->fabricante = $fabricante;
-}
+    function setObservaciones($observaciones) {
+        $this->observaciones = $observaciones;
+    }
 
- function setObservaciones($observaciones) {
-    $this->observaciones = $observaciones;
-}
+    function setCargadorId($cargadorId) {
+        $this->cargadorId = $cargadorId;
+    }
 
- function setCargadorId($cargadorId) {
-    $this->cargadorId = $cargadorId;
-}
+    function setEstadoComputador($estadoComputador) {
+        $this->estadoComputador = $estadoComputador;
+    }
 
 }
