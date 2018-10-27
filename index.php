@@ -137,13 +137,23 @@ session_start();
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                             <a class="dropdown-item" href="view/Catalogo.php">Libro</a>
                                             <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
+                                            <a class="dropdown-item" href="#">Prestamo Interbibliotecario</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Reserva
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <a class="dropdown-item" href="view/PrestamoLibro.php">Libro</a>
+                                            <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
                                         </div>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="view/noticias.php">Noticias</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Contactanos</a>
+                                        <a class="nav-link" href="view/Contactanos.php">Contactanos</a>
                                     </li>
                                 </ul>
                             </div>
@@ -230,7 +240,7 @@ session_start();
                             </tr>
                         </thead>
                         <tbody id = "ListarCatalogo">
-                       
+
                         </tbody>
                     </table>
                 </div>

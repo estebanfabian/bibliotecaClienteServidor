@@ -63,45 +63,48 @@ session_start();
                     </div>       
                 </aside>
                 <div class="col-md-9">
-                    <div class="row">
+                    <div class="row right">
                         <div class="col-md-6">
-                            <img src="html/imagenes/prueba.jpg">
+                            <img src="">
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group col-md-12">
-                                <label for="inputEmail4">isbn (*)</label>
-                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
+                            <div id = "isbnReserva" class="form-group col-md-12">
+                                <p> Isbn:  <?php echo $_GET['isbn']; ?></p>
                             </div>
-                            <div class="form-group col-md-12">
-                                <label for="inputEmail4">titulo (*)</label>
-                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
+                            <div id = "isbnReserva" class="form-group col-md-12">
+                                <p> Titulo:  <?php echo $_GET['titulo']; ?></p>
                             </div>
-                            <div class="form-group col-md-12">
-                                <label for="inputEmail4">Autor (*)</label>
-                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
+                            <div id = "isbnReserva" class="form-group col-md-12">
+                                <p> Titulo:  <?php echo $_GET['autor']; ?></p>
                             </div>
-                            <div class="form-group col-md-12">
-                                <label for="inputEmail4">Editoria (*)</label>
-                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
+                            <div id = "isbnReserva" class="form-group col-md-12">
+                                <p> Titulo:  <?php echo $_GET['tema']; ?></p>
                             </div>
-                            <div class="form-group col-md-12">
-                                <label for="inputEmail4">Reseña (*)</label>
-                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
+                                <p> Titulo:  <?php echo $_GET['editorial']; ?></p>
                             </div>
+                            <div id = "isbnReserva" class="form-group col-md-12">
+                                <p> Titulo:  <?php echo $_GET['facultad']; ?></p>
+                            </div>
+
 
                         </div>
                     </div>
-                    <button  class="btn btn-primary" id="btnRegistrar">Reservar</button>
-                    <button  class="btn btn-primary" id="btnLimpiar">Volver</button>
+                    <div id = "isbnReserva" class="form-group col-md-12">
+                        <p> Titulo:  <?php echo $_GET['resena']; ?></p>
+                    </div>
+                 
+                        <button  class="btn btn-primary " id="btnRegistrar">Reservar</button>
+                        <button  class="btn btn-primary " id="btnLimpiar">Volver</button>
+              
+
                 </div>
-
-
             </section>
         </div>
         <footer > 
             <div id = "pie">
             </div>
         </footer>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>

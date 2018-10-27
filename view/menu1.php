@@ -21,6 +21,7 @@ if ($_POST) {
                         <?php echo $_SESSION["usuario"]["nombre"]; ?>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="Multa.php">Multa</a> 
                         <a class="dropdown-item" href="CambiarClave.php">Cambiar Contraseña</a>
                         <a class="dropdown-item" href="configuracion.php">Configuración</a>
                         <a class="dropdown-item" href="../cerrarSesion.php">Cerrar Sesión</a>
@@ -61,20 +62,32 @@ if ($_POST) {
                                 <a class="dropdown-item" href="http://urepublicana.edu.co">Cur</a>
                             </div>
                         </li>
+                        <?php if (($_SESSION["usuario"]["perfil"] == "empleado" ) || ($_SESSION["usuario"]["perfil"] == "empleado")) { ?>
+                            <li class = "nav-item dropdown">
+                                <a class = "nav-link dropdown-toggle" href = "#" id = "navbarDropdownMenuLink" data-toggle = "dropdown" aria-haspopup = "true" aria-expanded = "false">
+                                    Prestamo
+                                </a>
+                                <div class = "dropdown-menu" aria-labelledby = "navbarDropdownMenuLink">
+                                    <a class = "dropdown-item" href = "Catalogo.php">Libro</a>
+                                    <a class = "dropdown-item" href = "videoBeam.php">Video Beam</a>
+                                </div>
+                            </li>
+                        <?php } ?>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Prestamo
+                                Reserva
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="Catalogo.php">Libro</a>
-                                <a class="dropdown-item" href="videoBeam.php">Video Beam</a>
+                                <a class="dropdown-item" href="view/PrestamoLibro.php">Libro</a>
+                                <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
                             </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="noticias.php">Noticias</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contactanos</a>
+                            <a class="nav-link" href="Contactanos.php">Contactanos</a>
                         </li>
                         <?php if ($_SESSION["usuario"]["perfil"] == "administrador") { ?>
                             <li class="nav-item dropdown">

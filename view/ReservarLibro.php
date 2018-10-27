@@ -63,45 +63,53 @@ session_start();
                     </div>       
                 </aside>
                 <div class="col-md-9">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <img src="html/imagenes/prueba.jpg">
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group col-md-12">
-                                <p class="isbnReserva"></p>  
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="inputEmail4">titulo (*)</label>
-                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="inputEmail4">Autor (*)</label>
-                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="inputEmail4">Editoria (*)</label>
-                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="inputEmail4">Reseña (*)</label>
-                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
+                    <form>
+                        <div class="row right">
+
+                            <div class="col-md-3">
+                                <img src= "<?php echo $_GET['imagen']; ?>"  width=200 height=300 >
+                                <input type="hidden"  id ="codigo" value="<?php echo $_SESSION['usuario']['codigo']; ?>" id="nombre"/>
                             </div>
 
+                            <div class="col-md-6">
+                                <div  class="form-group col-md-12" >
+                                    <p>  Isbn: <samp id = "isbnReserva" > <?php echo $_GET['isbn']; ?></samp></p> 
+                                </div>
+                                <div  class="form-group col-md-12">
+                                    <p> Titulo:  <?php echo $_GET['titulo']; ?></p>
+                                </div>
+                                <div  class="form-group col-md-12">
+                                    <p> Autor:  <?php echo $_GET['autor']; ?></p>
+                                </div>
+                                <div  class="form-group col-md-12">
+                                    <p> Tema:  <?php echo $_GET['tema']; ?></p>
+                                </div>
+                                <div  class="form-group col-md-12">
+                                    <p> Editorial:  <?php echo $_GET['editorial']; ?></p>
+                                </div>
+                                <div  class="form-group col-md-12">
+                                    <p> Faculta:  <?php echo $_GET['facultad']; ?></p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <button  class="btn btn-primary" id="btnRegistrar">Reservar</button>
-                    <button  class="btn btn-primary" id="btnLimpiar">Volver</button>
+                        <div id = "isbnReserva" class="form-group col-md-12">
+                            <p> Reseña:  <?php echo $_GET['resena']; ?></p>
+                        </div> 
+                        <input type="datetime-local" name="datetimepicker1" id="datetimepicker1" value="">    
+
+                      
+                        <button  class="btn btn-primary " id="btnResercarLibro">Reservar</button>
+                        <button  class="btn btn-primary " id="btnVolverCatalogo">Volver</button>
+                    </form>
                 </div>
-
-
             </section>
         </div>
         <footer > 
             <div id = "pie">
             </div>
         </footer>
-        <script src="../js/carga.js" type="text/javascript"></script>
+        <script src="../js/ejemplo.js" type="text/javascript"></script>
+        <script src="../js/moment.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>

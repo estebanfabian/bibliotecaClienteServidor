@@ -3,6 +3,7 @@
 class UsuarioVO {
 
     private $id;
+    private $cedula;
     private $codigo;
     private $nombre;
     private $apellido;
@@ -26,6 +27,10 @@ class UsuarioVO {
 
     function getId() {
         return $this->id;
+    }
+
+    function getCedula() {
+        return $this->cedula;
     }
 
     function getCodigo() {
@@ -110,6 +115,10 @@ class UsuarioVO {
 
     function setId($id) {
         $this->id = $id;
+    }
+
+    function setCedula($cedula) {
+        $this->cedula = $cedula;
     }
 
     function setCodigo($codigo) {

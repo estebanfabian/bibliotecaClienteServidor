@@ -66,7 +66,7 @@ session_start();
                 <div class = "col-md-9">
                     <h2>Cambio de contraseña</h2>
                     <br><br>
-                    <p>Se recomienda realizar el cambio de clave preriodicamente y para su mayor segurdad bla bla bla</p>
+                    <p>Se recomienda realizar el cambio de clave preriodicamente y para su mayor segurdad.</p>
                     <form method="post" id="passwordForm">
                         <label for="other">Codigo</label>
                         <input type="text" class="input-lg form-control" name="codigo" id="codigo" value=" <?php echo $_SESSION ['usuario']['codigo'] ?>" readonly  >

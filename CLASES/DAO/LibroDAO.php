@@ -81,7 +81,7 @@ class LibroDAO {
     }
 
     public function ListarXid($array) {
-        $sql = 'SELECT tbl_libro.isbn AS isbn,tbl_libro.titulo AS titulo,tbl_autor.nombreAutor AS autor,tbl_temas.nombreTema AS tema,tbl_editorial.nombreEditorial AS editorial,tbl_libroautor.listaLibro AS facultad, tbl_libro.estado AS estado
+        $sql = 'SELECT tbl_libro.isbn AS isbn,tbl_libro.titulo AS titulo,tbl_autor.nombreAutor AS autor,tbl_temas.nombreTema AS tema,tbl_editorial.nombreEditorial AS editorial,tbl_libroautor.listaLibro AS facultad, tbl_libro.estado AS estado,tbl_libro.resena,tbl_libro.imagen
                 FROM  tbl_libro INNER JOIN  tbl_editorial INNER JOIN  tbl_libroautor INNER JOIN tbl_autor INNER JOIN  tbl_temas INNER JOIN  tbl_libro_temas 
                 WHERE tbl_libro.idEditorial =tbl_editorial.idEditorial AND  tbl_libro.isbn=tbl_libroautor.isbn=tbl_libro_temas.isbn AND tbl_libroautor.idautor=tbl_autor.idautor AND tbl_libro_temas.idTema=tbl_temas.idTema AND
                 tbl_libro.isbn=? ;';
@@ -98,7 +98,26 @@ class LibroDAO {
 
         $stmp->bind_param("i", $Consulta);
 
-        $this->RespuestaLibros($conn, $stmp);
+        $stmp->execute();
+        $stmp->bind_result($isbn, $titulo, $autor, $tema, $editorial, $facultad, $estado, $resena, $imagen);
+
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["isbn"] = $isbn;
+            $tmp["titulo"] = $titulo;
+            $tmp["autor"] = $autor;
+            $tmp["tema"] = $tema;
+            $tmp["editorial"] = $editorial;
+            $tmp["facultad"] = $facultad;
+            $tmp["estado"] = $estado;
+            $tmp["resena"] = $resena;
+            $tmp["imagen"] = $imagen;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
     }
 
     public function ListarXtitulo($array) {
@@ -121,14 +140,13 @@ class LibroDAO {
     }
 
     public function LoMasBUscado($array) {
-        $sql = "SELECT libro.isbn ,libro.titulo,libro.imagen ,autor.nombreAutor FROM tbl_libro libro INNER JOIN tbl_libroautor LAutor on libro.isbn =LAutor.isbn INNER JOIN tbl_autor autor on autor.idAutor = LAutor.idAutor WHERE libro.estado = 'libre' LIMIT 10";
-
+        $sql = "SELECT libro.isbn ,libro.titulo,libro.imagen ,autor.nombreAutor , editorial.nombreEditorial FROM ( tbl_libro libro INNER JOIN tbl_libroautor LAutor on libro.isbn =LAutor.isbn INNER JOIN tbl_autor autor on autor.idAutor = LAutor.idAutor INNER JOIN tbl_editorial editorial on editorial.idEditorial = libro.idEditorial ) WHERE libro.estado = 'libre'";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
         $stmp->execute();
-        $stmp->bind_result($isbn,$titulo, $imagen, $nombreAutor);
+        $stmp->bind_result($isbn, $titulo, $imagen, $nombreAutor,$editorial);
 
         $respuesta = array();
         while ($stmp->fetch()) {
@@ -137,6 +155,7 @@ class LibroDAO {
             $tmp["nombreAutor"] = $nombreAutor;
             $tmp["titulo"] = $titulo;
             $tmp["imagen"] = $imagen;
+                 $tmp["editorial"] = $editorial;
             $respuesta[sizeof($respuesta)] = $tmp;
         }
         $stmp->close();
@@ -279,5 +298,5 @@ class LibroDAO {
         $conn->close();
         echo json_encode($respuesta);
     }
-    
+
 }

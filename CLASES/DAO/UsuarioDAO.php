@@ -8,12 +8,13 @@ class UsuarioDAO {
 
     public function CrearUsuario($array) {
 
-        $sql = 'INSERT INTO `tbl_usuario` (`codigo`, `nombre`, `apellido`, `fechaNacimiento`, `sexo`, `direccion`, `direccion2`, `telefonoPrincipal`, `telefonoSecundario`, `telefonoOtro`, `emailPrincipal`, `contactoNombre`, `contactoApellido`, `contactoDireccion`, `contactoDireccion2`, `contactoTelefono`, `contrasena`, `perfil`, `foto`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);';
+        $sql = 'INSERT INTO `tbl_usuario` (cedula, `codigo`, `nombre`, `apellido`, `fechaNacimiento`, `sexo`, `direccion`, `direccion2`, `telefonoPrincipal`, `telefonoSecundario`, `telefonoOtro`, `emailPrincipal`, `contactoNombre`, `contactoApellido`, `contactoDireccion`, `contactoDireccion2`, `contactoTelefono`, `contrasena`, `perfil`, `foto`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
         $UsuarioVO = new UsuarioVO();
+        $UsuarioVO->setCedula($array->cedula);    
         $UsuarioVO->setCodigo($array->codigo);
         $UsuarioVO->setNombre($array->nombre);
         $UsuarioVO->setApellido($array->apellido);
@@ -25,7 +26,7 @@ class UsuarioDAO {
         $UsuarioVO->setContrasena($array->contrasena);
         $UsuarioVO->setFoto($array->foto);
 
-        if (count((array) $array, COUNT_RECURSIVE) > 10) {
+        if (count((array) $array, COUNT_RECURSIVE) > 11) {
 
             $UsuarioVO->setDireccion2($array->direccion2);
             $UsuarioVO->setTelefonoSecundario($array->telefonoSecundario);
@@ -50,6 +51,7 @@ class UsuarioDAO {
             $UsuarioVO->setPerfil("");
         }
 
+        $cedula= $UsuarioVO->getCedula();
         $codigo = $UsuarioVO->getCodigo();
         $nombre = $UsuarioVO->getNombre();
         $apellido = $UsuarioVO->getApellido();
@@ -71,7 +73,7 @@ class UsuarioDAO {
         $perfil = $UsuarioVO->getPerfil();
         $foto = $UsuarioVO->getFoto();
 
-        $stmp->bind_param("isssbssssssssssssss", $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $direccion2, $telefonoPrincipal, $telefonoSecundario, $telefonoOtro, $emailPrincipal, $contactoNombre, $contactoApellido, $contactoDireccion, $contactoDireccion2, $contactoTelefono, $contrasena, $perfil, $foto);
+        $stmp->bind_param("iisssbssssssssssssss",$cedula, $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $direccion2, $telefonoPrincipal, $telefonoSecundario, $telefonoOtro, $emailPrincipal, $contactoNombre, $contactoApellido, $contactoDireccion, $contactoDireccion2, $contactoTelefono, $contrasena, $perfil, $foto);
 
         $this->respuesta($conn, $stmp);
     }
@@ -384,7 +386,6 @@ class UsuarioDAO {
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
         
-        
         $UsuarioVO = new UsuarioVO();
         $UsuarioVO->setCodigo($array->codigo);
         $UsuarioVO->setContrasena($array->contrasena);
@@ -396,5 +397,4 @@ class UsuarioDAO {
 
         $this->respuesta($conn, $stmp);
     }
-
 }

@@ -18,10 +18,8 @@ session_start();
         <script src="../js/MiLogica.js" type="text/javascript"></script>
         <link href="../css/fileuploader.css" rel="stylesheet" type="text/css"/>
 
-
         <link rel="stylesheet" href="../css/jquery.fileupload.css">
         <link rel="stylesheet" href="../css/jquery.fileupload-ui.css">
-
 
         <script src="../js/jquery.fileupload-image.js" type="text/javascript"></script>
         <title>BiblioCur</title>
@@ -88,14 +86,13 @@ session_start();
                                 <label for="inputEmail4">Reseña (*)</label>
                                 <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
                             </div>
-
                         </div>
                     </div>
+                    
+                    
                     <button  class="btn btn-primary" id="btnRegistrar">Reservar</button>
                     <button  class="btn btn-primary" id="btnLimpiar">Volver</button>
                 </div>
-
-
             </section>
         </div>
         <footer > 

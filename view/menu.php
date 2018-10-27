@@ -1,6 +1,6 @@
 <?php
 if ($_POST) {
-    session_start();//inicio, quienes somos , prestamos ?? libro ?? video beam,noticias,contactos
+    session_start(); //inicio, quienes somos , prestamos ?? libro ?? video beam,noticias,contactos
     ?>
     <style>
         .dropdown-submenu {
@@ -21,6 +21,7 @@ if ($_POST) {
                         <?php echo $_SESSION["usuario"]["nombre"]; ?>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="Multa.php">Multa</a> 
                         <a class="dropdown-item" href="view/CambiarClave.php">Cambiar Contraseña</a>
                         <a class="dropdown-item" href="view/configuracion.php">Configuración</a>
                         <a class="dropdown-item" href="cerrarSesion.php">Cerrar Sesión</a>
@@ -68,13 +69,23 @@ if ($_POST) {
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="view/PrestamoLibro.php">Libro</a>
                             <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
+                            <a class="dropdown-item" href="#">Prestamo Interbibliotecario</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Reserva
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="view/PrestamoLibro.php">Libro</a>
+                            <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
                         </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Noticias</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contactanos</a>
+                        <a class="nav-link" href="view/Contactanos.php">Contactanos</a>
                     </li>
                     <?php if ($_SESSION["usuario"]["perfil"] == "administrador") { ?>
                         <li class="nav-item dropdown">

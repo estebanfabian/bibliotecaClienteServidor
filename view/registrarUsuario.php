@@ -67,16 +67,20 @@ session_start();
                         <fieldset class="border p-1">
                             <legend  class="w-auto">Datos de Usuario</legend>
                             <div class="form-row">
-
+                                <div class="form-group col-md-2">
+                                    <label for="inputEmail4">Cedula (*)</label>
+                                    <input type="tetx" class="form-control" id="cedula" name ="cedula" placeholder="Cedulad">
+                                </div>
+                                
                                 <div class="form-group col-md-2">
                                     <label for="inputEmail4">Código (*)</label>
                                     <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <label for="inputEmail4">Nombres (*)</label>
                                     <input type="tetx" class="form-control" id="nombre" name="nombre" placeholder="Nombres" >
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <label for="inputEmail4">Apellidos (*)</label>
                                     <input type="tetx" class="form-control" id="apellido" name="apellido" placeholder="Apellidos" >
                                 </div>

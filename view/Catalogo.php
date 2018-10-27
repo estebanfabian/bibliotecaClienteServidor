@@ -27,7 +27,7 @@ session_start();
                 <div id = "cabezara"></div>
                 <script src="../js/loginNormal.js" type="text/javascript"></script>
             <?php } ?> 
-            <script src="../js/carga.js" type="text/javascript"></script>
+
         </header>
         <div class ="container ">
             <section class ="main row">
@@ -64,19 +64,21 @@ session_start();
 
                     <form class="form-inline">
                         <div class="form-group ">
-                            <label for="exampleFormControlSelect1">Buscar por :</label>
-                            <select class="form-control " id="exampleFormControlSelect1">
-                                <option>Isbn</option>
-                                <option>Autor</option>
-                                <option>Titulo</option>
-                                <option>Editorial</option>
-                            </select> 
-                            <input type="search" class="input-sm form-control " placeholder="Búsqueda">
-                            <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Buscar</button>
+                            <label for="exampleFormControlSelect1">Buscar por  :</label> 
+
+                            <select name="Filtro" class="form-control" id="filtro">
+                                <option value="" disabled selected>Seleccione un Filtro de busqueda</option>
+                                <option value="Isbn">Isbn</option>
+                                <option value="Autor">Autor</option>
+                                <option value="Titulo">Titulo</option>
+                                <option value="Editorial">Editorial</option>
+                            </select>
+                            <input type="search" class="input-sm form-control " placeholder="Búsqueda" id = "txtBusqueda">
+                            <button type="submit" id ="BtnFiltro" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Buscar</button>
                         </div>
                     </form>
-                    
-                    <table class="table table-bordered table-dark" id ="tabla1" >
+
+                    <table class="table table-bordered table-dark"  >
                         <thead>
                             <tr>
                                 <th scope="col">isbn</th>
@@ -85,21 +87,24 @@ session_start();
                                 <th scope="col">Estado</th>
                             </tr>
                         </thead>
-                        <tbody id="respuesta">
+                        <tbody id ="tabla1">
                         </tbody>
                     </table>
                 </div>
                 <div class="offset-md-3" >
                     <div class= "align-self-center">
                         <nav aria-label="Page navigation example">
-                           <ul class="pagination" id="paginador"></ul>
-                        </nav></div></div>
+                            <ul class="pagination" id="paginador"></ul>
+                        </nav>
+                    </div>
+                </div>
             </section>
         </div>
         <footer > 
             <div id = "pie">
             </div>
         </footer>
+        <script src="../js/carga.js" type="text/javascript"></script>
         <script src="../js/paginator.min.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

@@ -62,7 +62,12 @@ session_start();
                 </aside>
                 <div class = "col-md-9">
                     <h3>BiblioCur</h3> 
-                    <p align="justify">Biblocur es un proyecto que nace de la necesidad de mejora... bka bla bla</p>
+                    <p align="justify">En este proyecto recolectamos información de la biblioteca de la universidad por medio de encuestas, entrevistas y observaciones, el cual nos brinda información muy importante para llegar a una problemática que tienen los usuarios con los recursos bibliográficos y tecnológicos para desarrollo de sus estudios.</p>
+                    <p align="justify">La problemática que se desarrolla en el proyecto, es el manejo de la página web que no tiene una interfaz agradable para los usuarios. además que el módulo de préstamo interbibliotecario está en otra parte que no es la página de la biblioteca, además del difícil acceso a los recursos por motivo de la distancia que hay de una sede a la otra; como es el caso de los estudiantes de ingenierías y ciencias básicas, por este motivo se crea una aplicación en versión beta, realizando mejoras en la parte de entorno gráfico, además de integrar los módulos existentes como es el préstamo bibliotecario e interbibliotecario para mejorar la experiencia del usuario.</p>
+                    <p align="justify">Teniendo en cuenta que no se puede reservar material tecnológico a través de la página, implementamos la opción de hacer estas reservas a través de la red, mucho más fácil para los estudiantes y/o profesores a la hora de desarrollar clase.</p>
+                    <p align="justify">La página web debe tener seguridad a la hora de ingresar, observamos que después de varios intentos en ingresar con datos falsos, no nos bloquea la opción por tal motivo en la versión beta que realizamos después de tres intentos fallidos no nos deja ingresar más datos e intentos para acceder.</p>
+                    <p align="justify">Con la versión beta de la página web de la biblioteca de la universidad editamos el entorno gráfico, con mejoras En la parte De seguridad que garantice tranquilidad al usuario al dar información personal en la web, Para llegar a una web Segura hicimos una base de datos y la conectamos con la parte gráfica y la parte lógica Teniendo en cuenta la seguridad de la información.</p>
+                    <p align="justify">Utilizamos varias herramientas para la ejecución del proyecto, como fueron herramientas físicas, tecnológicas entre ellas software de desarrollo los cuales, algunos de ellos versión beta y otros de licencia libre. </p>
                 </div>  
 
             </section>

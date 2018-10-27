@@ -71,6 +71,52 @@ $(document).ready(function () {
             }
         });
     }
+//funcion para reservar 
+    function reserva() {
+
+        var formulario = {
+            codigo: $("#codigo").val()
+        };
+        myJson.push(formulario);
+        var myString = JSON.stringify(formulario);
+        var url = "../Conta_res";
+        var parameto = myString;
+        var metodo = function (respuesta) {
+            var data = $.parseJSON(respuesta);
+            if (data[0]['count'] < 4) {
+                if (moment().format("dddd") == "Sunday") {
+                    var fechaReserva = moment().add(2, "days").format('YYYY/MM/DD hh:mm:ss');
+                } else {
+                    var fechaReserva = moment().add(1, "days").format('YYYY/MM/DD hh:mm:ss');
+                }
+                var txt = document.getElementById("isbnReserva");
+                txt = (txt.innerHTML);
+                var formulario = {
+                    diaPrestamo: moment().format('YYYY/MM/DD hh:mm:ss'),
+                    isbn: txt,
+                    codigo: $("#codigo").val(),
+                    diaEntrega: fechaReserva
+                };
+                myJson.push(formulario);
+                var myString = JSON.stringify(formulario);
+                var url = "../reserva";
+                var parameto = myString;
+                var metodo = function (respuesta) {
+                    var data = $.parseJSON(respuesta);
+                    if (data.sucess == "ok") {
+                        alert("La reserva del libro fue un éxito");
+                        location.href = "../index.php"
+                    } else {
+                        alert("Hubo un problema con la reserva intentolo mas tarde");
+                    }
+                };
+                fajax(url, parameto, metodo);
+            } else {
+                alert("tiene el numero maximo de reservas o prestamos")
+            }
+        };
+        fajax(url, parameto, metodo);
+    }
 // funcion para registrar usuario
     function registarUsuario() {
         $("#registar_usuario").validate({
@@ -129,6 +175,7 @@ $(document).ready(function () {
 //                var NombreFoto = $("#file").val();
 //                NombreFoto = palabra(NombreFoto);
 //                var formulario = {
+//                        cedula: $("#cedula").val(),
 //                    codigo: $("#codigo").val(),
 //                    nombre: $("#nombre").val(),
 //                    apellido: $("#apellido").val(),
@@ -233,6 +280,7 @@ $(document).ready(function () {
     }
 // funcion clear de registrar usuario
     function LimpiarUsuario() {
+        $("#cedula").val("");
         $("#codigo").val("");
         $("#nombre").val("");
         $("#apellido").val("");
@@ -277,21 +325,15 @@ $(document).ready(function () {
         var formulario = {
             photo: file
         };
-
-
         myJson.push(formulario);
         var myString = JSON.stringify(formulario);
-
         var url = "../Controlador/Usuario/Cargar_Foto.php";
         var parameto = file;
         var metodo = function () {
         };
         console.log(formulario);
-
         fajax(url, parameto, metodo);
         alert("dentro de la funciona");
-
-
         console.log(file);
 //        if (file) {
 //            var reader = new FileReader();
@@ -339,8 +381,6 @@ $(document).ready(function () {
             var myString = JSON.stringify(formulario);
             var url1 = "CambioClave";
             var parametro1 = myString;
-
-
             var metodo1 = function (respuesta) {
                 var data = $.parseJSON(respuesta);
                 if (data.sucess == "ok") {
@@ -367,7 +407,6 @@ $(document).ready(function () {
         var ucase = new RegExp("[A-Z]+");
         var lcase = new RegExp("[a-z]+");
         var num = new RegExp("[0-9]+");
-
         if ($("#password1").val().length >= 6) {
             cambio++;
             $("#8char").removeClass("glyphicon-remove");
@@ -435,41 +474,36 @@ $(document).ready(function () {
         console.log("entra");
         alert("mesaje");
     });
-
     $("#BTNIngresar").click(function () {
         login();
     });
-
     $("#CerrarSesion").click(function () {
         location.href = "cerrarSesion.php";
     });
-
     $("#Enviar_correo").click(function () {
         Correo();
     });
-
     $("#btnRegistrar").click(function () {
         cargarFoto();
     });
-
     $("#btnLimpiar").click(function () {
         cargarFoto();
     });
-
     $("#login_lost_btn").click(function () {
         modalAnimate($formLogin, $formLost);
     });
-
     $("#lost_login_btn").click(function () {
         modalAnimate($formLost, $formLogin);
     });
-
     $("#btnCatalogoLinea").click(function () {
-        // Catalogo();
+// Catalogo();
         location.href = "view/Catalogo.php";
     });
-
-    
+    $("#btnResercarLibro").click(function () {
+        reserva();
+    });
+    $("#btnVolverCatalogo").click(function () {
+        location.href = "Catalogo.php"
+    });
 //-------------------------------------------------------
-
 });
