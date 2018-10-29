@@ -3,29 +3,27 @@
 class ComputadorDAO {
 
     function CrearComputador($array) {
+
+        $sql = 'INSERT INTO `tbl_computador` (`idcomputador`, `fabricante`, `observaciones`, `cargadorId`) VALUES (?,?,?,?);';
+
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
         $computadorVo = new ComputadorVO();
         $computadorVo->setIdcomputador($array->idcomputador);
         $computadorVo->setFabricante($array->fabricante);
         $computadorVo->setObservaciones($array->observaciones);
         $computadorVo->setCargadorId($array->cargadorId);
 
-        if ($computadorVo->getIdcomputador() != "null") {
-            $this->ModificarComputador($computadorVo);
-        } else {
-            $sql = 'INSERT INTO `tbl_computador` (`idcomputador`, `fabricante`, `observaciones`, `cargadorId`) VALUES (?,?,?,?);';
-            $BD = new ConectarBD();
-            $conn = $BD->getMysqli();
-            $stmp = $conn->prepare($sql);
+        $idcomputador = $computadorVo->getIdcomputador();
+        $fabricante = $computadorVo->getFabricante();
+        $observaciones = $computadorVo->getObservaciones();
+        $cargadorId = $computadorVo->getCargadorId();
 
-            $idcomputador = $computadorVo->getIdcomputador();
-            $fabricante = $computadorVo->getFabricante();
-            $observaciones = $computadorVo->getObservaciones();
-            $cargadorId = $computadorVo->getCargadorId();
+        $stmp->bind_param("issi", $idcomputador, $fabricante, $observaciones, $cargadorId);
 
-            $stmp->bind_param("ssss", $idcomputador, $fabricante, $observaciones, $cargadorId);
-
-            $this->Respuesta($conn, $stmp);
-        }
+        $this->Respuesta($conn, $stmp);
     }
 
     function ModificarComputador($array) {
@@ -46,7 +44,7 @@ class ComputadorDAO {
         $observaciones = $computadorVo->getObservaciones();
         $cargadorId = $computadorVo->getCargadorId();
 
-        $stmp->bind_param("ssss", $fabricante, $observaciones, $cargadorId, $idcomputador);
+        $stmp->bind_param("ssii", $fabricante, $observaciones, $cargadorId, $idcomputador);
 
         $this->Respuesta($conn, $stmp);
     }
@@ -76,6 +74,36 @@ class ComputadorDAO {
             $respuesta["sucess"] = "no";
         }
 
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
+    function buscar($array) {
+        $sql = "SELECT `idcomputador`, `fabricante`, `observaciones`, `cargadorId` FROM `tbl_computador` WHERE `idcomputador` = ?";
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $computadorVo = new ComputadorVO();
+        $computadorVo->setIdcomputador($array->idcomputador);
+
+        $idcomputador = $computadorVo->getIdcomputador();
+
+        $stmp->bind_param("i", $idcomputador);
+        $stmp->execute();
+        
+        $stmp->bind_result($idcomputador, $fabricante, $observaciones, $cargadorId);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["idcomputador"] = $idcomputador;
+            $tmp["fabricante"] = $fabricante;
+            $tmp["cargadorId"] = $cargadorId;
+            $tmp["idcomputador"] = $idcomputador;
+            $tmp["observaciones"] = $observaciones;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);

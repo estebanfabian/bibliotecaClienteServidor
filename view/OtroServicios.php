@@ -17,9 +17,6 @@ session_start();
         <script src="../js/localization/messages_es.js" type="text/javascript"></script>
         <script src="" type="text/javascript"></script>
         <script src="../gato.jsp" type="text/javascript"></script>
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
         <title>BiblioCur</title>
     </head>
@@ -57,41 +54,34 @@ session_start();
                                 js.id = id;
                                 js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.0';
                                 fjs.parentNode.insertBefore(js, fjs);
-                            }(document, 'script', 'facebook-jssdk'));
-                        </script>
+                            }(document, 'script', 'facebook-jssdk'));</script>
+
                         <!-- Your embedded comments code -->
                         <div class="fb-comment-embed" data-href="https://www.facebook.com/zuck/posts/10102577175875681?comment_id=1193531464007751&amp;reply_comment_id=654912701278942" data-width="220" data-include-parent="false"></div>
                     </div>
                 </aside>
                 <div class = "col-md-9">
-                    <h2>Cambio de contraseña</h2>
-                    <br><br>
-                    <p>Se recomienda realizar el cambio de clave preriodicamente y para su mayor segurdad.</p>
-                    <form method="post" id="passwordForm">
-                        <label for="other">Codigo</label>
-                        <input type="text" class="input-lg form-control" name="codigo" id="codigo" value=" <?php echo $_SESSION ['usuario']['codigo'] ?>" readonly  >
-
-                        <input type="password" class="input-lg form-control" name="password1" id="password1" placeholder="Nueva Clave" autocomplete="off"  >
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 6 caracteres largos<br>
-                                <span id="ucase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Una letra mayúscula
-                            </div>
-                            <div class="col-sm-6">
-                                <span id="lcase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Una letra minúscula
-                                <br>
-                                <span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Un número
-                            </div>
-                        </div>
-                        <input type="password" class="input-lg form-control" name="password2" id="password2" placeholder="Repetir Clave" autocomplete="off">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span>Las contraseñas coinciden
-                            </div>
-                        </div>
-                        <input  id="CambioClave" class="col-xs-12 btn btn-primary btn-load btn-lg" data-loading-text="Changing Password..." value="Cambio de contraseña">
-
-                    </form>
+                    <div id="serv_otros" class="content_inter mostrar">
+                        <p>	
+                        </p><h4>Otros Servicios</h4>
+                        <h5> Cartas de Presentación</h5>
+                        Las cartas de presentación permiten a la comunidad republicana el acceso a otras bibliotecas de la ciudad.
+                        <br>El servicio puede solicitarse en la biblioteca o diligenciando el formato que encontrará en el sistema académico en la sección de Biblioteca, <a target="_blank" href="https://academiaurepublicana.org/ArKa/test/new_login.php">aquí</a>
+                        <h5> Elaboración de Bibliografías</h5>
+                        Recopilación de las reseñas bibliográficas sobre un tema específico, a solicitud del usuario, a partir de las colecciones de la Biblioteca de la Corporación.
+                        <br>El servicio puede solicitarse en la biblioteca o diligenciando el formato que encontrará en el sistema académico en la sección de Biblioteca, <a target="_blank" href="https://academiaurepublicana.org/ArKa/test/new_login.php">aquí</a>
+                        <h5> Formación de Usuarios</h5>
+                        Inducciones y capacitaciones sobre el uso y el manejo de los servicios y recursos de la Biblioteca.
+                        <br>Las inducciones están dirigidas a los docentes y los estudiantes nuevos y consiste en una revisión general de los servicios presenciales y en línea que ofrece la Biblioteca.
+                        <br>Mediante las capacitaciones se ofrece a estudiantes y docentes la posibilidad de aprender a utilizar el Catálogo en línea y las bases de datos. Las capacitaciones se pueden solicitar personalmente en la Biblioteca.
+                        <h5> Servicio de Referencia</h5>
+                        Es el servicio de asesoría que el personal de la Biblioteca presta de forma individualizada a un usuario, para la búsqueda y recuperación de información.
+                        <h5> Préstamo de equipos audiovisuales</h5>
+                        La Biblioteca cuenta con herramientas como video beam y computadores portátiles, disponibles para apoyar las actividades académicas de la comunidad republicana. La reserva de estos equipos debe hacerse directamente en la Biblioteca, con mínimo 3 días de anticipación a la actividad.
+                        <h5> Red Inalámbrica</h5>
+                        Contamos con red inalámbrica en todos los espacios de la Biblioteca para la conexión de equipos móviles.
+                        <p></p>
+                    </div>
                 </div>
             </section>
         </div>

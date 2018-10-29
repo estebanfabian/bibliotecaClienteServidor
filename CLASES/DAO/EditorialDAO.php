@@ -90,4 +90,5 @@ class EditorialDAO {
         echo json_encode($respuesta);
     }
 
+    function BuscarEditoriala(){}
 }

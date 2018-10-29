@@ -62,22 +62,22 @@ session_start();
                 </aside>
                 <div class = " col-9 " >
 
-                    <form class="form-inline">
+                    <form class="form-inline" onsubmit="return false">
                         <div class="form-group ">
                             <label for="exampleFormControlSelect1">Buscar por  :</label> 
-
+                            &nbsp
                             <select name="Filtro" class="form-control" id="filtro">
                                 <option value="" disabled selected>Seleccione un Filtro de busqueda</option>
                                 <option value="Isbn">Isbn</option>
                                 <option value="Autor">Autor</option>
                                 <option value="Titulo">Titulo</option>
                                 <option value="Editorial">Editorial</option>
-                            </select>
+                            </select>&nbsp
                             <input type="search" class="input-sm form-control " placeholder="Búsqueda" id = "txtBusqueda">
-                            <button type="submit" id ="BtnFiltro" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Buscar</button>
+                            &nbsp <button type="submit" id ="BtnFiltro" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Buscar</button>
                         </div>
                     </form>
-
+                    <br>
                     <table class="table table-bordered table-dark"  >
                         <thead>
                             <tr>

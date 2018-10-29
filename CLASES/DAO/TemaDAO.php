@@ -3,26 +3,20 @@
 class TemaDAO {
 
     function CrearTema($array) {
+        $sql = "INSERT INTO `tbl_temas`( `nombreTema`, `descripcion`) VALUES (?,?);";
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
         $TemaVo = new TemaVO();
-        $TemaVo->setIdTema($array->idTema);
         $TemaVo->setNombreTema($array->nombreTema);
-        $TemaVo->setDescricion($array->Descricion);
+        $TemaVo->setDescripcion($array->Descricion);
 
-        if ($TemaVo->setIdTema() != "null") {
-            $this->ModificarTema($TemaVo);
-        } else {
-            $sql = 'INSERT INTO `tbl_temas`(`idTema`, `nombreTema`, `Descricion`) VALUES (?,?,?);';
-            $BD = new ConectarBD();
-            $conn = $BD->getMysqli();
-            $stmp = $conn->prepare($sql);
+        $nombreTema = $TemaVo->getNombreTema();
+        $Descricion = $TemaVo->getDescripcion();
 
-            $idLibroTema = $TemaVo->getIdLibroTema();
-            $idTema = $TemaVo->getIdTema();
-            $nombreTema = $TemaVo->getNombreTema();
-            $Descricion = $TemaVo->getDescricion();
-
-            $stmp->bind_param("iss", $idTema, $nombreTema, $Descricion);
-        }
+        $stmp->bind_param("ss", $nombreTema, $Descricion);
+        $this->Respuesta($conn, $stmp);
     }
 
     function ModificarTema($array) {
@@ -31,7 +25,7 @@ class TemaDAO {
         $TemaVo->setNombreTema($array->nombreTema);
         $TemaVo->setDescricion($array->Descricion);
 
-        $sql = 'UPDATE `tbl_temas` SET `nombreTema`=?,`Descricion`=? WHERE `idTema`=?;';
+        $sql = 'UPDATE `tbl_temas` SET `Descricion`=? WHERE `nombreTema`=?;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -45,16 +39,17 @@ class TemaDAO {
 
     function EliminarTema($array) {
         $TemaVo = new TemaVO();
-        $TemaVo->setIdTema($array->idTema);
+        $TemaVo->setIdTema($array->nombreTema);
 
         $sql = 'DELETE FROM `tbl_temas` WHERE `idTema`=?;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
-        $idTema = $TemaVo->getIdTema();
+        $idTema = $TemaVo->getNombreTema();
 
-        $stmp->bind_param("i", $idTema);
+        $stmp->bind_param("s", $idTema);
+        $this->Respuesta($conn, $stmp);
     }
 
     function Respuesta($conn, $stmp) {
@@ -68,6 +63,33 @@ class TemaDAO {
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
+    }
+
+    function BuscarTema($array) {
+        $sql = "SELECT `descripcion` FROM `tbl_temas` WHERE `nombreTema` = ?";
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $TemaVo = new TemaVO();
+        $TemaVo->setNombreTema($array->nombreTema);
+
+        $nombreTema = $TemaVo->getNombreTema();
+
+        $stmp->bind_param("s", $nombreTema);
+        $stmp->execute();
+        
+        $stmp->bind_result( $Descricion);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["nombreTema"] = $nombreTema;
+            $tmp["Descricion"] = $Descricion;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($tmp);
     }
 
 }

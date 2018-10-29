@@ -19,7 +19,7 @@ if ($_POST) {
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?php echo $_SESSION["usuario"]["nombre"]; ?>
-                    </button>
+                    </button> 
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="Multa.php">Multa</a> 
                         <a class="dropdown-item" href="CambiarClave.php">Cambiar Contraseña</a>
@@ -29,8 +29,6 @@ if ($_POST) {
                 </div>
             </div>
         </div>
-
-
         <div class="row">
             <div class="col-4">
                 <img src="../img/recurso/cur.png">
@@ -60,6 +58,7 @@ if ($_POST) {
                                 <a class="dropdown-item" href="misionYvision.php">Misión y Visión </a>
                                 <a class="dropdown-item" href="AcercaBiblioCur.php">Acerca de BilioCur</a>
                                 <a class="dropdown-item" href="http://urepublicana.edu.co">Cur</a>
+                                <a class="dropdown-item" href="OtroServicios.php">Otros servicios</a>
                             </div>
                         </li>
                         <?php if (($_SESSION["usuario"]["perfil"] == "empleado" ) || ($_SESSION["usuario"]["perfil"] == "empleado")) { ?>

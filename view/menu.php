@@ -18,7 +18,7 @@ if ($_POST) {
                 <img src="img/usuario/icono_foto.png" class="rounded float-left" alt=""  width="40" height="40"/>
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?php echo $_SESSION["usuario"]["nombre"]; ?>
+                        <?php echo $_SESSION["usuario"]["perfil"]; ?>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="Multa.php">Multa</a> 
@@ -60,6 +60,7 @@ if ($_POST) {
                             <a class="dropdown-item" href="view/misionYvision.php">Misión y Visión </a>
                             <a class="dropdown-item" href="view/AcercaBiblioCur.php">Acerca de BilioCur</a>
                             <a class="dropdown-item" href="http://urepublicana.edu.co">Cur</a>
+                            <a class="dropdown-item" href="/view/OtroServicios.php">Otros servicios</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -69,7 +70,7 @@ if ($_POST) {
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="view/PrestamoLibro.php">Libro</a>
                             <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
-                            <a class="dropdown-item" href="#">Prestamo Interbibliotecario</a>
+                            <a class="dropdown-item" href="view/PrestamoInter.php">Prestamo Interbibliotecario</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -87,6 +88,10 @@ if ($_POST) {
                     <li class="nav-item">
                         <a class="nav-link" href="view/Contactanos.php">Contactanos</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="view/Historial.php">Historial</a>
+                    </li>
                     <?php if ($_SESSION["usuario"]["perfil"] == "administrador") { ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -95,14 +100,13 @@ if ($_POST) {
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="view/registrarUsuario.php">Registrar Usuario</a>
                                 <a class="dropdown-item" href="view/registrarVideoBeam.php">Registrar Video Beam</a>
-                                <a class="dropdown-item" href="#">Material audiovisual</a>
+                                <a class="dropdown-item" href="view/RegistrarLibro.php">Registrar libros</a>
                             </div>
                         </li>
-                </div>
-                <div>
-                </div>
-            <?php } ?>
-            </ul>
+                    <?php } ?> 
+                </ul>
+            </div>
+        </nav>
     </div>
     <?php
 } else {

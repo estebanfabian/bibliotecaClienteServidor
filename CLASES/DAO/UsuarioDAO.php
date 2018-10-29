@@ -14,7 +14,7 @@ class UsuarioDAO {
         $stmp = $conn->prepare($sql);
 
         $UsuarioVO = new UsuarioVO();
-        $UsuarioVO->setCedula($array->cedula);    
+        $UsuarioVO->setCedula($array->cedula);
         $UsuarioVO->setCodigo($array->codigo);
         $UsuarioVO->setNombre($array->nombre);
         $UsuarioVO->setApellido($array->apellido);
@@ -51,7 +51,7 @@ class UsuarioDAO {
             $UsuarioVO->setPerfil("");
         }
 
-        $cedula= $UsuarioVO->getCedula();
+        $cedula = $UsuarioVO->getCedula();
         $codigo = $UsuarioVO->getCodigo();
         $nombre = $UsuarioVO->getNombre();
         $apellido = $UsuarioVO->getApellido();
@@ -73,7 +73,7 @@ class UsuarioDAO {
         $perfil = $UsuarioVO->getPerfil();
         $foto = $UsuarioVO->getFoto();
 
-        $stmp->bind_param("iisssbssssssssssssss",$cedula, $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $direccion2, $telefonoPrincipal, $telefonoSecundario, $telefonoOtro, $emailPrincipal, $contactoNombre, $contactoApellido, $contactoDireccion, $contactoDireccion2, $contactoTelefono, $contrasena, $perfil, $foto);
+        $stmp->bind_param("iisssbssssssssssssss", $cedula, $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $direccion2, $telefonoPrincipal, $telefonoSecundario, $telefonoOtro, $emailPrincipal, $contactoNombre, $contactoApellido, $contactoDireccion, $contactoDireccion2, $contactoTelefono, $contrasena, $perfil, $foto);
 
         $this->respuesta($conn, $stmp);
     }
@@ -283,7 +283,7 @@ class UsuarioDAO {
     }
 
     public function Mostrar($array) {
-        
+
         $sql = "SELECT codigo, `nombre`, `apellido`, `fechaNacimiento`, `sexo`, `direccion`, `telefonoPrincipal`, `emailPrincipal`,  `contrasena`,`foto`  FROM tbl_usuario  WHERE `codigo`=? ";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
@@ -385,7 +385,7 @@ class UsuarioDAO {
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
-        
+
         $UsuarioVO = new UsuarioVO();
         $UsuarioVO->setCodigo($array->codigo);
         $UsuarioVO->setContrasena($array->contrasena);
@@ -397,4 +397,40 @@ class UsuarioDAO {
 
         $this->respuesta($conn, $stmp);
     }
+
+    function Historial($array) {
+        $sql = "SELECT `diaReserva`,`diaEntrega`,`diaPrestamo`,tbl_libro.titulo,tbl_libro.isbn,`renovacion`,`actividad`   FROM `tbl_prestamo`, tbl_libro WHERE codigo = ? and tbl_libro.isbn = tbl_prestamo.isbn";
+
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $UsuarioVO = new UsuarioVO();
+        $UsuarioVO->setCodigo($array->codigo);
+
+        $codigo = $UsuarioVO->getCodigo();
+
+        $stmp->bind_param("i", $codigo);
+
+        $stmp->execute();
+        $stmp->bind_result($Dreserva, $Dentrega, $Dprestamo, $titulo,$isbn, $renovacion, $estado);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["Dreserva"] = $Dreserva;
+            $tmp["Dentrega"] = $Dentrega;
+            $tmp["Dprestamo"] = $Dprestamo;
+            $tmp["titulo"] = $titulo;
+            $tmp["isbn"] = $isbn;
+            $tmp["renovacion"] = $renovacion;
+            $tmp["estado"] = $estado;
+
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
 }

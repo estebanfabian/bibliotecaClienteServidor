@@ -24,7 +24,7 @@ class AutorDao {
         }
     }
 
-    private function ModificarAutor($array) {
+     function ModificarAutor($array) {
         $Autorvo = new AutorVO();
         $Autorvo->setIdautor($array->idAutor);
         $Autorvo->setNombreAutor($array->NombreAutor);
@@ -71,4 +71,5 @@ class AutorDao {
         echo json_encode($respuesta);
     }
 
+    function buscarAutor(){}
 }

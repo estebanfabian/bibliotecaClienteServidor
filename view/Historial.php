@@ -17,10 +17,9 @@ session_start();
         <script src="../js/localization/messages_es.js" type="text/javascript"></script>
         <script src="" type="text/javascript"></script>
         <script src="../gato.jsp" type="text/javascript"></script>
-
         <title>BiblioCur</title>
     </head>
-    <body>
+    <body >
         <header > <?php if ($_SESSION) { ?>
                 <div id = "cabezara1"></div>
                 <script src="../js/loginNormal.js" type="text/javascript"></script>
@@ -28,6 +27,7 @@ session_start();
                 <div id = "cabezara"></div>
                 <script src="../js/loginNormal.js" type="text/javascript"></script>
             <?php } ?> 
+
         </header>
         <div class ="container ">
             <section class ="main row">
@@ -60,35 +60,29 @@ session_start();
                         <div class="fb-comment-embed" data-href="https://www.facebook.com/zuck/posts/10102577175875681?comment_id=1193531464007751&amp;reply_comment_id=654912701278942" data-width="220" data-include-parent="false"></div>
                     </div>
                 </aside>
-                <div class = "col-md-9">
-                    <div class="container">
-                        <h4>Solicitud Prestamo Interbibliotecario</h4>
-                        <form method="post">
-                            <div class="col-sm-6 form-group">
-                                <label>Institución Prestamista</label>
-                                <input type="text" class="form-control" name="iPrestamista" autofocus="">	
-                            </div>
-                            <div class="col-sm-6 form-group">
-                                <label>Titulo del Libro</label>
-                                <input type="text" class="form-control" name="tLibro">	
-                            </div>
-                            <div class="col-sm-6 form-group">
-                                <label>Autor</label>
-                                <input type="text" class="form-control" name="autor">	
-                            </div>
-                            <div class="col-sm-6 form-group">
-                                <label># de Clasificación o signatura topográfica</label>
-                                <input type="text" class="form-control" name="nClasificacion">	
-                            </div>
-
-                            <div class="col-sm-3">
-                                <script type="text/javascript">
-                                    document.write("<input type=\"submit\" value=\"Enviar\" name=\"s1\" id=\"button1\" class=\"btn btn-primary btn-block\"/>");
-                                </script><input type="submit" value="Enviar" name="s1" id="button1" class="btn btn-primary btn-block">
-                            </div>
-                        </form>
+                <div class = " col-9 " >
+                    <input type="hidden" name="codigoUsuario" value="<?php echo $_SESSION["usuario"]["codigo"]; ?>" id ="codigoUsuario">
+                    <table class="table table-bordered table-dark"  >
+                        <thead>
+                            <tr>
+                                <th scope="col">dia de reserva</th>
+                                <th scope="col">dia de entrega</th>
+                                <th scope="col">dia de prestamo</th>
+                                <th scope="col">titulo del libro</th>
+                                <th scope="col">estado</th>
+                                  <th scope="col">Resenovacion</th>
+                            </tr>
+                        </thead>
+                        <tbody id ="historialTabla">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="offset-md-3" >
+                    <div class= "align-self-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination" id="paginador"></ul>
+                        </nav>
                     </div>
-
                 </div>
             </section>
         </div>
@@ -96,6 +90,8 @@ session_start();
             <div id = "pie">
             </div>
         </footer>
+        <script src="../js/historial.js" type="text/javascript"></script>
+        <script src="../js/paginator.min.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>

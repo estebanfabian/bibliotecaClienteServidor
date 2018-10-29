@@ -16,7 +16,7 @@ session_start();
         <script src="../js/additional-methods.js" type="text/javascript"></script>
         <script src="../js/localization/messages_es.js" type="text/javascript"></script>
         <script src="" type="text/javascript"></script>
-        <script src="../gato.jsp" type="text/javascript"></script>
+        <script src="../js/MiLogica.js" type="text/javascript"></script>
 
         <title>BiblioCur</title>
     </head>
@@ -63,47 +63,92 @@ session_start();
                 <div class = "col-md-9">
                     <form id="registar_VideoBeam" name ="registar_VideoBeam" method="POST" enctype=" multipart/form-data">
                         <fieldset class="border p-1">
-                            <legend  class="w-auto">Datos de Usuario</legend>
+                            <legend  class="w-auto">Registrar Video Beam</legend>
                             <div class="form-row">
 
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-md-6">
                                     <label for="inputEmail4">Id video Beam (*)</label>
-                                    <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
+                                    <input type="tel" class="form-control" id="idvideoBeam" name ="idvideoBeam" placeholder="Numero de video beam">
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label for="inputEmail4">Fabrica (*)</label>
-                                    <input type="tetx" class="form-control" id="nombre" name="nombre" placeholder="Nombres" >
+                                    <input type="tetx" class="form-control" id="FabricanteVideoBeam" name="FabricanteVideoBeam" placeholder="Fabricante" >
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="inputEmail4">Cable USB (*)</label>
-                                    <input type="tetx" class="form-control" id="apellido" name="apellido" placeholder="Apellidos" >
+                                    <select name="CableUSB" class="form-control" id="CableUSB">
+                                        <option value="" disabled selected>Tiene cable USB</option>
+                                        <option value="b'1'">si</option>
+                                        <option value="b'0'">no</option>
+                                    </select>
                                 </div>
 
-                                <div class="form-group col-md-3">
-                                    <label for="inputPassword4">Cable HDMI  (*)</label>               
-                                    <input type="date" class="form-control"   id="fechaNacimiento" name="fechaNacimiento" placeholder="Fecha de nacimeino" >
+                                <div class="form-group col-md-4">
+                                    <label for="inputPassword4">Cable HDMI  (*)</label>  
+                                    <select name="CableHDMI" class="form-control" id="CableHDMI">
+                                        <option value="" disabled selected>Tiene cable HDMI</option>
+                                        <option value="b'1'">si</option>
+                                        <option value="b'0'">no</option>
+                                    </select>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-md-4">
                                     <label for="exampleSelect1">cable VGA</label>
-                                    <select class="form-control" name="sexo" id="sexo"  >
-                                        <option value="" selected disabled>Sexo</option>
-                                        <option value="1">Masculino</option>
-                                        <option value="0">Femenino</option>
+                                    <select name="CableVGA" class="form-control" id="CableVGA">
+                                        <option value="" disabled selected>Tiene cable VGA</option>
+                                        <option value="b'1'">si</option>
+                                        <option value="b'0'">no</option>
                                     </select>
                                 </div>  
-                                <div class="form-group col-md-6 ">
-                                    <label for="inputAddress">Observaciones(*)</label>
-                                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección" >
+                                <div class="form-group col-md-12 ">
+                                    <label for="inputAddress">Observaciones(*)</label><br>
+                                    <textarea name="comment" form="usrform" placeholder="Observaciones sobre el equipo" id ="txtObservacionesVideoBeam"></textarea>
                                 </div>
                             </div>
                         </fieldset>
-                        <button  class="btn btn-primary" id="btnRegistrar">Registrar</button>
-                        <button  class="btn btn-primary" id="btnLimpiar">Limpiar</button>
+                        <br>
+                        <button  class="btn btn-primary" id="btnRegistrarVideoBeam">Registrar</button>
+                        <button  class="btn btn-primary" id="btnLimpiarVideoBeam">Limpiar</button>
+                        <button  class="btn btn-primary" id="btnActualizarVideoBeam">Actualizar</button>
+                        <button  class="btn btn-primary" id="btnEliminarVideoBeam">Eliminar</button>
+                        <button  class="btn btn-primary" id="btnBuscarVideoBeam">Buscar</button>
+                    </form>
+                    <br>
+                    <form id="registar_Computador" name ="registar_Computador" method="POST" enctype=" multipart/form-data">
+                        <fieldset class="border p-1">
+                            <legend  class="w-auto">Registrar Computador</legend>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label for="inputEmail4"># del computador  (*)</label>
+                                    <input type="tetx" class="form-control" id="SerialComputador" name ="SerialComputador" placeholder="Numero de serial">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputEmail4">Fabrica (*)</label>
+                                    <input type="tetx" class="form-control" id="FabricanteComputador" name="FabricanteComputador" placeholder="Fabricante del equipo" >
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputPassword4"># de Cargador   (*)</label>               
+                                    <input type="text" class="form-control"   id="SerialCargado" name="SerialCargado" placeholder="Numero de cargador" >
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputEmail4">Observaciones  (*)</label>
+                                    <textarea name="comment" form="usrform" placeholder="Observaciones sobre el equipo" id="observacionesComputador"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <br>
+                        <button  class="btn btn-primary" id="btnRegistrarComputador">Registrar</button>
+                        <button  class="btn btn-primary" id="btnLimpiarComputador">Limpiar</button>
+                        <button  class="btn btn-primary" id="btnActualizaComputador">Actualizar</button>
+                        <button  class="btn btn-primary" id="btnEliminarComputador">Eliminar</button>
+                        <button  class="btn btn-primary" id="btnBuscarComputador">Buscar</button>
                     </form>
                 </div>
             </section>
         </div>
         <footer > 
+            <a href=""></a>
+            <a href="../Controlador/Computador/ActualizarComputador.php"></a>
+            <a href="../Controlador/Computador/EliminarComputador.php"></a>
             <div id = "pie">
             </div>
         </footer>

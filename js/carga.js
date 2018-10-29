@@ -15,9 +15,6 @@ $(document).ready(function () {
     set_callback(get_data_callback);
     cargaPagina(0);
 
-    var ejempplo;
-    var ejjj = new Array();
-
     function get_data_callback() {
         $.ajax({
             data: {
@@ -39,8 +36,8 @@ $(document).ready(function () {
             $.each(lista, function (tmp) {
                 $('<tr>' +
                         "<td>" + tmp.isbn + "</td>"
-                        + "<td><img src=" + tmp.imagen + "   width=100 height=100></td>"
-                        + "<td><p> Titulo :" + tmp.titulo + " Autor:" + tmp.nombreAutor + "</p></td>"
+                        + "<td><img src=" + tmp.imagen + "width=100 height=100></td>"
+                        + "<td><p> Titulo :" + tmp.titulo + "Autor:" + tmp.nombreAutor + "</td>"
                         + "<td class ='reservar' post ='" + tmp.isbn + "' >Reservas</td>" +
                         '</tr>').appendTo($("#tabla1"));
 
@@ -70,7 +67,6 @@ $(document).ready(function () {
         var url = "../controlador/Libro/MasBuscado.php";
         var parametro = "hla";
         var metodo = function (respuesta) {
-            console.log(respuesta);
             var data = $.parseJSON(respuesta);
             var limite = data.length;
             for (var i = 0; i < limite; i++) {
@@ -82,15 +78,43 @@ $(document).ready(function () {
         fajax(url, parametro, metodo);
     }
 
-    function item(tmp) {
+    function item(tmp, i) {
+        if (i == 0) {
+            $("#tabla1").empty();
+            tabla(tmp);
+        } else {
+            tabla(tmp);
+        }
+    }
+    function  tabla(tmp) {
         var estr = $("<tr></tr>");
         estr.append("<td>" + tmp.isbn + "</td>"
                 + "<td><img src=" + tmp.imagen + "   width=100 height=100></td>"
-                + "<td><p> Titulo :" + tmp.titulo + " Autor:" + tmp.nombreAutor + " Editorial:" + tmp.editorial + "</p></td>"
+                + "<td><p> Titulo :" + tmp.titulo + "<br> Autor:" + tmp.autor + " Editorial:" + tmp.editorial + "</p></td>"
                 + "<td class ='reservar' post ='" + tmp.isbn + "' >Reservas</td>");
         $("#tabla1").append(estr);
     }
 
+    function busquedaFiltro(array) {
+        var formulario = {
+            Consulta: $("#txtBusqueda").val()
+        };
+        myJson.push(formulario);
+        var myString1 = JSON.stringify(formulario);
+        var ur = "../" + array;
+        var parametro1 = myString1;
+        $("#ListaTabla").html("");
+        var meto = function (respuesta) {
+            //alert("Dentro de metodos");
+            var data = $.parseJSON(respuesta);
+            var limite = data.length;
+            for (var i = 0; i < limite; i++) {
+                var local = data[i];
+                item(local, i);
+            }
+        };
+        fajax(ur, parametro1, meto);
+    }
     function reservar() {
         $(".reservar").click(function () {
 
@@ -116,55 +140,31 @@ $(document).ready(function () {
         switch ($("#filtro").val()) {
             case "Isbn":
             {
-                     busquedaFiltro(tablaXid) 
-
-             
+                busquedaFiltro("tablaXid");
                 break;
             }
             case "Autor":
             {
-                
+                busquedaFiltro("tablaXautor");
                 break;
             }
             case "Titulo":
             {
-                
+                busquedaFiltro("tablaXtitulo");
                 break;
             }
             case "Editorial":
             {
-           
-                ;
+                busquedaFiltro("tablaXEditorial");
                 break;
             }
             default:
             {
-                 alert("Escoja un filtro para poder hacer la busqueda");
+                alert("Escoja un filtro para poder hacer la busqueda");
                 break;
             }
         }
-        
+
     });
-        
-    
-    function busquedaFiltro(array) {
-
-        var formulario = {
-                Consulta: $("#txtBusqueda").val()
-            };
-            myJson.push(formulario);
-            var myString = JSON.stringify(formulario);
-            var url = "../"+array ;
-            var parametro = myString;
-            var metodo = function (respuesta) {
-                var data = $.parseJSON(respuesta);
-                location.href = "ReservarLibro.php?isbn=" + data[0]['isbn'] + "&titulo=" + data[0]['titulo'] + "&autor=" + data[0]['autor'] +
-                        "&tema=" + data[0]['tema'] + "&editorial=" + data[0]['editorial'] + "&facultad=" + data[0]['facultad'] + "&resena=" + data[0]['resena']
-                        + "&imagen=" + data[0]['imagen'];
-            };
-            fajax(url, parametro, metodo);
-       
-    }
-
     window.onload(Catalogo());
 });

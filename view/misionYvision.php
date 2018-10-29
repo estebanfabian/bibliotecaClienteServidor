@@ -62,12 +62,21 @@ session_start();
                 </aside>
                 <div class = "col-md-9">
                     <h3>Vision</h3> 
-                    <p align="justify">La CORPORACIÓN UNIVERSITARIA REPUBLICANA espera constituirse en el pilar de la formación permanente e integral, capaz de generar cambios de profunda resignificación en el contexto nacional e internacional; fomentando los valores éticos y morales, el respeto a los derechos de los demás, el cultivo de los talentos profesionales y el estímulo a las vocaciones intelectuales y científicas siendo imprescindibles para mejorar la convivencia social, el domino técnico de los problemas, la comprensión del mundo globalizado contemporáneo y la calidad de vida.
+                    <p align="justify">Constituirnos en un referente en el entorno como biblioteca universitaria, en cuanto a sus buenas prácticas y gestión de la calidad de los servicios y productos ofrecidos.
                     </p>     
                     <br>
                     <br>
                     <h3>Mision</h3> 
-                    <p align="justify">La misión Institucional de la CORPORACIÓN UNIVERSITARIA REPUBLICANA apunta esencialmente a la preparación integral de nuestros educandos, mediante estrategias participativas de enseñanza, aprendizaje y formación, que integren la docencia, la investigación y la extensión, dentro de claros principios humanísticos, éticos y ecológicos, para viabilizar el progreso individual y colectivo, en todos los campos del saber, acordes con el carácter institucional legalmente reconocido.</p> 
+                    <p align="justify">La Biblioteca de la Corporación Universitaria Republicana tiene como misión ofrecer a la comunidad Republicana recursos bibliográficos pertinentes y servicios de alta calidad para apoyar los programas de docencia, investigación y extensión que desarrolla la Institución.
+                    <h3>Objetivos</h3> 
+                    <ul> 
+                        <li>Brindar a los miembros de la comunidad universitaria el acceso y difusión de la información apropiada y actualizada acorde a los programas académicos de la Corporación.
+                        </li> 
+                        <li> Suministrar servicios de información que respondan a las necesidades de la comunidad universitaria.
+                        </li> 
+                        <li> Cooperar en el desarrollo de planes de extensión universitaria. Establecer los nexos correspondientes para la vinculación a redes bibliotecarias locales, nacionales e internacionales.
+                        </li>
+                    </ul>
                 </div>       
             </section>
 

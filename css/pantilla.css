@@ -16,6 +16,9 @@ footer{
 .reservar{
     cursor: pointer;
 }
+.renovar{
+    cursor: pointer;
+}
 tbody tr:hover{
 background-color: #ddd;
 color: #000;

@@ -32,7 +32,7 @@
         <div class="row">
             <div class="col-md-12">
                 <p align ="center" style="font-size:11px;margin-bottom: 0px;">
-                    © Corporación Universitaria Republicana 2017
+                    © Corporación Universitaria Republicana 2018
                 </p>
             </div> 
         </div>

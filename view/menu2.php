@@ -108,6 +108,7 @@
                             <a class="dropdown-item" href="misionYvision.php">Misión y Visión </a>
                             <a class="dropdown-item" href="AcercaBiblioCur.php">Acerca de BilioCur</a>
                             <a class="dropdown-item" href="http://urepublicana.edu.co">Cur</a>
+                            <a class="dropdown-item" href="OtroServicios.php">Otros servicios</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
