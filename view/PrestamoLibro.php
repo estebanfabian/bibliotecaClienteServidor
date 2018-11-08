@@ -60,39 +60,38 @@ session_start();
                         <div class="fb-comment-embed" data-href="https://www.facebook.com/zuck/posts/10102577175875681?comment_id=1193531464007751&amp;reply_comment_id=654912701278942" data-width="220" data-include-parent="false"></div>
                     </div>       
                 </aside>
-                <div class="col-md-9">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <img src="html/imagenes/prueba.jpg">
+                <form class="Buscar_libro" onsubmit="return false">
+                    <div class="col-md-9">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <img src="html/imagenes/prueba.jpg">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group col-md-12">
+                                    <label for="inputEmail4">isbn (*)</label>
+                                    <input type="tetx" class="form-control" id="PrestamoIsbn" name ="PrestamoIsbn" placeholder="Isbn del libro">
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group col-md-12">
-                                <label for="inputEmail4">isbn (*)</label>
-                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="inputEmail4">titulo (*)</label>
-                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="inputEmail4">Autor (*)</label>
-                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="inputEmail4">Editoria (*)</label>
-                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="inputEmail4">Reseña (*)</label>
-                                <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
-                            </div>
-                        </div>
+                        <button  class="btn btn-primary" id="btnBuscarPrestamo">Buscar</button>
+                        <button  class="btn btn-primary" id="btnPresar">Prestar</button>
                     </div>
                     
-                    
-                    <button  class="btn btn-primary" id="btnRegistrar">Reservar</button>
-                    <button  class="btn btn-primary" id="btnLimpiar">Volver</button>
-                </div>
+                       <table class="table table-bordered table-dark"  >
+                        <thead>
+                            <tr>
+                                <th scope="col">isbn</th>
+                                <th scope="col">Portada</th>
+                                <th scope="col">Titulo y Autor</th>
+                                <th scope="col">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id ="PrestamoTabla">
+                        </tbody>
+                    </table>
+                </form>
             </section>
         </div>
         <footer > 

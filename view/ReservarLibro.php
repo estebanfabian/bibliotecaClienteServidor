@@ -68,7 +68,9 @@ session_start();
 
                             <div class="col-md-3">
                                 <img src= "<?php echo $_GET['imagen']; ?>"  width=200 height=300 >
-                                <input type="hidden"  id ="codigo" value="<?php echo $_SESSION['usuario']['codigo']; ?>" id="nombre"/>
+                                <?php if ($_SESSION["usuario"]["perfil"] == "administrador") { ?>    
+                               Codigo: <input type="text"  id ="codigo" value="<?php echo $_SESSION['usuario']['codigo']; ?>" />   <?php } else { ?>
+                                <input type="hidden"  id ="codigo" value="<?php echo $_SESSION['usuario']['codigo']; ?>" /> <?php }  ?>
                             </div>
 
                             <div class="col-md-6">
@@ -97,7 +99,10 @@ session_start();
                         </div> 
                         <input type="datetime-local" name="datetimepicker1" id="datetimepicker1" value="">    
 
-                      
+                        
+                       
+                        <button  class="btn btn-primary " id="BtnPrestamo">Prestamo</button>
+     
                         <button  class="btn btn-primary " id="btnResercarLibro">Reservar</button>
                         <button  class="btn btn-primary " id="btnVolverCatalogo">Volver</button>
                     </form>

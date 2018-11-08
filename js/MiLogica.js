@@ -59,12 +59,25 @@ $(document).ready(function () {
                     if (data.length == 0) {
                         alert("El código o clave esta errada ");
                         $('#login-modal').modal('hide');
+
+                        var url2 = "Controlador/Usuario/Intentos_usuario.php";
+                        var parametro2 = myString;
+                        console.log(parametro2)
+                        var metodo2 = function (respuesta) {
+                        };
+                        fajax(url2, parametro2, metodo2);
                     } else {
-                        console.log(respuesta);
+
                         $('body').removeClass('modal-open');
                         $('.modal-backdrop').remove();
                         envio(respuesta);
                         Codigo = $("#codigo").val("");
+                        var url2 = "Controlador/Usuario/Intentos_usuarioExitoso.php";
+                        var parametro2 = myString;
+                        console.log(parametro2)
+                        var metodo2 = function (respuesta) {
+                        };
+                        fajax(url2, parametro2, metodo2);
                     }
                 };
                 fajax(url1, parametro1, metodo1);
@@ -84,14 +97,15 @@ $(document).ready(function () {
         var parameto = myString;
         var metodo = function (respuesta) {
             var data = $.parseJSON(respuesta);
-            // if (data[0]['count'] < 4) {
-            reservacion1();
-//            } else {
-//                alert("tiene el numero maximo de reservas o prestamos")
-//            }
+            if (data[0]['count'] < 4) {
+                reservacion1();
+            } else {
+                alert("tiene el numero maximo de reservas o prestamos")
+            }
         };
         fajax(url, parameto, metodo);
     }
+
 //funcion para saber el dia que se hace la reservacion
     function reservacion1() {
         if (moment().format("dddd") == "Sunday") {
@@ -184,54 +198,42 @@ $(document).ready(function () {
                     number: "Este campo solo permite número"
                 },
             }, submitHandler: function () {
-
-//                var NombreFoto = $("#file").val();
-//                NombreFoto = palabra(NombreFoto);
-//                var formulario = {
-//                        cedula: $("#cedula").val(),
-//                    codigo: $("#codigo").val(),
-//                    nombre: $("#nombre").val(),
-//                    apellido: $("#apellido").val(),
-//                    fechaNacimiento: $("#fechaNacimiento").val(),
-//                    sexo: $("#sexo").val(),
-//                    direccion: $("#direccion").val(),
-//                    telefonoPrincipal: $("#telefono").val(),
-//                    emailPrincipal: $("#coreeo").val(),
-//                    contrasena: $("#clave").val(), foto: NombreFoto,
-//                    direccion2: $("#direccion2").val(),
-//                    telefonoSecundario: $("#telefono2").val(),
-//                    telefonoOtro: $("#telefonoOtro").val(),
-//                    contactoNombre: $("#nombreContacto").val(),
-//                    contactoApellido: $("#apellidoContacto").val(),
-//                    contactoDireccion: $("#dirrecionContacto").val(),
-//                    contactoDireccion2: $("#dirrecionContacto2").val(),
-//                    contactoTelefono: $("#telefonoContacto").val(),
-//                    perfil: $("#Perfil").val()
-//                };
-//                console.log(formulario);
-//                myJson.push(formulario);
-//                var myString = JSON.stringify(formulario);
-//                var url1 = "../Controlador/Usuario/Insertar_Usuario.php";
-//                var parametro1 = myString;
-//                var metodo1 = function (respuesta) {
-//                    $("#codigo").val("");
-//                    $("#contrasena").val("");
-//                    var data = $.parseJSON(respuesta);
-//                    if (data.sucess == 'ok') {
-//                        alert("el usuario se registro con exito");
-//                        // LimpiarUsuario();
-//                        var url1 = "../Controlador/Usuario/Cargar_Foto.php";
-//                        var parametro1 = NombreFoto;
-//                        var metodo1 = function (respuesta) {
-//                        };
-//                        fajax(url1, parametro1, metodo1);
-//                    } else {
-//                        alert("No se pude registar al usuario");
-//                        console.log(respuesta);
-//                        console.log(data.sucess);
-//                    }
-//                };
-//                fajax(url1, parametro1, metodo1);
+                var formulario = {
+                    cedula: $("#cedula").val(),
+                    codigo: $("#codigo").val(),
+                    nombre: $("#nombre").val(),
+                    apellido: $("#apellido").val(),
+                    fechaNacimiento: $("#fechaNacimiento").val(),
+                    sexo: $("#sexo").val(),
+                    direccion: $("#direccion").val(),
+                    telefonoPrincipal: $("#telefono").val(),
+                    emailPrincipal: $("#coreeo").val(),
+                    contrasena: $("#clave").val(),
+                    direccion2: $("#direccion2").val(),
+                    telefonoSecundario: $("#telefono2").val(),
+                    telefonoOtro: $("#telefonoOtro").val(),
+                    contactoNombre: $("#nombreContacto").val(),
+                    contactoApellido: $("#apellidoContacto").val(),
+                    contactoDireccion: $("#dirrecionContacto").val(),
+                    contactoDireccion2: $("#dirrecionContacto2").val(),
+                    contactoTelefono: $("#telefonoContacto").val(),
+                    perfil: $("#Perfil").val()
+                };
+                myJson.push(formulario);
+                var myString = JSON.stringify(formulario);
+                var url1 = "../Controlador/Usuario/Insertar_Usuario.php";
+                var parametro1 = myString;
+                var metodo1 = function (respuesta) {
+                    alert(respuesta);
+                    var data = $.parseJSON(respuesta);
+                    if (data.sucess == 'ok') {
+                        alert("el usuario se registro con exito");
+                        LimpiarUsuario();
+                    } else {
+                        alert("No se pude registar al usuario");
+                    }
+                };
+                fajax(url1, parametro1, metodo1);
             }
         });
     }
@@ -502,7 +504,6 @@ $(document).ready(function () {
                     } else {
                         alert("No se pude registar al usuario");
                     }
-
                 };
                 fajax(url, parametro, metodo);
             }
@@ -568,12 +569,12 @@ $(document).ready(function () {
                     } else {
                         alert("El video Beam no existe");
                     }
-
                 };
                 fajax(url, parametro, metodo);
             }
         });
     }
+
     function BuscarVideoBeam() {
         $("#registar_VideoBeam").validate({
             rules: {
@@ -787,7 +788,6 @@ $(document).ready(function () {
             }
         });
     }
-
     function RegistrarTema() {
         $("#registar_Tema").validate({
             rules: {
@@ -824,6 +824,256 @@ $(document).ready(function () {
         $("#NombreTema").val("");
         $("#observacionesTema").val("");
     }
+    function RegistrarAutor() {
+        $("#registar_Autor").validate({
+            rules: {
+                NombreAutor: {
+                    required: true,
+                    minlength: 1
+                }
+            }, submitHandler: function () {
+                var formulario = {
+                    NombreAutor: $("#NombreAutor").val(),
+                    NotaAutor: $("#observacionesAutor").val()
+                }
+                myJson.push(formulario);
+                var myString = JSON.stringify(formulario);
+                var url = "../Controlador/Libro/CrearAutor.php";
+                var parametro = myString;
+                console.log(myString)
+                var metodo = function (respuesta) {
+                    console.log(respuesta);
+                    var data = $.parseJSON(respuesta);
+                    if (data.sucess == 'ok') {
+                        alert("el usuario se registro con exito");
+                        LimpiarVideoBeam();
+                    } else {
+                        alert("No se pude registar al usuario");
+                    }
+
+                };
+                fajax(url, parametro, metodo);
+            }
+        });
+    }
+    function EliminarAutor() {
+        $("#registar_Autor").validate({
+            rules: {
+                NombreAutor: {
+                    required: true,
+                    minlength: 1
+                }
+            }, submitHandler: function () {
+                var formulario = {
+                    NombreAutor: $("#NombreAutor").val()
+                }
+
+                myJson.push(formulario);
+                var myString = JSON.stringify(formulario);
+                var url = "../Controlador/Libro/EliminarAutor.php";
+                var parametro = myString;
+                console.log(myString)
+                var metodo = function (respuesta) {
+                    console.log(respuesta);
+                    var data = $.parseJSON(respuesta);
+                    if (data.sucess == 'ok') {
+                        alert("el usuario se registro con exito");
+                        LimpiarVideoBeam();
+                    } else {
+                        alert("No se pude registar al usuario");
+                    }
+
+                };
+                fajax(url, parametro, metodo);
+            }
+        });
+    }
+    function LimpiarAutor() {
+        $("#NombreAutor").val("");
+        $("#observacionesAutor").val("");
+    }
+    function RegistrarEditorial() {
+        $("#registar_Editorial").validate({
+            rules: {
+                NombreEditorial: {
+                    required: true,
+                    minlength: 1
+                },
+                DireccionEditoriaal: {
+                    required: true,
+                    minlength: 1
+                },
+                TelEditorial: {
+                    required: true,
+                    minlength: 1
+                },
+                fechaEditorial: {
+                    required: true,
+                    minlength: 1
+                }
+            }, submitHandler: function () {
+                var formulario = {
+                    nombreEditorial: $("#NombreEditorial").val(),
+                    direccionEditorial: $("#DireccionEditoriaal").val(),
+                    telefonoEditorial: $("#TelEditorial").val(),
+                    anoPublicacion: $("#fechaEditorial").val()}
+                myJson.push(formulario);
+                var myString = JSON.stringify(formulario);
+                var url = "../Controlador/Libro/CrearEditorial.php";
+                var parametro = myString;
+                console.log(myString)
+                var metodo = function (respuesta) {
+                    console.log(respuesta);
+                    var data = $.parseJSON(respuesta);
+                    if (data.sucess == 'ok') {
+                        alert("el usuario se registro con exito");
+                        LimpiarVideoBeam();
+                    } else {
+                        alert("No se pude registar al usuario");
+                    }
+
+                };
+                fajax(url, parametro, metodo);
+            }
+        });
+    }
+    function LimpiarEditorial() {
+        $("#NombreEditorial").val("");
+        $("#DireccionEditoriaal").val("");
+        $("#TelEditorial").val("");
+        $("#fechaEditorial").val("");
+    }
+    function EliminarEditorial() {
+        $("#registar_Editorial").validate({
+            rules: {
+                NombreEditorial: {
+                    required: true,
+                    minlength: 1
+                }
+            }, submitHandler: function () {
+                var formulario = {
+                    nombreEditorial: $("#NombreEditorial").val()
+                }
+                myJson.push(formulario);
+                var myString = JSON.stringify(formulario);
+                var url = "../Controlador/Libro/EliminarEditorial.php";
+                var parametro = myString;
+                console.log(myString)
+                var metodo = function (respuesta) {
+                    console.log(respuesta);
+                    var data = $.parseJSON(respuesta);
+                    if (data.sucess == 'ok') {
+                        alert("el usuario se registro con exito");
+                        LimpiarVideoBeam();
+                    } else {
+                        alert("No se pude registar al usuario");
+                    }
+                };
+                fajax(url, parametro, metodo);
+            }
+        });
+    }
+    function ActualizarTema() {
+        var formulario = {
+            nombreTema: $("#NombreTema").val(),
+            Descricion: $("#observacionesTema").val()
+        };
+        myJson.push(formulario);
+        var myString = JSON.stringify(formulario);
+        var url = "../Controlador/Libro/ModificarTema.php";
+        var parametro = myString;
+        var metodo = function (respuesta) {
+            console.log(respuesta);
+            var data = $.parseJSON(respuesta);
+            if (data.sucess == 'ok') {
+                alert("el usuario se registro con exito");
+                LimpiarVideoBeam();
+            } else {
+                alert("No se pude registar al usuario");
+            }
+        };
+        fajax(url, parametro, metodo);
+    }
+    function BuscarTema() {
+        $("#registar_Tema").validate({
+            rules: {
+                NombreTema: {
+                    required: true,
+                    minlength: 1
+                }
+            }, submitHandler: function () {
+                var formulario = {
+                    nombreTema: $("#NombreTema").val()
+                };
+                myJson.push(formulario);
+                var myString = JSON.stringify(formulario);
+                var url = "../Controlador/Libro/BuscarTema.php";
+                var parametro = myString;
+                var metodo = function (respuesta) {
+                    console.log(respuesta);
+                    var data = $.parseJSON(respuesta);
+                    console.log(data);
+                    if (data.length != 0) {
+                        console.log(data.nombreTema);
+                        $("#NombreTema").val("" + data.nombreTema + "");
+                        $("#observacionesTema").val("" + data.Descricion + "");
+                    } else {
+                        alert("el video beam no exite")
+                    }
+                };
+                fajax(url, parametro, metodo);
+            }
+        });
+    }
+    function BuscarEditorial() {
+        $("#registar_Editorial").validate({
+            rules: {
+                NombreEditorial: {
+                    required: true,
+                    minlength: 1
+                }
+            }, submitHandler: function () {
+                var formulario = {
+                    nombreEditorial: $("#NombreEditorial").val()
+                };
+                myJson.push(formulario);
+                var myString = JSON.stringify(formulario);
+                var url = "../Controlador/Libro/BuscarEditorial.php";
+                var parametro = myString;
+                var metodo = function (respuesta) {
+                    var data = $.parseJSON(respuesta);
+                    if (data.length != 0) {
+                        $("#NombreEditorial").val(data.nombreEditorial);
+                        $("#DireccionEditoriaal").val(data.direccionEditorial);
+                        $("#TelEditorial").val(data.telefonoEditorial);
+                        $("#fechaEditorial").val(data.anoPublicacion);
+                    } else {
+                        alert("el video beam no exite")
+                    }
+                };
+                fajax(url, parametro, metodo);
+            }
+        });
+    }
+    function BuscarAutor() {
+        var formulario = {
+            NombreAutor: $("#NombreAutor").val()
+        };
+        myJson.push(formulario);
+        var myString = JSON.stringify(formulario);
+        var url = "../Controlador/Libro/BuscarAutor.php";
+        var parametro = myString;
+        var metodo = function (respuesta) {
+            var data = $.parseJSON(respuesta);
+            if (data.length != 0) {
+                $("#NombreAutor").val(data.NombreAutor);
+                $("#observacionesAutor").val(data.Nota);
+            } else {
+                alert("el autor no exite");
+            }
+        };
+        fajax(url, parametro, metodo);
+    }
 //---------------
 // botones
     $("#tabla").click(function () {
@@ -839,10 +1089,10 @@ $(document).ready(function () {
         Correo();
     });
     $("#btnRegistrar").click(function () {
-        cargarFoto();
+        registarUsuario();
     });
     $("#btnLimpiar").click(function () {
-        cargarFoto();
+        LimpiarUsuario()
     });
     $("#login_lost_btn").click(function () {
         modalAnimate($formLogin, $formLost);
@@ -905,7 +1155,6 @@ $(document).ready(function () {
     $("#btnBuscarTema").click(function () {
         BuscarTema();
     });
-
     $("#btnRegistrarLibro ").click(function () {
         RegistrarLibro();
     });
@@ -919,117 +1168,76 @@ $(document).ready(function () {
         EliminarLibro()
     });
     $("#btnBuscarLibro ").click(function () {
-        
+        BuscarLibro()
     });
-    $("#btnRegistrarEditorial ").click(function () {
+    $("#btnRegistrarEditorial").click(function () {
+        RegistrarEditorial();
     });
-    $("#btnLimpiarEditorial ").click(function () {
+    $("#btnLimpiarEditorial").click(function () {
+        LimpiarEditorial();
     });
-    $("#btnActualizaEditorial ").click(function () {
+    $("#btnActualizaEditorial").click(function () {
+        ActualizarEditorial();
     });
-    $("#btnEliminarEditorial ").click(function () {
+    $("#btnEliminarEditorial").click(function () {
+        EliminarEditorial();
     });
     $("#btnBuscarEditorial ").click(function () {
+        BuscarEditorial();
     });
-    $("#btnRegistrarComputador ").click(function () {
+    $("#btnRegistrarAutor ").click(function () {
+        RegistrarAutor();
     });
-    $("#btnLimpiarComputador ").click(function () {
+    $("#btnLimpiarAutor").click(function () {
+        LimpiarAutor();
     });
-    $("#btnActualizaComputador ").click(function () {
+    $("#btnActualizaAutor ").click(function () {
+        ActualizarAutor()
     });
-    $("#btnEliminarComputador ").click(function () {
+    $("#btnEliminarAutor ").click(function () {
+        EliminarAutor();
     });
-    $("#btnBuscarComputador ").click(function () {
+    $("#btnBuscarAutor ").click(function () {
+        BuscarAutor();
     });
-
-    function ActualizarTema() {
+    function ActualizarEditorial() {
         var formulario = {
-            nombreTema: $("#NombreTema").val(),
-            Descricion: $("#observacionesTema").val()
+            nombreEditorial: $("#NombreEditorial").val(),
+            direccionEditorial: $("#DireccionEditoriaal").val(),
+            telefonoEditorial: $("#TelEditorial").val(),
+            anoPublicacion: $("#fechaEditorial").val()
         };
         myJson.push(formulario);
         var myString = JSON.stringify(formulario);
-        var url = "../Controlador/VideoBeam/ActualizarVideoBeam.php";
+        var url = "../Controlador/Libro/ModificarEditorial.php";
         var parametro = myString;
+        console.log(myString)
         var metodo = function (respuesta) {
             console.log(respuesta);
             var data = $.parseJSON(respuesta);
             if (data.sucess == 'ok') {
                 alert("el usuario se registro con exito");
-                LimpiarVideoBeam();
             } else {
                 alert("No se pude registar al usuario");
             }
         };
         fajax(url, parametro, metodo);
     }
-    function BuscarTema() {
-        $("#registar_Tema").validate({
+    function ActualizarAutor() {
+        $("#registar_Autor").validate({
             rules: {
-                NombreTema: {
+                NombreAutor: {
                     required: true,
                     minlength: 1
                 }
             }, submitHandler: function () {
                 var formulario = {
-                    nombreTema: $("#NombreTema").val()
-                };
-                myJson.push(formulario);
-                var myString = JSON.stringify(formulario);
-                var url = "../Controlador/Libro/BuscarTema.php";
-                var parametro = myString;
-                var metodo = function (respuesta) {
-                    console.log(respuesta);
-                    var data = $.parseJSON(respuesta);
-                    console.log(data);
-                    if (data.length != 0) {
-                        $("#NombreTema").val("" + data[0]["nombreTema"] + "");
-                        $("#observacionesTema").val("" + data[0]['Descricion'] + "");
-                    } else {
-                        alert("el video beam no exite")
-                    }
-                };
-                fajax(url, parametro, metodo);
-            }
-        });
-    }
-    function RegistrarAutor() {
-        $("#registar_VideoBeam").validate({
-            rules: {
-                idvideoBeam: {
-                    required: true,
-                    number: true,
-                    digits: true,
-                    minlength: 1
-                },
-                FabricanteVideoBeam: {
-                    required: true,
-                    minlength: 1
-                },
-                CableUSB: {
-                    required: true,
-                    minlength: 1
-                },
-                CableHDMI: {
-                    required: true,
-                    minlength: 1
-                },
-                CableVGA: {
-                    required: true,
-                    minlength: 1
-                }
-            }, submitHandler: function () {
-                var formulario = {
-                    idVideoBeam: $("#idvideoBeam").val(),
-                    fabricante: $("#FabricanteVideoBeam").val(),
-                    cableUSB: $("#CableUSB").val(),
-                    cableHDMI: $("#CableHDMI").val(),
-                    cableVGA: $("#CableVGA").val(),
-                    observaciones: $("#txtObservacionesVideoBeam").val()
+                    NombreAutor: $("#NombreAutor").val(),
+                    NotaAutor: $("#observacionesAutor").val()
                 }
                 myJson.push(formulario);
                 var myString = JSON.stringify(formulario);
-                var url = "../Controlador/VideoBeam/RegistrarVideoBeam.php";
+                var url = "../Controlador/Libro/ModificarAutor.php";
                 var parametro = myString;
                 console.log(myString)
                 var metodo = function (respuesta) {
@@ -1040,107 +1248,6 @@ $(document).ready(function () {
                         LimpiarVideoBeam();
                     } else {
                         alert("No se pude registar al usuario");
-                    }
-
-                };
-                fajax(url, parametro, metodo);
-            }
-        });
-    }
-    function LimpiarAutor() {
-        $("#idvideoBeam").val("");
-        $("#FabricanteVideoBeam").val("");
-        $("#CableUSB").val("");
-        $("#CableHDMI").val("");
-        $("#CableVGA").val("");
-        $("#txtObservacionesVideoBeam").val("");
-    }
-    function ActualizarAutor() {
-        var formulario = {
-            idVideoBeam: $("#idvideoBeam").val(),
-            fabricante: $("#FabricanteVideoBeam").val(),
-            cableUSB: $("#CableUSB").val(),
-            cableHDMI: $("#CableHDMI").val(),
-            cableVGA: $("#CableVGA").val(),
-            observaciones: $("#txtObservacionesVideoBeam").val()
-        };
-        myJson.push(formulario);
-        var myString = JSON.stringify(formulario);
-        var url = "../Controlador/VideoBeam/ActualizarVideoBeam.php";
-        var parametro = myString;
-        var metodo = function (respuesta) {
-            console.log(respuesta);
-            var data = $.parseJSON(respuesta);
-            if (data.sucess == 'ok') {
-                alert("el usuario se registro con exito");
-                LimpiarVideoBeam();
-            } else {
-                alert("No se pude registar al usuario");
-            }
-        };
-        fajax(url, parametro, metodo);
-    }
-    function EliminarAutor() {
-        $("#registar_VideoBeam").validate({
-            rules: {
-                idvideoBeam: {
-                    required: true,
-                    number: true,
-                    digits: true,
-                    minlength: 1
-                }
-            }, submitHandler: function () {
-                var formulario = {
-                    idVideoBeam: $("#idvideoBeam").val()
-                };
-                myJson.push(formulario);
-                var myString = JSON.stringify(formulario);
-                var url = "../Controlador/VideoBeam/EliminarVideoBeam.php";
-                var parametro = myString;
-                console.log(myString)
-                var metodo = function (respuesta) {
-                    console.log(respuesta);
-                    var data = $.parseJSON(respuesta);
-                    if (data.sucess == 'ok') {
-                        alert("se elimino con exito");
-                        LimpiarVideoBeam();
-                    } else {
-                        alert("El video Beam no existe");
-                    }
-
-                };
-                fajax(url, parametro, metodo);
-            }
-        });
-    }
-    function BuscarAutor() {
-        $("#registar_VideoBeam").validate({
-            rules: {
-                idvideoBeam: {
-                    required: true,
-                    number: true,
-                    digits: true,
-                    minlength: 1
-                }
-            }, submitHandler: function () {
-                var formulario = {
-                    idVideoBeam: $("#idvideoBeam").val()
-                };
-                myJson.push(formulario);
-                var myString = JSON.stringify(formulario);
-                var url = "../Controlador/VideoBeam/BuscarVideoBeam.php";
-                var parametro = myString;
-                var metodo = function (respuesta) {
-                    var data = $.parseJSON(respuesta);
-                    if (data.length > 0) {
-                        $("#idvideoBeam").val("" + data[0]['idVideoBeam'] + "");
-                        $("#FabricanteVideoBeam").val("" + data[0]['fabricante'] + "");
-                        $("#CableUSB").val("b'" + data[0]['cableUSB'] + "'");
-                        $("#CableHDMI").val("b'" + data[0]['cableHDMI'] + "'");
-                        $("#CableVGA").val("b'" + data[0]['cableVGA'] + "'");
-                        $("#txtObservacionesVideoBeam").val("" + data[0]['observaciones'] + "");
-                    } else {
-                        alert("el video beam no exite")
                     }
                 };
                 fajax(url, parametro, metodo);
@@ -1148,80 +1255,50 @@ $(document).ready(function () {
         });
     }
     function RegistrarLibro() {
-        $("#registar_VideoBeam").validate({
-            rules: {
-                idvideoBeam: {
-                    required: true,
-                    number: true,
-                    digits: true,
-                    minlength: 1
-                },
-                FabricanteVideoBeam: {
-                    required: true,
-                    minlength: 1
-                },
-                CableUSB: {
-                    required: true,
-                    minlength: 1
-                },
-                CableHDMI: {
-                    required: true,
-                    minlength: 1
-                },
-                CableVGA: {
-                    required: true,
-                    minlength: 1
-                }
-            }, submitHandler: function () {
-                var formulario = {
-                    idVideoBeam: $("#idvideoBeam").val(),
-                    fabricante: $("#FabricanteVideoBeam").val(),
-                    cableUSB: $("#CableUSB").val(),
-                    cableHDMI: $("#CableHDMI").val(),
-                    cableVGA: $("#CableVGA").val(),
-                    observaciones: $("#txtObservacionesVideoBeam").val()
-                }
-                myJson.push(formulario);
-                var myString = JSON.stringify(formulario);
-                var url = "../Controlador/VideoBeam/RegistrarVideoBeam.php";
-                var parametro = myString;
-                console.log(myString)
-                var metodo = function (respuesta) {
-                    console.log(respuesta);
-                    var data = $.parseJSON(respuesta);
-                    if (data.sucess == 'ok') {
-                        alert("el usuario se registro con exito");
-                        LimpiarVideoBeam();
-                    } else {
-                        alert("No se pude registar al usuario");
-                    }
-
-                };
-                fajax(url, parametro, metodo);
+        var formulario = {
+            isbn: $("#Risbn").val(),
+            titulo: $("#RTituo").val(),
+            categoriaLibro: $("#RCategoria").val(),
+            resena: $("#resenaLibro").val(),
+            autor: $("#Autores").val(),
+            editorial: $("#ListaEditores").val()
+        }
+        myJson.push(formulario);
+        var myString = JSON.stringify(formulario);
+        var url = "../Controlador/Libro/CrearLibro.php";
+        var parametro = myString;
+        console.log(myString)
+        var metodo = function (respuesta) {
+            console.log(respuesta);
+            var data = $.parseJSON(respuesta);
+            if (data.sucess == 'ok') {
+                alert("el usuario se registro con exito");
+                LimpiarVideoBeam();
+            } else {
+                alert("No se pude registar al usuario");
             }
-        });
+        };
+        fajax(url, parametro, metodo);
     }
+
     function LimpiarLibro() {
-        $("#idvideoBeam").val("");
-        $("#FabricanteVideoBeam").val("");
-        $("#CableUSB").val("");
-        $("#CableHDMI").val("");
-        $("#CableVGA").val("");
-        $("#txtObservacionesVideoBeam").val("");
+        $("#Risbn").val("");
+        $("#RTituo").val("");
+        $("#RCategoria").val("");
+        $("#resenaLibro").val("");
+        $("#Autores").val("");
+        $("#ListaEditores").val("");
     }
     function ActualizarLibro() {
         var formulario = {
-            idVideoBeam: $("#idvideoBeam").val(),
-            fabricante: $("#FabricanteVideoBeam").val(),
-            cableUSB: $("#CableUSB").val(),
-            cableHDMI: $("#CableHDMI").val(),
-            cableVGA: $("#CableVGA").val(),
-            observaciones: $("#txtObservacionesVideoBeam").val()
-        };
+            NombreAutor: $("#NombreAutor").val(),
+            NotaAutor: $("#observacionesAutor").val()
+        }
         myJson.push(formulario);
         var myString = JSON.stringify(formulario);
-        var url = "../Controlador/VideoBeam/ActualizarVideoBeam.php";
+        var url = "../Controlador/Libro/ModificarAutor.php";
         var parametro = myString;
+        console.log(myString)
         var metodo = function (respuesta) {
             console.log(respuesta);
             var data = $.parseJSON(respuesta);
@@ -1261,200 +1338,95 @@ $(document).ready(function () {
                     } else {
                         alert("El video Beam no existe");
                     }
+                };
+                fajax(url, parametro, metodo);
+            }
+        });
+    }
 
-                };
-                fajax(url, parametro, metodo);
-            }
-        });
-    }
-    function BuscarLibro() {
-        $("#registar_VideoBeam").validate({
-            rules: {
-                idvideoBeam: {
-                    required: true,
-                    number: true,
-                    digits: true,
-                    minlength: 1
-                }
-            }, submitHandler: function () {
-                var formulario = {
-                    idVideoBeam: $("#idvideoBeam").val()
-                };
-                myJson.push(formulario);
-                var myString = JSON.stringify(formulario);
-                var url = "../Controlador/VideoBeam/BuscarVideoBeam.php";
-                var parametro = myString;
-                var metodo = function (respuesta) {
-                    var data = $.parseJSON(respuesta);
-                    if (data.length > 0) {
-                        $("#idvideoBeam").val("" + data[0]['idVideoBeam'] + "");
-                        $("#FabricanteVideoBeam").val("" + data[0]['fabricante'] + "");
-                        $("#CableUSB").val("b'" + data[0]['cableUSB'] + "'");
-                        $("#CableHDMI").val("b'" + data[0]['cableHDMI'] + "'");
-                        $("#CableVGA").val("b'" + data[0]['cableVGA'] + "'");
-                        $("#txtObservacionesVideoBeam").val("" + data[0]['observaciones'] + "");
-                    } else {
-                        alert("el video beam no exite")
-                    }
-                };
-                fajax(url, parametro, metodo);
-            }
-        });
-    }
-    function RegistrarEditorial() {
-        $("#registar_VideoBeam").validate({
-            rules: {
-                idvideoBeam: {
-                    required: true,
-                    number: true,
-                    digits: true,
-                    minlength: 1
-                },
-                FabricanteVideoBeam: {
-                    required: true,
-                    minlength: 1
-                },
-                CableUSB: {
-                    required: true,
-                    minlength: 1
-                },
-                CableHDMI: {
-                    required: true,
-                    minlength: 1
-                },
-                CableVGA: {
-                    required: true,
-                    minlength: 1
-                }
-            }, submitHandler: function () {
-                var formulario = {
-                    idVideoBeam: $("#idvideoBeam").val(),
-                    fabricante: $("#FabricanteVideoBeam").val(),
-                    cableUSB: $("#CableUSB").val(),
-                    cableHDMI: $("#CableHDMI").val(),
-                    cableVGA: $("#CableVGA").val(),
-                    observaciones: $("#txtObservacionesVideoBeam").val()
-                }
-                myJson.push(formulario);
-                var myString = JSON.stringify(formulario);
-                var url = "../Controlador/VideoBeam/RegistrarVideoBeam.php";
-                var parametro = myString;
-                console.log(myString)
-                var metodo = function (respuesta) {
-                    console.log(respuesta);
-                    var data = $.parseJSON(respuesta);
-                    if (data.sucess == 'ok') {
-                        alert("el usuario se registro con exito");
-                        LimpiarVideoBeam();
-                    } else {
-                        alert("No se pude registar al usuario");
-                    }
 
-                };
-                fajax(url, parametro, metodo);
-            }
+
+
+
+    function BuscarLibroPrestamo() {
+
+        $("#btnBuscarPrestamo").click(function () {
+
+            var formulario = {
+                Consulta: $("#PrestamoIsbn").val()
+            };
+            myJson.push(formulario);
+            var myString = JSON.stringify(formulario);
+            var url = "../tablaXid";
+            var parametro = myString;
+            var metodo = function (respuesta) {
+                console.log(respuesta)
+            
+//                var data = $.parseJSON(respuesta);
+//                location.href = "ReservarLibro.php?isbn=" + data[0]['isbn'] + "&titulo=" + data[0]['titulo'] + "&autor=" + data[0]['autor'] +
+//                        "&tema=" + data[0]['tema'] + "&editorial=" + data[0]['editorial'] + "&facultad=" + data[0]['facultad'] + "&resena=" + data[0]['resena']
+//                        + "&imagen=" + data[0]['imagen'];
+           };
+            fajax(url, parametro, metodo);
         });
     }
-    function LimpiarEditorial() {
-        $("#idvideoBeam").val("");
-        $("#FabricanteVideoBeam").val("");
-        $("#CableUSB").val("");
-        $("#CableHDMI").val("");
-        $("#CableVGA").val("");
-        $("#txtObservacionesVideoBeam").val("");
-    }
-    function ActualizarEditorial() {
+    $("#btnBuscarPrestamo").click(function () {
+        BuscarLibroPrestamo();
+    });
+
+
+    function Pretamo() {
+        var fecha = $("#datetimepicker1").val();
+        var ejemplo = fecha.split(":T11:");
         var formulario = {
-            idVideoBeam: $("#idvideoBeam").val(),
-            fabricante: $("#FabricanteVideoBeam").val(),
-            cableUSB: $("#CableUSB").val(),
-            cableHDMI: $("#CableHDMI").val(),
-            cableVGA: $("#CableVGA").val(),
-            observaciones: $("#txtObservacionesVideoBeam").val()
+            codigo: $("#codigo").val()
         };
         myJson.push(formulario);
         var myString = JSON.stringify(formulario);
-        var url = "../Controlador/VideoBeam/ActualizarVideoBeam.php";
-        var parametro = myString;
+        var url = "../Conta_res";
+        var parameto = myString;
+        var metodo = function (respuesta) {
+            var data = $.parseJSON(respuesta);
+            if (data[0]['count'] < 4) {
+                Prestamo1();
+            } else {
+                alert("tiene el numero maximo de reservas o prestamos")
+            }
+        };
+        fajax(url, parameto, metodo);
+    }
+    
+     function Prestamo1() {
+        if (moment().format("dddd") == "Sunday") {
+            var fechaReserva = moment().add(2, "days").format('YYYY/MM/DD hh:mm:ss');
+        } else {
+            var fechaReserva = moment().add(1, "days").format('YYYY/MM/DD hh:mm:ss');
+        }
+        var txt = document.getElementById("isbnReserva");
+        txt = (txt.innerHTML);
+        var formulario = {
+            diaPrestamo: moment().format('YYYY/MM/DD hh:mm:ss'),
+            isbn: txt,
+            codigo: $("#codigo").val(),
+            diaEntrega: fechaReserva,
+            estado:2
+        };
+        myJson.push(formulario);
+        var myString = JSON.stringify(formulario);
+        var url = "../reserva";
+        var parameto = myString;
         var metodo = function (respuesta) {
             console.log(respuesta);
             var data = $.parseJSON(respuesta);
-            if (data.sucess == 'ok') {
-                alert("el usuario se registro con exito");
-                LimpiarVideoBeam();
+            if (data.sucess == "ok") {
+                alert("La reserva del libro fue un éxito");
+                location.href = "../index.php"
             } else {
-                alert("No se pude registar al usuario");
+                alert("Hubo un problema con la reserva intentolo mas tarde");
             }
         };
-        fajax(url, parametro, metodo);
+        fajax(url, parameto, metodo);
+        alert(parameto);
     }
-    function EliminarEditorial() {
-        $("#registar_VideoBeam").validate({
-            rules: {
-                idvideoBeam: {
-                    required: true,
-                    number: true,
-                    digits: true,
-                    minlength: 1
-                }
-            }, submitHandler: function () {
-                var formulario = {
-                    idVideoBeam: $("#idvideoBeam").val()
-                };
-                myJson.push(formulario);
-                var myString = JSON.stringify(formulario);
-                var url = "../Controlador/VideoBeam/EliminarVideoBeam.php";
-                var parametro = myString;
-                console.log(myString)
-                var metodo = function (respuesta) {
-                    console.log(respuesta);
-                    var data = $.parseJSON(respuesta);
-                    if (data.sucess == 'ok') {
-                        alert("se elimino con exito");
-                        LimpiarVideoBeam();
-                    } else {
-                        alert("El video Beam no existe");
-                    }
-
-                };
-                fajax(url, parametro, metodo);
-            }
-        });
-    }
-    function BuscarEditorial() {
-        $("#registar_VideoBeam").validate({
-            rules: {
-                idvideoBeam: {
-                    required: true,
-                    number: true,
-                    digits: true,
-                    minlength: 1
-                }
-            }, submitHandler: function () {
-                var formulario = {
-                    idVideoBeam: $("#idvideoBeam").val()
-                };
-                myJson.push(formulario);
-                var myString = JSON.stringify(formulario);
-                var url = "../Controlador/VideoBeam/BuscarVideoBeam.php";
-                var parametro = myString;
-                var metodo = function (respuesta) {
-                    var data = $.parseJSON(respuesta);
-                    if (data.length > 0) {
-                        $("#idvideoBeam").val("" + data[0]['idVideoBeam'] + "");
-                        $("#FabricanteVideoBeam").val("" + data[0]['fabricante'] + "");
-                        $("#CableUSB").val("b'" + data[0]['cableUSB'] + "'");
-                        $("#CableHDMI").val("b'" + data[0]['cableHDMI'] + "'");
-                        $("#CableVGA").val("b'" + data[0]['cableVGA'] + "'");
-                        $("#txtObservacionesVideoBeam").val("" + data[0]['observaciones'] + "");
-                    } else {
-                        alert("el video beam no exite")
-                    }
-                };
-                fajax(url, parametro, metodo);
-            }
-        });
-    }
-
 //-------------------------------------------------------
 });

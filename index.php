@@ -127,17 +127,9 @@ session_start();
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                             <a class="dropdown-item" href="view/misionYvision.php">Misión y Visión</a>
                                             <a class="dropdown-item" href="view/AcercaBiblioCur.php">Acerca de BilioCur</a>
-                                            <a class="dropdown-item" href="http://urepublicana.edu.co/">Cur</a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Prestamo
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="view/Catalogo.php">Libro</a>
-                                            <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
-                                            <a class="dropdown-item" href="#">Prestamo Interbibliotecario</a>
+                                            <a class="dropdown-item" href="OtroServicios.php">Otros Servicios</a>
+                                            <a class="dropdown-item" href="http://urepublicana.edu.co/">Corporacion Universitaria Republicana</a>
+                                            
                                         </div>
                                     </li>
                                     <li class="nav-item dropdown">
@@ -202,13 +194,13 @@ session_start();
                         </ol>
                         <div class="carousel-inner" role="listbox">
                             <div class="carousel-item active">
-                                <img class="d-block img-fluid" src="img/recurso/Welcome-wallpaper-9779294.jpg" alt="First slide">
+                                <img src="img/recurso/1540401059.jpg" alt="" height="400 px" width=""/>
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block img-fluid" src="img/recurso/Wild_Lion-wallpaper-10771164.jpg" alt="Second slide">
+                                <img src="img/recurso/1540852598.jpg" alt=""height="400 px" width=""/>
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block img-fluid" src="img/recurso/Wolfie-wallpaper-10713295.jpg" alt="Third slide">
+                                <img src="img/recurso/1541008269.jpg" alt=""height="400 px" width=""/>
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

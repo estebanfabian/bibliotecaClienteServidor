@@ -12,18 +12,58 @@ if ($_POST) {
             margin-top: -1px;
         }
     </style>
+    <input type="hidden" size="15" maxlength="30" value="<?php echo $_SESSION["usuario"]["codigo"]; ?>" name="nombre" id="codigo">
     <div  id ="cabezara1" class ="container">
         <div class="row justify-content-end">
             <div class="col-4">
-                <img src="../img/usuario/icono_foto.png" class="rounded float-left" alt=""  width="40" height="40"/>
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?php echo $_SESSION["usuario"]["nombre"]; ?>
-                    </button> 
+                    </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="Multa.php">Multa</a> 
+                        <a class="dropdown-item" href="#" id="btnmultas" name ="btnmultas">Multa programada</a> 
+                        <script>
+                            $(document).ready(function () {
+                                var myJson = new Array();
+                                function fajax(URL, parametros, metodo) {
+                                    $.ajax({
+                                        url: URL,
+                                        data: parametros,
+                                        type: 'post',
+                                        cache: false,
+                                        dataType: 'html', success: function (ZZx) {
+                                            metodo(ZZx);
+                                        },
+                                        error: function (xhr, status) {
+                                            alert("Existe un problema");
+                                        }
+                                    });
+                                }
+                                function envio1() {
+                                    var formulario = {
+                                        codigo: $("#codigo").val()
+                                    };
+                                    myJson.push(formulario);
+                                    var myString = JSON.stringify(formulario);
+                                    var url = "../Controlador/Usuario/Mostrar_multa.php";
+                                    var parameto = myString;
+                                    var metodo = function (respuesta) {
+                                        var data = $.parseJSON(respuesta);
+                                        if (data[0]['multa'] == 0)
+                                        {
+                                            alert("no tiene multa");
+                                        } else {
+                                            alert("usted tiene multa" + data[0]['multa']);
+                                        }
+                                    };
+                                    fajax(url, parameto, metodo);
+                                }
+                                $("#btnmultas").click(function () {
+                                    envio1();
+                                });
+                            });
+                        </script>
                         <a class="dropdown-item" href="CambiarClave.php">Cambiar Contraseña</a>
-                        <a class="dropdown-item" href="configuracion.php">Configuración</a>
                         <a class="dropdown-item" href="../cerrarSesion.php">Cerrar Sesión</a>
                     </div>
                 </div>
@@ -58,10 +98,10 @@ if ($_POST) {
                                 <a class="dropdown-item" href="misionYvision.php">Misión y Visión </a>
                                 <a class="dropdown-item" href="AcercaBiblioCur.php">Acerca de BilioCur</a>
                                 <a class="dropdown-item" href="http://urepublicana.edu.co">Cur</a>
-                                <a class="dropdown-item" href="OtroServicios.php">Otros servicios</a>
+                                  <a class="dropdown-item" href="OtroServicios.php">Otros Servicios</a>
                             </div>
                         </li>
-                        <?php if (($_SESSION["usuario"]["perfil"] == "empleado" ) || ($_SESSION["usuario"]["perfil"] == "empleado")) { ?>
+                        <?php if (($_SESSION["usuario"]["perfil"] == "empleado" ) || ($_SESSION["usuario"]["perfil"] == "administrador")) { ?>
                             <li class = "nav-item dropdown">
                                 <a class = "nav-link dropdown-toggle" href = "#" id = "navbarDropdownMenuLink" data-toggle = "dropdown" aria-haspopup = "true" aria-expanded = "false">
                                     Prestamo
@@ -72,7 +112,6 @@ if ($_POST) {
                                 </div>
                             </li>
                         <?php } ?>
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Reserva
@@ -81,12 +120,6 @@ if ($_POST) {
                                 <a class="dropdown-item" href="view/PrestamoLibro.php">Libro</a>
                                 <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
                             </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="noticias.php">Noticias</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="Contactanos.php">Contactanos</a>
                         </li>
                         <?php if ($_SESSION["usuario"]["perfil"] == "administrador") { ?>
                             <li class="nav-item dropdown">

@@ -7,24 +7,21 @@ class AutorDao {
         $Autorvo->setNombreAutor($array->NombreAutor);
         $Autorvo->setNotaAutor($array->NotaAutor);
 
-        if ($Autorvo->getIdautor() != "null") {
-            $this->modificarProveedor($Autorvo);
-        } else {
-            $sql = 'INSERT INTO `tbl_autor` ( `nombreAutor`, `notaAutor`) VALUES ( ?,?);';
-            $BD = new ConectarBD();
-            $conn = $BD->getMysqli();
-            $stmp = $conn->prepare($sql);
 
-            $nomAutor = $Autorvo->getNombreAutor();
-            $notaAutor = $Autorvo->getNotaAutor();
+        $sql = 'INSERT INTO `tbl_autor` ( `nombreAutor`, `notaAutor`) VALUES ( ?,?);';
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
 
-            $stmp->bind_param("ss", $nomAutor, $notaAutor);
+        $nomAutor = $Autorvo->getNombreAutor();
+        $notaAutor = $Autorvo->getNotaAutor();
 
-            $this->Respuesta($conn, $stmp);
-        }
+        $stmp->bind_param("ss", $nomAutor, $notaAutor);
+
+        $this->Respuesta($conn, $stmp);
     }
 
-     function ModificarAutor($array) {
+    function ModificarAutor($array) {
         $Autorvo = new AutorVO();
         $Autorvo->setIdautor($array->idAutor);
         $Autorvo->setNombreAutor($array->NombreAutor);
@@ -45,16 +42,16 @@ class AutorDao {
 
     function EliminarAutor($array) {
         $Autorvo = new AutorVO();
-        $Autorvo->setIdautor($array->idAutor);
+        $Autorvo->setIdautor($array->NombreAutor);
 
-        $sql = 'DELETE FROM `tbl_autor` WHERE `tbl_autor`.`idautor`=?';
+        $sql = 'DELETE FROM `tbl_autor` WHERE `nombreAutor`=?';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
         $idAutor = $Autorvo->getIdautor();
 
-        $stmp->bind_param("i", $idAutor);
+        $stmp->bind_param("s", $idAutor);
         $this->Respuesta($conn, $stmp);
     }
 
@@ -71,5 +68,53 @@ class AutorDao {
         echo json_encode($respuesta);
     }
 
-    function buscarAutor(){}
+    function buscarAutor($array) {
+        $sql = "SELECT `nombreAutor`,`notaAutor` FROM `tbl_autor` WHERE `nombreAutor`= ?";
+
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $Autorvo = new AutorVO();
+        $Autorvo->setNombreAutor($array->NombreAutor);
+
+        $NombreAutor = $Autorvo->getNombreAutor();
+        $stmp->bind_param("s", $NombreAutor);
+        $stmp->execute();
+
+        $stmp->bind_result($NombreAutor, $Nota);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["NombreAutor"] = $NombreAutor;
+            $tmp["Nota"] = $Nota;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
+    function ListarAutor($array) {
+        $sql = "SELECT `idAutor`,`nombreAutor`FROM `tbl_autor`";
+
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+      
+        $stmp->execute();
+
+        $stmp->bind_result($NombreAutor, $Nota);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["NombreAutor"] = $NombreAutor;
+            $tmp["Nota"] = $Nota;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
 }

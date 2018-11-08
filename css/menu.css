@@ -160,3 +160,7 @@ html[xmlns] #nav {
 * html #nav {
 	height: 1%;
 }
+button#dropdownMenu2 {
+    background-color: #f5f6f7;
+    color: #212529;
+}

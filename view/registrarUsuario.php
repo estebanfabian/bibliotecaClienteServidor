@@ -71,7 +71,7 @@ session_start();
                                     <label for="inputEmail4">Cedula (*)</label>
                                     <input type="tetx" class="form-control" id="cedula" name ="cedula" placeholder="Cedulad">
                                 </div>
-                                
+
                                 <div class="form-group col-md-2">
                                     <label for="inputEmail4">Código (*)</label>
                                     <input type="tetx" class="form-control" id="codigo" name ="codigo" placeholder="Codigo">
@@ -83,19 +83,6 @@ session_start();
                                 <div class="form-group col-md-3">
                                     <label for="inputEmail4">Apellidos (*)</label>
                                     <input type="tetx" class="form-control" id="apellido" name="apellido" placeholder="Apellidos" >
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="uploader" ondragover="return false">
-                                        <i class="icon-upload icon"></i>
-                                        <img src="" class="" id = "foto" name = "foto">
-                                        <input type="photo" name="photo[]" multiple>
-                                        <input type="file" accept="image/*" id ="photo" name="photo">
-                                    </label>
-
-                                    <script src="../js/FileUploader.js" type="text/javascript"></script>
-                                    <script type="text/javascript">
-                            new FileUploader('.uploader');
-                                    </script>  
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="inputPassword4">Fecha de nacimiento (*)</label>               
@@ -109,17 +96,17 @@ session_start();
                                         <option value="0">Femenino</option>
                                     </select>
                                 </div>  
-                                <?php if ($_SESSION ['usuario']['perfil'] == "Admin") { ?>
                                     <div class = "form-group col-md-3">
                                         <label for = "exampleSelect1">Perfil</label>
                                         <select class = "form-control" name = "Perfil" id = "Perfil" >
                                             <option value = "usario" selected disabled>Perfil</option>
                                             <option value = "administradir">Administrador</option>
-                                            <option value = "usario">Usuario</option>
+                                            <option value = "empleado">Empleado</option>
+                                            <option value = "estudiante">Estudiante</option>
+                                            <option value = "profesor">Profesor</option>
                                         </select>
                                     </div>
-                                <?php }
-                                ?>
+                  
                                 <div class="form-group col-md-6 ">
                                     <label for="inputAddress">Dirección(*)</label>
                                     <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección" >

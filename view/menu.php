@@ -12,18 +12,58 @@ if ($_POST) {
             margin-top: -1px;
         }
     </style>
+    <input type="hidden" size="15" maxlength="30" value="<?php echo $_SESSION["usuario"]["codigo"]; ?>" name="nombre" id="codigo">
     <div  id ="cabezara" class ="container">
         <div class="row justify-content-end">
             <div class="col-4">
-                <img src="img/usuario/icono_foto.png" class="rounded float-left" alt=""  width="40" height="40"/>
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?php echo $_SESSION["usuario"]["perfil"]; ?>
+                        <?php echo $_SESSION["usuario"]["nombre"]; ?>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="Multa.php">Multa</a> 
+                        <a class="dropdown-item" id="btnmultas1">Multa</a> 
+                        <script>
+                            $(document).ready(function () {
+                                var myJson = new Array();
+                                function fajax(URL, parametros, metodo) {
+                                    $.ajax({
+                                        url: URL,
+                                        data: parametros,
+                                        type: 'post',
+                                        cache: false,
+                                        dataType: 'html', success: function (ZZx) {
+                                            metodo(ZZx);
+                                        },
+                                        error: function (xhr, status) {
+                                            alert("Existe un problema");
+                                        }
+                                    });
+                                }
+                                function envio1() {
+                                    var formulario = {
+                                        codigo: $("#codigo").val()
+                                    };
+                                    myJson.push(formulario);
+                                    var myString = JSON.stringify(formulario);
+                                    var url = "Controlador/Usuario/Mostrar_multa.php";
+                                    var parameto = myString;
+                                    var metodo = function (respuesta) {
+                                        var data = $.parseJSON(respuesta);
+                                        if (data[0]['multa'] == 0)
+                                        {
+                                            alert("no tiene multa");
+                                        } else {
+                                            alert("usted tiene multa" + data[0]['multa']);
+                                        }
+                                    };
+                                    fajax(url, parameto, metodo);
+                                }
+                                $("#btnmultas1").click(function () {
+                                    envio1();
+                                });
+                            });
+                        </script>
                         <a class="dropdown-item" href="view/CambiarClave.php">Cambiar Contraseña</a>
-                        <a class="dropdown-item" href="view/configuracion.php">Configuración</a>
                         <a class="dropdown-item" href="cerrarSesion.php">Cerrar Sesión</a>
                     </div>
                 </div>
@@ -60,9 +100,10 @@ if ($_POST) {
                             <a class="dropdown-item" href="view/misionYvision.php">Misión y Visión </a>
                             <a class="dropdown-item" href="view/AcercaBiblioCur.php">Acerca de BilioCur</a>
                             <a class="dropdown-item" href="http://urepublicana.edu.co">Cur</a>
-                            <a class="dropdown-item" href="/view/OtroServicios.php">Otros servicios</a>
+                            <a class="dropdown-item" href="view/OtroServicios.php">Otros Servicios</a>
                         </div>
                     </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Prestamo
@@ -70,9 +111,10 @@ if ($_POST) {
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="view/PrestamoLibro.php">Libro</a>
                             <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
-                            <a class="dropdown-item" href="view/PrestamoInter.php">Prestamo Interbibliotecario</a>
+                            <a class="dropdown-item" href="#">Prestamo Interbibliotecario</a>
                         </div>
                     </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Reserva
@@ -82,16 +124,6 @@ if ($_POST) {
                             <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Noticias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="view/Contactanos.php">Contactanos</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="view/Historial.php">Historial</a>
-                    </li>
                     <?php if ($_SESSION["usuario"]["perfil"] == "administrador") { ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -100,11 +132,11 @@ if ($_POST) {
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="view/registrarUsuario.php">Registrar Usuario</a>
                                 <a class="dropdown-item" href="view/registrarVideoBeam.php">Registrar Video Beam</a>
-                                <a class="dropdown-item" href="view/RegistrarLibro.php">Registrar libros</a>
+                                <a class="dropdown-item" href="#">Material audiovisual</a>
                             </div>
                         </li>
                     <?php } ?> 
-                </ul>
+                </ul> 
             </div>
         </nav>
     </div>

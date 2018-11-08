@@ -20,21 +20,22 @@ class TemaDAO {
     }
 
     function ModificarTema($array) {
-        $TemaVo = new TemaVO();
-        $TemaVo->setIdTema($array->idTema);
-        $TemaVo->setNombreTema($array->nombreTema);
-        $TemaVo->setDescricion($array->Descricion);
 
-        $sql = 'UPDATE `tbl_temas` SET `Descricion`=? WHERE `nombreTema`=?;';
+        $sql = 'UPDATE `tbl_temas` SET `descripcion`= ? WHERE `nombreTema`= ?;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
-        $idTema = $TemaVo->getIdTema();
-        $nombreTema = $TemaVo->getNombreTema();
-        $Descricion = $TemaVo->getDescricion();
+        $TemaVo = new TemaVO();
 
-        $stmp->bind_param("sis", $nombreTema, $Descricion, $idTema);
+        $TemaVo->setNombreTema($array->nombreTema);
+        $TemaVo->setDescripcion($array->Descricion);
+     
+        $nombreTema = $TemaVo->getNombreTema();
+        $Descricion = $TemaVo->getDescripcion();
+
+        $stmp->bind_param("ss", $nombreTema, $Descricion);
+        $this->Respuesta($conn, $stmp);
     }
 
     function EliminarTema($array) {
@@ -78,8 +79,8 @@ class TemaDAO {
 
         $stmp->bind_param("s", $nombreTema);
         $stmp->execute();
-        
-        $stmp->bind_result( $Descricion);
+
+        $stmp->bind_result($Descricion);
         $respuesta = array();
         while ($stmp->fetch()) {
             $tmp = array();

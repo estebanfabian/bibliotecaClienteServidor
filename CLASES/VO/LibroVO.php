@@ -5,7 +5,6 @@ class LibroVO {
     private $isbn;
     private $idEditorial;
     private $titulo;
-    private $editorial;
     private $categoriaLibro;
     private $resena;
     private $estado;
@@ -21,10 +20,6 @@ class LibroVO {
 
     function getTitulo() {
         return $this->titulo;
-    }
-
-    function getEditorial() {
-        return $this->editorial;
     }
 
     function getCategoriaLibro() {
@@ -53,10 +48,6 @@ class LibroVO {
 
     function setTitulo($titulo) {
         $this->titulo = $titulo;
-    }
-
-    function setEditorial($editorial) {
-        $this->editorial = $editorial;
     }
 
     function setCategoriaLibro($categoriaLibro) {

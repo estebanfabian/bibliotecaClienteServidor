@@ -5,53 +5,48 @@ class EditorialDAO {
     function CrearEditorial($array) {
 
         $editorialVo = new EditorialVO();
-        $editorialVo->setIdEditorial($array->idEditorial);
+
         $editorialVo->setNombreEditorial($array->nombreEditorial);
         $editorialVo->setDireccionEditorial($array->direccionEditorial);
         $editorialVo->setTelefonoEditorial($array->telefonoEditorial);
         $editorialVo->setAnoPublicacion($array->anoPublicacion);
 
-        if ($editorialVo->getIdcomputador() != "null") {
-            $this->ModificarEditorial($editorialVo);
-        } else {
-            $sql = 'INSERT INTO `tbl_editorial` (`idEditorial`, `nombreEditorial`, `direccionEditorial`, `telefonoEditorial`, `anoPublicacion`) VALUES (?, ?,?, ?,?);';
-            $BD = new ConectarBD();
-            $conn = $BD->getMysqli();
-            $stmp = $conn->prepare($sql);
-
-            $idEditorial = $editorialVo->getIdEditorial();
-            $nombreEditorial = $editorialVo->getNombreEditorial();
-            $direccionEditorial = $editorialVo->getDireccionEditorial();
-            $telefonoEditorial = $editorialVo->getTelefonoEditorial();
-            $anoPublicacion = $editorialVo->getAnoPublicacion();
-
-            $stmp->bind_param("isssss", $idEditorial, $nombreEditorial, $direccionEditorial, $telefonoEditorial, $anoPublicacion);
-
-            $this->Respuesta($conn, $stmp);
-        }
-    }
-
-    function ModificarEditorial($array) {
-
-        $editorialVo = new EditorialVO();
-        $editorialVo->setIdEditorial($array->idEditorial);
-        $editorialVo->setNombreEditorial($array->nombreEditorial);
-        $editorialVo->setDireccionEditorial($array->direccionEditorial);
-        $editorialVo->setTelefonoEditorial($array->telefonoEditorial);
-        $editorialVo->setAnoPublicacion($array->anoPublicacion);
-
-        $sql = 'UPDATE `tbl_editorial` SET `nombreEditorial` = ?, `direccionEditorial` = ?, `telefonoEditorial` = ?, `anoPublicacion` = ? WHERE `tbl_editorial`.`idEditorial` = ?;';
+        $sql = 'INSERT INTO `tbl_editorial` ( `nombreEditorial`, `direccionEditorial`, `telefonoEditorial`, `anoPublicacion`) VALUES ( ?,?, ?,?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
-        $idEditorial = $editorialVo->getIdEditorial();
+
         $nombreEditorial = $editorialVo->getNombreEditorial();
         $direccionEditorial = $editorialVo->getDireccionEditorial();
         $telefonoEditorial = $editorialVo->getTelefonoEditorial();
         $anoPublicacion = $editorialVo->getAnoPublicacion();
 
-        $stmp->bind_param("sssssI", $nombreEditorial, $direccionEditorial, $telefonoEditorial, $anoPublicacion, $idEditorial);
+        $stmp->bind_param("ssss", $nombreEditorial, $direccionEditorial, $telefonoEditorial, $anoPublicacion);
+
+        $this->Respuesta($conn, $stmp);
+    }
+
+    function ModificarEditorial($array) {
+
+        $sql = 'UPDATE `tbl_editorial` SET ,`direccionEditorial`= ? ,`telefonoEditorial`=?,`anoPublicacion`= ? WHERE `nombreEditorial`= ?;';
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $editorialVo = new EditorialVO();
+
+        $editorialVo->setNombreEditorial($array->nombreEditorial);
+        $editorialVo->setDireccionEditorial($array->direccionEditorial);
+        $editorialVo->setTelefonoEditorial($array->telefonoEditorial);
+        $editorialVo->setAnoPublicacion($array->anoPublicacion);
+
+        $nombreEditorial = $editorialVo->getNombreEditorial();
+        $direccionEditorial = $editorialVo->getDireccionEditorial();
+        $telefonoEditorial = $editorialVo->getTelefonoEditorial();
+        $anoPublicacion = $editorialVo->getAnoPublicacion();
+
+        $stmp->bind_param("ssss", $nombreEditorial, $direccionEditorial, $telefonoEditorial, $anoPublicacion);
 
         $this->Respuesta($conn, $stmp);
     }
@@ -59,20 +54,19 @@ class EditorialDAO {
     function EliminarEditorial($array) {
 
         $editorialVo = new EditorialVO();
-        $editorialVo->setIdEditorial($array->idEditorial);
+        $editorialVo->setNombreEditorial($array->nombreEditorial);
 
-        $sql = 'DELETE FROM `tbl_editorial` WHERE ``tbl_editorial`.`idEditorial` = ?;';
+        $sql = 'DELETE FROM `tbl_editorial` WHERE `nombreEditorial`= ?;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
-        $idEditorial = $editorialVo->getIdEditorial();
-        $nombreEditorial = $editorialVo->getNombreEditorial();
-        $direccionEditorial = $editorialVo->getDireccionEditorial();
-        $telefonoEditorial = $editorialVo->getTelefonoEditorial();
-        $anoPublicacion = $editorialVo->getAnoPublicacion();
+        $editorialVo = new EditorialVO();
 
-        $stmp->bind_param("isssss", $idEditorial, $nombreEditorial, $direccionEditorial, $telefonoEditorial, $anoPublicacion);
+        $editorialVo->setNombreEditorial($array->nombreEditorial);
+
+        $nombreEditorial = $editorialVo->getNombreEditorial();
+        $stmp->bind_param("s", $nombreEditorial);
 
         $this->Respuesta($conn, $stmp);
     }
@@ -90,5 +84,54 @@ class EditorialDAO {
         echo json_encode($respuesta);
     }
 
-    function BuscarEditoriala(){}
+    function BuscarEditoriala($array) {
+        $sql = "SELECT `nombreEditorial`,`direccionEditorial`,`telefonoEditorial`,`anoPublicacion` FROM `tbl_editorial` WHERE `nombreEditorial` = ?";
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $editorialVo = new EditorialVO();
+
+        $editorialVo->setNombreEditorial($array->nombreEditorial);
+
+        $nombreEditorial = $editorialVo->getNombreEditorial();
+        $stmp->bind_param("s", $nombreEditorial);
+        $stmp->execute();
+        $stmp->bind_result($nombreEditorial, $direccionEditorial, $telefonoEditorial, $anoPublicacion);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["nombreEditorial"] = $nombreEditorial;
+            $tmp["direccionEditorial"] = $direccionEditorial;
+            $tmp["telefonoEditorial"] = $telefonoEditorial;
+            $tmp["anoPublicacion"] = $anoPublicacion;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($tmp);
+    }
+
+    function ListarAutor($array) {
+       $sql = "SELECT `idEditorial`,`nombreEditorial` FROM `tbl_editorial`";
+
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+      
+        $stmp->execute();
+
+        $stmp->bind_result($NombreAutor, $Nota);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["NombreAutor1"] = $NombreAutor;
+            $tmp["Nota1"] = $Nota;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
 }

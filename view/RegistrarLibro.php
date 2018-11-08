@@ -18,6 +18,7 @@ session_start();
         <script src="" type="text/javascript"></script>
         <script src="../js/MiLogica.js" type="text/javascript"></script>
 
+
         <title>BiblioCur</title>
     </head>
     <body>
@@ -84,10 +85,20 @@ session_start();
                                     <textarea name="comment" form="usrform" placeholder="Reseña del libro" id="resenaLibro"></textarea>
                                 </div>
 
-                                <div class="form-group col-md-3 ">
-                                    <label for="inputAddress">Observaciones(*)</label>
-                                    <textarea name="comment" form="usrform" placeholder="Observaciones sobre el Libro" id="observacionesLibro"></textarea>
+                                <div class="form-group col-md-4">
+                                    <label for="inputEmail4">Autor  (*)</label>
+                                    <select name="CableUSB" class="form-control" id="Autores">
+                                        <option value="" disabled selected>Autores</option>
+                                    </select>
                                 </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="inputEmail4">Editorial (*)</label>
+                                    <select name="CableUSB" class="form-control" id="ListaEditores">
+                                        <option value="" disabled selected>Editorial</option>
+                                    </select>
+                                </div>    
+
                             </div>
                         </fieldset>
                         <button  class="btn btn-primary" id="btnRegistrarLibro">Registrar</button>
@@ -138,49 +149,49 @@ session_start();
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="inputEmail4">Nota autor (*)</label>     
-                                    <textarea name="comment" form="usrform" placeholder="Observaciones sobre el Tema"  id="observacionesAutor" name="observacionesAutor" placeholder="Nota" ></textarea>
+                                    <textarea name="comment" form="usrform" placeholder="Observaciones sobre el Tema"  id="observacionesAutor"  ></textarea>
                                 </div>
                             </div>
                         </fieldset>
-                        <button  class="btn btn-primary" id="btnRegistrarComputador">Registrar</button>
-                        <button  class="btn btn-primary" id="btnLimpiarComputador">Limpiar</button>
-                        <button  class="btn btn-primary" id="btnActualizaComputador">Actualizar</button>
-                        <button  class="btn btn-primary" id="btnEliminarComputador">Eliminar</button>
-                        <button  class="btn btn-primary" id="btnBuscarComputador">Buscar</button>
-                    </form>
-                    <br>
-                    <form id="registar_Tema" name ="registar_Tema" method="POST" enctype=" multipart/form-data">
-                        <fieldset class="border p-1">
-                            <legend  class="w-auto">Nombre del tema</legend>
-                            <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <label for="inputEmail4">Nombre del tema (*)</label>
-                                    <input type="tetx" class="form-control" id="NombreTema" name ="NombreTema" placeholder="Nombre del tema">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputEmail4">Descricion (*)</label>
-                                    <textarea name="comment" form="usrform" placeholder="Observaciones sobre el Tema" id="observacionesTema"></textarea>
-                                </div>
-                            </div>
-                        </fieldset>
-
                         <button  class="btn btn-primary" id="btnRegistrarAutor">Registrar</button>
                         <button  class="btn btn-primary" id="btnLimpiarAutor">Limpiar</button>
                         <button  class="btn btn-primary" id="btnActualizaAutor">Actualizar</button>
                         <button  class="btn btn-primary" id="btnEliminarAutor">Eliminar</button>
                         <button  class="btn btn-primary" id="btnBuscarAutor">Buscar</button>
                     </form>
+                    <br>
+                    <!--                    <form id="registar_Tema" name ="registar_Tema" method="POST" enctype=" multipart/form-data">
+                                            <fieldset class="border p-1">
+                                                <legend  class="w-auto">Nombre del tema</legend>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-3">
+                                                        <label for="inputEmail4">Nombre del tema (*)</label>
+                                                        <input type="tetx" class="form-control" id="NombreTema" name ="NombreTema" placeholder="Nombre del tema">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputEmail4">Descricion (*)</label>
+                                                        <textarea name="comment" form="usrform" placeholder="Observaciones sobre el Tema" id="observacionesTema"></textarea>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                    
+                                            
+                                            <button  class="btn btn-primary" id="btnRegistrarTema">Registrar</button>
+                                            <button  class="btn btn-primary" id="btnLimpiarTema">Limpiar</button>
+                                            <button  class="btn btn-primary" id="btnActualizaTema">Actualizar</button>
+                                            <button  class="btn btn-primary" id="btnEliminarTema">Eliminar</button>
+                                            <button  class="btn btn-primary" id="btnBuscarTema">Buscar</button>
+                                        </form>-->
                 </div>
             </section>
         </div>
-        <a href=""></a>
-        <a href=""></a>
-        <a href="../Controlador/Libro/ModificarTema.php"></a>
-        <a href="../Controlador/Libro/BuscarTema.php"></a>
-        <footer > 
+        <footer> 
             <div id = "pie">
             </div>
-        </footer>
+        </footer> 
+        <a href=""></a>
+        <script src="../js/Libro.js" type="text/javascript"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>

@@ -70,11 +70,15 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
         
 }
 
-/*button.btn.btn-secondary
+button.btn.btn-secondary
 {
         background:#154672;
 }*/
 
+#button#dropdownMenu2 {
+    color: #212529;
+    background: white;
+}
 .row.ejemplo
 {
     background :white;

@@ -11,7 +11,7 @@ class LibroAutorDAO {
         if ($libroAutorVo->setIdAutorLibro() != "null") {
             $this->ModificarLibroAutor($libroAutorVo);
         } else {
-            $sql = 'INSERT INTO `tbl_libroautor` (`idAutorLibro`, `Isbn`, `idautor`, `listaLibro`) VALUES (?,?,?,?);';
+            $sql = 'INSERT INTO `tbl_libro_autor` (`idAutorLibro`, `Isbn`, `idautor`, `listaLibro`) VALUES (?,?,?,?);';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
@@ -34,7 +34,7 @@ class LibroAutorDAO {
         $libroAutorVo->setIdautor($array->idautor);
         $libroAutorVo->setListaLibro($array->listaLibro);
 
-        $sql = 'UPDATE `tbl_libroautor` SET `Isbn` = ?, `idautor` = ?, `idautor` =? WHERE `tbl_libroautor`.`idAutorLibro` = ?';
+        $sql = 'UPDATE `tbl_libro_autor` SET `Isbn` = ?, `idautor` = ?, `idautor` =? WHERE `tbl_libro_autor`.`idAutorLibro` = ?';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -53,7 +53,7 @@ class LibroAutorDAO {
         $libroAutorVo = new LibroAutorVO();
         $libroAutorVo->setIdAutorLibro($array->idAutorLibro);
 
-        $sql = 'DELETE FROM `tbl_computador` WHERE `tbl_libroautor`.`idAutorLibro` =?';
+        $sql = 'DELETE FROM `tbl_computador` WHERE `tbl_libro_autor`.`idAutorLibro` =?';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);

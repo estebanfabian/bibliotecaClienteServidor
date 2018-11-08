@@ -63,12 +63,13 @@ $(document).ready(function () {
         });
     }
     function Catalogo() {
-
         var url = "../controlador/Libro/MasBuscado.php";
         var parametro = "hla";
         var metodo = function (respuesta) {
+            console.log(respuesta);
             var data = $.parseJSON(respuesta);
             var limite = data.length;
+            console.log(data);
             for (var i = 0; i < limite; i++) {
                 var local = data[i];
                 item(local, i);
@@ -77,7 +78,6 @@ $(document).ready(function () {
         };
         fajax(url, parametro, metodo);
     }
-
     function item(tmp, i) {
         if (i == 0) {
             $("#tabla1").empty();
@@ -94,18 +94,18 @@ $(document).ready(function () {
                 + "<td class ='reservar' post ='" + tmp.isbn + "' >Reservas</td>");
         $("#tabla1").append(estr);
     }
-
     function busquedaFiltro(array) {
         var formulario = {
             Consulta: $("#txtBusqueda").val()
         };
         myJson.push(formulario);
+        
         var myString1 = JSON.stringify(formulario);
         var ur = "../" + array;
         var parametro1 = myString1;
         $("#ListaTabla").html("");
         var meto = function (respuesta) {
-            //alert("Dentro de metodos");
+            alert(respuesta);
             var data = $.parseJSON(respuesta);
             var limite = data.length;
             for (var i = 0; i < limite; i++) {
@@ -156,6 +156,11 @@ $(document).ready(function () {
             case "Editorial":
             {
                 busquedaFiltro("tablaXEditorial");
+                break;
+            }
+            case "Tema":
+            {
+                busquedaFiltro("tablaXtema");
                 break;
             }
             default:

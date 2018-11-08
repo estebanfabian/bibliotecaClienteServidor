@@ -72,6 +72,7 @@ session_start();
                                 <option value="Autor">Autor</option>
                                 <option value="Titulo">Titulo</option>
                                 <option value="Editorial">Editorial</option>
+                                <option value="Tema">Tema</option>
                             </select>&nbsp
                             <input type="search" class="input-sm form-control " placeholder="Búsqueda" id = "txtBusqueda">
                             &nbsp <button type="submit" id ="BtnFiltro" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Buscar</button>
