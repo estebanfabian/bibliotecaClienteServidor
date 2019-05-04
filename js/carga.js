@@ -76,6 +76,7 @@ $(document).ready(function () {
             }
             reservar();
         };
+        console.log("aqui es ");
         fajax(url, parametro, metodo);
     }
     function item(tmp, i) {
@@ -99,7 +100,7 @@ $(document).ready(function () {
             Consulta: $("#txtBusqueda").val()
         };
         myJson.push(formulario);
-        
+
         var myString1 = JSON.stringify(formulario);
         var ur = "../" + array;
         var parametro1 = myString1;

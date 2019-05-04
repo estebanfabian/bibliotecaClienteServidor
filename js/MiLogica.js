@@ -67,7 +67,6 @@ $(document).ready(function () {
                         };
                         fajax(url2, parametro2, metodo2);
                     } else {
-
                         $('body').removeClass('modal-open');
                         $('.modal-backdrop').remove();
                         envio(respuesta);
@@ -105,7 +104,6 @@ $(document).ready(function () {
         };
         fajax(url, parameto, metodo);
     }
-
 //funcion para saber el dia que se hace la reservacion
     function reservacion1() {
         if (moment().format("dddd") == "Sunday") {
@@ -328,12 +326,12 @@ $(document).ready(function () {
         });
     }
 
-    function palabra($palabra) {
-
-        var listaNombres = $palabra.split('\\');
-        var i = listaNombres.length;
-        return listaNombres[i - 1];
-    }
+//    function palabra($palabra) {
+//
+//        var listaNombres = $palabra.split('\\');
+//        var i = listaNombres.length;
+//        return listaNombres[i - 1];
+//    }
 // intento para hacer la carga de la foto al server
     function  cargarFoto() {
         var file = document.getElementById('foto').files[0];
@@ -789,6 +787,7 @@ $(document).ready(function () {
         });
     }
     function RegistrarTema() {
+        alert("ingresa");
         $("#registar_Tema").validate({
             rules: {
                 NombreTema: {
@@ -823,70 +822,6 @@ $(document).ready(function () {
     function LimpiarTema() {
         $("#NombreTema").val("");
         $("#observacionesTema").val("");
-    }
-    function RegistrarAutor() {
-        $("#registar_Autor").validate({
-            rules: {
-                NombreAutor: {
-                    required: true,
-                    minlength: 1
-                }
-            }, submitHandler: function () {
-                var formulario = {
-                    NombreAutor: $("#NombreAutor").val(),
-                    NotaAutor: $("#observacionesAutor").val()
-                }
-                myJson.push(formulario);
-                var myString = JSON.stringify(formulario);
-                var url = "../Controlador/Libro/CrearAutor.php";
-                var parametro = myString;
-                console.log(myString)
-                var metodo = function (respuesta) {
-                    console.log(respuesta);
-                    var data = $.parseJSON(respuesta);
-                    if (data.sucess == 'ok') {
-                        alert("el usuario se registro con exito");
-                        LimpiarVideoBeam();
-                    } else {
-                        alert("No se pude registar al usuario");
-                    }
-
-                };
-                fajax(url, parametro, metodo);
-            }
-        });
-    }
-    function EliminarAutor() {
-        $("#registar_Autor").validate({
-            rules: {
-                NombreAutor: {
-                    required: true,
-                    minlength: 1
-                }
-            }, submitHandler: function () {
-                var formulario = {
-                    NombreAutor: $("#NombreAutor").val()
-                }
-
-                myJson.push(formulario);
-                var myString = JSON.stringify(formulario);
-                var url = "../Controlador/Libro/EliminarAutor.php";
-                var parametro = myString;
-                console.log(myString)
-                var metodo = function (respuesta) {
-                    console.log(respuesta);
-                    var data = $.parseJSON(respuesta);
-                    if (data.sucess == 'ok') {
-                        alert("el usuario se registro con exito");
-                        LimpiarVideoBeam();
-                    } else {
-                        alert("No se pude registar al usuario");
-                    }
-
-                };
-                fajax(url, parametro, metodo);
-            }
-        });
     }
     function LimpiarAutor() {
         $("#NombreAutor").val("");
@@ -1055,26 +990,321 @@ $(document).ready(function () {
             }
         });
     }
-    function BuscarAutor() {
+
+//---------------
+
+    function ActualizarEditorial() {
         var formulario = {
-            NombreAutor: $("#NombreAutor").val()
+            nombreEditorial: $("#NombreEditorial").val(),
+            direccionEditorial: $("#DireccionEditoriaal").val(),
+            telefonoEditorial: $("#TelEditorial").val(),
+            anoPublicacion: $("#fechaEditorial").val()
         };
         myJson.push(formulario);
         var myString = JSON.stringify(formulario);
-        var url = "../Controlador/Libro/BuscarAutor.php";
+        var url = "../Controlador/Libro/ModificarEditorial.php";
         var parametro = myString;
+        console.log(myString)
         var metodo = function (respuesta) {
+            console.log(respuesta);
             var data = $.parseJSON(respuesta);
-            if (data.length != 0) {
-                $("#NombreAutor").val(data.NombreAutor);
-                $("#observacionesAutor").val(data.Nota);
+            if (data.sucess == 'ok') {
+                alert("el usuario se registro con exito");
             } else {
-                alert("el autor no exite");
+                alert("No se pude registar al usuario");
             }
         };
         fajax(url, parametro, metodo);
     }
-//---------------
+    function EliminarAutor() {
+//        $("#registar_Autor").validate({
+//            rules: {
+//                ombreAutor: {
+//                    required: true,
+//                    minlength: 1
+//                }
+//            }, submitHandler: function () {
+        var formulario = {
+            NombreAutor: $("#NombreAutor").val()
+        }
+
+        myJson.push(formulario);
+        var myString = JSON.stringify(formulario);
+        var url = "../Controlador/Libro/EliminarAutor.php";
+        var parametro = myString;
+        console.log(myString)
+        var metodo = function (respuesta) {
+            console.log(respuesta);
+            var data = $.parseJSON(respuesta);
+            if (data.sucess == 'ok') {
+                alert("el usuario se registro con exito");
+                LimpiarVideoBeam();
+            } else {
+                alert("No se pude registar al usuario");
+            }
+
+        };
+        fajax(url, parametro, metodo);
+        //  }
+//        });
+    }
+    function ActualizarAutor() {
+
+        var formulario = {
+            NombreAutor: $("#NombreAutor").val(),
+            NotaAutor: $("#observacionesAutor").val()
+        };
+
+        myJson.push(formulario);
+        var myString = JSON.stringify(formulario);
+        var url = "../Controlador/Libro/ModificarAutor.php";
+        var parametro = myString;
+        var metodo = function (respuesta) {
+            console.log(respuesta);
+            var data = $.parseJSON(respuesta);
+            if (data.sucess == 'ok') {
+                alert("el usuario se registro con exito");
+            } else {
+                alert("No se pude registar al usuario");
+            }
+        };
+        fajax(url, parametro, metodo);
+    }
+    function RegistrarLibro() {
+        var formulario = {
+            isbn: $("#Risbn").val(),
+            titulo: $("#RTituo").val(),
+            categoriaLibro: $("#RCategoria").val(),
+            resena: $("#resenaLibro").val(),
+            autor: $("#Autores").val(),
+            editorial: $("#ListaEditores").val()
+        };
+        myJson.push(formulario);
+        var myString = JSON.stringify(formulario);
+        var url = "../Controlador/Libro/CrearLibro.php";
+        var parametro = myString;
+        console.log(myString);
+        var metodo = function (respuesta) {
+            console.log(respuesta);
+            var data = $.parseJSON(respuesta);
+            if (data.sucess == 'ok') {
+                alert("el usuario se registro con exito");
+                LimpiarVideoBeam();
+            } else {
+                alert("No se pude registar al usuario");
+            }
+        };
+        fajax(url, parametro, metodo);
+    }
+    function LimpiarLibro() {
+        $("#Risbn").val("");
+        $("#RTituo").val("");
+        $("#RCategoria").val("");
+        $("#resenaLibro").val("");
+        $("#Autores").val("");
+        $("#ListaEditores").val("");
+    }
+    function ActualizarLibro() {
+        var formulario = {
+            NombreAutor: $("#NombreAutor").val(),
+            NotaAutor: $("#observacionesAutor").val()
+        }
+        myJson.push(formulario);
+        var myString = JSON.stringify(formulario);
+        var url = "../Controlador/Libro/ModificarAutor.php";
+        var parametro = myString;
+        console.log(myString)
+        var metodo = function (respuesta) {
+            console.log(respuesta);
+            var data = $.parseJSON(respuesta);
+            if (data.sucess == 'ok') {
+                alert("el usuario se registro con exito");
+                LimpiarVideoBeam();
+            } else {
+                alert("No se pude registar al usuario");
+            }
+        };
+        fajax(url, parametro, metodo);
+    }
+    function EliminarLibro() {
+        $("#registar_VideoBeam").validate({
+            rules: {
+                idvideoBeam: {
+                    required: true,
+                    number: true,
+                    digits: true,
+                    minlength: 1
+                }
+            }, submitHandler: function () {
+                var formulario = {
+                    idVideoBeam: $("#idvideoBeam").val()
+                };
+                myJson.push(formulario);
+                var myString = JSON.stringify(formulario);
+                var url = "../Controlador/VideoBeam/EliminarVideoBeam.php";
+                var parametro = myString;
+                console.log(myString)
+                var metodo = function (respuesta) {
+                    console.log(respuesta);
+                    var data = $.parseJSON(respuesta);
+                    if (data.sucess == 'ok') {
+                        alert("se elimino con exito");
+                        LimpiarVideoBeam();
+                    } else {
+                        alert("El video Beam no existe");
+                    }
+                };
+                fajax(url, parametro, metodo);
+            }
+        });
+    }
+
+
+
+    function BuscarLibroPrestamo() {
+
+        $("#btnBuscarPrestamo").click(function () {
+
+            var formulario = {
+                Consulta: $("#PrestamoIsbn").val()
+            };
+            myJson.push(formulario);
+            var myString = JSON.stringify(formulario);
+            var url = "../tablaXid";
+            var parametro = myString;
+            var metodo = function (respuesta) {
+                console.log(respuesta);
+                var data = $.parseJSON(respuesta);
+                var limite = data.length;
+                console.log(data);
+                for (var i = 0; i < limite; i++) {
+                    var local = data[i];
+                    item(local, i);
+                }
+                noDispo();
+                prestarLibro();
+            };
+            fajax(url, parametro, metodo);
+        });
+    }
+
+    function item(tmp, i) {
+        if (i == 0) {
+            $("#PrestamoTabla").empty();
+            tabla(tmp);
+        } else {
+            tabla(tmp);
+        }
+    }
+    function  tabla(tmp) {
+        var estr = $("<tr></tr>");
+        estr.append("<td>" + tmp.isbn + "</td>"
+                + "<td><img src=" + tmp.imagen + "   width=100 height=100></td>"
+                + "<td><p> Titulo :" + tmp.titulo + "<br> Autor:" + tmp.autor + " Editorial:" + tmp.editorial + "</p></td>"
+                + validacionEstado(tmp));
+        $("#PrestamoTabla").append(estr);
+    }
+    function validacionEstado(tmp) {
+        if (tmp.estado == 'libre') {
+            return "<td class ='prestar' post ='" + tmp.isbn + "' >Libre</td>";
+        } else {
+            return "<td class ='no_diponible' post ='" + tmp.isbn + "' >No disponible</td>";
+        }
+    }
+
+    function  noDispo() {
+        $(".no_diponible").click(function () {
+            alert("materia no disponoble");
+
+            var lo = prompt("ejemplo", "");
+            console.log(lo);
+        })
+    }
+
+    function prestarLibro() {
+        $(".prestar").click(function () {
+
+            var lo = prompt("Codigo del estudiante que solicita el libro", "");
+            if (lo == null || lo == "") {
+                alert("No hay codigo de estudiante");
+            } else
+            {
+                var formulario = {
+                    codigo: $("#codigoPrestamo").val()
+                };
+                myJson.push(formulario);
+                var myString = JSON.stringify(formulario);
+                var url = "../Conta_res";
+                var parameto = myString;
+                var metodo = function (respuesta) {
+                    var data = $.parseJSON(respuesta);
+                    if (data[0]['count'] < 4) {
+                        Prestamo1();
+                    } else {
+                        alert("tiene el numero maximo de reservas o prestamos")
+                    }
+                };
+                //    fajax(url, parameto, metodo);
+
+            }
+
+        })
+    }
+
+    function Pretamo() {
+        var fecha = $("#datetimepicker1").val();
+        var ejemplo = fecha.split(":T11:");
+        var formulario = {
+            codigo: $("#codigo").val()
+        };
+        myJson.push(formulario);
+        var myString = JSON.stringify(formulario);
+        var url = "../Conta_res";
+        var parameto = myString;
+        var metodo = function (respuesta) {
+            var data = $.parseJSON(respuesta);
+            if (data[0]['count'] < 4) {
+                Prestamo1();
+            } else {
+                alert("tiene el numero maximo de reservas o prestamos")
+            }
+        };
+        fajax(url, parameto, metodo);
+    }
+
+    function Prestamo1() {
+        if (moment().format("dddd") == "Sunday") {
+            var fechaReserva = moment().add(2, "days").format('YYYY/MM/DD hh:mm:ss');
+        } else {
+            var fechaReserva = moment().add(1, "days").format('YYYY/MM/DD hh:mm:ss');
+        }
+        var txt = document.getElementById("isbnReserva");
+        txt = (txt.innerHTML);
+        var formulario = {
+            diaPrestamo: moment().format('YYYY/MM/DD hh:mm:ss'),
+            isbn: txt,
+            codigo: $("#codigo").val(),
+            diaEntrega: fechaReserva,
+            estado: 2
+        };
+        myJson.push(formulario);
+        var myString = JSON.stringify(formulario);
+        var url = "../reserva";
+        var parameto = myString;
+        var metodo = function (respuesta) {
+            console.log(respuesta);
+            var data = $.parseJSON(respuesta);
+            if (data.sucess == "ok") {
+                alert("La reserva del libro fue un éxito");
+                location.href = "../index.php"
+            } else {
+                alert("Hubo un problema con la reserva intentolo mas tarde");
+            }
+        };
+        fajax(url, parameto, metodo);
+        alert(parameto);
+    }
+//-------------------------------------------------------
 // botones
     $("#tabla").click(function () {
         alert("mesaje");
@@ -1185,9 +1415,7 @@ $(document).ready(function () {
     $("#btnBuscarEditorial ").click(function () {
         BuscarEditorial();
     });
-    $("#btnRegistrarAutor ").click(function () {
-        RegistrarAutor();
-    });
+
     $("#btnLimpiarAutor").click(function () {
         LimpiarAutor();
     });
@@ -1197,236 +1425,39 @@ $(document).ready(function () {
     $("#btnEliminarAutor ").click(function () {
         EliminarAutor();
     });
-    $("#btnBuscarAutor ").click(function () {
-        BuscarAutor();
-    });
-    function ActualizarEditorial() {
-        var formulario = {
-            nombreEditorial: $("#NombreEditorial").val(),
-            direccionEditorial: $("#DireccionEditoriaal").val(),
-            telefonoEditorial: $("#TelEditorial").val(),
-            anoPublicacion: $("#fechaEditorial").val()
-        };
-        myJson.push(formulario);
-        var myString = JSON.stringify(formulario);
-        var url = "../Controlador/Libro/ModificarEditorial.php";
-        var parametro = myString;
-        console.log(myString)
-        var metodo = function (respuesta) {
-            console.log(respuesta);
-            var data = $.parseJSON(respuesta);
-            if (data.sucess == 'ok') {
-                alert("el usuario se registro con exito");
-            } else {
-                alert("No se pude registar al usuario");
-            }
-        };
-        fajax(url, parametro, metodo);
-    }
-    function ActualizarAutor() {
-        $("#registar_Autor").validate({
-            rules: {
-                NombreAutor: {
-                    required: true,
-                    minlength: 1
-                }
-            }, submitHandler: function () {
-                var formulario = {
-                    NombreAutor: $("#NombreAutor").val(),
-                    NotaAutor: $("#observacionesAutor").val()
-                }
-                myJson.push(formulario);
-                var myString = JSON.stringify(formulario);
-                var url = "../Controlador/Libro/ModificarAutor.php";
-                var parametro = myString;
-                console.log(myString)
-                var metodo = function (respuesta) {
-                    console.log(respuesta);
-                    var data = $.parseJSON(respuesta);
-                    if (data.sucess == 'ok') {
-                        alert("el usuario se registro con exito");
-                        LimpiarVideoBeam();
-                    } else {
-                        alert("No se pude registar al usuario");
-                    }
-                };
-                fajax(url, parametro, metodo);
-            }
-        });
-    }
-    function RegistrarLibro() {
-        var formulario = {
-            isbn: $("#Risbn").val(),
-            titulo: $("#RTituo").val(),
-            categoriaLibro: $("#RCategoria").val(),
-            resena: $("#resenaLibro").val(),
-            autor: $("#Autores").val(),
-            editorial: $("#ListaEditores").val()
-        }
-        myJson.push(formulario);
-        var myString = JSON.stringify(formulario);
-        var url = "../Controlador/Libro/CrearLibro.php";
-        var parametro = myString;
-        console.log(myString)
-        var metodo = function (respuesta) {
-            console.log(respuesta);
-            var data = $.parseJSON(respuesta);
-            if (data.sucess == 'ok') {
-                alert("el usuario se registro con exito");
-                LimpiarVideoBeam();
-            } else {
-                alert("No se pude registar al usuario");
-            }
-        };
-        fajax(url, parametro, metodo);
-    }
 
-    function LimpiarLibro() {
-        $("#Risbn").val("");
-        $("#RTituo").val("");
-        $("#RCategoria").val("");
-        $("#resenaLibro").val("");
-        $("#Autores").val("");
-        $("#ListaEditores").val("");
-    }
-    function ActualizarLibro() {
-        var formulario = {
-            NombreAutor: $("#NombreAutor").val(),
-            NotaAutor: $("#observacionesAutor").val()
-        }
-        myJson.push(formulario);
-        var myString = JSON.stringify(formulario);
-        var url = "../Controlador/Libro/ModificarAutor.php";
-        var parametro = myString;
-        console.log(myString)
-        var metodo = function (respuesta) {
-            console.log(respuesta);
-            var data = $.parseJSON(respuesta);
-            if (data.sucess == 'ok') {
-                alert("el usuario se registro con exito");
-                LimpiarVideoBeam();
-            } else {
-                alert("No se pude registar al usuario");
-            }
-        };
-        fajax(url, parametro, metodo);
-    }
-    function EliminarLibro() {
-        $("#registar_VideoBeam").validate({
-            rules: {
-                idvideoBeam: {
-                    required: true,
-                    number: true,
-                    digits: true,
-                    minlength: 1
-                }
-            }, submitHandler: function () {
-                var formulario = {
-                    idVideoBeam: $("#idvideoBeam").val()
-                };
-                myJson.push(formulario);
-                var myString = JSON.stringify(formulario);
-                var url = "../Controlador/VideoBeam/EliminarVideoBeam.php";
-                var parametro = myString;
-                console.log(myString)
-                var metodo = function (respuesta) {
-                    console.log(respuesta);
-                    var data = $.parseJSON(respuesta);
-                    if (data.sucess == 'ok') {
-                        alert("se elimino con exito");
-                        LimpiarVideoBeam();
-                    } else {
-                        alert("El video Beam no existe");
-                    }
-                };
-                fajax(url, parametro, metodo);
-            }
-        });
-    }
-
-
-
-
-
-    function BuscarLibroPrestamo() {
-
-        $("#btnBuscarPrestamo").click(function () {
-
-            var formulario = {
-                Consulta: $("#PrestamoIsbn").val()
-            };
-            myJson.push(formulario);
-            var myString = JSON.stringify(formulario);
-            var url = "../tablaXid";
-            var parametro = myString;
-            var metodo = function (respuesta) {
-                console.log(respuesta)
-            
-//                var data = $.parseJSON(respuesta);
-//                location.href = "ReservarLibro.php?isbn=" + data[0]['isbn'] + "&titulo=" + data[0]['titulo'] + "&autor=" + data[0]['autor'] +
-//                        "&tema=" + data[0]['tema'] + "&editorial=" + data[0]['editorial'] + "&facultad=" + data[0]['facultad'] + "&resena=" + data[0]['resena']
-//                        + "&imagen=" + data[0]['imagen'];
-           };
-            fajax(url, parametro, metodo);
-        });
-    }
     $("#btnBuscarPrestamo").click(function () {
         BuscarLibroPrestamo();
     });
 
 
-    function Pretamo() {
-        var fecha = $("#datetimepicker1").val();
-        var ejemplo = fecha.split(":T11:");
+    $("#btnBuscarAutor ").click(function () {
+        BuscarAutor();
+    });
+    function BuscarAutor() {
+        alert("entra");
         var formulario = {
-            codigo: $("#codigo").val()
+            NombreAutor: $("#NombreAutor").val()
         };
         myJson.push(formulario);
         var myString = JSON.stringify(formulario);
-        var url = "../Conta_res";
-        var parameto = myString;
+        var url = "../Controlador/Libro/BuscarAutor.php";
+        var parametro = myString;
         var metodo = function (respuesta) {
             var data = $.parseJSON(respuesta);
-            if (data[0]['count'] < 4) {
-                Prestamo1();
+            if (data.length != 0) {
+
+                console.log($("#NombreAutor").val(data.NombreAutor));
+                console.log($("#observacionesAutor").val(data.Nota));
+
+                $("#NombreAutor").val(data.NombreAutor);
+                $("#observacionesAutor").val(data.Nota);
+
             } else {
-                alert("tiene el numero maximo de reservas o prestamos")
+                alert("el autor no exite");
             }
         };
-        fajax(url, parameto, metodo);
+        fajax(url, parametro, metodo);
+
     }
-    
-     function Prestamo1() {
-        if (moment().format("dddd") == "Sunday") {
-            var fechaReserva = moment().add(2, "days").format('YYYY/MM/DD hh:mm:ss');
-        } else {
-            var fechaReserva = moment().add(1, "days").format('YYYY/MM/DD hh:mm:ss');
-        }
-        var txt = document.getElementById("isbnReserva");
-        txt = (txt.innerHTML);
-        var formulario = {
-            diaPrestamo: moment().format('YYYY/MM/DD hh:mm:ss'),
-            isbn: txt,
-            codigo: $("#codigo").val(),
-            diaEntrega: fechaReserva,
-            estado:2
-        };
-        myJson.push(formulario);
-        var myString = JSON.stringify(formulario);
-        var url = "../reserva";
-        var parameto = myString;
-        var metodo = function (respuesta) {
-            console.log(respuesta);
-            var data = $.parseJSON(respuesta);
-            if (data.sucess == "ok") {
-                alert("La reserva del libro fue un éxito");
-                location.href = "../index.php"
-            } else {
-                alert("Hubo un problema con la reserva intentolo mas tarde");
-            }
-        };
-        fajax(url, parameto, metodo);
-        alert(parameto);
-    }
-//-------------------------------------------------------
 });

@@ -8,4 +8,5 @@ require '../../CLASES/DAO/AutorDAO.php';
 $json = file_get_contents("php://input");
 $local = json_decode($json);
 $LibroDAO = new AutorDao();
+//print_r($LibroDAO);
 $LibroDAO->CrearAutor($local);

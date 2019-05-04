@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    var myJson = new Array();
 
     function fajax(URL, parametros, metodo) {
         $.ajax({
@@ -34,7 +34,6 @@ $(document).ready(function () {
         var url = "../Controlador/Libro/ListarEditorial.php";
         var parametro = "myString";
         var metodo = function (respuesta) {
-            console.log(respuesta);
             var data = $.parseJSON(respuesta);
             var limite = data.length;
             for (var i = 0; i < limite; i++) {
@@ -51,5 +50,36 @@ $(document).ready(function () {
         $("#ListaEditores").append("<option value=" + tmp.NombreAutor1 + ">" + tmp.Nota1 + "</option>");
     }
     ListarEditorial();
-    window.onload(ListarAutores());
+
+    $("#btnRegistrarAutor ").click(function () {
+        RegistrarAutor();
+    });
+
+    function RegistrarAutor() {
+
+        var formulario = {
+            NombreAutor: $("#NombreAutor").val(),
+            NotaAutor: $("#observacionesAutor").val()
+        };
+        myJson.push(formulario);
+        var myString = JSON.stringify(formulario);
+        var url = "../Controlador/Libro/CrearAutor.php";
+        var parametro = myString;
+
+        console.log(formulario);
+        var metodo = function (respuesta) {
+            console.log(respuesta);
+            var data = $.parseJSON(respuesta);
+            if (data.sucess == 'ok') {
+                alert("el usuario se registro con exito");
+                LimpiarVideoBeam();
+            } else {
+                alert("No se pude registar al usuario");
+            }
+        };
+        fajax(url, parametro, metodo);
+    }
+
+    //window.onload(ListarAutores());
+
 });

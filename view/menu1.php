@@ -129,7 +129,7 @@ if ($_POST) {
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="registrarUsuario.php">Registrar Usuario</a>
                                     <a class="dropdown-item" href="videoBeam.php">Video Beam</a>
-                                    <a class="dropdown-item" href="#">Material audiovisual</a>
+                                    <a class="dropdown-item" href="view/RegistrarLibro.php">Material audiovisual</a>
                                 </div>
                             </li>
                         <?php } ?>

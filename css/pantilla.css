@@ -1,12 +1,12 @@
 header {
     width: 100;
-    background-color: #5e2129;
+    background-color: #A2121C;
     color:black;
 }
 
 footer{
     position: absolute;
-    background: #5e2129;
+    background: #a2121c;
     width: 100%;
     color: white;
     margin: 0px;
@@ -16,7 +16,10 @@ footer{
 .reservar{
     cursor: pointer;
 }
-.renovar{
+.prestar{
+    cursor: pointer;
+}
+.no_diponible{
     cursor: pointer;
 }
 tbody tr:hover{

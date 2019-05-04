@@ -145,10 +145,10 @@ session_start();
                             <div class="form-row">
                                 <div class="form-group col-md-2">
                                     <label for="inputEmail4">Nombre del autor (*)</label>
-                                    <input type="tetx" class="form-control" id="NombreAutor" name ="NombreAutor" placeholder="Nombre del autor">
+                                        <input type="tetx" class="form-control" id="NombreAutor" name ="nombreAutor" placeholder="Nombre del autor">
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="inputEmail4">Nota autor (*)</label>     
+                                    <label for="inputEmail4">Nota autor </label>     
                                     <textarea name="comment" form="usrform" placeholder="Observaciones sobre el Tema"  id="observacionesAutor"  ></textarea>
                                 </div>
                             </div>

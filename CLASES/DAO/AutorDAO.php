@@ -23,21 +23,25 @@ class AutorDao {
 
     function ModificarAutor($array) {
         $Autorvo = new AutorVO();
-        $Autorvo->setIdautor($array->idAutor);
+
         $Autorvo->setNombreAutor($array->NombreAutor);
         $Autorvo->setNotaAutor($array->NotaAutor);
-        $sql = 'UPDATE `tbl_autor` SET `nombreAutor` = ?, `notaAutor` = ? WHERE `tbl_autor`.`idautor` = ?;';
+        $sql = 'UPDATE `tbl_autor` SET  `notaAutor` = ? WHERE `nombreAutor` = ? ;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
-        $idAutor = $Autorvo->getIdautor();
         $nomAutor = $Autorvo->getNombreAutor();
         $notaAutor = $Autorvo->getNotaAutor();
-        $stmp->bind_param("ssi", $nomAutor, $notaAutor, $idAutor);
-        $this->respuesta($stmp);
-
-        $this->Respuesta($conn, $stmp);
+        $stmp->bind_param("ss", $nomAutor, $notaAutor);
+        if ($stmp->execute() == 1) {
+            $respuesta["sucess"] = "ok";
+        } else {
+            $respuesta["sucess"] = "no";
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
     }
 
     function EliminarAutor($array) {
@@ -62,7 +66,6 @@ class AutorDao {
         } else {
             $respuesta["sucess"] = "no";
         }
-
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
@@ -101,7 +104,7 @@ class AutorDao {
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
-      
+
         $stmp->execute();
 
         $stmp->bind_result($NombreAutor, $Nota);

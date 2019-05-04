@@ -25,31 +25,6 @@ class UsuarioDAO {
         $UsuarioVO->setEmailPrincipal($array->emailPrincipal);
         $UsuarioVO->setContrasena($array->contrasena);
 
-        if (count((array) $array, COUNT_RECURSIVE) > 11) {
-
-            $UsuarioVO->setDireccion2($array->direccion2);
-            $UsuarioVO->setTelefonoSecundario($array->telefonoSecundario);
-            $UsuarioVO->setTelefonoOtro($array->telefonoOtro);
-            $UsuarioVO->setContactoNombre($array->contactoNombre);
-            $UsuarioVO->setContactoApellido($array->contactoApellido);
-            $UsuarioVO->setContactoDireccion($array->contactoDireccion);
-            $UsuarioVO->setContactoDireccion2($array->contactoDireccion2);
-            $UsuarioVO->setContactoTelefono($array->contactoTelefono);
-            $UsuarioVO->setPerfil($array->perfil);
-        } else {
-
-            $UsuarioVO->setDireccion2("");
-            $UsuarioVO->setTelefonoSecundario("");
-            $UsuarioVO->setTelefonoOtro("");
-            $UsuarioVO->setContactoNombre("");
-            $UsuarioVO->setContactoApellido("");
-            $UsuarioVO->setContactoDireccion("");
-            $UsuarioVO->setContactoDireccion2("");
-            $UsuarioVO->setContactoTelefono("");
-            $UsuarioVO->setMulta("");
-            $UsuarioVO->setPerfil("");
-        }
-
         $cedula = $UsuarioVO->getCedula();
         $codigo = $UsuarioVO->getCodigo();
         $nombre = $UsuarioVO->getNombre();
@@ -94,21 +69,18 @@ class UsuarioDAO {
         $UsuarioVO->setContrasena($array->contrasena);
         $UsuarioVO->setFoto($array->foto);
 
-        if (count((array) $array, COUNT_RECURSIVE) > 10) {
-            $UsuarioVO->setDireccion2($array->direccion2);
-            $UsuarioVO->setTelefonoSecundario($array->telefonoSecundario);
-            $UsuarioVO->setTelefonoOtro($array->telefonoOtro);
-            $UsuarioVO->setContactoNombre($array->contactoNombre);
-            $UsuarioVO->setContactoApellido($array->contactoApellido);
-            $UsuarioVO->setContactoDireccion($array->contactoDireccion);
-            $UsuarioVO->setContactoDireccion2($array->contactoDireccion2);
-            $UsuarioVO->setContactoTelefono($array->contactoTelefono);
-            $UsuarioVO->setMulta($array->multa);
-            $UsuarioVO->setPerfil($array->perfil);
-            $sql = 'UPDATE `tbl_usuario` SET `nombre`=?,`apellido`=?,`fechaNacimiento`=?,`sexo`=?,`direccion`=?,`direccion2`=?,`telefonoPrincipal`=?,`telefonoSecundario`=?,`telefonoOtro`=?,`emailPrincipal`=?,`contactoNombre`=?,`contactoApellido`=?,`contactoDireccion`=?,`contactoDireccion2`=?,`contactoTelefono`=?,`contrasena`=? ,foto =?WHERE `codigo`=?;';
-        } else {
-            $sql = 'UPDATE `tbl_usuario` SET `nombre`=?,`apellido`=?,`fechaNacimiento`=?,`sexo`=?,`direccion`=?,`telefonoPrincipal`=?,`emailPrincipal`=?,`contrasena`=? ,foto =?WHERE `codigo`=?;';
-        }
+
+        $UsuarioVO->setDireccion2($array->direccion2);
+        $UsuarioVO->setTelefonoSecundario($array->telefonoSecundario);
+        $UsuarioVO->setTelefonoOtro($array->telefonoOtro);
+        $UsuarioVO->setContactoNombre($array->contactoNombre);
+        $UsuarioVO->setContactoApellido($array->contactoApellido);
+        $UsuarioVO->setContactoDireccion($array->contactoDireccion);
+        $UsuarioVO->setContactoDireccion2($array->contactoDireccion2);
+        $UsuarioVO->setContactoTelefono($array->contactoTelefono);
+        $UsuarioVO->setMulta($array->multa);
+        $UsuarioVO->setPerfil($array->perfil);
+        $sql = 'UPDATE `tbl_usuario` SET `nombre`=?,`apellido`=?,`fechaNacimiento`=?,`sexo`=?,`direccion`=?,`direccion2`=?,`telefonoPrincipal`=?,`telefonoSecundario`=?,`telefonoOtro`=?,`emailPrincipal`=?,`contactoNombre`=?,`contactoApellido`=?,`contactoDireccion`=?,`contactoDireccion2`=?,`contactoTelefono`=?,`contrasena`=? ,foto =?WHERE `codigo`=?;';
 
 
         $stmp = $conn->prepare($sql);
@@ -131,11 +103,9 @@ class UsuarioDAO {
         $contactoTelefono = $UsuarioVO->getContactoTelefono();
         $contrasena = $UsuarioVO->getContrasena();
         $foto = $UsuarioVO->getFoto();
-        if (count((array) $array, COUNT_RECURSIVE) > 10) {
-            $stmp->bind_param("sssssssssssssssssi", $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $direccion2, $telefonoPrincipal, $telefonoSecundario, $telefonoOtro, $emailPrincipal, $contactoNombre, $contactoApellido, $contactoDireccion, $contactoDireccion2, $contactoTelefono, $contrasena, $foto);
-        } else {
-            $stmp->bind_param("sssssssssi", $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $telefonoPrincipal, $emailPrincipal, $contrasena, $foto, $codigo);
-        }
+
+        $stmp->bind_param("sssssssssssssssssi", $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $direccion2, $telefonoPrincipal, $telefonoSecundario, $telefonoOtro, $emailPrincipal, $contactoNombre, $contactoApellido, $contactoDireccion, $contactoDireccion2, $contactoTelefono, $contrasena, $foto);
+
         $this->respuesta($conn, $stmp);
     }
 
@@ -156,7 +126,6 @@ class UsuarioDAO {
     }
 
     public function Login($array) {
-
 
         $sql = "SELECT codigo,nombre , foto, perfil FROM tbl_usuario WHERE `codigo` = ? AND `contrasena` like binary  ? AND (`intentos` < 3 OR (`intentos` > 3 AND NOW() > DATE_ADD(`ultimo_intento`, INTERVAL 15 MINUTE)))";
         $BD = new ConectarBD();

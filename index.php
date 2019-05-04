@@ -80,7 +80,7 @@ session_start();
                                                 <span id="text-lost-msg">Ingrese su código y correo registrado</span>
                                             </div>
                                             <input id="lost_codigo" name = "lost_codigo" class="form-control" type="text" placeholder="Código" required>
-                                            <input id="lost_email" name =  "lost_email" class="form-control" type="email" placeholder="Contraseña" required>
+                                            <input id="lost_email" name =  "lost_email" class="form-control" type="email" placeholder="Correo" required>
                                         </div>
                                         <div class="modal-footer">
                                             <div>

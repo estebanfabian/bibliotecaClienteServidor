@@ -24,8 +24,9 @@ session_start();
         <script src="../js/jquery.fileupload-image.js" type="text/javascript"></script>
         <title>BiblioCur</title>
     </head>
-    <body>   
+    <body> 
         <header > <?php if ($_SESSION) { ?>
+                <input type="hidden"  id ="codigoPrestamo" value="<?php echo $_SESSION['usuario']['codigo']; ?>" /> 
                 <div id = "cabezara1"></div>
                 <script src="../js/loginNormal.js" type="text/javascript"></script>
             <?php } else { ?>
@@ -62,24 +63,18 @@ session_start();
                 </aside>
                 <form class="Buscar_libro" onsubmit="return false">
                     <div class="col-md-9">
-                        <div class="row">
-
-                            <div class="col-md-6">
-                                <img src="html/imagenes/prueba.jpg">
-                            </div>
-                            <div class="col-md-6">
+                        <div class="row">                      
+                            <div class="col-md-12">
                                 <div class="form-group col-md-12">
                                     <label for="inputEmail4">isbn (*)</label>
                                     <input type="tetx" class="form-control" id="PrestamoIsbn" name ="PrestamoIsbn" placeholder="Isbn del libro">
+                                    <button  class="btn btn-primary" id="btnBuscarPrestamo">Buscar</button>
+                                    <button  class="btn btn-primary" id="btnPresar">Prestar</button>
                                 </div>
                             </div>
-
                         </div>
-                        <button  class="btn btn-primary" id="btnBuscarPrestamo">Buscar</button>
-                        <button  class="btn btn-primary" id="btnPresar">Prestar</button>
                     </div>
-                    
-                       <table class="table table-bordered table-dark"  >
+                    <table class="table table-bordered table-dark"  >
                         <thead>
                             <tr>
                                 <th scope="col">isbn</th>

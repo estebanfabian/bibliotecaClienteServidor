@@ -145,7 +145,9 @@ class LibroDAO {
     }
 
     public function LoMasBUscado($array) {
-        $sql = "SELECT count(libro.isbn) ,libro.isbn ,libro.titulo,libro.imagen ,autor.nombreAutor , editorial.nombreEditorial FROM ( tbl_libro libro INNER JOIN tbl_libro_autor LAutor on libro.isbn =LAutor.isbn INNER JOIN tbl_autor autor on autor.idAutor = LAutor.idAutor INNER JOIN tbl_editorial editorial on editorial.idEditorial = libro.idEditorial ) WHERE libro.estado = 'libre'";
+        $sql = "SELECT libro.isbn ,libro.titulo,libro.imagen ,autor.nombreAutor , editorial.nombreEditorial FROM "
+                . "( tbl_libro libro INNER JOIN tbl_libro_autor LAutor on libro.isbn =LAutor.isbn INNER JOIN tbl_autor autor on autor.idAutor = LAutor.idAutor INNER JOIN tbl_editorial editorial on editorial.idEditorial = libro.idEditorial ) "
+                . "WHERE libro.estado = 'libre'   group by libro.isbn; ";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -202,7 +204,7 @@ class LibroDAO {
 
         $Consulta = $TemaVO->getNombreTema();
 
-        $Consulta = "%".$Consulta."%";
+        $Consulta = "%" . $Consulta . "%";
 
         $stmp->bind_param("s", $Consulta);
         $this->RespuestaLibros($conn, $stmp);

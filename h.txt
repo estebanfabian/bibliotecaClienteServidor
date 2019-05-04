@@ -1,1 +1,21 @@
 INSERT INTO `tbl_usuario` (`codigo`, `nombre`, `apellido`, `fechaNacimiento`, `sexo`, `direccion`, `direccion2`, `telefonoPrincipal`, `telefonoSecundario`, `telefonoOtro`, `emailPrincipal`, `contactoNombre`, `contactoApellido`, `contactoDireccion`, `contactoDireccion2`, `contactoTelefono`, `contrasena`, `multa`, `perfil`, `foto`) VALUES ('123456', 'qweryer', 'wertytyytreyt', '2018-05-02', '1', 'ertyui', NULL, '1234567890', NULL, NULL, 'nico.calderon04@gmail.com', NULL, NULL, NULL, NULL, NULL, '123456', '0', NULL, NULL);
+
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp0s3:
+     dhcp4: no
+     addresses: [192.168.1.233/24]
+     gateway4: 192.168.1.1
+     nameservers:
+       addresses: [8.8.8.8,8.8.4.4]
+
+
+
+smtp_sasl_auth_enable = yes
+smtp_sasl_security_options =
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
+
+mail -s "Test subject" recipient@domain.com
