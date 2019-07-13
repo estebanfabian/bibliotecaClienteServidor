@@ -1,0 +1,43 @@
+<?php
+
+class AutorVO {
+
+    private $idAutor;
+    private $nombreAutor;
+    private $notaAutor;
+
+    function getIdAutor() {
+        return $this->idAutor;
+    }
+
+    function getNombreAutor() {
+        return $this->nombreAutor;
+    }
+
+    /*
+ * addRelationship
+ *
+ * Adds a relationship between two entities using the given relation type.
+ *
+ * @param fromKey the original entity
+ * @param toKey the referring entity
+ * @param relationTypeDesc the type of relationship
+ */
+    function getNotaAutor() {
+        return $this->notaAutor;
+    }
+
+    function setIdAutor($idAutor) {
+        $this->idAutor = $idAutor;
+    }
+
+    function setNombreAutor($nombreAutor) {
+        $this->nombreAutor = $nombreAutor;
+    }
+
+    function setNotaAutor($notaAutor) {
+        $this->notaAutor = $notaAutor;
+    }
+
+}
+
