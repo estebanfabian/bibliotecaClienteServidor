@@ -1,9 +1,19 @@
 RewriteEngine on
 
+RewriteRule Validar$ Controlador/Usuario/Validar_Usuario.php
+RewriteRule IntentoFallido$ Controlador/Usuario/Intentos_usuario.php
+RewriteRule IntentoExitoso$ Controlador/Usuario/Intentos_usuarioExitoso.php
+RewriteRule Multas$ Controlador/Usuario/Mostrar_multa.php
+RewriteRule RegistrarVideoBeam$ Controlador/VideoBeam/RegistrarVideoBeam.php
+RewriteRule ActualizarVideoBeam$ Controlador/VideoBeam/ActualizarVideoBeam.php
+RewriteRule EliminarVideoBeam$ Controlador/VideoBeam/EliminarVideoBeam.php
+RewriteRule BuscarVideoBeam$ Controlador/VideoBeam/BuscarVideoBeam.php
+RewriteRule SbMasivaVideoBeam$ Controlador/VideoBeam/SubidaMasivaVideoBeam.php
+
+#-------------------------------------------------------------------------------
 RewriteRule ^gato.jsp$ js/MiLogica.js
 RewriteRule ^Ingreso$ view/menu.php
 RewriteRule Insert_user$ Controlador/Usuario/Insertar_Usuario.php
-RewriteRule Validar$ Controlador/Usuario/Validar_Usuario.php
 RewriteRule tablaXid$ Controlador/Libro/Consultar_LibroXid.php
 RewriteRule tablaXtitulo$ Controlador/Libro/Consultar_LibroXtitulo.php
 RewriteRule tablaXautor$ Controlador/libro/Consultar_LibroXautor.php
@@ -20,7 +30,7 @@ RewriteRule Most_usuario$ Controlador/Usuario/Mostrar_Usuario.php
 RewriteRule Conta_res$ Controlador/prestamo/Contador_Reservas.php
 RewriteRule Tarjeta$ Controlador/Prestamo/Reserva_Tarjeta.php
 RewriteRule reserva$ Controlador/prestamo/reservar_libro.php
-RewriteRule multas$ Controlador/Usuario/Mostrar_multa.php
 RewriteRule CambioClave$ Controlador/Usuario/Cambio_Clave.php
 RewriteRule Suprimir$ Controlador/prestamo/Cancelar_prestamo.php
 RewriteRule Renovacion$ Controlador/prestamo/Renovacion_libro.php
+#-------------------------------------------------------------------------------

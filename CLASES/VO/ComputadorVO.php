@@ -1,52 +1,155 @@
 <?php
 
+/**
+ * Long Desc 
+ * */
+
+/**
+ * Esta clase almacena la informacíon de los computadores como 
+ * el numro de serie , fabricante , numero de cargador , observaciones y estdo del computador.
+ * 
+ * @package VO
+ * @category Educativo
+ * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+ * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
+ * @version Revision: 1.0 
+ * @access publico
+ * * */
 class ComputadorVO {
 
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var int Almacena el número de serial del computador
+     * */
     private $idcomputador;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var string Almacena el nombre del fabricante del computador 
+     * */
     private $fabricante;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var string Almacena las observaciones del computador 
+     * */
     private $observaciones;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var int Almacena el número de serial del cargador que le pertenece al computador 
+     * */
     private $cargadorId;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var boolean Almacena el estado de prestamo del computador 
+     * */
     private $estadoComputador;
-    
+
+    /**
+     * Este método permitre brindar información el número de seril del computador
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable idcomputador
+     * */
     function getIdcomputador() {
         return $this->idcomputador;
     }
 
+    /**
+     * Este método permitre brindar información el nombre del fabricante del computador.
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable fabricante
+     * */
     function getFabricante() {
         return $this->fabricante;
     }
 
+    /**
+     * Este método permitre brindar información las observaciones del computador 
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable observaciones
+     * */
     function getObservaciones() {
         return $this->observaciones;
     }
 
+    /**
+     * Este método permitre brindar información el número de serial del cargador del computador
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable cargadorId
+     * */
     function getCargadorId() {
         return $this->cargadorId;
     }
 
+    /**
+     * Este método permitre brindar información sobre estado de prestamo del computador
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable estadoComputador
+     * */
     function getEstadoComputador() {
         return $this->estadoComputador;
     }
 
+    /**
+     * Este método permite obtener información sobre el número de serial del computador
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param int $idcomputador Retorna el valor que esta almacenado en la variable idcomputador
+     * */
     function setIdcomputador($idcomputador) {
         $this->idcomputador = $idcomputador;
     }
 
+    /**
+     * Este método permite obtener información sobre el nombre del fabricante del computador
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $fabricante Retorna el valor que esta almacenado en la variable fabricante
+     * */
     function setFabricante($fabricante) {
         $this->fabricante = $fabricante;
     }
 
+    /**
+     * Este método permite obtener información sobre las observaciones de computador
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $observaciones Retorna el valor que esta almacenado en la variable observaciones
+     * */
     function setObservaciones($observaciones) {
         $this->observaciones = $observaciones;
     }
 
+    /**
+     * Este método permite obtener información sobre el número de serial del cargador
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param int $cargadorId Retorna el valor que esta almacenado en la variable cargadorId
+     * */
     function setCargadorId($cargadorId) {
         $this->cargadorId = $cargadorId;
     }
 
+    /**
+     * Este método permite obtener información sobre el estado del computador
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $estadoComputador Retorna el valor que esta almacenado en la variable estadoComputador
+     * */
     function setEstadoComputador($estadoComputador) {
         $this->estadoComputador = $estadoComputador;
     }
 
-   
 }

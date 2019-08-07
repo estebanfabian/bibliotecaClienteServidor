@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * Long Desc 
+ * */
+/**
+ * Página encargada de realizar el cierre de sesión
+ *
+ * 
+ * @category Educativo
+ * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+ * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
+ * @version Revision: 1.0 
+ * */
+session_start();
+session_destroy();
+session_unset();
+header("location: ./");
+?>

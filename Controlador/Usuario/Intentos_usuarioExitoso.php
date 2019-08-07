@@ -1,5 +1,20 @@
 <?php
 
+/**
+ * Long Desc 
+ * */
+/**
+ * Cotrolador del acceso que lleva es encargado de servir de puente de comunicación 
+ * entre la capa de interface y la capa de datos para poder tener un seguimiento de los intento exitos. 
+ *
+ * 
+ * @package VO
+ * @category Educativo
+ * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+ * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
+ * @version Revision: 1.0 
+ * @access publico
+ * * */
 header('Access-Control-Allow-Origin: *');
 require '../../CLASES/BD/MySql.php';
 require '../../CLASES/BD/datosbd.php';

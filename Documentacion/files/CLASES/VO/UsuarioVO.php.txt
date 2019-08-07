@@ -1,0 +1,561 @@
+<?php
+
+/**
+ * Long Desc 
+ * */
+
+/**
+ * Esta clase almacena la informacíon de los usuario 
+ *
+ * 
+ * @package VO
+ * @category Educativo
+ * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+ * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
+ * @version Revision: 1.0 
+ * @access publico
+ * * */
+class UsuarioVO {
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var int Almacena la cedula del usuario
+     * */
+    private $cedula;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var string Almacena el código del usuario
+     * */
+    private $codigo;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var string Almacena el nombre del usuario
+     * */
+    private $nombre;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var string Almacena el apellido del usuario
+     * */
+    private $apellido;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var string Almacena la fecha de nacimiento del usuario
+     * */
+    private $fechaNacimiento;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var bool Almacena el sexo biologico del usuario
+     * */
+    private $sexo;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var $direccion almacena la dirección del usuario
+     * */
+    private $direccion;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var string almacena la dirección alternativa del usuario
+     * */
+    private $direccion2;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var int Almacena el telefono principal del usuario
+     * */
+    private $telefonoPrincipal;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var int Almacena el telefono segundario del usuario
+     * */
+    private $telefonoSecundario;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var int Almacena otros telefonos del usuario si lo tiene 
+     * */
+    private $telefonoOtro;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var string Almacena el correo del usuario
+     * */
+    private $emailPrincipal;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var $contactoNombre Almacena el nombre de contacto del usuario
+     * */
+    private $contactoNombre;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var string Almacena el apellido de contacto del usuario
+     * */
+    private $contactoApellido;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var $contactoDireccion Almacena la direccion de contacto del usuario 
+     * */
+    private $contactoDireccion;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var string Almacena la dirección alterna del usuario
+     * */
+    private $contactoDireccion2;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var int Almacena el número de contacto del usuario
+     * */
+    private $contactoTelefono;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var string Almacena la contraseña para el ingreso
+     * */
+    private $contrasena;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var int Almacena el valor de la multa del usuario
+     * */
+    private $multa;
+
+    /**
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @var string Almacena el perfil del usuario
+     * */
+    private $perfil;
+
+    /**
+     * Este método permitre brindar información sobre la cedula
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Reotrna el valor que esta almacenado en la cedula
+     * */
+    function getCedula() {
+        return $this->cedula;
+    }
+
+    /**
+     * Este método permitre brindar información sobre el código
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable código
+     * */
+    function getCodigo() {
+        return $this->codigo;
+    }
+
+    /**
+     * Este método permitre brindar información sobre el nombre
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable nombre
+     * */
+    function getNombre() {
+        return $this->nombre;
+    }
+
+    /**
+     * Este método permitre brindar información sobre el apellido
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable apellido
+     * */
+    function getApellido() {
+        return $this->apellido;
+    }
+
+    /**
+     * Este método permitre brindar información sobre la fehca de nacimiento 
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable FechaNacimiento
+     * */
+    function getFechaNacimiento() {
+        return $this->fechaNacimiento;
+    }
+
+    /**
+     * Este método permitre brindar información sobre el sexo del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable sexo
+     * */
+    function getSexo() {
+        return $this->sexo;
+    }
+
+    /**
+     * Este método permitre brindar información sobre la dirección
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable direccion
+     * */
+    function getDireccion() {
+        return $this->direccion;
+    }
+
+    /**
+     * Este método permitre brindar información sobre la dirección alterna del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable direccion2
+     * */
+    function getDireccion2() {
+        return $this->direccion2;
+    }
+
+    /**
+     * Este método permitre brindar información sobre el telefono del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable telefonoPrincipal
+     * */
+    function getTelefonoPrincipal() {
+        return $this->telefonoPrincipal;
+    }
+
+    /**
+     * Este método permitre brindar información sobre el telefono segundario del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable telefonoSecundario
+     * */
+    function getTelefonoSecundario() {
+        return $this->telefonoSecundario;
+    }
+
+    /**
+     * Este método permitre brindar información sobre telefonos alternativo del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable telefonoOtro
+     * */
+    function getTelefonoOtro() {
+        return $this->telefonoOtro;
+    }
+
+    /**
+     * Este método permitre brindar información sobre el correo del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable emailPrincipal
+     * */
+    function getEmailPrincipal() {
+        return $this->emailPrincipal;
+    }
+
+    /**
+     * Este método permitre brindar información sobre el nombre de contacto del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable contactoNombre
+     * */
+    function getContactoNombre() {
+        return $this->contactoNombre;
+    }
+
+    /**
+     * Este método permitre brindar información sobre el apellido de contacto
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable contactoApellido
+     * */
+    function getContactoApellido() {
+        return $this->contactoApellido;
+    }
+
+    /**
+     * Este método permitre brindar información sobre la direccion de contacto
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable contactoDireccion
+     * */
+    function getContactoDireccion() {
+        return $this->contactoDireccion;
+    }
+
+    /**
+     * Este método permitre brindar información sobre direccion alterna de contacto
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable contactoDireccion2
+     * */
+    function getContactoDireccion2() {
+        return $this->contactoDireccion2;
+    }
+
+    /**
+     * Este método permitre brindar información sobre el telefono de contecto del ususario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable contactoTelefono
+     * */
+    function getContactoTelefono() {
+        return $this->contactoTelefono;
+    }
+
+    /**
+     * Este método permitre brindar información sobre la contraseña
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable contrasena
+     * */
+    function getContrasena() {
+        return $this->contrasena;
+    }
+
+    /**
+     * Este método permitre brindar información sobre la multa del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable multa
+     * */
+    function getMulta() {
+        return $this->multa;
+    }
+
+    /**
+     * Este método permitre brindar información sobre el perfil del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @return self Retorna el valor que esta almacenado en la variable perfil
+     * */
+    function getPerfil() {
+        return $this->perfil;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre la cedula
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param int $cedula Retorna el valor que esta almacenado en la variable cedula
+     * */
+    function setCedula($cedula) {
+        $this->cedula = $cedula;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre el codigo
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param int $codigo Retorna el valor que esta almacenado en la variable codigo
+     * */
+    function setCodigo($codigo) {
+        $this->codigo = $codigo;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre el nombre del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $nombre Retorna el valor que esta almacenado en la variable nombre
+     * */
+    function setNombre($nombre) {
+        $this->nombre = $nombre;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre el apellido del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $apellido Retorna el valor que esta almacenado en la variable apellido
+     * */
+    function setApellido($apellido) {
+        $this->apellido = $apellido;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre la fecha de nacimiento del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $fechaNacimiento Retorna el valor que esta almacenado en la fechaNacimiento
+     * */
+    function setFechaNacimiento($fechaNacimiento) {
+        $this->fechaNacimiento = $fechaNacimiento;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre el sexo del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param boolean $sexo Retorna el valor que esta almacenado en a variable sexo
+     * */
+    function setSexo($sexo) {
+        $this->sexo = $sexo;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre la direccion del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $direccion Retorna el valor que esta almacenado en la variable direccion
+     * */
+    function setDireccion($direccion) {
+        $this->direccion = $direccion;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre la direccion alternativa del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $direccion2 Retorna el valor que esta almacenado en la variable direccion2
+     * */
+    function setDireccion2($direccion2) {
+        $this->direccion2 = $direccion2;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre el telefono del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $telefonoPrincipal Retorna el valor que esta almacenado en la variable telefonoPrincipal
+     * */
+    function setTelefonoPrincipal($telefonoPrincipal) {
+        $this->telefonoPrincipal = $telefonoPrincipal;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre el telefono alterno del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param int $telefonoSecundario Retorna el valor que esta almacenado en la variable telefonoSecundario
+     * */
+    function setTelefonoSecundario($telefonoSecundario) {
+        $this->telefonoSecundario = $telefonoSecundario;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre los telefonos alternativo del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param int $telefonoOtro Retorna el valor que esta almacenado en la variable telefonoOtro
+     * */
+    function setTelefonoOtro($telefonoOtro) {
+        $this->telefonoOtro = $telefonoOtro;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre el correo del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $emailPrincipal Retorna el valor que esta almacenado en la variable emailPrincipal
+     * */
+    function setEmailPrincipal($emailPrincipal) {
+        $this->emailPrincipal = $emailPrincipal;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre el nombre de contacto del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $contactoNombre Retorna el valor que esta almacenado en la variable contactoNombre
+     * */
+    function setContactoNombre($contactoNombre) {
+        $this->contactoNombre = $contactoNombre;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre el apellido de contacto del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $contactoApellido Retorna el valor que esta almacenado en la varible contactoApellido
+     * */
+    function setContactoApellido($contactoApellido) {
+        $this->contactoApellido = $contactoApellido;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre la direccion de contacto del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $contactoDireccion Retorna el valor que esta almacenado en la variable contactoDireccion
+     * */
+    function setContactoDireccion($contactoDireccion) {
+        $this->contactoDireccion = $contactoDireccion;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre la direccion alterna del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $contactoDireccion2 Retorna el valor que esta almacenado en la variable contactoDireccion2
+     * */
+    function setContactoDireccion2($contactoDireccion2) {
+        $this->contactoDireccion2 = $contactoDireccion2;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre el telefono de contacto del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $contactoTelefono Retorna el valor que esta almacenado en la variable contactoTelefono
+     * */
+    function setContactoTelefono($contactoTelefono) {
+        $this->contactoTelefono = $contactoTelefono;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre la contraseña del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $contrasena Retorna el valor que esta almacenado en la variable contrasena
+     * */
+    function setContrasena($contrasena) {
+        $this->contrasena = $contrasena;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre la multas del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $multa Retorna el valor que esta almacenado en la variable multa
+     * */
+    function setMulta($multa) {
+        $this->multa = $multa;
+    }
+
+    /**
+     * Este método permite obtener informacipon sobre el perfil del usuario
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+     * @since Revision: 1.0 
+     * @param string $perfil Retorna el valor que esta almacenado en la variable perfil
+     * */
+    function setPerfil($perfil) {
+        $this->perfil = $perfil;
+    }
+
+}
+

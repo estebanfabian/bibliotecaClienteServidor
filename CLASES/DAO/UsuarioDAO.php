@@ -127,7 +127,7 @@ class UsuarioDAO {
 
     public function Login($array) {
 
-        $sql = "SELECT codigo,nombre , foto, perfil FROM tbl_usuario WHERE `codigo` = ? AND `contrasena` like binary  ? AND (`intentos` < 3 OR (`intentos` > 3 AND NOW() > DATE_ADD(`ultimo_intento`, INTERVAL 15 MINUTE)))";
+        $sql = "CALL login(?,?)";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -138,19 +138,18 @@ class UsuarioDAO {
         $codigo = $UsuarioVO->getCodigo();
         $contrasena = $UsuarioVO->getContrasena();
 
+
+
         $stmp->bind_param("is", $codigo, $contrasena);
 
-
         if ($stmp->execute() == 1) {
-            $stmp->bind_result($codigo, $nombre, $foto, $perfil);
+            $stmp->bind_result($codigo, $nombre, $perfil);
             $respuesta = array();
             while ($stmp->fetch()) {
                 $tmp = array();
                 $tmp["codigo"] = $codigo;
                 $tmp["nombre"] = $nombre;
-                $tmp["foto"] = $foto;
                 $tmp["perfil"] = $perfil;
-
                 $respuesta[sizeof($respuesta)] = $tmp;
             }
         }
@@ -223,28 +222,6 @@ class UsuarioDAO {
     function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
-            $respuesta["sucess"] = "ok";
-        } else {
-            $respuesta["sucess"] = "no";
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
-    }
-
-    public function Foto($array) {
-
-        $sql = "UPDATE `tbl_usuario` SET `foto` = ? WHERE codigo =?;";
-        $BD = new ConectarBD();
-        $conn = $BD->getMysqli();
-        $stmp = $conn->prepare($sql);
-        $UsuarioVO = new UsuarioVO();
-        $UsuarioVO->setCodigo($array->codigo);
-        $UsuarioVO->setFoto($array->foto);
-        $codigo = $UsuarioVO->getCodigo();
-        $foto = $UsuarioVO->getFoto();
-        $stmp->bind_param("si", $foto, $codigo);
-        if ($stmp->execute()) {
             $respuesta["sucess"] = "ok";
         } else {
             $respuesta["sucess"] = "no";
@@ -327,7 +304,7 @@ class UsuarioDAO {
     public function Mis_multa($array) {
 
 
-        $sql = "SELECT `foto`, multa FROM `tbl_usuario` WHERE `codigo`= ?";
+        $sql = "SELECT  multa FROM `tbl_usuario` WHERE `codigo`= ?";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -337,11 +314,10 @@ class UsuarioDAO {
 
         $stmp->bind_param("i", $codigo);
         $stmp->execute();
-        $stmp->bind_result($foto, $multa);
+        $stmp->bind_result($multa);
         $respuesta = array();
         while ($stmp->fetch()) {
             $tmp = array();
-            $tmp["foto"] = $foto;
             $tmp["multa"] = $multa;
             $respuesta[sizeof($respuesta)] = $tmp;
         }
@@ -407,7 +383,7 @@ class UsuarioDAO {
 
     function intento($array) {
 
-        $sql = "UPDATE `tbl_usuario` SET `ultimo_intento`= NOW() ,`intentos` = `intentos`+1  WHERE `codigo` =?";
+        $sql = "CALL intento (?)";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -432,7 +408,7 @@ class UsuarioDAO {
 
     function intentoExitoso($array) {
 
-        $sql = "UPDATE `tbl_usuario` SET `ultimo_intento`= NOW() ,`intentos` = 0  WHERE `codigo` =?";
+        $sql = "CALL intentoExitoso (?)";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
