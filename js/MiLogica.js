@@ -23,66 +23,7 @@ $(document).ready(function () {
             }
         });
     }
-// funcion para llammar el login y hacer la valicaciones pertinentes
-    function login() {
-        $("#login-form").validate({
-            rules: {
-                codigo: {
-                    required: true,
-                    number: true,
-                    digits: true
-                },
-                contrasena: {
-                    required: true,
-                    minlength: 1
-                }
-            },
-            messages: {
-                codigo: {
-                    digits: "Este campo no puede tener ni comas, ni puntos",
-                    number: "Este campo solo permite número"
-                }
-            }, submitHandler: function () {
 
-                var formulario = {
-                    codigo: $("#codigo").val(),
-                    contrasena: $("#contrasena").val()
-                };
-                myJson.push(formulario);
-                var myString = JSON.stringify(formulario);
-                var url1 = "Validar";
-                var parametro1 = myString;
-                var metodo1 = function (respuesta) {
-                    $("#codigo").val("");
-                    $("#contrasena").val("");
-                    var data = $.parseJSON(respuesta);
-                    if (data.length == 0) {
-                        alert("El código o clave esta errada ");
-                        $('#login-modal').modal('hide');
-
-                        var url2 = "Controlador/Usuario/Intentos_usuario.php";
-                        var parametro2 = myString;
-                        console.log(parametro2)
-                        var metodo2 = function (respuesta) {
-                        };
-                        fajax(url2, parametro2, metodo2);
-                    } else {
-                        $('body').removeClass('modal-open');
-                        $('.modal-backdrop').remove();
-                        envio(respuesta);
-                        Codigo = $("#codigo").val("");
-                        var url2 = "Controlador/Usuario/Intentos_usuarioExitoso.php";
-                        var parametro2 = myString;
-                        console.log(parametro2)
-                        var metodo2 = function (respuesta) {
-                        };
-                        fajax(url2, parametro2, metodo2);
-                    }
-                };
-                fajax(url1, parametro1, metodo1);
-            }
-        });
-    }
 //funcion para reservar 
     function reserva() {
         var fecha = $("#datetimepicker1").val();

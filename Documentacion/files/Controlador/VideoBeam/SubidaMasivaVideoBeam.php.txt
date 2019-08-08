@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Long Desc 
  * */
@@ -20,7 +21,7 @@ require '../../CLASES/BD/MySql.php';
 require '../../CLASES/BD/datosbd.php';
 require '../../CLASES/VO/VideoBeamVO.php';
 require '../../CLASES/DAO/VideoBeamDAO.php';
-$array;
+
 $Exitoso = 0;
 $Fallido = 0;
 $Duplicado = 0;
@@ -36,9 +37,9 @@ if ($_FILES['csv']['size'] > 0) {
 
             $array = array("idVideoBeam" => $column[0],
                 "fabricante" => $column[1],
-                "cableUSB" => $column[2],
-                "cableHDMI" => $column[3],
-                "cableVGA" => $column[4],
+                "cableUSB" => cambio($column[2]),
+                "cableHDMI" => cambio($column[3]),
+                "cableVGA" => cambio($column[4]),
                 "observaciones" => $column[5]);
 
             $object = json_decode(json_encode((object) $array), FALSE);
@@ -59,14 +60,24 @@ if ($_FILES['csv']['size'] > 0) {
         }
         $numeroFila++;
     }
+
 //    echo "Exitoso " . $Exitoso;
 //    echo "Fallido " . $Fallido . " numero de las lineas" . $Fallido_n;
 //    echo "Duplicado " . $Duplicado . " numero de lineas" . $Duplicado_n;
+
 
 
     $array = array("Exitoso" => $Exitoso,
         "Fallido" => $Fallido,
         "Duplicado" => $Duplicado);
     echo json_encode((object) $array);
+}
+
+function cambio($param) {
+    if ($param == "si") {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 

@@ -256,6 +256,7 @@ session_start();
                                     <option value="" disabled selected>Tipo de formato</option>
                                     <option value="SbMasivaVideoBeam">Video Beam</option>
                                     <option value="SbMasivaComputador">Computador</option>
+                                    <option value="SbMasivaUsuario">Usuario</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
@@ -303,8 +304,11 @@ session_start();
                                     subida(filtro);
                                     break;
                                 case "SbMasivaComputador":
-                                     subida(filtro);
-                                break;
+                                    subida(filtro);
+                                    break;
+                                case "SbMasivaUsuario":
+                                    subida(filtro);
+                                    break;
                                 default:
                                     alert("Error");
                                     break;
@@ -321,7 +325,7 @@ session_start();
                         for (var i = 0; i < (formulario.find('input[type=file]').length); i++) {
                             archivos.append((formulario.find('input[type="file"]:eq(' + i + ')').attr("name")), ((formulario.find('input[type="file"]:eq(' + i + ')')[0]).files[0]));
                         }
-                        
+
                         $.ajax({
                             url: url,
                             type: 'POST',

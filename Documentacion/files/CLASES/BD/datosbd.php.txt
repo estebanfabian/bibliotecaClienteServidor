@@ -37,7 +37,7 @@ class Datos {
      * @since Revision: 1.0 
      * @var string Almacena la contraseña para el acceso a la base de datos
      */
-    private $clave = '';
+    private $clave = 'root';
 
     /**
      * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>

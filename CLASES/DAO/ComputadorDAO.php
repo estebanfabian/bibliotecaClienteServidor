@@ -28,27 +28,32 @@ class ComputadorDAO {
      * @return array() Se envia la respuesta del registro donde se indica si fue exitosa o no 
      * */
     function CrearComputador($array) {
+        if ($this->Filtro($array) == "ok") {
+            $respuesta = array();
+            $respuesta["sucess"] = "Reguistro duplicado";
+            echo json_encode($respuesta);
+        } else {
+            $sql = 'call insetComputador (?,?,?,?);';
 
-        $sql = 'INSERT INTO `tbl_computador` (`idcomputador`, `fabricante`, `observaciones`, `cargadorId`) VALUES (?,?,?,?);';
+            $BD = new ConectarBD();
+            $conn = $BD->getMysqli();
+            $stmp = $conn->prepare($sql);
 
-        $BD = new ConectarBD();
-        $conn = $BD->getMysqli();
-        $stmp = $conn->prepare($sql);
+            $computadorVo = new ComputadorVO();
+            $computadorVo->setIdcomputador($array->idcomputador);
+            $computadorVo->setFabricante($array->fabricante);
+            $computadorVo->setObservaciones($array->observaciones);
+            $computadorVo->setCargadorId($array->cargadorId);
 
-        $computadorVo = new ComputadorVO();
-        $computadorVo->setIdcomputador($array->idcomputador);
-        $computadorVo->setFabricante($array->fabricante);
-        $computadorVo->setObservaciones($array->observaciones);
-        $computadorVo->setCargadorId($array->cargadorId);
+            $idcomputador = $computadorVo->getIdcomputador();
+            $fabricante = $computadorVo->getFabricante();
+            $observaciones = $computadorVo->getObservaciones();
+            $cargadorId = $computadorVo->getCargadorId();
 
-        $idcomputador = $computadorVo->getIdcomputador();
-        $fabricante = $computadorVo->getFabricante();
-        $observaciones = $computadorVo->getObservaciones();
-        $cargadorId = $computadorVo->getCargadorId();
+            $stmp->bind_param("issi", $idcomputador, $fabricante, $observaciones, $cargadorId);
 
-        $stmp->bind_param("issi", $idcomputador, $fabricante, $observaciones, $cargadorId);
-
-        $this->Respuesta($conn, $stmp);
+            $this->Respuesta($conn, $stmp);
+        }
     }
 
     /**
@@ -68,7 +73,7 @@ class ComputadorDAO {
         $computadorVo->setObservaciones($array->observaciones);
         $computadorVo->setCargadorId($array->cargadorId);
 
-        $sql = 'UPDATE `tbl_computador` SET `fabricante` = ?, `observaciones` =?, `cargadorId` = ? WHERE `tbl_computador`.`idcomputador` = ?;';
+        $sql = 'call actualizarComputador (?,?,?,?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -95,7 +100,7 @@ class ComputadorDAO {
         $computadorVo = new ComputadorVO();
         $computadorVo->setIdcomputador($array->idcomputador);
 
-        $sql = 'DELETE FROM `tbl_computador` WHERE `tbl_computador`.`idcomputador` =?;';
+        $sql = 'call eliminarComputador (?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -136,7 +141,7 @@ class ComputadorDAO {
      * @return array() Se envia la respuesta  toda la informaciòn del computador como  fabricante , estado y observaciones 
      * */
     function buscar($array) {
-        $sql = "SELECT `idcomputador`, `fabricante`, `observaciones`, `cargadorId` FROM `tbl_computador` WHERE `idcomputador` = ?";
+        $sql = "call buscarComputador (?);";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -145,7 +150,6 @@ class ComputadorDAO {
         $computadorVo->setIdcomputador($array->idcomputador);
 
         $idcomputador = $computadorVo->getIdcomputador();
-
         $stmp->bind_param("i", $idcomputador);
         $stmp->execute();
 
@@ -163,6 +167,76 @@ class ComputadorDAO {
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
+    }
+
+    function Filtro($array) {
+
+        $computadorVo = new ComputadorVO();
+        $computadorVo->setIdcomputador($array->idcomputador);
+
+        $sql = "call verificacionComputador (?);";
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $idcomputador = $computadorVo->getIdcomputador();
+        $stmp->bind_param("i", $idcomputador);
+        $respuesta = array();
+        if ($stmp->execute() == 1) {
+            $stmp->bind_result($idcomputador);
+            while ($stmp->fetch()) {
+                $respuesta = $idcomputador;
+            }
+
+            if ($idcomputador != "") {
+                $respuesta = "ok";
+            } else {
+                $respuesta = "no";
+            }
+        } else {
+            $respuesta = "no";
+        }
+
+        $stmp->close();
+        $conn->close();
+        return ($respuesta);
+    }
+
+    function SMCrearComputador($array) {
+        if ($this->Filtro($array) == "ok") {
+            $respuesta = array();
+            $respuesta["sucess"] = "Reguistro duplicado";
+            echo json_encode($respuesta);
+        } else {
+            $sql = 'call insetComputador (?,?,?,?);';
+
+            $BD = new ConectarBD();
+            $conn = $BD->getMysqli();
+            $stmp = $conn->prepare($sql);
+
+            $computadorVo = new ComputadorVO();
+            $computadorVo->setIdcomputador($array->idcomputador);
+            $computadorVo->setFabricante($array->fabricante);
+            $computadorVo->setObservaciones($array->observaciones);
+            $computadorVo->setCargadorId($array->cargadorId);
+
+            $idcomputador = $computadorVo->getIdcomputador();
+            $fabricante = $computadorVo->getFabricante();
+            $observaciones = $computadorVo->getObservaciones();
+            $cargadorId = $computadorVo->getCargadorId();
+
+            $stmp->bind_param("issi", $idcomputador, $fabricante, $observaciones, $cargadorId);
+
+            $respuesta = array();
+            if ($stmp->execute() == 1) {
+                $respuesta = "ok";
+            } else {
+                $respuesta = "no";
+            }
+            $stmp->close();
+            $conn->close();
+            return $respuesta;
+        }
     }
 
 }

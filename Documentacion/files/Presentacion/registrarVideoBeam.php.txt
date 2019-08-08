@@ -334,8 +334,8 @@ session_start();
                         <button class="btn btn-primary" id="btnEliminarComputador">Eliminar</button>
                         <button class="btn btn-primary" id="btnBuscarComputador">Buscar</button>
                     </form>
-                    <br>
                 </div>
+                <br>
                 <div class="col-md-3">
                     <div class="btn-group-vertical" role="group" aria-label="Basic example">
                         <button type="button" id="btnCatalogoLinea" class="btn btn-secondary">Catalogo en línea</button>

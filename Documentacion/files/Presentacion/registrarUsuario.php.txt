@@ -251,19 +251,18 @@ session_start();
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
-                    <form id="registar_usuario" name ="registar_usuario" method="POST" enctype=" multipart/form-data">
+                    <form id="registar_usuario" name ="registar_usuario" method="POST" enctype=" multipart/form-data" style="margin-bottom: 10px;">
                         <fieldset class="border p-1">
                             <legend  class="w-auto">Datos de Usuario</legend>
                             <div class="form-row">
-                                <div class="form-group col-md-2">
-                                    <label for="inputEmail4">Cedula (*)</label>
-                                    <input type="tetx" class="form-control" id="cedula" name ="cedula" placeholder="Cedulad">
-                                </div>
-
-                                <div class="form-group col-md-2">
+                                  <div class="form-group col-md-2">
                                     <label for="inputEmail4">Código (*)</label>
                                     <input type="tetx" class="form-control" id="codigoUsuario" name ="codigoUsuario" placeholder="Codigo">
                                 </div>
+                                <div class="form-group col-md-2">
+                                    <label for="inputEmail4">Cedula (*)</label>
+                                    <input type="tetx" class="form-control" id="cedula" name ="cedula" placeholder="Cedula">
+                                </div>                              
                                 <div class="form-group col-md-3">
                                     <label for="inputEmail4">Nombres (*)</label>
                                     <input type="tetx" class="form-control" id="nombre" name="nombre" placeholder="Nombres" >
@@ -325,7 +324,7 @@ session_start();
                                 </div>
                             </div>
                         </fieldset>
-                        <fieldset class="border p-1">
+                        <fieldset class="border p-1" style="margin-bottom: 10px;">
                             <legend  class="w-auto">Datos de Contactos</legend>
                             <div class="form-row">
                                 <div class="form-group col-md-4">

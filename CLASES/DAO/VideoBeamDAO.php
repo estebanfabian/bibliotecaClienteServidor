@@ -42,7 +42,7 @@ class VideoBeamDAO {
             $VideoBeamVo->setCableVGA($array->cableVGA);
             $VideoBeamVo->setObservaciones($array->observaciones);
 
-            $sql = 'INSERT INTO `tbl_video_beam`(`idVideoBeam`, `fabricante`, `cableUSB`, `cableHDMI`, `cableVGA`, `observaciones`) VALUES (?,?,?,?,?,?);';
+            $sql = 'call insertVideoBeam(?,?,?,?,?,?);';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
@@ -68,7 +68,7 @@ class VideoBeamDAO {
      * */
     function ModificarVideoBeam($array) {
 
-        $sql = 'UPDATE `tbl_video_beam` SET `fabricante`= ?,`cableUSB`= ?,`cableHDMI`= ?,`cableVGA`= ?,`observaciones`= ? WHERE `idVideoBeam`= ?;';
+        $sql = 'call actualizarVideoBeam (?,?,?,?,?,?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -88,7 +88,7 @@ class VideoBeamDAO {
         $cableVGA = $VideoBeamVo->getCableVGA();
         $observaciones = $VideoBeamVo->getObservaciones();
 
-        $stmp->bind_param("sbbbsi", $fabricante, $cableUSB, $cableHDMI, $cableVGA, $observaciones, $idVideoBeam);
+        $stmp->bind_param("siiisi", $fabricante, $cableUSB, $cableHDMI, $cableVGA, $observaciones, $idVideoBeam);
         $this->respuesta($conn, $stmp);
     }
 
@@ -104,7 +104,7 @@ class VideoBeamDAO {
         $VideoBeamVo = new VideoBeamVO();
         $VideoBeamVo->setIdVideoBeam($array->idVideoBeam);
 
-        $sql = 'DELETE FROM `tbl_video_beam` WHERE `idVideoBeam` = ?;';
+        $sql = 'call eliminarVideoBeam (?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -127,7 +127,7 @@ class VideoBeamDAO {
         $VideoBeamVo = new VideoBeamVO();
         $VideoBeamVo->setIdVideoBeam($array->idVideoBeam);
 
-        $sql = "SELECT * FROM `tbl_video_beam` WHERE `idVideoBeam`=?";
+        $sql = "call buscarVideoBean (?);";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -166,7 +166,7 @@ class VideoBeamDAO {
         $VideoBeamVo = new VideoBeamVO();
         $VideoBeamVo->setIdVideoBeam($array->idVideoBeam);
 
-        $sql = "SELECT idVideoBeam FROM `tbl_video_beam` WHERE `idVideoBeam`=?";
+        $sql = "call verificacionVideoBeam (?);";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -191,10 +191,11 @@ class VideoBeamDAO {
 
         $stmp->close();
         $conn->close();
+        echo  $respuesta;
         return ($respuesta);
     }
 
-     /**
+    /**
      * Este metodo permite cerrar la conexiòn con la base de datos y retornar si la query fue exitosa o no
      * @param array() $conn Variable que establece el driver de conexión 
      * @param array() $stmp prepara la ejecucion de la sentencia 
@@ -237,7 +238,7 @@ class VideoBeamDAO {
             $VideoBeamVo->setCableVGA($array->cableVGA);
             $VideoBeamVo->setObservaciones($array->observaciones);
 
-            $sql = 'INSERT INTO `tbl_video_beam`(`idVideoBeam`, `fabricante`, `cableUSB`, `cableHDMI`, `cableVGA`, `observaciones`) VALUES (?,?,?,?,?,?);';
+            $sql = 'call insertVideoBeam(?,?,?,?,?,?);';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
@@ -256,7 +257,6 @@ class VideoBeamDAO {
             } else {
                 $respuesta = "no";
             }
-
             $stmp->close();
             $conn->close();
             return $respuesta;

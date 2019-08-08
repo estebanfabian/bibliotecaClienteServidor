@@ -21,7 +21,6 @@ require '../../CLASES/BD/MySql.php';
 require '../../CLASES/BD/datosbd.php';
 require '../../CLASES/VO/ComputadorVO.php';
 require '../../CLASES/DAO/ComputadorDAO.php';
-$array;
 $Exitoso = 0;
 $Fallido = 0;
 $Duplicado = 0;

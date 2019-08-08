@@ -257,6 +257,15 @@ session_start();
                     <a download="VideoBeam.csv" href="../assets/plantilla/VideoBeam.csv">  
                         <i class="exel fas fa-file-excel"></i>
                     </a>Video beam
+                    <br>
+                     <a download="Computador.csv" href="../assets/plantilla/Computador.csv">  
+                        <i class="exel fas fa-file-excel"></i>
+                    </a>Computador
+                    <br>
+                      <a download="Usuario.csv" href="../assets/plantilla/Usuario.csv">  
+                        <i class="exel fas fa-file-excel"></i>
+                    </a>Usuario
+                    <br>
                 </div>
                 <div class="col-md-3">
                     <div class="btn-group-vertical" role="group" aria-label="Basic example">
