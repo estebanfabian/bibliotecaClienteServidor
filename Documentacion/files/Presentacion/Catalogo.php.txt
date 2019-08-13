@@ -3,7 +3,8 @@
  * Long Desc 
  * */
 /**
- * Capa de presentación de acerca de biblioCur donde se esplica que es el proyecto
+ * Capa de presentación del catalogo de libros que estan disponibles para el prestamo segun 
+ * la busqueda del usuario.
  * 
  * @category Educativo
  * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>

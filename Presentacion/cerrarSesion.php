@@ -4,7 +4,8 @@
  * Long Desc 
  * */
 /**
- * Página encargada de realizar el cierre de sesión
+ * Página encargada de realizar el cierre de sesión destruyendo  la sesion
+ * creada en php y realizando una redirección  al index del proyecto.
  *
  * 
  * @category Educativo

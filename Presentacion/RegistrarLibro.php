@@ -3,7 +3,7 @@
  * Long Desc 
  * */
 /**
- * Capa de presentación de para Registrar los libros
+ * Capa de presentación de para Registrar los libros , temas  y autores
  * 
  * @category Educativo
  * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
@@ -21,15 +21,20 @@ session_start();
         <title>BiblioCur</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
-        <link rel="stylesheet" href="../assets/css/styles.min.css?h=313b471bd9c649213fb455372265f1e2">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
         <script src="../assets/js/script.min.js?h=fedf14a447758dc0b3c6f999b9fc334b"></script>
-
-
         <script src="../assets/js/localization/messages_es.js" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/additional-methods.js"></script>     
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/additional-methods.js"></script>      
+        <link rel="stylesheet" href="../assets/css/styles.min.css?h=313b471bd9c649213fb455372265f1e2">
+        <link rel="stylesheet" href="../docs/css/prettify.min.css" type="text/css">
+        <script type="text/javascript" src="../docs/js/prettify.min.js"></script>
+
+        <link rel="stylesheet" href="../dist/css/bootstrap-multiselect.css" type="text/css">
+        <script type="text/javascript" src="../dist/js/bootstrap-multiselect.js"></script>
+
+
     </head> 
     <body>.bg{background-color:red}<!-- Navigation -->
         <div id = cabecera>
@@ -268,10 +273,6 @@ session_start();
                                     <input type="tetx" class="form-control" id="RCategoria" name="RCategoria" placeholder="Categoria" >
                                 </div>
 
-                                <div class="form-group col-md-3">
-                                    <label for="inputPassword4">Reseña  (*)</label>               
-                                    <textarea name="comment" form="usrform" placeholder="Reseña del libro" id="resenaLibro"></textarea>
-                                </div>
 
                                 <div class="form-group col-md-4">
                                     <label for="inputEmail4">Autor  (*)</label>
@@ -287,6 +288,10 @@ session_start();
                                     </select>
                                 </div>    
 
+                                <div class="form-group col-md-3">
+                                    <label for="inputPassword4">Reseña  (*)</label>               
+                                    <textarea name="comment" form="usrform" placeholder="Reseña del libro" id="resenaLibro"></textarea>
+                                </div>
                             </div>
                         </fieldset>
                         <button  class="btn btn-primary" id="btnRegistrarLibro">Registrar</button>
@@ -362,13 +367,37 @@ session_start();
                                 </div>
                             </div>
                         </fieldset>
-                    </form>
                         <button  class="btn btn-primary" id="btnRegistrarTema">Registrar</button>
                         <button  class="btn btn-primary" id="btnLimpiarTema">Limpiar</button>
                         <button  class="btn btn-primary" id="btnActualizaTema">Actualizar</button>
                         <button  class="btn btn-primary" id="btnEliminarTema">Eliminar</button>
                         <button  class="btn btn-primary" id="btnBuscarTema">Buscar</button>
+                    </form>
 
+                    <form method="post" id="framework_form">
+
+                        <div class="example">
+                            <script type="text/javascript">
+                                $(document).ready(function () {
+                                    $('#example-dropUp').multiselect({
+                                        enableFiltering: true,
+                                        includeSelectAllOption: true,
+                                        maxHeight: 400,
+                                        dropUp: true
+                                    });
+                                });
+                            </script>
+                            <select id="example-dropUp" multiple="multiple">
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                                <option data-role="divider"></option>
+                                <option value="4">Option 4</option>
+                                <option value="5">Option 5</option>
+                                <option value="6">Option 6</option>
+                            </select>
+                        </div>
+                    </form>
 
                 </div>
                 <div class="col-md-3">
@@ -391,4 +420,61 @@ session_start();
         <footer id="piePagina" class="py-1">
         </footer>
     </body>
+    <script>
+        $(document).ready(function () {
+            function fajax(URL, parametros, metodo) {
+                $.ajax({
+                    url: URL,
+                    data: parametros,
+                    type: 'post',
+                    cache: false,
+                    dataType: 'html',
+                    success: function (ZZx) {
+                        metodo(ZZx);
+                    },
+                    error: function (xhr, status) {
+                        alert("Existe un problema");
+                    }
+                });
+            }
+            function ListarAutores() {
+                var url = "ListarAutores";
+                var parametro = "";
+                var metodo = function (respuesta) {
+                    var data = $.parseJSON(respuesta);
+                    var limite = data.length;
+                    for (var i = 0; i < limite; i++) {
+                        var local = data[i];
+                        item(local, i);
+                    }
+                };
+                fajax(url, parametro, metodo);
+            }
+
+            function ListarEditorial() {
+                var url = "ListarEditorial";
+                var parametro = "";
+                var metodo = function (respuesta) {
+                    console.log(respuesta);
+                    var data = $.parseJSON(respuesta);
+                    var limite = data.length;
+                    for (var i = 0; i < limite; i++) {
+                        var local = data[i];
+                        item1(local, i);
+                    }
+                };
+                fajax(url, parametro, metodo);
+            }
+            function item(tmp) {
+                $("#Autores").append("<option value=" + tmp.NombreAutor + ">" + tmp.Nota + "</option>");
+            }
+            function item1(tmp) {
+                $("#ListaEditores").append("<option value=" + tmp.NombreAutor1 + ">" + tmp.Nota1 + "</option>");
+            }
+            ListarEditorial();
+            ListarAutores();
+        });
+
+    </script> 
+
 </html>

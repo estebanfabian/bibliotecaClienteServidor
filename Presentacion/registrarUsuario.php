@@ -3,7 +3,8 @@
  * Long Desc 
  * */
 /**
- * Capa de presentación de registrar usuario.
+ * Capa de presentación de registrar usuario donde se puede registar la informacion del usuario con
+ * sus contecto , ademas de poder realizar la busqueda,  elimnacion y actualizacion de la informacion..
  * 
  * @category Educativo
  * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>

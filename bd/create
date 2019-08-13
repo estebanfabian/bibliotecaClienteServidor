@@ -5,7 +5,7 @@
 # Project name:                                                          #
 # Author:                                                                #
 # Script type:           Database creation script                        #
-# Created on:            2019-08-08 00:26                                #
+# Created on:            2019-08-10 01:53                                #
 # ---------------------------------------------------------------------- #
 
 
@@ -339,27 +339,10 @@ DELIMITER ;;
 
 DROP PROCEDURE IF EXISTS `insetUsuario`;
  DELIMITER $$
-CREATE  PROCEDURE `insetUsuario` (IN `cedulaUsuario` VARCHAR(40), IN `codigoUsuario` INT, IN `nombreUsuario` VARCHAR(40), IN `apellidoUsuario` VARCHAR(40), IN `fechaNacimientoUsuario` VARCHAR(40), IN `sexoUsuario` INT, IN `direccionUsuario` VARCHAR(40), IN `direccion2Usuario` VARCHAR(40), IN `telefonoPrincipalUsuario` VARCHAR(40), IN `telefonoSecundarioUsuario` VARCHAR(40), IN `telefonoOtroUsuario` VARCHAR(40), IN `emailPrincipalUsuario` VARCHAR(40), IN `contactoNombreUsuario` VARCHAR(40), IN `contactoApellidoUsuario` VARCHAR(40), IN `contactoDireccionUsuario` VARCHAR(40), IN `contactoDireccion2Usuario` VARCHAR(40), IN `contactoTelefonoUsuario` VARCHAR(40), IN `contrasenaUsuario` VARCHAR(40), IN `perfilUsuario` VARCHAR(40))  BEGIN
-INSERT INTO tbl_usuario (cedula, codigo, nombre, apellido, fechaNacimiento, sexo, direccion, direccion2, telefonoPrincipal, telefonoSecundario, telefonoOtro, emailPrincipal, contactoNombre, contactoApellido, contactoDireccion, contactoDireccion2, contactoTelefono, contrasena, perfil   ) VALUES (cedulaUsuario,                    
-codigoUsuario,                    
-nombreUsuario,                    
-apellidoUsuario,                  
-fechaNacimientoUsuario,           
-sexoUsuario,                      
-direccionUsuario,                 
-direccion2Usuario,                
-telefonoPrincipalUsuario,         
-telefonoSecundarioUsuario,        
-telefonoOtroUsuario,              
-emailPrincipalUsuario,            
-contactoNombreUsuario,            
-contactoApellidoUsuario,          
-contactoDireccionUsuario,         
-contactoDireccion2Usuario,        
-contactoTelefonoUsuario,          
-contrasenaUsuario,                
-perfilUsuario                     
-);  END$$
+CREATE  PROCEDURE `insetUsuario` (IN `cedulaUsuario` VARCHAR(40), IN `codigoUsuario` INT, IN `nombreUsuario` VARCHAR(40), IN `apellidoUsuario` VARCHAR(40), IN `fechaNacimientoUsuario` VARCHAR(40), IN `sexoUsuario` INT, IN `direccionUsuario` VARCHAR(40), IN `direccion2Usuario` VARCHAR(40), IN `telefonoPrincipalUsuario` VARCHAR(40), IN `telefonoSecundarioUsuario` VARCHAR(40), IN `telefonoOtroUsuario` VARCHAR(40), IN `emailPrincipalUsuario` VARCHAR(40), IN `contactoNombreUsuario` VARCHAR(40), IN `contactoApellidoUsuario` VARCHAR(40), IN `contactoDireccionUsuario` VARCHAR(40), IN `contactoDireccion2Usuario` VARCHAR(40), IN `contactoTelefonoUsuario` VARCHAR(40), IN `contrasenaUsuario` VARCHAR(40), IN `perfilUsuario` VARCHAR(40)) 
+ BEGIN 
+ INSERT INTO tbl_usuario (cedula, codigo, nombre, apellido, fechaNacimiento, sexo, direccion, direccion2, telefonoPrincipal, telefonoSecundario, telefonoOtro, emailPrincipal, contactoNombre, contactoApellido, contactoDireccion, contactoDireccion2, contactoTelefono, contrasena, perfil) VALUES (cedulaUsuario,codigoUsuario,nombreUsuario,apellidoUsuario,fechaNacimientoUsuario,sexoUsuario, direccionUsuario,direccion2Usuario, telefonoPrincipalUsuario,telefonoSecundarioUsuario,telefonoOtroUsuario,emailPrincipalUsuario,contactoNombreUsuario,contactoApellidoUsuario, contactoDireccionUsuario,contactoDireccion2Usuario,contactoTelefonoUsuario,contrasenaUsuario, perfilUsuario);  
+  END$$
 
 DELIMITER ;;
 
@@ -408,7 +391,7 @@ DROP PROCEDURE IF EXISTS `verificacionVideoBeam`;
 
 CREATE PROCEDURE `verificacionVideoBeam` (codigoVideoBeam int)
 BEGIN
-SELECT idVideoBeam FROM `tbl_video_beam` WHERE `idVideoBeam`=codigoVideoBeam
+SELECT idVideoBeam FROM `tbl_video_beam` WHERE `idVideoBeam`=codigoVideoBeam ;
 END$$
 
 DELIMITER ;;
@@ -416,7 +399,7 @@ DELIMITER ;;
 DROP PROCEDURE IF EXISTS `insetComputador`;
  DELIMITER $$
 
-CREATE PROCEDURE `insetComputador` (idcomputador int  , fabricante varchar (40), observaciones varchar (40) , cargadorId int  )
+CREATE PROCEDURE `insetComputador` (idcomputador int  , fabricante varchar (40), observaciones text , cargadorId int  )
 BEGIN
 INSERT INTO `tbl_computador` (`idcomputador`, `fabricante`, `observaciones`, `cargadorId`) VALUES (idcomputador, fabricante, observaciones, cargadorId  );    
 END$$
@@ -474,7 +457,7 @@ DELIMITER ;;
 DROP PROCEDURE IF EXISTS `actualizarComputador`;
  DELIMITER $$
 
-CREATE PROCEDURE `actualizarComputador` (IN `fabricante` VARCHAR(40), IN `observaciones` VARCHAR(40), IN `cargadorId` INT, IN `idcomputador` INT )
+CREATE PROCEDURE `actualizarComputador` (IN `fabricante` VARCHAR(40), IN `observaciones`text ,IN `cargadorId` INT, IN `idcomputador` INT )
 BEGIN
 UPDATE `tbl_computador` SET `fabricante` = fabricante , `observaciones` = observaciones, `cargadorId` = cargadorId WHERE `tbl_computador`.`idcomputador` = idcomputador ; 
 END$$
@@ -509,4 +492,44 @@ BEGIN
 SELECT `idcomputador` FROM `tbl_computador` WHERE `idcomputador` = id;
 END$$
 
+DELIMITER ;;
+
+DROP PROCEDURE IF EXISTS `verificacionTema`;
+ DELIMITER $$
+CREATE PROCEDURE `verificacionTema` (nombreTema varchar (40))
+BEGIN
+SELECT `descripcion` FROM `tbl_temas` WHERE `nombreTema` = temaNombre;
+END$$
+DELIMITER ;;
+
+DROP PROCEDURE IF EXISTS `buscarTema`;
+ DELIMITER $$
+CREATE PROCEDURE `buscarTema` (nombreTema varchar (40))
+BEGIN
+SELECT `descripcion` FROM `tbl_temas` WHERE `nombreTema` = temaNombre;
+END$$
+DELIMITER ;;
+
+DROP PROCEDURE IF EXISTS `eliminarTema`;
+ DELIMITER $$
+CREATE PROCEDURE `eliminarTema` (nombreTema varchar (40))
+BEGIN
+DELETE FROM `tbl_temas` WHERE `nombreTema` = temaNombre;
+END$$
+DELIMITER ;;
+
+DROP PROCEDURE IF EXISTS `actualizarTema`;
+ DELIMITER $$
+CREATE PROCEDURE `actualizarTema` (temaNombre varchar (40), temadescripcion TEXT)
+BEGIN
+UPDATE `tbl_temas` SET `descripcion`= temadescripcion WHERE `nombreTema`= temaNombre;
+END$$
+DELIMITER ;;
+
+DROP PROCEDURE IF EXISTS `insetTema`;
+ DELIMITER $$
+CREATE PROCEDURE `insetTema` (temaNombre varchar (40), temadescripcion TEXT)
+BEGIN
+INSERT INTO `tbl_temas`( `nombreTema`, `descripcion`) VALUES (temaNombre,temadescripcion);
+END$$
 DELIMITER ;;

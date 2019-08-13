@@ -39,20 +39,7 @@ class ComputadorDAO {
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
 
-            $computadorVo = new ComputadorVO();
-            $computadorVo->setIdcomputador($array->idcomputador);
-            $computadorVo->setFabricante($array->fabricante);
-            $computadorVo->setObservaciones($array->observaciones);
-            $computadorVo->setCargadorId($array->cargadorId);
-
-            $idcomputador = $computadorVo->getIdcomputador();
-            $fabricante = $computadorVo->getFabricante();
-            $observaciones = $computadorVo->getObservaciones();
-            $cargadorId = $computadorVo->getCargadorId();
-
-            $stmp->bind_param("issi", $idcomputador, $fabricante, $observaciones, $cargadorId);
-
-            $this->Respuesta($conn, $stmp);
+            $this->respuesta($conn, $this->insert($array, $stmp));
         }
     }
 
@@ -96,20 +83,26 @@ class ComputadorDAO {
      * @return array() Se envia la respuesta si la eliminacion del computador si fue exitosa o no 
      * */
     function EliminarComputador($array) {
+        if ($this->Filtro($array) == "no") {
+            $respuesta = array();
+            $respuesta["sucess"] = "no";
+            echo json_encode($respuesta);
+        } else {
 
-        $computadorVo = new ComputadorVO();
-        $computadorVo->setIdcomputador($array->idcomputador);
+            $computadorVo = new ComputadorVO();
+            $computadorVo->setIdcomputador($array->idcomputador);
 
-        $sql = 'call eliminarComputador (?);';
-        $BD = new ConectarBD();
-        $conn = $BD->getMysqli();
-        $stmp = $conn->prepare($sql);
+            $sql = 'call eliminarComputador (?);';
+            $BD = new ConectarBD();
+            $conn = $BD->getMysqli();
+            $stmp = $conn->prepare($sql);
 
-        $idcomputador = $computadorVo->getIdcomputador();
+            $idcomputador = $computadorVo->getIdcomputador();
 
-        $stmp->bind_param("s", $idcomputador);
+            $stmp->bind_param("s", $idcomputador);
 
-        $this->Respuesta($conn, $stmp);
+            $this->Respuesta($conn, $stmp);
+        }
     }
 
     /**
@@ -214,21 +207,8 @@ class ComputadorDAO {
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
 
-            $computadorVo = new ComputadorVO();
-            $computadorVo->setIdcomputador($array->idcomputador);
-            $computadorVo->setFabricante($array->fabricante);
-            $computadorVo->setObservaciones($array->observaciones);
-            $computadorVo->setCargadorId($array->cargadorId);
-
-            $idcomputador = $computadorVo->getIdcomputador();
-            $fabricante = $computadorVo->getFabricante();
-            $observaciones = $computadorVo->getObservaciones();
-            $cargadorId = $computadorVo->getCargadorId();
-
-            $stmp->bind_param("issi", $idcomputador, $fabricante, $observaciones, $cargadorId);
-
             $respuesta = array();
-            if ($stmp->execute() == 1) {
+            if ($this->insert($array, $stmp)->execute() == 1) {
                 $respuesta = "ok";
             } else {
                 $respuesta = "no";
@@ -237,6 +217,24 @@ class ComputadorDAO {
             $conn->close();
             return $respuesta;
         }
+    }
+
+    function insert($array, $stmp) {
+
+        $computadorVo = new ComputadorVO();
+        $computadorVo->setIdcomputador($array->idcomputador);
+        $computadorVo->setFabricante($array->fabricante);
+        $computadorVo->setObservaciones($array->observaciones);
+        $computadorVo->setCargadorId($array->cargadorId);
+
+        $idcomputador = $computadorVo->getIdcomputador();
+        $fabricante = $computadorVo->getFabricante();
+        $observaciones = $computadorVo->getObservaciones();
+        $cargadorId = $computadorVo->getCargadorId();
+
+        $stmp->bind_param("issi", $idcomputador, $fabricante, $observaciones, $cargadorId);
+
+        return $stmp;
     }
 
 }

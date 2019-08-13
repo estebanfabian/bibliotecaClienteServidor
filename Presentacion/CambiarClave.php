@@ -3,7 +3,8 @@
  * Long Desc 
  * */
 /**
- * Capa de presentación de inicio de sesión 
+ * Capa de presentación de cambio de clave  donde el usuario puede realizar el cambio
+ * de clave 
  * 
  * @category Educativo
  * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>

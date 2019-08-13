@@ -3,7 +3,8 @@
  * Long Desc 
  * */
 /**
- * Capa de presentación de acerca de biblioCur donde se esplica que es el proyecto
+ * Capa de presentación de subida masiva donde  los usuarios de tipo admninistrador puede subir
+ * registro de informacion de manera masiva para que sea mas eficiente el ingreso de informacíon.
  * 
  * @category Educativo
  * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>

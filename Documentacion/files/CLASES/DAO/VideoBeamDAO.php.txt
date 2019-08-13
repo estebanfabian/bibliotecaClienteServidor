@@ -34,28 +34,13 @@ class VideoBeamDAO {
             $respuesta["sucess"] = "Reguistro duplicado";
             echo json_encode($respuesta);
         } else {
-            $VideoBeamVo = new VideoBeamVO();
-            $VideoBeamVo->setIdVideoBeam($array->idVideoBeam);
-            $VideoBeamVo->setFabricante($array->fabricante);
-            $VideoBeamVo->setCableUSB($array->cableUSB);
-            $VideoBeamVo->setCableHDMI($array->cableHDMI);
-            $VideoBeamVo->setCableVGA($array->cableVGA);
-            $VideoBeamVo->setObservaciones($array->observaciones);
 
             $sql = 'call insertVideoBeam(?,?,?,?,?,?);';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
 
-            $idVideoBeam = $VideoBeamVo->getIdVideoBeam();
-            $fabricante = $VideoBeamVo->getFabricante();
-            $cableUSB = $VideoBeamVo->getCableUSB();
-            $cableHDMI = $VideoBeamVo->getCableHDMI();
-            $cableVGA = $VideoBeamVo->getCableVGA();
-            $observaciones = $VideoBeamVo->getObservaciones();
-
-            $stmp->bind_param("isiiis", $idVideoBeam, $fabricante, $cableUSB, $cableHDMI, $cableVGA, $observaciones);
-            $this->respuesta($conn, $stmp);
+            $this->respuesta($conn, $this->insert($array, $stmp));
         }
     }
 
@@ -100,19 +85,24 @@ class VideoBeamDAO {
      * @return array() Se envia la respuesta si la eliminacion del video beam  si fue exitosa o no 
      * */
     function EliminarVideoBeam($array) {
+        if ($this->Filtro($array) == "no") {
+            $respuesta = array();
+            $respuesta["sucess"] = "no";
+            echo json_encode($respuesta);
+        } else {
+            $VideoBeamVo = new VideoBeamVO();
+            $VideoBeamVo->setIdVideoBeam($array->idVideoBeam);
 
-        $VideoBeamVo = new VideoBeamVO();
-        $VideoBeamVo->setIdVideoBeam($array->idVideoBeam);
+            $sql = 'call eliminarVideoBeam (?);';
+            $BD = new ConectarBD();
+            $conn = $BD->getMysqli();
+            $stmp = $conn->prepare($sql);
 
-        $sql = 'call eliminarVideoBeam (?);';
-        $BD = new ConectarBD();
-        $conn = $BD->getMysqli();
-        $stmp = $conn->prepare($sql);
+            $idVideoBeam = $VideoBeamVo->getIdVideoBeam();
 
-        $idVideoBeam = $VideoBeamVo->getIdVideoBeam();
-
-        $stmp->bind_param("i", $idVideoBeam);
-        $this->respuesta($conn, $stmp);
+            $stmp->bind_param("i", $idVideoBeam);
+            $this->respuesta($conn, $stmp);
+        }
     }
 
     /**
@@ -191,7 +181,7 @@ class VideoBeamDAO {
 
         $stmp->close();
         $conn->close();
-        echo  $respuesta;
+        echo $respuesta;
         return ($respuesta);
     }
 
@@ -230,29 +220,16 @@ class VideoBeamDAO {
             $respuesta = "Reguistro duplicado";
             return $respuesta;
         } else {
-            $VideoBeamVo = new VideoBeamVO();
-            $VideoBeamVo->setIdVideoBeam($array->idVideoBeam);
-            $VideoBeamVo->setFabricante($array->fabricante);
-            $VideoBeamVo->setCableUSB($array->cableUSB);
-            $VideoBeamVo->setCableHDMI($array->cableHDMI);
-            $VideoBeamVo->setCableVGA($array->cableVGA);
-            $VideoBeamVo->setObservaciones($array->observaciones);
+
 
             $sql = 'call insertVideoBeam(?,?,?,?,?,?);';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
 
-            $idVideoBeam = $VideoBeamVo->getIdVideoBeam();
-            $fabricante = $VideoBeamVo->getFabricante();
-            $cableUSB = $VideoBeamVo->getCableUSB();
-            $cableHDMI = $VideoBeamVo->getCableHDMI();
-            $cableVGA = $VideoBeamVo->getCableVGA();
-            $observaciones = $VideoBeamVo->getObservaciones();
 
-            $stmp->bind_param("isiiis", $idVideoBeam, $fabricante, $cableUSB, $cableHDMI, $cableVGA, $observaciones);
             $respuesta = array();
-            if ($stmp->execute() == 1) {
+            if ($this->insert($array, $stmp)->execute() == 1) {
                 $respuesta = "ok";
             } else {
                 $respuesta = "no";
@@ -261,6 +238,27 @@ class VideoBeamDAO {
             $conn->close();
             return $respuesta;
         }
+    }
+
+    function insert($array, $stmp) {
+
+        $VideoBeamVo = new VideoBeamVO();
+        $VideoBeamVo->setIdVideoBeam($array->idVideoBeam);
+        $VideoBeamVo->setFabricante($array->fabricante);
+        $VideoBeamVo->setCableUSB($array->cableUSB);
+        $VideoBeamVo->setCableHDMI($array->cableHDMI);
+        $VideoBeamVo->setCableVGA($array->cableVGA);
+        $VideoBeamVo->setObservaciones($array->observaciones);
+
+        $idVideoBeam = $VideoBeamVo->getIdVideoBeam();
+        $fabricante = $VideoBeamVo->getFabricante();
+        $cableUSB = $VideoBeamVo->getCableUSB();
+        $cableHDMI = $VideoBeamVo->getCableHDMI();
+        $cableVGA = $VideoBeamVo->getCableVGA();
+        $observaciones = $VideoBeamVo->getObservaciones();
+
+        $stmp->bind_param("isiiis", $idVideoBeam, $fabricante, $cableUSB, $cableHDMI, $cableVGA, $observaciones);
+        return $stmp;
     }
 
 }

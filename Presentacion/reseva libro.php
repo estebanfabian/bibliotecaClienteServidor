@@ -3,7 +3,8 @@
  * Long Desc 
  * */
 /**
- * Capa de presentación de acerca de biblioCur donde se esplica que es el proyecto
+ * Capa de presentación de reservar libro donde el usuario puede realizar la reserva de un video beam 
+ * pero solo  un 2 semanas maximo de plazo.
  * 
  * @category Educativo
  * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>

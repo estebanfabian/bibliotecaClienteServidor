@@ -3,33 +3,23 @@
 class EditorialDAO {
 
     function CrearEditorial($array) {
+        if ($this->Filtro($array) == "ok") {
+            $respuesta = array();
+            $respuesta["sucess"] = "Reguistro duplicado";
+            echo json_encode($respuesta);
+        } else {
+            $sql = 'INSERT INTO `tbl_editorial` ( `nombreEditorial`, `direccionEditorial`, `telefonoEditorial`, `anoPublicacion`) VALUES ( ?,?, ?,?);';
+            $BD = new ConectarBD();
+            $conn = $BD->getMysqli();
+            $stmp = $conn->prepare($sql);
 
-        $editorialVo = new EditorialVO();
-
-        $editorialVo->setNombreEditorial($array->nombreEditorial);
-        $editorialVo->setDireccionEditorial($array->direccionEditorial);
-        $editorialVo->setTelefonoEditorial($array->telefonoEditorial);
-        $editorialVo->setAnoPublicacion($array->anoPublicacion);
-
-        $sql = 'INSERT INTO `tbl_editorial` ( `nombreEditorial`, `direccionEditorial`, `telefonoEditorial`, `anoPublicacion`) VALUES ( ?,?, ?,?);';
-        $BD = new ConectarBD();
-        $conn = $BD->getMysqli();
-        $stmp = $conn->prepare($sql);
-
-
-        $nombreEditorial = $editorialVo->getNombreEditorial();
-        $direccionEditorial = $editorialVo->getDireccionEditorial();
-        $telefonoEditorial = $editorialVo->getTelefonoEditorial();
-        $anoPublicacion = $editorialVo->getAnoPublicacion();
-
-        $stmp->bind_param("ssss", $nombreEditorial, $direccionEditorial, $telefonoEditorial, $anoPublicacion);
-
-        $this->Respuesta($conn, $stmp);
+            $this->respuesta($conn, $this->insert($array, $stmp));
+        }
     }
 
     function ModificarEditorial($array) {
 
-        $sql = 'UPDATE `tbl_editorial` SET ,`direccionEditorial`= ? ,`telefonoEditorial`=?,`anoPublicacion`= ? WHERE `nombreEditorial`= ?;';
+        $sql = 'UPDATE `tbl_editorial` SET ,`direccionEditorial`= ?,`telefonoEditorial`= ? ,`anoPublicacion`= ?  WHERE `nombreEditorial`= ? ;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -46,17 +36,15 @@ class EditorialDAO {
         $telefonoEditorial = $editorialVo->getTelefonoEditorial();
         $anoPublicacion = $editorialVo->getAnoPublicacion();
 
-        $stmp->bind_param("ssss", $nombreEditorial, $direccionEditorial, $telefonoEditorial, $anoPublicacion);
+        $stmp->bind_param("ssss", $direccionEditorial, $telefonoEditorial, $anoPublicacion, $nombreEditorial);
 
         $this->Respuesta($conn, $stmp);
     }
 
     function EliminarEditorial($array) {
 
-        $editorialVo = new EditorialVO();
-        $editorialVo->setNombreEditorial($array->nombreEditorial);
-
         $sql = 'DELETE FROM `tbl_editorial` WHERE `nombreEditorial`= ?;';
+  
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -84,7 +72,7 @@ class EditorialDAO {
         echo json_encode($respuesta);
     }
 
-    function BuscarEditoriala($array) {
+    function BuscarEditorial($array) {
         $sql = "SELECT `nombreEditorial`,`direccionEditorial`,`telefonoEditorial`,`anoPublicacion` FROM `tbl_editorial` WHERE `nombreEditorial` = ?";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
@@ -112,13 +100,13 @@ class EditorialDAO {
         echo json_encode($tmp);
     }
 
-    function ListarAutor($array) {
-       $sql = "SELECT `idEditorial`,`nombreEditorial` FROM `tbl_editorial`";
+    function ListarEditorial() {
+        $sql = "SELECT * FROM `listareditorial`";
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
-      
+
         $stmp->execute();
 
         $stmp->bind_result($NombreAutor, $Nota);
@@ -132,6 +120,80 @@ class EditorialDAO {
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
+    }
+
+    function SMCrearEditorial($array) {
+        if ($this->Filtro($array) == "ok") {
+            $respuesta = array();
+            $respuesta["sucess"] = "Reguistro duplicado";
+            echo json_encode($respuesta);
+        } else {
+
+            $sql = 'INSERT INTO `tbl_editorial` ( `nombreEditorial`, `direccionEditorial`, `telefonoEditorial`, `anoPublicacion`) VALUES ( ?,?, ?,?);';
+            $BD = new ConectarBD();
+            $conn = $BD->getMysqli();
+            $stmp = $conn->prepare($sql);
+
+            $respuesta = array();
+            if ($this->insert($array, $stmp)->execute() == 1) {
+                $respuesta = "ok";
+            } else {
+                $respuesta = "no";
+            }
+            $stmp->close();
+            $conn->close();
+            return $respuesta;
+        }
+    }
+
+    function insert($array, $stmp) {
+        $editorialVo = new EditorialVO();
+
+        $editorialVo->setNombreEditorial($array->nombreEditorial);
+        $editorialVo->setDireccionEditorial($array->direccionEditorial);
+        $editorialVo->setTelefonoEditorial($array->telefonoEditorial);
+        $editorialVo->setAnoPublicacion($array->anoPublicacion);
+
+        $nombreEditorial = $editorialVo->getNombreEditorial();
+        $direccionEditorial = $editorialVo->getDireccionEditorial();
+        $telefonoEditorial = $editorialVo->getTelefonoEditorial();
+        $anoPublicacion = $editorialVo->getAnoPublicacion();
+
+        $stmp->bind_param("ssss", $nombreEditorial, $direccionEditorial, $telefonoEditorial, $anoPublicacion);
+
+        return $stmp;
+    }
+
+    function Filtro($array) {
+        $sql = 'SELECT `idEditorial`  FROM `tbl_editorial` WHERE `nombreEditorial`  = ?;';
+
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $editorialVo = new EditorialVO();
+        $editorialVo->setNombreEditorial($array->nombreEditorial);
+
+        $nombreEditorial = $editorialVo->getNombreEditorial();
+        $stmp->bind_param("i", $nombreEditorial);
+        $respuesta = array();
+        if ($stmp->execute() == 1) {
+            $stmp->bind_result($codigo);
+            while ($stmp->fetch()) {
+                $respuesta = $codigo;
+            }
+
+            if ($codigo != "") {
+                $respuesta = "ok";
+            } else {
+                $respuesta = "no";
+            }
+        } else {
+            $respuesta = "no";
+        }
+        $stmp->close();
+        $conn->close();
+        return ($respuesta);
     }
 
 }

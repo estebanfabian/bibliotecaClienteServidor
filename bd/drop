@@ -5,7 +5,7 @@
 # Project name:                                                          #
 # Author:                                                                #
 # Script type:           Database drop script                            #
-# Created on:            2019-08-08 00:26                                #
+# Created on:            2019-08-10 01:53                                #
 # ---------------------------------------------------------------------- #
 
 
@@ -52,6 +52,16 @@ DROP PROCEDURE `eliminarComputador`;
 DROP PROCEDURE `buscarComputador`;
 
 DROP PROCEDURE `verificacionComputador`;
+
+DROP PROCEDURE `verificacionTema`;
+
+DROP PROCEDURE `buscarTema`;
+
+DROP PROCEDURE `eliminarTema`;
+
+DROP PROCEDURE `actualizarTema`;
+
+DROP PROCEDURE `insetTema`;
 
 # ---------------------------------------------------------------------- #
 # Drop foreign key constraints                                           #

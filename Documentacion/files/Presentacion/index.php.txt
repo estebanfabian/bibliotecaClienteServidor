@@ -3,7 +3,8 @@
  * Long Desc 
  * */
 /**
- * Capa de presentación de inicio de sesión 
+ * Capa de presentación de inicio de sesión  donde es la pagina de incio  de la página
+ * donde se encuntra  los 3 libros que tiene mayor cantidad de prestamo , ademas de porder inciar secion.
  * 
  * @category Educativo
  * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>

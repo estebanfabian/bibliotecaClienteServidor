@@ -16,50 +16,7 @@ class UsuarioDAO {
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
-
-            $UsuarioVO = new UsuarioVO();
-            $UsuarioVO->setCedula($array->cedula);
-            $UsuarioVO->setCodigo($array->codigo);
-            $UsuarioVO->setNombre($array->nombre);
-            $UsuarioVO->setApellido($array->apellido);
-            $UsuarioVO->setFechaNacimiento($array->fechaNacimiento);
-            $UsuarioVO->setSexo($array->sexo);
-            $UsuarioVO->setDireccion($array->direccion);
-            $UsuarioVO->setTelefonoPrincipal($array->telefonoPrincipal);
-            $UsuarioVO->setEmailPrincipal($array->emailPrincipal);
-            $UsuarioVO->setContrasena($array->contrasena);
-            $UsuarioVO->setDireccion2($array->direccion2);
-            $UsuarioVO->setTelefonoSecundario($array->telefonoSecundario);
-            $UsuarioVO->setTelefonoOtro($array->telefonoOtro);
-            $UsuarioVO->setContactoNombre($array->contactoNombre);
-            $UsuarioVO->setContactoApellido($array->contactoApellido);
-            $UsuarioVO->setContactoDireccion($array->contactoDireccion);
-            $UsuarioVO->setContactoDireccion2($array->contactoDireccion2);
-            $UsuarioVO->setContactoTelefono($array->contactoTelefono);
-            $UsuarioVO->setPerfil($array->perfil);
-
-            $cedula = $UsuarioVO->getCedula();
-            $codigo = $UsuarioVO->getCodigo();
-            $nombre = $UsuarioVO->getNombre();
-            $apellido = $UsuarioVO->getApellido();
-            $fechaNacimiento = $UsuarioVO->getFechaNacimiento();
-            $sexo = $UsuarioVO->getSexo();
-            $direccion = $UsuarioVO->getDireccion();
-            $direccion2 = $UsuarioVO->getDireccion2();
-            $telefonoPrincipal = $UsuarioVO->getTelefonoPrincipal();
-            $telefonoSecundario = $UsuarioVO->getTelefonoSecundario();
-            $telefonoOtro = $UsuarioVO->getTelefonoOtro();
-            $emailPrincipal = $UsuarioVO->getEmailPrincipal();
-            $contactoNombre = $UsuarioVO->getContactoNombre();
-            $contactoApellido = $UsuarioVO->getContactoApellido();
-            $contactoDireccion = $UsuarioVO->getContactoDireccion();
-            $contactoDireccion2 = $UsuarioVO->getContactoDireccion2();
-            $contactoTelefono = $UsuarioVO->getContactoTelefono();
-            $contrasena = $UsuarioVO->getContrasena();
-            $perfil = $UsuarioVO->getPerfil();
-
-            $stmp->bind_param("iisssisssssssssssss", $cedula, $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $direccion2, $telefonoPrincipal, $telefonoSecundario, $telefonoOtro, $emailPrincipal, $contactoNombre, $contactoApellido, $contactoDireccion, $contactoDireccion2, $contactoTelefono, $contrasena, $perfil);
-            $this->respuesta($conn, $stmp);
+            $this->respuesta($conn, $this->insert($array, $stmp));
         }
     }
 
@@ -116,19 +73,24 @@ class UsuarioDAO {
     }
 
     function ElminarUsuario($array) {
+        if ($this->Filtro($array) == "no") {
+            $respuesta = array();
+            $respuesta["sucess"] = "no";
+            echo json_encode($respuesta);
+        } else {
+            $sql = 'call eliminarUsuario (?)';
+            $BD = new ConectarBD();
+            $conn = $BD->getMysqli();
+            $stmp = $conn->prepare($sql);
 
-        $sql = 'call eliminarUsuario (?)';
-        $BD = new ConectarBD();
-        $conn = $BD->getMysqli();
-        $stmp = $conn->prepare($sql);
+            $Usuariovo = new UsuarioVO();
+            $Usuariovo->setCodigo($array->codigo);
 
-        $Usuariovo = new UsuarioVO();
-        $Usuariovo->setCodigo($array->codigo);
+            $codigo = $Usuariovo->getCodigo();
+            $stmp->bind_param("i", $codigo);
 
-        $codigo = $Usuariovo->getCodigo();
-        $stmp->bind_param("i", $codigo);
-
-        $this->respuesta($conn, $stmp);
+            $this->respuesta($conn, $stmp);
+        }
     }
 
     function BuscarUsuario($array) {
@@ -272,7 +234,7 @@ class UsuarioDAO {
 
     public function Mostrar($array) {
 
-        $sql = "SELECT codigo, `nombre`, `apellido`, `fechaNacimiento`, `sexo`, `direccion`, `telefonoPrincipal`, `emailPrincipal`,  `contrasena`,`foto`  FROM tbl_usuario  WHERE `codigo`=? ";
+        $sql = "SELECT codigo, `nombre`, `apellido`, `fechaNacimiento`, `sexo`, `direccion`, `telefonoPrincipal`, `emailPrincipal`,  `contrasena`  FROM tbl_usuario  WHERE `codigo`=? ";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -282,7 +244,7 @@ class UsuarioDAO {
 
         $stmp->bind_param("i", $codigo);
         $stmp->execute();
-        $stmp->bind_result($codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $telefonoPrincipal, $emailPrincipal, $contrasena, $foto);
+        $stmp->bind_result($codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $telefonoPrincipal, $emailPrincipal, $contrasen);
         $respuesta = array();
         while ($stmp->fetch()) {
             $tmp = array();
@@ -295,7 +257,7 @@ class UsuarioDAO {
             $tmp["telefonoPrincipal"] = $telefonoPrincipal;
             $tmp["emailPrincipal"] = $emailPrincipal;
             $tmp["contrasena"] = $contrasena;
-            $tmp["foto"] = $foto;
+
 
             $respuesta[sizeof($respuesta)] = $tmp;
         }
@@ -455,50 +417,8 @@ class UsuarioDAO {
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
 
-            $UsuarioVO = new UsuarioVO();
-            $UsuarioVO->setCedula($array->cedula);
-            $UsuarioVO->setCodigo($array->codigo);
-            $UsuarioVO->setNombre($array->nombre);
-            $UsuarioVO->setApellido($array->apellido);
-            $UsuarioVO->setFechaNacimiento($array->fechaNacimiento);
-            $UsuarioVO->setSexo($array->sexo);
-            $UsuarioVO->setDireccion($array->direccion);
-            $UsuarioVO->setTelefonoPrincipal($array->telefonoPrincipal);
-            $UsuarioVO->setEmailPrincipal($array->emailPrincipal);
-            $UsuarioVO->setContrasena($array->contrasena);
-            $UsuarioVO->setDireccion2($array->direccion2);
-            $UsuarioVO->setTelefonoSecundario($array->telefonoSecundario);
-            $UsuarioVO->setTelefonoOtro($array->telefonoOtro);
-            $UsuarioVO->setContactoNombre($array->contactoNombre);
-            $UsuarioVO->setContactoApellido($array->contactoApellido);
-            $UsuarioVO->setContactoDireccion($array->contactoDireccion);
-            $UsuarioVO->setContactoDireccion2($array->contactoDireccion2);
-            $UsuarioVO->setContactoTelefono($array->contactoTelefono);
-            $UsuarioVO->setPerfil($array->perfil);
-
-            $cedula = $UsuarioVO->getCedula();
-            $codigo = $UsuarioVO->getCodigo();
-            $nombre = $UsuarioVO->getNombre();
-            $apellido = $UsuarioVO->getApellido();
-            $fechaNacimiento = $UsuarioVO->getFechaNacimiento();
-            $sexo = $UsuarioVO->getSexo();
-            $direccion = $UsuarioVO->getDireccion();
-            $direccion2 = $UsuarioVO->getDireccion2();
-            $telefonoPrincipal = $UsuarioVO->getTelefonoPrincipal();
-            $telefonoSecundario = $UsuarioVO->getTelefonoSecundario();
-            $telefonoOtro = $UsuarioVO->getTelefonoOtro();
-            $emailPrincipal = $UsuarioVO->getEmailPrincipal();
-            $contactoNombre = $UsuarioVO->getContactoNombre();
-            $contactoApellido = $UsuarioVO->getContactoApellido();
-            $contactoDireccion = $UsuarioVO->getContactoDireccion();
-            $contactoDireccion2 = $UsuarioVO->getContactoDireccion2();
-            $contactoTelefono = $UsuarioVO->getContactoTelefono();
-            $contrasena = $UsuarioVO->getContrasena();
-            $perfil = $UsuarioVO->getPerfil();
-
-            $stmp->bind_param("sisssisssssssssssss", $cedula, $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $direccion2, $telefonoPrincipal, $telefonoSecundario, $telefonoOtro, $emailPrincipal, $contactoNombre, $contactoApellido, $contactoDireccion, $contactoDireccion2, $contactoTelefono, $contrasena, $perfil);
             $respuesta = array();
-            if ($stmp->execute() == 1) {
+            if ($this->insert($array, $stmp)->execute() == 1) {
                 $respuesta = "ok";
             } else {
                 $respuesta = "no";
@@ -519,6 +439,54 @@ class UsuarioDAO {
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
+    }
+
+    function insert($array, $stmp) {
+
+        $UsuarioVO = new UsuarioVO();
+        $UsuarioVO->setCedula($array->cedula);
+        $UsuarioVO->setCodigo($array->codigo);
+        $UsuarioVO->setNombre($array->nombre);
+        $UsuarioVO->setApellido($array->apellido);
+        $UsuarioVO->setFechaNacimiento($array->fechaNacimiento);
+        $UsuarioVO->setSexo($array->sexo);
+        $UsuarioVO->setDireccion($array->direccion);
+        $UsuarioVO->setTelefonoPrincipal($array->telefonoPrincipal);
+        $UsuarioVO->setEmailPrincipal($array->emailPrincipal);
+        $UsuarioVO->setContrasena($array->contrasena);
+        $UsuarioVO->setDireccion2($array->direccion2);
+        $UsuarioVO->setTelefonoSecundario($array->telefonoSecundario);
+        $UsuarioVO->setTelefonoOtro($array->telefonoOtro);
+        $UsuarioVO->setContactoNombre($array->contactoNombre);
+        $UsuarioVO->setContactoApellido($array->contactoApellido);
+        $UsuarioVO->setContactoDireccion($array->contactoDireccion);
+        $UsuarioVO->setContactoDireccion2($array->contactoDireccion2);
+        $UsuarioVO->setContactoTelefono($array->contactoTelefono);
+        $UsuarioVO->setPerfil($array->perfil);
+
+        $cedula = $UsuarioVO->getCedula();
+        $codigo = $UsuarioVO->getCodigo();
+        $nombre = $UsuarioVO->getNombre();
+        $apellido = $UsuarioVO->getApellido();
+        $fechaNacimiento = $UsuarioVO->getFechaNacimiento();
+        $sexo = $UsuarioVO->getSexo();
+        $direccion = $UsuarioVO->getDireccion();
+        $direccion2 = $UsuarioVO->getDireccion2();
+        $telefonoPrincipal = $UsuarioVO->getTelefonoPrincipal();
+        $telefonoSecundario = $UsuarioVO->getTelefonoSecundario();
+        $telefonoOtro = $UsuarioVO->getTelefonoOtro();
+        $emailPrincipal = $UsuarioVO->getEmailPrincipal();
+        $contactoNombre = $UsuarioVO->getContactoNombre();
+        $contactoApellido = $UsuarioVO->getContactoApellido();
+        $contactoDireccion = $UsuarioVO->getContactoDireccion();
+        $contactoDireccion2 = $UsuarioVO->getContactoDireccion2();
+        $contactoTelefono = $UsuarioVO->getContactoTelefono();
+        $contrasena = $UsuarioVO->getContrasena();
+        $perfil = $UsuarioVO->getPerfil();
+
+        $stmp->bind_param("sisssisssssssssssss", $cedula, $codigo, $nombre, $apellido, $fechaNacimiento, $sexo, $direccion, $direccion2, $telefonoPrincipal, $telefonoSecundario, $telefonoOtro, $emailPrincipal, $contactoNombre, $contactoApellido, $contactoDireccion, $contactoDireccion2, $contactoTelefono, $contrasena, $perfil);
+
+        return $stmp;
     }
 
 }

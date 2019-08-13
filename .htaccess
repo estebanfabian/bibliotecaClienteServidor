@@ -21,6 +21,14 @@ RewriteRule BuscarComputador$ Controlador/Computador/BuscarComputador.php
 RewriteRule EliminarComputador$ Controlador/Computador/EliminarComputador.php
 RewriteRule ActualizarComputador$ Controlador/Computador/ActualizarComputador.php
 RewriteRule SbMasivaComputador$ Controlador/Computador/SubidaMasivaComputador.php
+RewriteRule CrearTema$ Controlador/Libro/CrearTema.php
+RewriteRule EliminarTema$ Controlador/Libro/EliminarTema.php
+RewriteRule ModificarTema$ Controlador/Libro/ModificarTema.php
+RewriteRule BuscarTema$ Controlador/Libro/BuscarTema.php
+RewriteRule CrearAutor$ Controlador/Libro/CrearAutor.php
+RewriteRule BuscarAutor$ Controlador/Libro/BuscarAutor.php
+RewriteRule EliminarAutor$ Controlador/Libro/EliminarAutor.php
+RewriteRule ModificarAutor$ Controlador/Libro/ModificarAutor.php
 
 #-------------------------------------------------------------------------------
 RewriteRule ^gato.jsp$ js/MiLogica.js
@@ -31,9 +39,7 @@ RewriteRule tablaXautor$ Controlador/libro/Consultar_LibroXautor.php
 RewriteRule tablaXtema$ Controlador/libro/Consultar_LibroXtema.php
 RewriteRule tablaXEditorial$ Controlador/libro/Consultar_LibroXeditorial.php
 RewriteRule tablaXFacultad$ Controlador/libro/Consultar_LibroXfacultad.php
-RewriteRule olvidar$ Controlador/Usuario/Olvido_Contraseña.php
 RewriteRule Portada$ Controlador/libro/Consultar_LibroXPortada.php
-RewriteRule Modificar_usuario$ Controlador/Usuario/Modificar_Usuario.php
 RewriteRule Most_usuario$ Controlador/Usuario/Mostrar_Usuario.php
 RewriteRule Conta_res$ Controlador/prestamo/Contador_Reservas.php
 RewriteRule Tarjeta$ Controlador/Prestamo/Reserva_Tarjeta.php

@@ -8,4 +8,4 @@ require '../../CLASES/DAO/EditorialDAO.php';
 $json = file_get_contents("php://input");
 $local = json_decode($json);
 $LibroDAO = new EditorialDAO();
-$LibroDAO->BuscarEditoriala($local);
+$LibroDAO->BuscarEditorial($local);

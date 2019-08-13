@@ -3,7 +3,9 @@
  * Long Desc 
  * */
 /**
- * Capa de presentación de acerca de biblioCur donde se esplica que es el proyecto
+ * Capa de presentación de plantilla donde se encuetran pantillas para realizar las subidas 
+ * masivas y como se tiene que llenar la información  en el archivo exel para el registro  de los usuarios 
+ * y material. 
  * 
  * @category Educativo
  * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
