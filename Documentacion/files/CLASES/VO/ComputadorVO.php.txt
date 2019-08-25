@@ -5,8 +5,7 @@
  * */
 
 /**
- * Esta clase almacena la informacíon de los computadores como 
- * el numro de serie , fabricante , numero de cargador , observaciones y estdo del computador.
+ * Esta clase almacena la información de los computadores como el número de serie, fabricante, numero de cargador, observaciones y estado del computador.
  * 
  * @package VO
  * @category Educativo

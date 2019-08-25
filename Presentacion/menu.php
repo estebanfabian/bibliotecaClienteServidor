@@ -3,7 +3,7 @@
  * Long Desc 
  * */
 /**
- * Capa de presentación de inicio de sesión 
+ * Capa de presentación de menu 
  * 
  * @category Educativo
  * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>

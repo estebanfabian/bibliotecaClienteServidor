@@ -5,7 +5,7 @@
  * */
 
 /**
- * Esta clase almacena la informacíon de los video beams como es
+ * Esta clase almacena la información de los video beams como es
  * el fabricante , que si tiene algun cable y las observaciones 
  *
  * 

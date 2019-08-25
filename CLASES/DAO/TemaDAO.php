@@ -10,7 +10,7 @@ class TemaDAO {
             echo json_encode($respuesta);
         } else {
 
-            $sql = "call insetTema (?,?);";
+            $sql = "call tema (2,?,?);";
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
@@ -21,7 +21,7 @@ class TemaDAO {
 
     function ModificarTema($array) {
 
-        $sql = 'call actualizarTema (?,?);';
+        $sql = 'call tema (1,?,?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -44,7 +44,7 @@ class TemaDAO {
             $respuesta["sucess"] = "no";
             echo json_encode($respuesta);
         } else {
-            $sql = "call eliminarTema (?);";
+            $sql = "call miprocesos1 (7,?);";
 
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
@@ -74,7 +74,7 @@ class TemaDAO {
     }
 
     function BuscarTema($array) {
-        $sql = "call buscarTema (?);";
+        $sql = "call miprocesos1 (8,?);";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -115,7 +115,7 @@ class TemaDAO {
 
     function Filtro($array) {
 
-        $sql = 'call verificacionTema (?);';
+        $sql = 'call miprocesos1 (1,?);';
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
@@ -156,7 +156,7 @@ class TemaDAO {
             echo json_encode($respuesta);
         } else {
 
-            $sql = "call insetTema (?,?);";
+            $sql = "call tema (2,?,?);";
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
@@ -171,6 +171,28 @@ class TemaDAO {
             $conn->close();
             return $respuesta;
         }
+    }
+    
+       function ListarTema() {
+        $sql = "SELECT * FROM `listartema`";
+
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $stmp->execute();
+
+        $stmp->bind_result($NombreAutor, $Nota);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["NombreAutor"] = $NombreAutor;
+            $tmp["Nota"] = $Nota;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
     }
 
 }

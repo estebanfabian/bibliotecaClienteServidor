@@ -9,6 +9,8 @@ $(document).ready(function () {
             type: 'post',
             cache: false,
             dataType: 'html',
+            processData: false,
+            contentType: false,
             success: function (ZZx) {
                 metodo(ZZx);
             },
@@ -46,16 +48,10 @@ $(document).ready(function () {
                     if (data.length === 0) {
                         alert("El código o clave esta errada ");
                         $('#login-modal').modal('hide');
-                        var url1 = "IntentoFallido";
-                        var metodo1 = function (respuesta) {};
-                        fajax(url1, parametro, metodo1);
                     } else {
                         $('body').removeClass('modal-open');
                         $('.modal-backdrop').remove();
                         iniciarSeccion(respuesta);
-                        var url1 = "IntentoExitoso";
-                        var metodo1 = function (respuesta) {};
-                        fajax(url1, parametro, metodo1);
                     }
                 };
                 fajax(url, parametro, metodo);
@@ -743,7 +739,7 @@ $(document).ready(function () {
         var metodo = function (respuesta) {
             console.log(respuesta);
             var data = $.parseJSON(respuesta);
-            if (data.sucess == 'ok') {
+            if (data.sucess === 'ok') {
                 alert("se actualizo con exito");
                 LimpiarVideoBeam();
             } else {
@@ -893,7 +889,7 @@ $(document).ready(function () {
         var metodo = function (respuesta) {
             console.log(respuesta);
             var data = $.parseJSON(respuesta);
-            if (data.sucess == 'ok') {
+            if (data.sucess === 'ok') {
                 alert("el usuario se registro con exito");
                 LimpiarVideoBeam();
             } else {
@@ -1028,7 +1024,7 @@ $(document).ready(function () {
                 var metodo = function (respuesta) {
                     console.log(respuesta);
                     var data = $.parseJSON(respuesta);
-                    if (data.sucess == 'ok') {
+                    if (data.sucess === 'ok') {
                         alert("el usuario se registro con exito");
                         LimpiarVideoBeam();
                     } else {
@@ -1051,7 +1047,7 @@ $(document).ready(function () {
         };
         switch (op) {
             case 1:
-                var url = "../Controlador/Libro/CrearEditorial.php";
+                var url = "CrearEditorial";
                 var parametro = myjson(formulario);
                 var metodo = function (respuesta) {
                     console.log(respuesta);
@@ -1066,7 +1062,7 @@ $(document).ready(function () {
                 fajax(url, parametro, metodo);
                 break;
             case 2:
-                var url = "../Controlador/Libro/BuscarEditorial.php";
+                var url = "BuscarEditorial";
                 var parametro = myjson(formulario);
                 var metodo = function (respuesta) {
                     var data = $.parseJSON(respuesta);
@@ -1082,12 +1078,12 @@ $(document).ready(function () {
                 fajax(url, parametro, metodo);
                 break;
             case 3:
-                var url = "../Controlador/Libro/EliminarEditorial.php";
+                var url = "EliminarEditorial";
                 var parametro = myjson(formulario);
                 var metodo = function (respuesta) {
                     console.log(respuesta);
                     var data = $.parseJSON(respuesta);
-                    if (data.sucess == 'ok') {
+                    if (data.sucess === 'ok') {
                         alert("el usuario se registro con exito");
                         LimpiarVideoBeam();
                     } else {
@@ -1151,14 +1147,14 @@ $(document).ready(function () {
             telefonoEditorial: $("#TelEditorial").val(),
             anoPublicacion: $("#fechaEditorial").val()
         };
-        var url = "../Controlador/Libro/ModificarEditorial.php";
+        var url = "ModificarEditorial";
         var parametro = myjson(formulario);
         alert("va bn");
         console.log(parametro);
         var metodo = function (respuesta) {
             console.log(respuesta);
             var data = $.parseJSON(respuesta);
-            if (data.sucess == 'ok') {
+            if (data.sucess === 'ok') {
                 alert("el usuario se registro con exito");
             } else {
                 alert("No se pude registar al usuario");
@@ -1178,20 +1174,6 @@ $(document).ready(function () {
             }
         });
     }
-
-    var doSomething = (function () {
-        "use strict";
-        return {
-            test: (function () {
-                return 'test';
-            }()),
-            test2: (function () {
-                return console.log('test 2');
-            })
-        };
-    }());
-
-
 //--------------------------botones---------------------//
     $("#BTNIngresar").click(function () {
         login();
@@ -1319,6 +1301,178 @@ $(document).ready(function () {
         op = 2;
         BuscarEditorial();
     });
+    $("#btnRegistrarLibro").click(function () {
+        ////        var selected = $("#ListaTema").val();
+////        alert(selected);
+//
+//        //  var inputFileImage = document.getElementById("fileToUpload");
+//        //var file = $("#fileToUpload")[0].files[0];
+//        //var file = inputFileImage.files[0];
+//
+//        $("#registar_Libro").validate({
+//            rules: {
+//                Risbn: {
+//                    required: true,
+//                    minlength: 1
+//                },
+//                RTituo: {
+//                    required: true,
+//                    minlength: 1
+//                },
+//                ListaEditores: {
+//                    required: true,
+//                    minlength: 1
+//                },
+//                ListaPublica: {
+//                    required: true,
+//                    minlength: 1
+//                },
+//                ListaCategoria: {
+//                    required: true,
+//                    minlength: 1
+//                },
+//                ListaAutores: {
+//                    required: true,
+//                    minlength: 1
+//                },
+//                ListaTema: {
+//                    required: true,
+//                    minlength: 1
+//                }
+//            }, submitHandler: function () {
+        try {
+            var filename = $("#fileToUpload")[0].files[0].name;
+        } catch (e) {
+            var filename = null;
+        }
+        var formulario = {
+            isbn: $("#Risbn").val(),
+            titulo: $("#RTituo").val(),
+            resena: $("#resenaLibro").val(),
+            autor: $("#ListaAutores").val(),
+            editorial: $("#ListaEditores").val(),
+            tema: $("#ListaTema").val(),
+            lPublica: $("#ListaPublica").val(),
+            lCategoria: $("#ListaCategoria").val(),
+            imagen: filename
+
+        };
+        var url = "CrearLibro";
+        var parametro = myjson(formulario);
+        var metodo = function (respuesta) {
+            console.log(respuesta);
+            var data = $.parseJSON(respuesta);
+            if (data.sucess === 'ok') {
+                console.log(respuesta);
+                var file = $('#fileToUpload').prop('files')[0];
+                var data = new FormData();
+                data.append('fileToUpload', file);
+                if (filename != null) {
+                    var url = "SubirPortada";
+                    var parametro1 = data;
+                    var metodo = function (respuesta) {
+                        console.log(respuesta);
+                    };
+                    fajax(url, parametro1, metodo);
+                }
+            } else {
+
+                var url = "CrearLibro";
+                var metodo = function (respuesta) {
+                    console.log(respuesta);
+                };
+                fajax(url, parametro, metodo);
+            }
+
+        };
+        fajax(url, parametro, metodo);
+        console.log(parametro);
+//            }
+//        });
+    });
+    function LimpiarLibro() {
+        $("#Risbn").val("");
+        $("#RTituo").val("");
+        $("#resenaLibro").val("");
+        $("#ListaAutores").val("");
+        $("#ListaEditores").val("");
+        $("#ListaTema").val("");
+        $("#ListaPublica").val("");
+        $("#ListaCategoria").val("");
+        $("#fileToUpload").val("");
+    }
+    $("#btnRegistrarLibro").click(function () {
+        LimpiarLibro();
+    });
+
+    function ActualizarLibro() {
+        var formulario = {
+
+        };
+        var url = "../Controlador/Libro/ModificarAutor.php";
+        var parametro = myjson(formulario);
+        var metodo = function (respuesta) {
+            console.log(respuesta);
+            var data = $.parseJSON(respuesta);
+            if (data.sucess == 'ok') {
+                alert("el usuario se registro con exito");
+                LimpiarVideoBeam();
+            } else {
+                alert("No se pude registar al usuario");
+            }
+        };
+        fajax(url, parametro, metodo);
+    }
+    function EliminarLibro() {
+        $("#registar_VideoBeam").validate({
+            rules: {
+                Risbn: {
+                    required: true,
+                    number: true,
+                    digits: true,
+                    minlength: 1
+                }
+            }, submitHandler: function () {
+                var formulario = {
+                    isbn: $("#Risbn").val()
+					};
+                var url = "../Controlador/Libro/EliminarLibro.php";
+                var parametro = myjson(formulario);
+                var metodo = function (respuesta) {
+                    console.log(respuesta);
+                    var data = $.parseJSON(respuesta);
+                    if (data.sucess == 'ok') {
+                        alert("se elimino con exito");
+                        LimpiarVideoBeam();
+                    } else {
+                        alert("El video Beam no existe");
+                    }
+                };
+                fajax(url, parametro, metodo);
+            }
+        });
+    }
+    $("#btnBuscarLibro ").click(function () {
+        BuscarLibro();
+    });
+    function BuscarLibro() {
+        var formulario = {
+            isbn: $("#Risbn").val()
+        };
+        var url = "../Controlador/Libro/ModificarAutor.php";
+        var parametro = myjson(formulario);
+        var metodo = function (respuesta) {
+            console.log(respuesta);
+            var data = $.parseJSON(respuesta);
+            if (data.sucess == 'ok') {
+                alert("se elimino con exito");
+                LimpiarVideoBeam();
+            } else {
+                alert("El video Beam no existe");
+            }
+        };
+        fajax(url, parametro, metodo);
+    }
 //----------------------------------------------------------//
 
 //function RegistrarLibro() {
@@ -1330,7 +1484,7 @@ $(document).ready(function () {
 //        autor: $("#Autores").val(),
 //        editorial: $("#ListaEditores").val()
 //};
-//        var url = "../Controlador/Libro/CrearLibro.php";
+//        var url = "CrearLibro";
 //        var parametro = myjson(formulario);
 //        var metodo = function (respuesta) {
 //        console.log(respuesta);
@@ -1344,62 +1498,7 @@ $(document).ready(function () {
 //        };
 //        fajax(url, parametro, metodo);
 //}
-//function LimpiarLibro() {
-//$("#Risbn").val("");
-//        $("#RTituo").val("");
-//        $("#RCategoria").val("");
-//        $("#resenaLibro").val("");
-//        $("#Autores").val("");
-//        $("#ListaEditores").val("");
-//}
-//function ActualizarLibro() {
-//var formulario = {
-//NombreAutor: $("#NombreAutor").val(),
-//        NotaAutor: $("#observacionesAutor").val()
-//};
-//        var url = "../Controlador/Libro/ModificarAutor.php";
-//        var parametro = myjson(formulario);
-//        var metodo = function (respuesta) {
-//        console.log(respuesta);
-//                var data = $.parseJSON(respuesta);
-//                if (data.sucess == 'ok') {
-//        alert("el usuario se registro con exito");
-//                LimpiarVideoBeam();
-//        } else {
-//        alert("No se pude registar al usuario");
-//        }
-//        };
-//        fajax(url, parametro, metodo);
-//}
-//function EliminarLibro() {
-//$("#registar_VideoBeam").validate({
-//rules: {
-//idvideoBeam: {
-//required: true,
-//        number: true,
-//        digits: true,
-//        minlength: 1
-//}
-//}, submitHandler: function () {
-//var formulario = {
-//idVideoBeam: $("#idvideoBeam").val()
-//};
-//        var url = "../Controlador/VideoBeam/EliminarVideoBeam.php";
-//        var parametro = myjson(formulario);
-//        var metodo = function (respuesta) {
-//        console.log(respuesta);
-//                var data = $.parseJSON(respuesta);
-//                if (data.sucess == 'ok') {
-//        alert("se elimino con exito");
-//                LimpiarVideoBeam();
-//        } else {
-//        alert("El video Beam no existe");
-//        }
-//        };
-//        fajax(url, parametro, metodo);
-//}
-//});
-//}
+
 //function BuscarLibroPrestamo() {
 //
 //$("#btnBuscarPrestamo").click(function () {
@@ -1555,9 +1654,7 @@ $(document).ready(function () {
 ////        $("#btnEliminarLibro ").click(function () {
 ////EliminarLibro();
 ////        });
-////        $("#btnBuscarLibro ").click(function () {
-////BuscarLibro();
-////        });
+////        
 //        $("#btnBuscarPrestamo").click(function () {
 //BuscarLibroPrestamo();
 //        });   

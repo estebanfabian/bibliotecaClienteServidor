@@ -4,18 +4,100 @@ class LibroDAO {
 
     function CrearLibro($array) {
 
+
+        // echo $array;
+//        $libroVo = new LibroVO;
+//        $libroVo->setIsbn($array->autor);
+//        $contenido = $libroVo->getIsbn();
+//        //echo $contenido[1];
+//        for ($i = 0; $i < count($contenido); $i++) {
+//            echo $contenido[$i]." ";
+//        }
         if ($this->Filtro($array) == "ok") {
             $respuesta = array();
             $respuesta["sucess"] = "Reguistro duplicado";
             echo json_encode($respuesta);
         } else {
 
-            $sql = 'INSERT INTO `tbl_libro`(`isbn`, `idEditorial`, `titulo`, `categoriaLibro`, `resena`) VALUES (?, ?, ?, ?, ?)';
+            $sql = 'INSERT INTO `tbl_libro`(`isbn`, `idEditorial`, `titulo`, `resena`,  `imagen`) VALUES (?,?,?,?,?);';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
 
-            $this->respuesta($conn, $this->insert($array, $stmp));
+            $libroVo = new LibroVO;
+            $autorVo = new AutorVO;
+            $editorialVo = new EditorialVO;
+            $temaVo = new TemaVO;
+            $lpulica = new LpublicaVo;
+            $categoriaVo = new CategoriaVO();
+
+            $libroVo->setIsbn($array->isbn);
+            $libroVo->setTitulo($array->titulo);
+            $libroVo->setResena($array->resena);
+            $autorVo->setIdAutor($array->autor);
+            $editorialVo->setIdEditorial($array->editorial);
+            $temaVo->setIdTema($array->tema);
+            $lpulica->setId_lista($array->lPublica);
+            $categoriaVo->setIdCategoria($array->lCategoria);
+            $libroVo->setImagen($array->imagen);
+
+            $isbn = $libroVo->getIsbn();
+            $titulo = $libroVo->getTitulo();
+            $resena = $libroVo->getResena();
+            $autor = $autorVo->getIdAutor();
+            $editorial = $editorialVo->getIdEditorial();
+            $tema = $temaVo->getIdTema();
+            $lPublica = $lpulica->getId_lista();
+            $lCategoria = $categoriaVo->getIdCategoria();
+            $imagen = $libroVo->getImagen();
+
+            $stmp->bind_param("sisss", $isbn, $editorial, $titulo, $resena, $imagen);
+
+            $respuesta = array();
+            if ($stmp->execute() == 1) {
+                $respuesta["sucess"] = "ok";
+                $sql1 = 'INSERT INTO `tbl_libro_autor`( `idAutor`, `isbn`) VALUES (?,?)';
+                $stmp = $conn->prepare($sql1);
+                for ($i = 0; $i < count($autor); $i++) {
+                    $stmp->bind_param("is", $autor[$i], $isbn);
+                    if ($stmp->execute() == 1) {
+                        $z = "si";
+                    }
+                }
+                $sql2 = 'INSERT INTO `tbl_libro_temas`( `idTema`, `isbn`) VALUES(?,?)';
+                $stmp = $conn->prepare($sql2);
+                for ($i = 0; $i < count($tema); $i++) {
+                    $stmp->bind_param("is", $tema[$i], $isbn);
+                    if ($stmp->execute() == 1) {
+                        $z = "si";
+                    }
+                }
+                $sql3 = 'INSERT INTO `tbl_libro_listapublica`( `id_lista`,`isbn`) VALUES (?,?)';
+                $stmp = $conn->prepare($sql3);
+                for ($i = 0; $i < count($lPublica); $i++) {
+                    $stmp->bind_param("is", $lPublica[$i], $isbn);
+                    if ($stmp->execute() == 1) {
+                        $z = "si";
+                    }
+                }
+                $sql4 = 'INSERT INTO `tbl_libro_categoria`(  `idCategoria`,`isbn`) VALUES(?,?)';
+                $stmp = $conn->prepare($sql4);
+                for ($i = 0; $i < count($lCategoria); $i++) {
+                    $stmp->bind_param("is", $lCategoria[$i], $isbn);
+                    if ($stmp->execute() == 1) {
+                        $z = "si";
+                    }
+                }
+                
+            } else {
+                $respuesta["sucess"] = "no";
+            }
+
+            $stmp->close();
+            $conn->close();
+            echo json_encode($respuesta);
+
+            //    $this->respuesta($conn, $this->insert($array, $stmp));
         }
     }
 
@@ -53,7 +135,7 @@ class LibroDAO {
         $libroVo = new LibroVO;
         $libroVo->setIsbn($array->isbn);
 
-        $sql = 'call  eliminarLibro (?);';
+        $sql = 'call miprocesos (7,?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -65,7 +147,7 @@ class LibroDAO {
     }
 
     public function ListarXid($array) {
-        $sql = 'call ListarXid (?);';
+        $sql = 'call miprocesos (12,?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -102,7 +184,7 @@ class LibroDAO {
     }
 
     public function ListarXtitulo($array) {
-        $sql = 'call ListarXtitulo (?) ;';
+        $sql = 'call miprocesos1 (4,?) ;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -142,7 +224,7 @@ class LibroDAO {
     }
 
     public function ListarXautor($array) {
-        $sql = 'call ListarXautor (?);';
+        $sql = 'call miprocesos1 (2,?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -158,7 +240,7 @@ class LibroDAO {
     }
 
     public function ListarXtema($array) {
-        $sql = 'call ListarXtema (?);';
+        $sql = 'call miprocesos1 (5,?);';
         $BD = new ConectarBD();
 
         $conn = $BD->getMysqli();
@@ -176,7 +258,7 @@ class LibroDAO {
     }
 
     public function ListarXeditorial($array) {
-        $sql = 'call ListarXeditorial (?);';
+        $sql = 'call miprocesos1 (3,?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -192,7 +274,7 @@ class LibroDAO {
     }
 
     public function ListarXfacultad($array) {
-        $sql = 'call ListarXfacultad (?;)';
+        $sql = 'call miprocesos1 (6,?;)';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -208,7 +290,7 @@ class LibroDAO {
     }
 
     public function ListarXPortada($array) {
-        $sql = 'call ListarXPortada (?);';
+        $sql = 'call miprocesos (13);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -342,23 +424,76 @@ class LibroDAO {
 
     function insert($array, $stmp) {
         $libroVo = new LibroVO;
+        $autorVo = new AutorVO;
+        $editorialVo = new EditorialVO;
+        $temaVo = new TemaVO;
+        $lpulica = new LpublicaVo;
+        $categoriaVo = new CategoriaVO();
+
         $libroVo->setIsbn($array->isbn);
-        $libroVo->setIdEditorial($array->editorial);
         $libroVo->setTitulo($array->titulo);
         $libroVo->setCategoriaLibro($array->categoriaLibro);
         $libroVo->setResena($array->resena);
-//        $libroVo->setImagen($array->imagen);
+        $autorVo->setIdAutor($array->autor);
+        $editorialVo->setIdEditorial($array->editorial);
+        $temaVo->setIdTema($array->tema);
+        $lpulica->setId_lista($array->lPublica);
+        $categoriaVo->setIdCategoria($array->lCategoria);
+        $libroVo->setImagen($array->imagen);
 
         $isbn = $libroVo->getIsbn();
         $titulo = $libroVo->getTitulo();
         $editorial = $libroVo->getIdEditorial();
-        $categoriaLibro = $libroVo->getCategoriaLibro();
         $resena = $libroVo->getResena();
-//        $imagen = $libroVo->getImagen();
+        $imagen = $libroVo->getImagen();
 
-        $stmp->bind_param("sisss", $isbn, $editorial, $titulo, $categoriaLibro, $resena);
+        $stmp->bind_param("sisss", $isbn, $editorial, $titulo, $resena, $imagen);
 
         return $stmp;
+    }
+
+    function ListarCatalogo() {
+        $sql = "SELECT * FROM `listacategoria`";
+
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $stmp->execute();
+
+        $stmp->bind_result($NombreAutor, $Nota);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["NombreAutor"] = $NombreAutor;
+            $tmp["Nota"] = $Nota;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
+    function ListarPublida() {
+        $sql = "SELECT * FROM `lista publica`";
+
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $stmp->execute();
+
+        $stmp->bind_result($NombreAutor, $Nota);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["NombreAutor"] = $NombreAutor;
+            $tmp["Nota"] = $Nota;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
     }
 
 }

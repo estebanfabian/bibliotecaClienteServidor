@@ -5,9 +5,7 @@
  * */
 
 /**
- * Esta clase permite reunir los datos que seran enviados en una query para poder realizar 
- * consultas , insertar , actualizar o eliminar información como se requiera de los video beam
- * 
+ * Esta clase permite reunir los datos que serán enviados en una query para poder realizar consultas, insertar, actualizar o eliminar información como se requiera de los video beams.
  * 
  * @package DAO
  * @category Educativo
@@ -35,7 +33,7 @@ class VideoBeamDAO {
             echo json_encode($respuesta);
         } else {
 
-            $sql = 'call insertVideoBeam(?,?,?,?,?,?);';
+            $sql = 'call videoBeam(2,?,?,?,?,?,?);';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
@@ -53,7 +51,7 @@ class VideoBeamDAO {
      * */
     function ModificarVideoBeam($array) {
 
-        $sql = 'call actualizarVideoBeam (?,?,?,?,?,?);';
+        $sql = 'call videoBeam (1,?,?,?,?,?,?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -93,7 +91,7 @@ class VideoBeamDAO {
             $VideoBeamVo = new VideoBeamVO();
             $VideoBeamVo->setIdVideoBeam($array->idVideoBeam);
 
-            $sql = 'call eliminarVideoBeam (?);';
+            $sql = 'call miprocesos (5,?);';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
@@ -117,7 +115,7 @@ class VideoBeamDAO {
         $VideoBeamVo = new VideoBeamVO();
         $VideoBeamVo->setIdVideoBeam($array->idVideoBeam);
 
-        $sql = "call buscarVideoBean (?);";
+        $sql = "call miprocesos (9,?);";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -156,7 +154,7 @@ class VideoBeamDAO {
         $VideoBeamVo = new VideoBeamVO();
         $VideoBeamVo->setIdVideoBeam($array->idVideoBeam);
 
-        $sql = "call verificacionVideoBeam (?);";
+        $sql = "call miprocesos (1,?);";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -222,7 +220,7 @@ class VideoBeamDAO {
         } else {
 
 
-            $sql = 'call insertVideoBeam(?,?,?,?,?,?);';
+            $sql = 'call videoBeam(2,?,?,?,?,?,?);';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);

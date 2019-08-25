@@ -5,7 +5,7 @@
  * */
 
 /**
- * Esta clase almacena la informacíon de los usuario 
+ * Esta clase almacena la información de los usuarios. 
  *
  * 
  * @package VO

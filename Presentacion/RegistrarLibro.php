@@ -3,7 +3,8 @@
  * Long Desc 
  * */
 /**
- * Capa de presentación de para Registrar los libros , temas  y autores
+ * Capa de presentación de para Registrar ,buscar modificar y eliminar ;
+ *los libros ,  categoria, temas  y autores
  * 
  * @category Educativo
  * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
@@ -24,12 +25,13 @@ session_start();
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
         <script src="../assets/js/script.min.js?h=fedf14a447758dc0b3c6f999b9fc334b"></script>
-        <script src="../assets/js/localization/messages_es.js" type="text/javascript"></script>
+<!--        <script src="../assets/js/localization/messages_es.js" type="text/javascript"></script>-->
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/additional-methods.js"></script>      
         <link rel="stylesheet" href="../assets/css/styles.min.css?h=313b471bd9c649213fb455372265f1e2">
         <link rel="stylesheet" href="../docs/css/prettify.min.css" type="text/css">
         <script type="text/javascript" src="../docs/js/prettify.min.js"></script>
+        <script src="https://kit.fontawesome.com/5bfd358a3c.js"></script>
 
         <link rel="stylesheet" href="../dist/css/bootstrap-multiselect.css" type="text/css">
         <script type="text/javascript" src="../dist/js/bootstrap-multiselect.js"></script>
@@ -268,25 +270,43 @@ session_start();
                                     <label for="inputEmail4">Titulo (*)</label>
                                     <input type="tetx" class="form-control" id="RTituo" name="RTituo" placeholder="Titulo" >
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputEmail4">Categoria (*)</label>
-                                    <input type="tetx" class="form-control" id="RCategoria" name="RCategoria" placeholder="Categoria" >
-                                </div>
-
-
-                                <div class="form-group col-md-4">
-                                    <label for="inputEmail4">Autor  (*)</label>
-                                    <select name="CableUSB" class="form-control" id="Autores">
-                                        <option value="" disabled selected>Autores</option>
-                                    </select>
-                                </div>
 
                                 <div class="form-group col-md-4">
                                     <label for="inputEmail4">Editorial (*)</label>
-                                    <select name="CableUSB" class="form-control" id="ListaEditores">
+                                    <select  class="form-control" id="ListaEditores" name  ="ListaEditores" >
                                         <option value="" disabled selected>Editorial</option>
                                     </select>
-                                </div>    
+                                </div> 
+                                <div class="form-group col-md-4">
+                                    <label for="inputEmail4">Lista Publica  (*)</label>
+                                    <br>
+                                    <select id="ListaPublica" name  ="ListaPublica" multiple="multiple">
+                                    </select>
+                                </div> 
+                                <div class="form-group col-md-4">
+                                    <label for="inputEmail4">Lista Categoria  (*)</label>
+                                    <br>
+                                    <select id="ListaCategoria" name ="ListaCategoria" multiple="multiple">
+                                    </select>
+                                </div>                                
+                                <div class="form-group col-md-4">
+                                    <label for="inputEmail4">Autor (*)</label>
+                                    <br>
+                                    <select id="ListaAutores" name ="ListaAutores" multiple="multiple">
+                                    </select>
+                                </div> 
+
+                                <div class="form-group col-md-4">
+                                    <label for="inputEmail4">Tema (*)</label>
+                                    <br>
+                                    <select id="ListaTema" name="ListaTema" multiple="multiple">
+                                    </select>   
+                                </div> 
+
+                                <div class="form-group col-md-3">
+                                    <label for="exampleInputFile">Seleccion un archivo</label>
+                                    <input type="file"  id="fileToUpload" >
+                                </div>
 
                                 <div class="form-group col-md-3">
                                     <label for="inputPassword4">Reseña  (*)</label>               
@@ -372,33 +392,7 @@ session_start();
                         <button  class="btn btn-primary" id="btnActualizaTema">Actualizar</button>
                         <button  class="btn btn-primary" id="btnEliminarTema">Eliminar</button>
                         <button  class="btn btn-primary" id="btnBuscarTema">Buscar</button>
-                    </form>
-
-                    <form method="post" id="framework_form">
-
-                        <div class="example">
-                            <script type="text/javascript">
-                                $(document).ready(function () {
-                                    $('#example-dropUp').multiselect({
-                                        enableFiltering: true,
-                                        includeSelectAllOption: true,
-                                        maxHeight: 400,
-                                        dropUp: true
-                                    });
-                                });
-                            </script>
-                            <select id="example-dropUp" multiple="multiple">
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
-                                <option data-role="divider"></option>
-                                <option value="4">Option 4</option>
-                                <option value="5">Option 5</option>
-                                <option value="6">Option 6</option>
-                            </select>
-                        </div>
-                    </form>
-
+                    </form>                
                 </div>
                 <div class="col-md-3">
                     <div class="btn-group-vertical" role="group" aria-label="Basic example">
@@ -447,6 +441,14 @@ session_start();
                         var local = data[i];
                         item(local, i);
                     }
+                    $('#ListaAutores').multiselect('destroy');
+                    $('#ListaAutores').multiselect({
+                        enableFiltering: true,
+                        includeSelectAllOption: true,
+                        maxHeight: 450,
+                        dropUp: true
+                    });
+                    $("#ListaAutores").multiselect('refresh');
                 };
                 fajax(url, parametro, metodo);
             }
@@ -455,7 +457,6 @@ session_start();
                 var url = "ListarEditorial";
                 var parametro = "";
                 var metodo = function (respuesta) {
-                    console.log(respuesta);
                     var data = $.parseJSON(respuesta);
                     var limite = data.length;
                     for (var i = 0; i < limite; i++) {
@@ -465,16 +466,102 @@ session_start();
                 };
                 fajax(url, parametro, metodo);
             }
+
+
+            function ListarPublica() {
+                var url = "ListarPublica";
+                var parametro = "";
+                var metodo = function (respuesta) {
+                    var data = $.parseJSON(respuesta);
+                    var limite = data.length;
+                    for (var i = 0; i < limite; i++) {
+                        var local = data[i];
+                        item4(local, i);
+                    }
+                    $('#ListaPublica').multiselect('destroy');
+                    $('#ListaPublica').multiselect({
+                        enableFiltering: true,
+                        includeSelectAllOption: true,
+                        maxHeight: 400,
+                        dropUp: true
+                    });
+                    $("#ListaPublica").multiselect('refresh');
+                };
+                fajax(url, parametro, metodo);
+            }
+
+            function ListarCatalogo() {
+                var url = "ListarCategoria";
+                var parametro = "";
+                var metodo = function (respuesta) {
+                    var data = $.parseJSON(respuesta);
+                    var limite = data.length;
+                    for (var i = 0; i < limite; i++) {
+                        var local = data[i];
+                        item3(local, i);
+                    }
+                    $('#ListaCategoria').multiselect('destroy');
+                    $('#ListaCategoria').multiselect({
+                        enableFiltering: true,
+                        includeSelectAllOption: true,
+                        maxHeight: 400,
+                        dropUp: true
+                    });
+                    $("#ListaCategoria").multiselect('refresh');
+                };
+                fajax(url, parametro, metodo);
+            }
+
+            function ListarTema() {
+                var url = "ListarTema";
+                var parametro = "";
+                var metodo = function (respuesta) {
+                    var data = $.parseJSON(respuesta);
+                    var limite = data.length;
+                    for (var i = 0; i < limite; i++) {
+                        var local = data[i];
+                        item2(local, i);
+                    }
+                    $('#ListaTema').multiselect('destroy');
+                    $('#ListaTema').multiselect({
+                        enableFiltering: true,
+                        includeSelectAllOption: true,
+                        maxHeight: 400,
+                        dropUp: true
+                    });
+                    $("#ListaTema").multiselect('refresh');
+                };
+                fajax(url, parametro, metodo);
+            }
             function item(tmp) {
-                $("#Autores").append("<option value=" + tmp.NombreAutor + ">" + tmp.Nota + "</option>");
+                $("#ListaAutores").append("<option value=" + tmp.NombreAutor + ">" + tmp.Nota + "</option>");
             }
             function item1(tmp) {
                 $("#ListaEditores").append("<option value=" + tmp.NombreAutor1 + ">" + tmp.Nota1 + "</option>");
             }
+            function item2(tmp) {
+                $("#ListaTema").append("<option value=" + tmp.NombreAutor + ">" + tmp.Nota + "</option>");
+            }
+            function item3(tmp) {
+                $("#ListaCategoria").append("<option value=" + tmp.NombreAutor + ">" + tmp.Nota + "</option>");
+            }
+            function item4(tmp) {
+                $("#ListaPublica").append("<option value=" + tmp.NombreAutor + ">" + tmp.Nota + "</option>");
+            }
             ListarEditorial();
             ListarAutores();
+            ListarTema();
+            ListarCatalogo();
+            ListarPublica();
         });
-
     </script> 
-
+    <style>
+        .formulario{
+            color: black;
+            background-color: white;
+        }
+        .a{
+            color: black;
+        }
+    </style> 
 </html>

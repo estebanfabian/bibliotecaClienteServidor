@@ -4,7 +4,7 @@
  * */
 /**
  * Capa de presentación de mision y vision donde se esta la mision y vision que tiene
- * la biblioteca de la Corporación Universitaroa Republicana. 
+ * la biblioteca de la Corporación Universitaria Republicana. 
  * 
  * @category Educativo
  * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>

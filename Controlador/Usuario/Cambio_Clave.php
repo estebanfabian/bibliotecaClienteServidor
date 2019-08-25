@@ -8,7 +8,7 @@
  * entre la capa de interface y la capa de datos para poder realizar el cambio de contraseña. 
  *
  * 
- * @package VO
+ * @package Controlador
  * @category Educativo
  * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
  * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 

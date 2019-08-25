@@ -3,7 +3,7 @@
  * Long Desc 
  * */
 /**
- * Capa de presentación de reservar libro donde el usuario puede realizar la reserva de un video beam 
+ * Capa de presentación de reservar libro donde el usuario puede realizar la reserva de un libro 
  * pero solo  un 2 semanas maximo de plazo.
  * 
  * @category Educativo

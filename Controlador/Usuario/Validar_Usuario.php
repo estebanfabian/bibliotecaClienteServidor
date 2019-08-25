@@ -9,7 +9,7 @@
  * al sistemas.
  *
  * 
- * @package VO
+ * @package Controlador
  * @category Educativo
  * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
  * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 

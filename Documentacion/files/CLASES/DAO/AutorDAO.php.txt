@@ -113,7 +113,7 @@ class AutorDao {
 
     function Filtro($array) {
 
-        $sql = 'call verificacionTema (?);';
+        $sql = '';
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();

@@ -29,6 +29,17 @@ RewriteRule CrearAutor$ Controlador/Libro/CrearAutor.php
 RewriteRule BuscarAutor$ Controlador/Libro/BuscarAutor.php
 RewriteRule EliminarAutor$ Controlador/Libro/EliminarAutor.php
 RewriteRule ModificarAutor$ Controlador/Libro/ModificarAutor.php
+RewriteRule ListarAutores$ Controlador/Libro/ListarAutores.php
+RewriteRule ListarEditorial$ Controlador/Libro/ListarEditorial.php
+RewriteRule ListarTema$ Controlador/Libro/ListarTema.php
+RewriteRule ListarPublica$ Controlador/Libro/ListarPublica.php
+RewriteRule ListarCategoria$ Controlador/Libro/ListarCategoria.php
+RewriteRule SubirPortada$ Controlador/Libro/SubirPortada.php
+RewriteRule CrearEditorial$ Controlador/Libro/CrearEditorial.php
+RewriteRule BuscarEditorial$ Controlador/Libro/BuscarEditorial.php
+RewriteRule EliminarEditorial$ Controlador/Libro/EliminarEditorial.php
+RewriteRule ModificarEditorial$ Controlador/Libro/ModificarEditorial.php
+RewriteRule CrearLibro$ Controlador/Libro/CrearLibro.php
 
 #-------------------------------------------------------------------------------
 RewriteRule ^gato.jsp$ js/MiLogica.js
@@ -47,3 +58,6 @@ RewriteRule reserva$ Controlador/prestamo/reservar_libro.php
 RewriteRule Suprimir$ Controlador/prestamo/Cancelar_prestamo.php
 RewriteRule Renovacion$ Controlador/prestamo/Renovacion_libro.php
 #-------------------------------------------------------------------------------
+
+#Serve Alternate Default Index Page
+#DirectoryIndex presentacion/index.php

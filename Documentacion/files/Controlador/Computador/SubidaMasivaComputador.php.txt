@@ -5,10 +5,10 @@
  * */
 /**
  * Cotrolador del acceso que lleva es encargado de servir de puente de comunicacion 
- * entre la capa de interface y la capa de datos para poder subir un archivo cvs y realizar el registro de la informacion
+ * entre la capa de interface y la capa de datos para poder subir un archivo cvs y realizar el registro de la informacion de los computadores.
  *
  * 
- * @package VO
+ * @package Controlador
  * @category Educativo
  * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
  * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 

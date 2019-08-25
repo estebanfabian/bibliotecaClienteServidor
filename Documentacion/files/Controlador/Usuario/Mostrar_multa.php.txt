@@ -6,7 +6,7 @@
 /**
  * Cotrolador del acceso que lleva es encargado de servir de puente de comunicacin 
  * entre la capa de interface y la capa de datos para poder mostrar el valor de la multa que tenga el usuario
- * en el sistema
+ * en el sistema.
  *
  * 
  * @package VO

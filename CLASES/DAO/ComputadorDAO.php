@@ -5,9 +5,7 @@
  * */
 
 /**
- * Esta clase permite reunir los datos que seran enviados en una query para poder realizar 
- * consultas , insertar , actualizar o eliminar información como se requiera de los computadores
- * 
+ *Esta clase permite reunir los datos que serán enviados en una query para poder realizar consultas , insertar , actualizar o eliminar información como se requiera de los computadores.
  * 
  * @package DAO
  * @category Educativo
@@ -33,7 +31,7 @@ class ComputadorDAO {
             $respuesta["sucess"] = "Reguistro duplicado";
             echo json_encode($respuesta);
         } else {
-            $sql = 'call insetComputador (?,?,?,?);';
+            $sql = 'call computador (2,?,?,?,?);';
 
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
@@ -60,7 +58,7 @@ class ComputadorDAO {
         $computadorVo->setObservaciones($array->observaciones);
         $computadorVo->setCargadorId($array->cargadorId);
 
-        $sql = 'call actualizarComputador (?,?,?,?);';
+        $sql = 'call computador (1,?,?,?,?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -92,7 +90,7 @@ class ComputadorDAO {
             $computadorVo = new ComputadorVO();
             $computadorVo->setIdcomputador($array->idcomputador);
 
-            $sql = 'call eliminarComputador (?);';
+            $sql = 'call miprocesos (8,?);';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
@@ -134,7 +132,7 @@ class ComputadorDAO {
      * @return array() Se envia la respuesta  toda la informaciòn del computador como  fabricante , estado y observaciones 
      * */
     function buscar($array) {
-        $sql = "call buscarComputador (?);";
+        $sql = "call miprocesos (11,?);";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -167,7 +165,7 @@ class ComputadorDAO {
         $computadorVo = new ComputadorVO();
         $computadorVo->setIdcomputador($array->idcomputador);
 
-        $sql = "call verificacionComputador (?);";
+        $sql = "call miprocesos (3,?);";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -201,7 +199,7 @@ class ComputadorDAO {
             $respuesta["sucess"] = "Reguistro duplicado";
             echo json_encode($respuesta);
         } else {
-            $sql = 'call insetComputador (?,?,?,?);';
+            $sql = 'call computador (2,?,?,?,?);';
 
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();

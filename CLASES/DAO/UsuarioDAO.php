@@ -78,7 +78,7 @@ class UsuarioDAO {
             $respuesta["sucess"] = "no";
             echo json_encode($respuesta);
         } else {
-            $sql = 'call eliminarUsuario (?)';
+            $sql = 'call miprocesos (6,?)';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
@@ -94,7 +94,7 @@ class UsuarioDAO {
     }
 
     function BuscarUsuario($array) {
-        $sql = "CALL buscarUsuario(?)";
+        $sql = "CALL miprocesos (10,?)";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -142,7 +142,7 @@ class UsuarioDAO {
 
     public function Login($array) {
 
-        $sql = "CALL login(?,?)";
+        $sql = "CALL usuario(1,?,?)";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -174,7 +174,7 @@ class UsuarioDAO {
 
     function Correo($array) {
 
-        $sql = 'call correoUsuario (?,?)';
+        $sql = 'call usuario (2,?,?)';
 
         $Usuariovo = new UsuarioVO();
         $Usuariovo->setCodigo($array->codigo);
@@ -268,7 +268,7 @@ class UsuarioDAO {
 
     public function Mis_multa($array) {
 
-        $sql = "call multaUsuario (?);";
+        $sql = "call miprocesos (4,?);";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -292,7 +292,7 @@ class UsuarioDAO {
 
     public function CambioClave($array) {
 
-        $sql = 'call cambioClaveUsuario (?,?)';
+        $sql = 'call usuario (3,?,?)';
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
@@ -345,40 +345,12 @@ class UsuarioDAO {
         echo json_encode($respuesta);
     }
 
-    function intento($array) {
-
-        $sql = "CALL intento (?)";
-        $BD = new ConectarBD();
-        $conn = $BD->getMysqli();
-        $stmp = $conn->prepare($sql);
-        $Usuariovo = new UsuarioVO();
-        $Usuariovo->setCodigo($array->codigo);
-        $codigo = $Usuariovo->getCodigo();
-        $stmp->bind_param("i", $codigo);
-        $this->respuesta($conn, $stmp);
-    }
-
-    function intentoExitoso($array) {
-
-        $sql = "CALL intentoExitoso (?)";
-        $BD = new ConectarBD();
-        $conn = $BD->getMysqli();
-        $stmp = $conn->prepare($sql);
-
-        $Usuariovo = new UsuarioVO();
-        $Usuariovo->setCodigo($array->codigo);
-        $codigo = $Usuariovo->getCodigo();
-
-        $stmp->bind_param("i", $codigo);
-        $this->respuesta($conn, $stmp);
-    }
-
     function Filtro($array) {
 
         $Usuariovo = new UsuarioVO();
         $Usuariovo->setCodigo($array->codigo);
 
-        $sql = 'call verificacionUsuario (?)';
+        $sql = 'call miprocesos (2,?)';
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
