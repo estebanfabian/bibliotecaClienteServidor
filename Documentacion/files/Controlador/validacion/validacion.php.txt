@@ -1,0 +1,26 @@
+<?php
+
+header('Access-Control-Allow-Origin: *');
+require '../../CLASES/BD/MySql.php';
+require '../../CLASES/BD/datosbd.php';
+require '../../CLASES/VO/LibroVO.php';
+require '../../CLASES/DAO/LibroDAO.php';
+
+$LibroDAO = new LibroDAO();
+$resultado = $LibroDAO->validacion($local);
+
+
+for ($index = 0; $index < count($resultado); $index++) {
+    echo $resultado[$index][0];
+    echo $resultado[$index][1];
+    if (file_exists("C:/xampp/htdocs/ejemplo/assets/img/img/tmp/" . $resultado[$index][1] . "") == true) {
+        echo "<p>El archivo existe</p>";
+        rename("C:/xampp/htdocs/ejemplo/assets/img/img/tmp/" . $resultado[$index][0] . ".jpg", "C:/xampp/htdocs/ejemplo/assets/img/img/libro/" . $resultado[$index][1] . "");
+        $LibroDAO->ModificarImagen($resultado[$index][0],$resultado[$index][1]);
+    } else {
+        echo "<p>El archivo no se ha encontrado</p>";
+    }
+}
+
+// Eliminar el archivo:
+    //unlink("datos-4.txt");

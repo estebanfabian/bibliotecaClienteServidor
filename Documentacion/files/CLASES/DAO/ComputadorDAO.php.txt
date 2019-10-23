@@ -90,7 +90,7 @@ class ComputadorDAO {
             $computadorVo = new ComputadorVO();
             $computadorVo->setIdcomputador($array->idcomputador);
 
-            $sql = 'call miprocesos (8,?);';
+            $sql = 'call miprocesos1 (13,?);';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
@@ -132,7 +132,7 @@ class ComputadorDAO {
      * @return array() Se envia la respuesta  toda la informaciòn del computador como  fabricante , estado y observaciones 
      * */
     function buscar($array) {
-        $sql = "call miprocesos (11,?);";
+        $sql = "call miprocesos1 (24,?);";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -165,7 +165,7 @@ class ComputadorDAO {
         $computadorVo = new ComputadorVO();
         $computadorVo->setIdcomputador($array->idcomputador);
 
-        $sql = "call miprocesos (3,?);";
+        $sql = "call miprocesos1 (16,?);";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);

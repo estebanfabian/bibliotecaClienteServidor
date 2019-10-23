@@ -269,7 +269,7 @@ session_start();
                         </div>
                     </form>
                     <br>
-                    <table class="table table-bordered table-dark"  >
+                    <table  id = "PrestamoTabla" class="table table-bordered table-dark"  >
                         <thead>
                             <tr>
                                 <th scope="col">isbn</th>
@@ -290,7 +290,7 @@ session_start();
                         <?php if ($_SESSION) { ?>
                             <button type="button" id="CerrarSesion" class="btn btn-secondary" data-toggle="modal" data-target="#login-modal"> Cerrar sesión </button>
                         <?php } else { ?>
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat"> Iniciar sesión </button>
+                            <button  type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat"> Iniciar sesión </button>
                         <?php } ?>
                     </div>
                 </div>
@@ -303,3 +303,65 @@ session_start();
         </footer>
     </body>
 </html>
+<script>
+    function fajax(URL, parametros, metodo) {
+        $.ajax({
+            url: URL,
+            data: parametros,
+            type: 'post',
+            cache: false,
+            dataType: 'html',
+            processData: false,
+            contentType: false,
+            success: function (ZZx) {
+                metodo(ZZx);
+            },
+            error: function (xhr, status) {
+                alert("Existe un problema");
+            }
+        });
+    }
+    function catalogo() {
+        var url = "catalogo";
+        var parametro = "z";
+        var metodo = function (respuesta) {
+            var data = $.parseJSON(respuesta);
+            for (var i = 0; i < data.length; i++) {
+                tabla(data[i]);
+            }
+        };
+        fajax(url, parametro, metodo);
+    }
+    var myJson = new Array();
+    function tabla(tmp) {
+        var estr = $("<tr></tr>");
+        estr.append("<td>" + tmp.isbn + "</td>"
+                + "<td><img src=" + tmp.imagen + " width=100 height=100></td>"
+                + "<td><p> Titulo :" + tmp.titulo + "<br> Autor:" + tmp.autor + " Editorial:" + tmp.editorial + "</p></td>"
+                + "<td><button value=" + tmp.isbn + " type='sumit' id='btnResl' class='btn btn-success' onclick='reserva(" + tmp.isbn + ")'>Resevar</button></td>");
+        //validacionEstado(tmp));
+        $("#PrestamoTabla").append(estr);
+    }
+    function validacionEstado(tmp) {
+        if (tmp.estado == 'libre') {
+            return "<td class ='prestar' post ='" + tmp.isbn + "' >Libre</td>";
+        } else {
+            return "<td class ='no_diponible' post ='" + tmp.isbn + "' >No disponible</td>";
+        }
+    }
+    catalogo();
+    function reserva(entrada ) {
+     window.location="http://127.0.0.1/ejemplo/Presentacion/resevalibro.php?entrada="+entrada;
+//        console.log("holamundo");
+//        var url = "reserva";
+//        var parametro = myjson(entrada);
+//        var metodo = function (respuesta) {
+//        }
+//         fajax(url, parametro, metodo);
+    }
+       function myjson(formulario) {
+        myJson.push(formulario);
+        var myString = JSON.stringify(formulario);
+        return myString;
+    }
+</script>

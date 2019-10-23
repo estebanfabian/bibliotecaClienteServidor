@@ -91,7 +91,7 @@ class VideoBeamDAO {
             $VideoBeamVo = new VideoBeamVO();
             $VideoBeamVo->setIdVideoBeam($array->idVideoBeam);
 
-            $sql = 'call miprocesos (5,?);';
+            $sql = 'call miprocesos1 (18,?);';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
@@ -115,7 +115,7 @@ class VideoBeamDAO {
         $VideoBeamVo = new VideoBeamVO();
         $VideoBeamVo->setIdVideoBeam($array->idVideoBeam);
 
-        $sql = "call miprocesos (9,?);";
+        $sql = "call miprocesos1 (21,?);";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -154,7 +154,7 @@ class VideoBeamDAO {
         $VideoBeamVo = new VideoBeamVO();
         $VideoBeamVo->setIdVideoBeam($array->idVideoBeam);
 
-        $sql = "call miprocesos (1,?);";
+        $sql = "call miprocesos1 (14,?);";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);

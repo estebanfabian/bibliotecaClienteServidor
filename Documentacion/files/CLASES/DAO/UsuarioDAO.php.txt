@@ -78,7 +78,7 @@ class UsuarioDAO {
             $respuesta["sucess"] = "no";
             echo json_encode($respuesta);
         } else {
-            $sql = 'call miprocesos (6,?)';
+            $sql = 'call miprocesos1 (19,?)';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
@@ -94,7 +94,7 @@ class UsuarioDAO {
     }
 
     function BuscarUsuario($array) {
-        $sql = "CALL miprocesos (10,?)";
+        $sql = "CALL miprocesos1 (9,?)";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -142,7 +142,7 @@ class UsuarioDAO {
 
     public function Login($array) {
 
-        $sql = "CALL usuario(1,?,?)";
+        $sql = "CALL tema (5,?,?)";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -174,7 +174,7 @@ class UsuarioDAO {
 
     function Correo($array) {
 
-        $sql = 'call usuario (2,?,?)';
+        $sql = 'call tema (6,?,?)';
 
         $Usuariovo = new UsuarioVO();
         $Usuariovo->setCodigo($array->codigo);
@@ -268,7 +268,7 @@ class UsuarioDAO {
 
     public function Mis_multa($array) {
 
-        $sql = "call miprocesos (4,?);";
+        $sql = "call miprocesos1 (17,?);";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -292,7 +292,7 @@ class UsuarioDAO {
 
     public function CambioClave($array) {
 
-        $sql = 'call usuario (3,?,?)';
+        $sql = 'call tema (7,?,?)';
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
@@ -350,7 +350,7 @@ class UsuarioDAO {
         $Usuariovo = new UsuarioVO();
         $Usuariovo->setCodigo($array->codigo);
 
-        $sql = 'call miprocesos (2,?)';
+        $sql = 'call miprocesos1 (15,?)';
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();

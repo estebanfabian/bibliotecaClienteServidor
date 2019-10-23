@@ -303,3 +303,43 @@ session_start();
         </footer>
     </body>
 </html>
+<script>
+    function fajax(URL, parametros, metodo) {
+        $.ajax({
+            url: URL,
+            data: parametros,
+            type: 'post',
+            cache: false,
+            dataType: 'html',
+            processData: false,
+            contentType: false,
+            success: function (ZZx) {
+                metodo(ZZx);
+            },
+            error: function (xhr, status) {
+                alert("Existe un problema");
+            }
+        });
+    }
+    function catalogo() {
+        var url = "catalogo";
+        var parametro = "z";
+        var metodo = function (respuesta) {
+            console.log(respuesta);
+//            $("#login_username").val("");
+//            $("#login_password").val("");
+//            var data = $.parseJSON(respuesta);
+//            if (data.length === 0) {
+//                alert("El código o clave esta errada ");
+//                $('#login-modal').modal('hide');
+//            } else {
+//                $('body').removeClass('modal-open');
+//                $('.modal-backdrop').remove();
+//                iniciarSeccion(respuesta);
+//            }
+        };
+        fajax(url, parametro, metodo);
+    }
+    
+    catalogo();
+</script>

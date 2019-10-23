@@ -40,6 +40,12 @@ RewriteRule BuscarEditorial$ Controlador/Libro/BuscarEditorial.php
 RewriteRule EliminarEditorial$ Controlador/Libro/EliminarEditorial.php
 RewriteRule ModificarEditorial$ Controlador/Libro/ModificarEditorial.php
 RewriteRule CrearLibro$ Controlador/Libro/CrearLibro.php
+RewriteRule BuscaLibro$ Controlador/Libro/BuscaLibro.php
+RewriteRule EliminarLibro$ Controlador/Libro/EliminarLibro.php
+RewriteRule ModificarLibro$ Controlador/Libro/ModificarLibro.php
+RewriteRule SbMasivaLibro$ Controlador/Libro/SubidaMasivaLibro.php
+RewriteRule SubidaMasivaImagen$ Controlador/Libro/SubidaMasivaImagen.php
+RewriteRule catalogo$ Controlador/Libro/Catalogo.php
 
 #-------------------------------------------------------------------------------
 RewriteRule ^gato.jsp$ js/MiLogica.js
@@ -54,7 +60,7 @@ RewriteRule Portada$ Controlador/libro/Consultar_LibroXPortada.php
 RewriteRule Most_usuario$ Controlador/Usuario/Mostrar_Usuario.php
 RewriteRule Conta_res$ Controlador/prestamo/Contador_Reservas.php
 RewriteRule Tarjeta$ Controlador/Prestamo/Reserva_Tarjeta.php
-RewriteRule reserva$ Controlador/prestamo/reservar_libro.php
+RewriteRule reserva$ Controlador/prestamo/Reservar_libro.php
 RewriteRule Suprimir$ Controlador/prestamo/Cancelar_prestamo.php
 RewriteRule Renovacion$ Controlador/prestamo/Renovacion_libro.php
 #-------------------------------------------------------------------------------

@@ -24,6 +24,7 @@ class Datos {
      * @var string Almacena el nombre de hots al que se conectara
      */
     private $hostname = 'localhost';
+   // private $hostname = 'http://192.168.0.18/';
 
     /**
      * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
@@ -37,7 +38,7 @@ class Datos {
      * @since Revision: 1.0 
      * @var string Almacena la contraseña para el acceso a la base de datos
      */
-    private $clave = 'root';
+    private $clave = '';
 
     /**
      * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>

@@ -1,4 +1,20 @@
 <?php
+/**
+ * Long Desc 
+ * */
+
+/**
+ * Esta clase ejecuta las conusltas relacionadas con el autor
+ * realizando 
+ *
+ * 
+ * @package VO
+ * @category Educativo
+ * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+ * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
+ * @version Revision: 1.0 
+ * @access publico
+ * * */
 
 class AutorDao {
 
@@ -8,7 +24,7 @@ class AutorDao {
             $respuesta["sucess"] = "Reguistro duplicado";
             echo json_encode($respuesta);
         } else {
-            $sql = 'INSERT INTO `tbl_autor` ( `nombreAutor`, `notaAutor`) VALUES ( ?,?);';
+            $sql = 'call tema(3, ?,?);';
 
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
@@ -20,7 +36,7 @@ class AutorDao {
 
     function ModificarAutor($array) {
 
-        $sql = 'UPDATE `tbl_autor` SET  `notaAutor` = ? WHERE `nombreAutor` = ? ;';
+        $sql = 'call tema(4, ?,?) ;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -36,7 +52,7 @@ class AutorDao {
     }
 
     function EliminarAutor($array) {
-        $sql = 'DELETE FROM `tbl_autor` WHERE `nombreAutor`=?';
+        $sql = 'call miprocesos1 (10,?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -63,7 +79,7 @@ class AutorDao {
     }
 
     function buscarAutor($array) {
-        $sql = "SELECT `nombreAutor`,`notaAutor` FROM `tbl_autor` WHERE `nombreAutor`= ?";
+        $sql = "call miprocesos1 (11,?);";
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
@@ -113,7 +129,7 @@ class AutorDao {
 
     function Filtro($array) {
 
-        $sql = '';
+        $sql = 'call miprocesos1 (12,?)';
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
@@ -152,7 +168,7 @@ class AutorDao {
             $respuesta["sucess"] = "Reguistro duplicado";
             echo json_encode($respuesta);
         } else {
-            $sql = 'INSERT INTO `tbl_autor` ( `nombreAutor`, `notaAutor`) VALUES ( ?,?);';
+             $sql = 'call tema(3, ?,?);';
 
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();

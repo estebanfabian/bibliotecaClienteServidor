@@ -8,7 +8,7 @@ class EditorialDAO {
             $respuesta["sucess"] = "Reguistro duplicado";
             echo json_encode($respuesta);
         } else {
-            $sql = 'INSERT INTO `tbl_editorial` ( `nombreEditorial`, `direccionEditorial`, `telefonoEditorial`, `anoPublicacion`) VALUES ( ?,?, ?,?);';
+            $sql = 'call computador (3, ?,?, ?,?);';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
@@ -19,7 +19,7 @@ class EditorialDAO {
 
     function ModificarEditorial($array) {
 
-        $sql = 'UPDATE `tbl_editorial` SET ,`direccionEditorial`= ?,`telefonoEditorial`= ? ,`anoPublicacion`= ?  WHERE `nombreEditorial`= ? ;';
+        $sql = 'call computador (4, ?,?, ?,?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -36,15 +36,15 @@ class EditorialDAO {
         $telefonoEditorial = $editorialVo->getTelefonoEditorial();
         $anoPublicacion = $editorialVo->getAnoPublicacion();
 
-        $stmp->bind_param("ssss", $direccionEditorial, $telefonoEditorial, $anoPublicacion, $nombreEditorial);
+        $stmp->bind_param("ssss", $nombreEditorial,$direccionEditorial, $telefonoEditorial, $anoPublicacion);
 
         $this->Respuesta($conn, $stmp);
     }
 
     function EliminarEditorial($array) {
 
-        $sql = 'DELETE FROM `tbl_editorial` WHERE `nombreEditorial`= ?;';
-  
+        $sql = 'call miprocesos1 (30,?);';
+
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -73,7 +73,7 @@ class EditorialDAO {
     }
 
     function BuscarEditorial($array) {
-        $sql = "SELECT `nombreEditorial`,`direccionEditorial`,`telefonoEditorial`,`anoPublicacion` FROM `tbl_editorial` WHERE `nombreEditorial` = ?";
+        $sql = 'call miprocesos1 (32,?);';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -129,7 +129,7 @@ class EditorialDAO {
             echo json_encode($respuesta);
         } else {
 
-            $sql = 'INSERT INTO `tbl_editorial` ( `nombreEditorial`, `direccionEditorial`, `telefonoEditorial`, `anoPublicacion`) VALUES ( ?,?, ?,?);';
+            $sql = 'call computador (3, ?,?, ?,?);';
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
@@ -165,7 +165,7 @@ class EditorialDAO {
     }
 
     function Filtro($array) {
-        $sql = 'SELECT `idEditorial`  FROM `tbl_editorial` WHERE `nombreEditorial`  = ?;';
+        $sql = 'call miprocesos1 (31,?);';
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();

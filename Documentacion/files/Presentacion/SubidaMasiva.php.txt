@@ -258,11 +258,13 @@ session_start();
                                     <option value="SbMasivaVideoBeam">Video Beam</option>
                                     <option value="SbMasivaComputador">Computador</option>
                                     <option value="SbMasivaUsuario">Usuario</option>
+                                    <option value="SbMasivaLibro">Libro</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="exampleFormControlFile1">Archivo de subida</label>
                                 <input type="file"  id="csv" name="csv" />
+                                Subir imagen: <input type="file" id="SbImagen" name="file[]" multiple>
                             </div>
                         </div>
                         <input type="submit" class="btn btn-primary"  value="Cargar" id="Cargar"/>                       
@@ -293,7 +295,7 @@ session_start();
                     $("#subida").validate({
                         rules: {
                             csv: {
-                                required: true,
+                                required: false,
                                 extension: "csv"
                             }, tipoFormato: {
                                 required: true
@@ -308,6 +310,9 @@ session_start();
                                     subida(filtro);
                                     break;
                                 case "SbMasivaUsuario":
+                                    subida(filtro);
+                                    break;
+                                case "SbMasivaLibro":
                                     subida(filtro);
                                     break;
                                 default:
@@ -326,7 +331,6 @@ session_start();
                         for (var i = 0; i < (formulario.find('input[type=file]').length); i++) {
                             archivos.append((formulario.find('input[type="file"]:eq(' + i + ')').attr("name")), ((formulario.find('input[type="file"]:eq(' + i + ')')[0]).files[0]));
                         }
-
                         $.ajax({
                             url: url,
                             type: 'POST',
@@ -344,7 +348,8 @@ session_start();
                         return false;
                     }
                 }
-            });
+            }
+            );
         </script>
 
     </body>

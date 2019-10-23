@@ -4,7 +4,7 @@
  * */
 /**
  * Capa de presentación de para Registrar ,buscar modificar y eliminar ;
- *los libros ,  categoria, temas  y autores
+ * los libros ,  categoria, temas  y autores
  * 
  * @category Educativo
  * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
@@ -445,7 +445,7 @@ session_start();
                     $('#ListaAutores').multiselect({
                         enableFiltering: true,
                         includeSelectAllOption: true,
-                        maxHeight: 450,
+                        maxHeight: 400,
                         dropUp: true
                     });
                     $("#ListaAutores").multiselect('refresh');
@@ -534,7 +534,7 @@ session_start();
                 fajax(url, parametro, metodo);
             }
             function item(tmp) {
-                $("#ListaAutores").append("<option value=" + tmp.NombreAutor + ">" + tmp.Nota + "</option>");
+                $("#ListaAutores").append("<option value=" + tmp.NombreAutor + " id='1'>" + tmp.Nota + "</option>");
             }
             function item1(tmp) {
                 $("#ListaEditores").append("<option value=" + tmp.NombreAutor1 + ">" + tmp.Nota1 + "</option>");

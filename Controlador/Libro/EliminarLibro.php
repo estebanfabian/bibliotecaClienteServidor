@@ -8,4 +8,4 @@ require '../../CLASES/DAO/LibroDAO.php';
 $json = file_get_contents("php://input");
 $local = json_decode($json);
 $AutorDao = new LibroDAO();
-$AutorDao->EliminarLibroe($local);
+$AutorDao->EliminarLibro($local);
