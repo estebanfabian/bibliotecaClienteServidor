@@ -1,5 +1,20 @@
 <?php
 
+/**
+ * Long Desc 
+ * */
+
+/**
+ * Esta clase almacena la información de los prestamos. 
+ *
+ * 
+ * @package VO
+ * @category Educativo
+ * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+ * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
+ * @version Revision: 1.0 
+ * @access publico
+ * * */
 class PrestamoVO {
 
     private $idPrestamo;
@@ -15,7 +30,6 @@ class PrestamoVO {
     private $idVideoBeam;
     private $idcomputador;
     private $isbn;
-    private $id;
 
     function getIdPrestamo() {
         return $this->idPrestamo;
@@ -69,10 +83,6 @@ class PrestamoVO {
         return $this->isbn;
     }
 
-    function getId() {
-        return $this->id;
-    }
-
     function setIdPrestamo($idPrestamo) {
         $this->idPrestamo = $idPrestamo;
     }
@@ -123,10 +133,6 @@ class PrestamoVO {
 
     function setIsbn($isbn) {
         $this->isbn = $isbn;
-    }
-
-    function setId($id) {
-        $this->id = $id;
     }
 
 }

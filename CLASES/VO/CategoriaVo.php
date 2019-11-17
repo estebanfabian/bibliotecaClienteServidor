@@ -1,14 +1,25 @@
 <?php
 
+/**
+ * Long Desc 
+ * */
+
+/**
+ * Esta clase almacena la información de la categoria como es
+ * el nombre de la categoria y desciciones de la categorias
+ *
+ * 
+ * @package VO
+ * @category Educativo
+ * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+ * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
+ * @version Revision: 1.0 
+ * @access publico
+ * * */
 class CategoriaVO {
 
-    private $idCategoria;
     private $categoria;
     private $descriccion;
-
-    function getIdCategoria() {
-        return $this->idCategoria;
-    }
 
     function getCategoria() {
         return $this->categoria;
@@ -16,10 +27,6 @@ class CategoriaVO {
 
     function getDescriccion() {
         return $this->descriccion;
-    }
-
-    function setIdCategoria($idCategoria) {
-        $this->idCategoria = $idCategoria;
     }
 
     function setCategoria($categoria) {

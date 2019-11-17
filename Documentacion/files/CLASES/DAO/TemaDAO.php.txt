@@ -1,7 +1,31 @@
 <?php
 
+/**
+ * Long Desc 
+ * */
+
+/**
+ * Esta clase ejecuta las conusltas relacionadas con el tema
+ *
+ * 
+ * @package VO
+ * @category Educativo
+ * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+ * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
+ * @version Revision: 1.0 
+ * @access publico
+ * * */
 class TemaDAO {
 
+    /**
+     * Este metodo permite registrar un nuevo tema
+     * nesesaria como es el fabricante y el numero del cargador que corresponde al computador, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del computador 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa o no 
+     * */
     function CrearTema($array) {
 
         if ($this->Filtro($array) == "ok") {
@@ -19,6 +43,13 @@ class TemaDAO {
         }
     }
 
+    /**
+     * Este metodo permite modificar informacíon sobre tema
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del computador 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa o no la modificacion
+     * */
     function ModificarTema($array) {
 
         $sql = 'call tema (1,?,?);';
@@ -38,8 +69,17 @@ class TemaDAO {
         $this->Respuesta($conn, $stmp);
     }
 
+    /**
+     * Este metodo permite eliminar el registro del tema
+     * nesesaria como es el fabricante y los cables que tiene, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del video beam 
+     * @return array() Se envia la respuesta si fue eliminado con exito donde se indica si fue exitosa , fallida o ya se encuentra duplicado 
+     * */
     function EliminarTema($array) {
-       if ($this->Filtro($array) == "no") {
+        if ($this->Filtro($array) == "no") {
             $respuesta = array();
             $respuesta["sucess"] = "no";
             echo json_encode($respuesta);
@@ -56,23 +96,38 @@ class TemaDAO {
             $idTema = $TemaVo->getNombreTema();
 
             $stmp->bind_param("s", $idTema);
-             $this->respuesta($conn, $stmp);
+            $this->respuesta($conn, $stmp);
         }
     }
 
-     function Respuesta($conn, $stmp) {
+    /**
+     * Este metodo permite cerrar la conexiòn con la base de datos y retornar si la query fue exitosa o no
+     * @param array() $conn Variable que establece el driver de conexión 
+     * @param array() $stmp prepara la ejecucion de la sentencia 
+     * @return array() Se envia la respuesta de la actualización donde se indica si fue exitosa o no 
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * */
+    function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
             $respuesta["sucess"] = "ok";
         } else {
             $respuesta["sucess"] = "no";
-             echo json_encode($stmp);
+            echo json_encode($stmp);
         }
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
     }
 
+    /**
+     * Este metodo permite buscar el tema.
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene el numero de serial del computador que desea buscar.
+     * @return array() Se envia la respuesta  toda la informaciòn del temas cargados en la base de datos
+     * */
     function BuscarTema($array) {
         $sql = "call miprocesos1 (8,?);";
         $BD = new ConectarBD();
@@ -100,6 +155,15 @@ class TemaDAO {
         echo json_encode($tmp);
     }
 
+    /**
+     * Este metodo permite registrar un nuevo tema
+     * nesesaria como es el fabricante y el numero del cargador que corresponde al computador, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del computador 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa o no 
+     * */
     function insert($array, $stmp) {
 
         $TemaVo = new TemaVO();
@@ -113,6 +177,13 @@ class TemaDAO {
         return $stmp;
     }
 
+    /**
+     * Este metodo valida si el tema ya esta registrado en la base de datos
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene el numero de serial del video beam que desea validar su existencia en la base de datos.
+     * @return array() Se envia la respuesta si el video beam esta registrado o no.
+     * */
     function Filtro($array) {
 
         $sql = 'call miprocesos1 (1,?);';
@@ -148,6 +219,15 @@ class TemaDAO {
         return ($respuesta);
     }
 
+    /**
+     * Este metodo permite registrar un nuevo tema
+     * nesesaria como es el fabricante y el numero del cargador que corresponde al computador, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del computador 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa o no 
+     * */
     function SMCrearTema($array) {
 
         if ($this->Filtro($array) == "ok") {
@@ -172,8 +252,15 @@ class TemaDAO {
             return $respuesta;
         }
     }
-    
-       function ListarTema() {
+
+    /**
+     * Este metodo carga todos los temas registrado
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene el numero de serial del video beam que desea validar su existencia en la base de datos.
+     * @return array() Retorna todos los registros de los temas
+     * */
+    function ListarTema() {
         $sql = "SELECT * FROM `listartema`";
 
         $BD = new ConectarBD();

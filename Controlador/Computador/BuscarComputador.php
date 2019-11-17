@@ -5,7 +5,7 @@
  * */
 /**
  * Cotrolador del acceso que lleva es encargado de servir de puente de comunicacion 
- * entre la capa de interface y la capa de datos para poder buscar sobre informacion del 
+ * entre la capa de interface y la capa de datos para poder buscar informacion del 
  * computador.
  *
  * 

@@ -1,12 +1,14 @@
 RewriteEngine on
 
 RewriteRule Validar$ Controlador/Usuario/Validar_Usuario.php
+RewriteRule Historial$ Controlador/Usuario/Historial_Prestamo.php
 RewriteRule IntentoFallido$ Controlador/Usuario/Intentos_usuario.php
 RewriteRule IntentoExitoso$ Controlador/Usuario/Intentos_usuarioExitoso.php
 RewriteRule Multas$ Controlador/Usuario/Mostrar_multa.php
 RewriteRule RegistrarVideoBeam$ Controlador/VideoBeam/RegistrarVideoBeam.php
 RewriteRule ActualizarVideoBeam$ Controlador/VideoBeam/ActualizarVideoBeam.php
 RewriteRule EliminarVideoBeam$ Controlador/VideoBeam/EliminarVideoBeam.php
+RewriteRule CargarVideoBeam$ Controlador/VideoBeam/Cargar_VideoBeam.php
 RewriteRule BuscarVideoBeam$ Controlador/VideoBeam/BuscarVideoBeam.php
 RewriteRule SbMasivaVideoBeam$ Controlador/VideoBeam/SubidaMasivaVideoBeam.php
 RewriteRule SbMasivaUsuario$ Controlador/Usuario/SubidaMasivaUsuario.php
@@ -18,8 +20,9 @@ RewriteRule CambioClave$ Controlador/Usuario/Cambio_Clave.php
 RewriteRule Correo$ Controlador/Usuario/Correo_Usuario.php
 RewriteRule RegistrarComputador$ Controlador/Computador/RegistrarComputador.php
 RewriteRule BuscarComputador$ Controlador/Computador/BuscarComputador.php
-RewriteRule EliminarComputador$ Controlador/Computador/EliminarComputador.php
 RewriteRule ActualizarComputador$ Controlador/Computador/ActualizarComputador.php
+RewriteRule EliminarComputador$ Controlador/Computador/EliminarComputador.php
+RewriteRule CargarComputador$ Controlador/Computador/Cargar_computadores.php
 RewriteRule SbMasivaComputador$ Controlador/Computador/SubidaMasivaComputador.php
 RewriteRule CrearTema$ Controlador/Libro/CrearTema.php
 RewriteRule EliminarTema$ Controlador/Libro/EliminarTema.php
@@ -46,6 +49,11 @@ RewriteRule ModificarLibro$ Controlador/Libro/ModificarLibro.php
 RewriteRule SbMasivaLibro$ Controlador/Libro/SubidaMasivaLibro.php
 RewriteRule SubidaMasivaImagen$ Controlador/Libro/SubidaMasivaImagen.php
 RewriteRule catalogo$ Controlador/Libro/Catalogo.php
+RewriteRule reserva$ Controlador/prestamo/Info_libro.php
+RewriteRule Conta_res$ Controlador/prestamo/Contador_Reservas.php
+RewriteRule reservaLibro$ Controlador/prestamo/Reservar_Libro.php
+RewriteRule ValiidarVideoBeam$ Controlador/prestamo/Validacion_videoBeam.php
+RewriteRule PrestamoInter$ Controlador/prestamo/PrestamoInter.php
 
 #-------------------------------------------------------------------------------
 RewriteRule ^gato.jsp$ js/MiLogica.js
@@ -53,17 +61,20 @@ RewriteRule ^Ingreso$ view/menu.php
 RewriteRule tablaXid$ Controlador/Libro/Consultar_LibroXid.php
 RewriteRule tablaXtitulo$ Controlador/Libro/Consultar_LibroXtitulo.php
 RewriteRule tablaXautor$ Controlador/libro/Consultar_LibroXautor.php
-RewriteRule tablaXtema$ Controlador/libro/Consultar_LibroXtema.php
 RewriteRule tablaXEditorial$ Controlador/libro/Consultar_LibroXeditorial.php
-RewriteRule tablaXFacultad$ Controlador/libro/Consultar_LibroXfacultad.php
 RewriteRule Portada$ Controlador/libro/Consultar_LibroXPortada.php
 RewriteRule Most_usuario$ Controlador/Usuario/Mostrar_Usuario.php
-RewriteRule Conta_res$ Controlador/prestamo/Contador_Reservas.php
 RewriteRule Tarjeta$ Controlador/Prestamo/Reserva_Tarjeta.php
-RewriteRule reserva$ Controlador/prestamo/Reservar_libro.php
+RewriteRule listarLibros$ Controlador/Libro/ListarLibros.php
 RewriteRule Suprimir$ Controlador/prestamo/Cancelar_prestamo.php
+RewriteRule CambioEstado$ Controlador/prestamo/Cambio_estado.php
+RewriteRule prestamo$ Controlador/prestamo/Prestamo_libro.php
 RewriteRule Renovacion$ Controlador/prestamo/Renovacion_libro.php
+RewriteRule PVideoBeam$ Controlador/prestamo/Prestamo_videobeam.php
+RewriteRule CargarBiblioteca$ Controlador/prestamo/CargarBiblioteca.php
 #-------------------------------------------------------------------------------
 
 #Serve Alternate Default Index Page
 #DirectoryIndex presentacion/index.php
+#http://127.0.0.1/ejemplo/assets/img/img/libro/58419374_2262161340493837_7184587620205199360_n.jpg
+#http://127.0.0.1/ejemplo/assets/img/img/libro/55736510_10205849555194732_6729436638629330944_n.jpg

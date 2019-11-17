@@ -14,7 +14,7 @@
  * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
  * @version Revision: 1.0 
  * @access publico
- * @return array() devuelve el numero de filas que fueron  exitosas , fallidas y registros duplcados encontrado al momento de realizar el registro de la informaciòn
+ * @return array() devuelve el numero de filas que fueron exitosas , fallidas y registros duplcados encontrado al momento de realizar el registro de la informaciòn
  * * */
 header('Access-Control-Allow-Origin: *');
 require '../../CLASES/BD/MySql.php';
@@ -76,11 +76,9 @@ if ($_FILES['csv']['size'] > 0) {
         $numeroFila++;
     }
 
-//    echo "Exitoso " . $Exitoso;
-//    echo "Fallido " . $Fallido . " numero de las lineas" . $Fallido_n;
-//    echo "Duplicado " . $Duplicado . " numero de lineas" . $Duplicado_n;
-
-
+// echo "Exitoso " . $Exitoso;
+// echo "Fallido " . $Fallido . " numero de las lineas" . $Fallido_n;
+// echo "Duplicado " . $Duplicado . " numero de lineas" . $Duplicado_n;
 
     $array = array("Exitoso" => $Exitoso,
         "Fallido" => $Fallido,
@@ -88,10 +86,4 @@ if ($_FILES['csv']['size'] > 0) {
     echo json_encode((object) $array);
 }
 
-function cambio($param) {
-    if ($param == "si") {
-        return 1;
-    } else {
-        return 0;
-    }
-}
+

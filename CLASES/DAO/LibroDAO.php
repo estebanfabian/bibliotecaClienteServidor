@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * Long Desc 
+ * */
+
+/**
+ * Esta clase ejecuta las conusltas relacionadas con el libro
+ * 
+ * @package VO
+ * @category Educativo
+ * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+ * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
+ * @version Revision: 1.0 
+ * @access publico
+ * * */
 class LibroDAO {
 
     function CrearLibro($array) {
@@ -150,6 +164,15 @@ class LibroDAO {
         }
     }
 
+    /**
+     * Este metodo permite eliminar el registro del libro
+     * nesesaria como es el fabricante y los cables que tiene, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del video beam 
+     * @return array() Se envia la respuesta si fue eliminado con exito donde se indica si fue exitosa , fallida o ya se encuentra duplicado 
+     * */
     function EliminarLibro($array) {
 
         $libroVo = new LibroVO;
@@ -174,7 +197,6 @@ class LibroDAO {
 
         $LibroVo = new LibroVO();
         $LibroVo->setIsbn($array->Consulta);
-
         $Consulta = $LibroVo->getIsbn();
 
         $Consulta = $Consulta . "%";
@@ -182,7 +204,7 @@ class LibroDAO {
         $stmp->bind_param("i", $Consulta);
 
         $stmp->execute();
-        $stmp->bind_result($isbn1, $isbn, $titulo, $autor, $tema, $editorial, $facultad, $estado, $resena, $imagen);
+        $stmp->bind_result($isbn1, $isbn, $titulo, $autor, $editorial, $estado, $resena, $imagen);
 
         $respuesta = array();
         while ($stmp->fetch()) {
@@ -190,9 +212,7 @@ class LibroDAO {
             $tmp["isbn"] = $isbn;
             $tmp["titulo"] = $titulo;
             $tmp["autor"] = $autor;
-            $tmp["tema"] = $tema;
             $tmp["editorial"] = $editorial;
-            $tmp["facultad"] = $facultad;
             $tmp["estado"] = $estado;
             $tmp["resena"] = $resena;
             $tmp["imagen"] = $imagen;
@@ -259,24 +279,6 @@ class LibroDAO {
         $this->RespuestaLibros($conn, $stmp);
     }
 
-    public function ListarXtema($array) {
-        $sql = 'call miprocesos1 (5,?);';
-        $BD = new ConectarBD();
-
-        $conn = $BD->getMysqli();
-        $stmp = $conn->prepare($sql);
-
-        $TemaVO = new TemaVO();
-        $TemaVO->setNombreTema($array->Consulta);
-
-        $Consulta = $TemaVO->getNombreTema();
-
-        $Consulta = "%" . $Consulta . "%";
-
-        $stmp->bind_param("s", $Consulta);
-        $this->RespuestaLibros($conn, $stmp);
-    }
-
     public function ListarXeditorial($array) {
         $sql = 'call miprocesos1 (3,?);';
         $BD = new ConectarBD();
@@ -293,46 +295,14 @@ class LibroDAO {
         $this->RespuestaLibros($conn, $stmp);
     }
 
-    public function ListarXfacultad($array) {
-        $sql = 'call miprocesos1 (6,?;)';
-        $BD = new ConectarBD();
-        $conn = $BD->getMysqli();
-        $stmp = $conn->prepare($sql);
-
-        $LibroAutorVO = new LibroAutorVO();
-        $LibroAutorVO->setListaLibro($array->Consulta);
-
-        $Consulta = $LibroAutorVO->getListaLibro();
-        $Consulta = "%" . $Consulta . "%";
-
-        $stmp->bind_param("s", $Consulta);
-        $this->RespuestaLibros($conn, $stmp);
-    }
-
-    public function ListarXPortada($array) {
-        $sql = 'call miprocesos1 (26,?);';
-        $BD = new ConectarBD();
-        $conn = $BD->getMysqli();
-        $stmp = $conn->prepare($sql);
-        $LibroVO = new LibroVO();
-        $LibroVO->setIsbn($array->isbn);
-        $isbn = $LibroVO->getIsbn();
-        $stmp->bind_param("i", $isbn);
-        $stmp->execute();
-        $stmp->bind_result($resena, $imagen);
-
-        $respuesta = array();
-        while ($stmp->fetch()) {
-            $tmp = array();
-            $tmp["resena"] = $resena;
-            $tmp["imagen"] = $imagen;
-            $respuesta[sizeof($respuesta)] = $tmp;
-        }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
-    }
-
+    /**
+     * Este metodo permite cerrar la conexiòn con la base de datos y retornar si la query fue exitosa o no
+     * @param array() $conn Variable que establece el driver de conexión 
+     * @param array() $stmp prepara la ejecucion de la sentencia 
+     * @return array() Se envia la respuesta de la actualización donde se indica si fue exitosa o no 
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * */
     function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
@@ -348,7 +318,7 @@ class LibroDAO {
 
     function RespuestaLibros($conn, $stmp) {
         $stmp->execute();
-        $stmp->bind_result($isbn, $titulo, $autor, $tema, $editorial, $facultad, $estado, $resena, $imagen);
+        $stmp->bind_result($isbn, $titulo, $autor, $editorial, $estado, $resena, $imagen);
 
         $respuesta = array();
         while ($stmp->fetch()) {
@@ -356,9 +326,7 @@ class LibroDAO {
             $tmp["isbn"] = $isbn;
             $tmp["titulo"] = $titulo;
             $tmp["autor"] = $autor;
-            $tmp["tema"] = $tema;
             $tmp["editorial"] = $editorial;
-            $tmp["facultad"] = $facultad;
             $tmp["estado"] = $estado;
             $tmp["resena"] = $resena;
             $tmp["imagen"] = $imagen;
@@ -428,6 +396,13 @@ class LibroDAO {
         }
     }
 
+    /**
+     * Este metodo valida si el libro ya esta registrado en la base de datos
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene el numero de serial del video beam que desea validar su existencia en la base de datos.
+     * @return array() Se envia la respuesta si el video beam esta registrado o no.
+     * */
     function Filtro($array) {
         $sql = "call miprocesos1 (29,?);";
         $BD = new ConectarBD();
@@ -690,42 +665,44 @@ class LibroDAO {
     function catalogo() {
         $sql = 'SET @row_number := 0;';
         $sql1 = 'SELECT 
-    isbn,titulo,estado,imagen,autor,editorial
+ isbn,titulo,estado,imagen,autor,editorial,resena
 FROM
-    (SELECT 
-        @row_number:=CASE
-                WHEN @customer_no = tbl_libro.isbn THEN @row_number + 1
-                ELSE 1
-            END AS num,
-            @customer_no:=tbl_libro.isbn  as isbn,
-            tbl_libro.titulo as titulo,
-            tbl_libro.estado as estado,
-            tbl_libro.imagen as imagen,
-            tbl_autor.nombreAutor as autor ,
-   		    tbl_editorial.nombreEditorial as editorial
-    FROM
-        tbl_libro
-    INNER JOIN tbl_libro_autor ON tbl_libro.isbn = tbl_libro_autor.isbn
-    INNER JOIN tbl_editorial ON tbl_editorial.idEditorial = tbl_libro.idEditorial
-    INNER JOIN tbl_autor ON tbl_libro_autor.idAutor = tbl_autor.idAutor
-        AND tbl_libro.isbn = tbl_libro_autor.isbn) AS ejemplo
+ (SELECT 
+ @row_number:=CASE
+ WHEN @customer_no = tbl_libro.isbn THEN @row_number + 1
+ ELSE 1
+ END AS num,
+ @customer_no:=tbl_libro.isbn as isbn,
+ tbl_libro.titulo as titulo,
+ tbl_libro.estado as estado,
+ tbl_libro.imagen as imagen,
+ tbl_libro.resena as resena,
+ tbl_autor.nombreAutor as autor ,
+ 		 tbl_editorial.nombreEditorial as editorial
+ FROM
+ tbl_libro
+ INNER JOIN tbl_libro_autor ON tbl_libro.isbn = tbl_libro_autor.isbn
+ INNER JOIN tbl_editorial ON tbl_editorial.idEditorial = tbl_libro.idEditorial
+ INNER JOIN tbl_autor ON tbl_libro_autor.idAutor = tbl_autor.idAutor
+ AND tbl_libro.isbn = tbl_libro_autor.isbn) AS ejemplo
 WHERE
-    num = 1';
+ num = 1';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
         $stmp->execute();
         $stmp = $conn->prepare($sql1);
         $stmp->execute();
-        $stmp->bind_result($isbn, $titulo, $estdo, $imagen, $autor, $editorial);
+        $stmp->bind_result($isbn, $titulo, $estdo, $imagen, $autor, $editorial, $resena);
         $respuesta = array();
         while ($stmp->fetch()) {
             $tmp["isbn"] = $isbn;
             $tmp["estado"] = $estdo;
             $tmp["titulo"] = $titulo;
-            $tmp["iamgen"] = $imagen;
+            $tmp["imagen"] = $imagen;
             $tmp["autor"] = $autor;
             $tmp["editorial"] = $editorial;
+            $tmp["resena"] = $resena;
             $respuesta[sizeof($respuesta)] = $tmp;
         }
         $stmp->close();
@@ -733,13 +710,14 @@ WHERE
         echo json_encode($respuesta);
     }
 
-    function reservar_libro($array) {
+    function info_libro($array) {
+
         $sql = "SELECT `nombreAutor` FROM `tbl_autor` inner join tbl_libro_autor on tbl_libro_autor.idAutor = tbl_autor.idAutor where tbl_libro_autor.isbn = ?";
         $sql1 = "SELECT tbl_temas.nombreTema FROM `tbl_temas`inner join tbl_libro_temas on tbl_libro_temas.idTema= tbl_temas.idTema where tbl_libro_temas.isbn=?";
         $sql2 = "SELECT tbl_categoria.categoria FROM `tbl_categoria` inner join tbl_libro_categoria on tbl_libro_categoria.idCategoria=tbl_categoria.idCategoria WHERE tbl_libro_categoria.isbn = ?";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
-      
+
         $libroVo = new LibroVO;
         $libroVo->setIsbn($array->isbn);
         $isbn = $libroVo->getIsbn();
@@ -758,25 +736,64 @@ WHERE
         $respuesta = array();
         $tmp["autor"] = $aux;
 
-
-
         $stmp = $conn->prepare($sql1);
         $stmp->bind_param("i", $isbn);
         $stmp->execute();
 
-
         $stmp->bind_result($temas);
         $aux = "";
         while ($stmp->fetch()) {
-
             $aux = ";" . $temas . $aux;
         }
-           $aux[0] = " ";
+        $aux[0] = " ";
         $tmp["temas"] = $aux;
+
+        $stmp = $conn->prepare($sql2);
+        $stmp->bind_param("i", $isbn);
+        $stmp->execute();
+
+        $stmp->bind_result($categoria);
+        $aux = "";
+        while ($stmp->fetch()) {
+
+            $aux = ";" . $categoria . $aux;
+        }
+        $aux[0] = " ";
+        $tmp["categoria"] = $aux;
+
         $respuesta[sizeof($respuesta)] = $tmp;
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
+    }
+
+    function listar_Libro($array) {
+
+        $sql = "SELECT `isbn`,`estado` FROM `tbl_libro` WHERE `titulo` = ?";
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+
+        $libroVo = new LibroVO;
+        $libroVo->setTitulo($array->titulo);
+        $titulo = $libroVo->getTitulo();
+        $stmp = $conn->prepare($sql);
+        $stmp->bind_param("s", $titulo);
+        $stmp->execute();
+        $stmp->bind_result($isbn, $estdo);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp["isbn"] = $isbn;
+            $tmp["estado"] = $estdo;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
+    function cambio($param) {
+        $valore = explode("|", $param);
+        return $valore;
     }
 
 }

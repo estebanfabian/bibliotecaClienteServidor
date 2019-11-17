@@ -1,5 +1,21 @@
 <?php
 
+/**
+ * Long Desc 
+ * */
+
+/**
+ * Esta clase almacena la información de las biblioteca como es
+ * nombre de la biblioteca , direccion telefono , persona responsable y observaciones
+ *
+ * 
+ * @package VO
+ * @category Educativo
+ * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+ * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
+ * @version Revision: 1.0 
+ * @access publico
+ * * */
 class BibliotecaVO {
 
     private $idBiblioteca;

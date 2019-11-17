@@ -70,7 +70,7 @@ session_start();
                                 <th scope="col">dia de prestamo</th>
                                 <th scope="col">titulo del libro</th>
                                 <th scope="col">estado</th>
-                                  <th scope="col">Resenovacion</th>
+                                <th scope="col">Resenovacion</th>
                             </tr>
                         </thead>
                         <tbody id ="historialTabla">

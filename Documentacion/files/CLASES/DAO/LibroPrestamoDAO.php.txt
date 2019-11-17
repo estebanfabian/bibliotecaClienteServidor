@@ -74,6 +74,14 @@ class LibroPrestamoDAO {
         $this->Respuesta($conn, $stmp);
     }
 
+    /**
+     * Este metodo permite cerrar la conexiòn con la base de datos y retornar si la query fue exitosa o no
+     * @param array() $conn Variable que establece el driver de conexión 
+     * @param array() $stmp prepara la ejecucion de la sentencia 
+     * @return array() Se envia la respuesta de la actualización donde se indica si fue exitosa o no 
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * */
     function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {

@@ -14,7 +14,7 @@
  * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
  * @version Revision: 1.0 
  * @access publico
- * @return array() devuelve el numero de filas que fueron  exitosas , fallidas y registros duplcados encontrado al momento de realizar el registro de la informaciòn
+ * @return array() devuelve el numero de filas que fueron exitosas , fallidas y registros duplcados encontrado al momento de realizar el registro de la informaciòn
  * * */
 header('Access-Control-Allow-Origin: *');
 require '../../CLASES/BD/MySql.php';
@@ -36,6 +36,7 @@ $Duplicado_n = "";
 if ($_FILES['csv']['size'] > 0) {
     $csv = $_FILES['csv']['tmp_name'];
     $file = fopen($csv, 'r');
+    $libroDAO = new LibroDAO();
     while (($column = fgetcsv($file, 10000, ";")) !== FALSE) {
         if ($numeroFila > 0) {
 
@@ -43,18 +44,16 @@ if ($_FILES['csv']['size'] > 0) {
                 "isbn" => $column[0],
                 "titulo" => $column[1],
                 "resena" => $column[2],
-                "autor" => cambio($column[3]),
+                "autor" => $libroDAO->cambio($column[3]),
                 "editorial" => $column[4],
-                "tema" => cambio($column[5]),
-                "lPublica" => cambio($column[6]),
-                "lCategoria" => cambio($column[7]),
+                "tema" => $libroDAO->cambio($column[5]),
+                "lPublica" => $libroDAO->cambio($column[6]),
+                "lCategoria" => $libroDAO->cambio($column[7]),
                 "imagen" => $column[8]
             );
 
-         
             $object = json_decode(json_encode((object) $array), FALSE);
-            $libroDAO = new LibroDAO();
-            $respuesta = $libroDAO->SMCrearLibro($object);//hacer insert con  sekect
+            $respuesta = $libroDAO->SMCrearLibro($object); //hacer insert con sekect
 //
             echo $respuesta;
             if ($respuesta == "ok") {
@@ -70,17 +69,12 @@ if ($_FILES['csv']['size'] > 0) {
         }
         $numeroFila++;
     }
-//    echo "Exitoso " . $Exitoso;
-//    echo "Fallido " . $Fallido . " numero de las lineas" . $Fallido_n;
-//    echo "Duplicado " . $Duplicado . " numero de lineas" . $Duplicado_n;
-
+// echo "Exitoso " . $Exitoso;
+// echo "Fallido " . $Fallido . " numero de las lineas" . $Fallido_n;
+// echo "Duplicado " . $Duplicado . " numero de lineas" . $Duplicado_n;
 
     $array = array("Exitoso" => $Exitoso,
         "Fallido" => $Fallido,
         "Duplicado" => $Duplicado);
     echo json_encode((object) $array);
-}
-function cambio($param) {
-    $valore=explode("|",$param);
-    return $valore;
 }

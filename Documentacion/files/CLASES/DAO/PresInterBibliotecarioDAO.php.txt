@@ -1,71 +1,56 @@
 <?php
+/**
+ * Long Desc 
+ * */
 
+/**
+ * Esta clase ejecuta las conusltas relacionadas con el prestamo inter bibliotecario
+ *
+ * 
+ * @package VO
+ * @category Educativo
+ * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+ * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
+ * @version Revision: 1.0 
+ * @access publico
+ * * */
 class PresInterBibliotecarioDAO {
 
     function CrearPresInterBibliotecario($array) {
-        $PresInterBibliotecarioVo = new PresInterBibliotecarioVO();
-        $PresInterBibliotecarioVo->setIdPrestamoInterBiblio($array->idPrestamoInterBiblio);
-        $PresInterBibliotecarioVo->setIdPrestamo($array->idPrestamo);
-        $PresInterBibliotecarioVo->setIdPrestemoInterBibliotecario($array->idPrestemoInterBibliotecario);
-        $PresInterBibliotecarioVo->setIsbnPrestamoInt($array->IsbnPrestamoInt);
 
-        if ($PresInterBibliotecarioVo->setIdPrestamoInterBiblio() != "null") {
-            $this->ModificarPresInterBibliotecario($PresInterBibliotecarioVo);
-        } else {
-            $sql = 'INSERT INTO `tbl_pestemointerbibliotecario`(`idPrestamoInterBiblio`, `idPrestamo`, `idPrestemoInterBibliotecario`, `IsbnPrestamoInt`) VALUES (?,?,?,);';
-            $BD = new ConectarBD();
-            $conn = $BD->getMysqli();
-            $stmp = $conn->prepare($sql);
+        $sql = 'set @a:= 0; SELECT @a:=`idPrestamo` as a  from  tbl_prestamo WHERE  `actividad` = 0 LIMIT 1;';
+        $sql2 = "call fa (@a,?,?,?,?,?)";
 
-            $Isbn = $PresInterBibliotecarioVo->getIsbn();
-            $idPrestamoInterBiblio = $PresInterBibliotecarioVo->getIdPrestamoInterBiblio();
-            $idPrestamo = $PresInterBibliotecarioVo->getIdPrestamo();
-            $idPrestemoInterBibliotecario = $PresInterBibliotecarioVo->getIdPrestemoInterBibliotecario();
-            $IsbnPrestamoInt = $PresInterBibliotecarioVo->getIsbnPrestamoInt();
-            $stmp->bind_param("isis", $idPrestamoInterBiblio, $idPrestamo, $idPrestemoInterBibliotecario, $IsbnPrestamoInt);
-
-            $this->Respuesta($conn, $stmp);
-        }
-    }
-
-    function ModificarPresInterBibliotecario($array) {
-        $PresInterBibliotecarioVo = new PresInterBibliotecarioVO();
-        $PresInterBibliotecarioVo->setIdPrestamoInterBiblio($array->idPrestamoInterBiblio);
-        $PresInterBibliotecarioVo->setIdPrestamo($array->idPrestamo);
-        $PresInterBibliotecarioVo->setIdPrestemoInterBibliotecario($array->idPrestemoInterBibliotecario);
-        $PresInterBibliotecarioVo->setIsbnPrestamoInt($array->IsbnPrestamoInt);
-
-        $sql = 'UPDATE `tbl_pestemointerbibliotecario` SET `idPrestamo`=?,`idPrestemoInterBibliotecario`=?,`IsbnPrestamoInt`=? WHERE `idPrestamoInterBiblio` = ?';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
-        $stmp = $conn->prepare($sql);
+        $stmp = $conn->query($sql);
+        $stmp1 = $conn->prepare($sql2);
 
-        $Isbn = $PresInterBibliotecarioVo->getIsbn();
-        $idPrestamoInterBiblio = $PresInterBibliotecarioVo->getIdPrestamoInterBiblio();
-        $idPrestamo = $PresInterBibliotecarioVo->getIdPrestamo();
-        $idPrestemoInterBibliotecario = $PresInterBibliotecarioVo->getIdPrestemoInterBibliotecario();
-        $IsbnPrestamoInt = $PresInterBibliotecarioVo->getIsbnPrestamoInt();
-        $stmp->bind_param("sisi", $idPrestamo, $idPrestemoInterBibliotecario, $IsbnPrestamoInt, $idPrestamoInterBiblio);
-
-        $this->Respuesta($conn, $stmp);
-    }
-
-    function EliminarPresInterBibliotecario($array) {
         $PresInterBibliotecarioVo = new PresInterBibliotecarioVO();
-        $PresInterBibliotecarioVo->setIdPrestamoInterBiblio($array->idPrestamoInterBiblio);
+        $PresInterBibliotecarioVo->setIdbiblioteca($array->Biblioteca);
+        $PresInterBibliotecarioVo->setIsbnPrestamoInt($array->isbn);
+        $PresInterBibliotecarioVo->setTituoloInter($array->titulo);
+        $PresInterBibliotecarioVo->setAutorInter($array->autor);
+        $PresInterBibliotecarioVo->setCodigoInter($array->codigoU);
 
-        $sql = 'DELETE FROM `tbl_pestemointerbibliotecario` WHERE  WHERE `idPrestamoInterBiblio` = ?';
-        $BD = new ConectarBD();
-        $conn = $BD->getMysqli();
-        $stmp = $conn->prepare($sql);
-
-        $Isbn = $PresInterBibliotecarioVo->getIsbn();
-        $idPrestamoInterBiblio = $PresInterBibliotecarioVo->getIdPrestamoInterBiblio();
-        $stmp->bind_param("i", $idPrestamoInterBiblio);
-
-        $this->Respuesta($conn, $stmp);
+        $biblioteca = $PresInterBibliotecarioVo->getIdbiblioteca();
+        $isbn = $PresInterBibliotecarioVo->getIsbnPrestamoInt();
+        $titulo = $PresInterBibliotecarioVo->getTituoloInter();
+        $autor = $PresInterBibliotecarioVo->getAutorInter();
+        $codigo = $PresInterBibliotecarioVo->getCodigoInter();
+  
+        $stmp1->bind_param("iissi", $biblioteca, $isbn, $titulo, $autor, $codigo);
+        $this->Respuesta($conn, $stmp1);
     }
 
+    /**
+     * Este metodo permite cerrar la conexiòn con la base de datos y retornar si la query fue exitosa o no
+     * @param array() $conn Variable que establece el driver de conexión 
+     * @param array() $stmp prepara la ejecucion de la sentencia 
+     * @return array() Se envia la respuesta de la actualización donde se indica si fue exitosa o no 
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * */
     function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {

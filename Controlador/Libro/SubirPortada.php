@@ -1,4 +1,20 @@
 <?php
+/**
+ * Long Desc 
+ * */
+/**
+ * Cotrolador del acceso que lleva es encargado de servir de puente de comunicacion 
+ * entre la capa de interface y la capa de datos para poder subir las imagenes de los libros.
+ *
+ * 
+ * @package Controlador
+ * @category Educativo
+ * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+ * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
+ * @version Revision: 1.0 
+ * @access publico
+ * @return array() devuelve el numero de filas que fueron exitosas , fallidas y registros duplcados encontrado al momento de realizar el registro de la informaciòn
+ * * */
 //echo count($_FILES["file0"]["name"]);exit;
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_FILES["fileToUpload"]["type"])) {
     $target_dir = "../../assets/img/img/libro/";
@@ -28,12 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_FILES["fileToUpload"]["type"
     }
 // Check file size
     if ($_FILES["fileToUpload"]["size"] > 1000000) {
-        $errors[] = "Lo sentimos, el archivo es demasiado grande.  Tamaño máximo admitido:  1MB";
+        $errors[] = "Lo sentimos, el archivo es demasiado grande. Tamaño máximo admitido: 1MB";
         $uploadOk = 0;
     }
 // Allow certain file formats
     if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-        $errors[] = "Lo sentimos, sólo archivos JPG, JPEG, PNG & GIF  son permitidos.";
+        $errors[] = "Lo sentimos, sólo archivos JPG, JPEG, PNG & GIF son permitidos.";
         $uploadOk = 0;
     }
 // Check if $uploadOk is set to 0 by an error

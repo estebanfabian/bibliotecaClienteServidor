@@ -86,7 +86,7 @@ class ConectarBD {
     }
 
     /**
-     * Método encargado de recibir la query que se ejecuta en el método query el cual retornara una trama de datos
+     * Ejecutar la query recibida y retornar el 
      * el cual realizara el retorno de los datos obtenidos anterioirmente.
      * @since Revision: 1.0 
      * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>

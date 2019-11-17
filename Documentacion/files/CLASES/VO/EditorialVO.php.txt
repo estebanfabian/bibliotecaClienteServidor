@@ -1,5 +1,20 @@
 <?php
 
+/**
+ * Long Desc 
+ * */
+
+/**
+ * Esta clase almacena la información de la editoriales como es
+ * nombre de la editorial , direccion , telefono 
+ * 
+ * @package VO
+ * @category Educativo
+ * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+ * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
+ * @version Revision: 1.0 
+ * @access publico
+ * * */
 class EditorialVO {
 
     private $idEditorial;

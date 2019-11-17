@@ -5,7 +5,7 @@
  * */
 
 /**
- *Esta clase permite reunir los datos que serán enviados en una query para poder realizar consultas , insertar , actualizar o eliminar información como se requiera de los computadores.
+ * Esta clase permite reunir los datos que serán enviados en una query para poder realizar consultas , insertar , actualizar o eliminar información como se requiera de los computadores.
  * 
  * @package DAO
  * @category Educativo
@@ -42,9 +42,9 @@ class ComputadorDAO {
     }
 
     /**
-     * Este metodo permite registrar un nuevo computador con toda la información
-     * nesesaria como es el fabricante y el numero del cargador que corresponde al computador, además 
-     * de contar con sus observsaciones
+     * Este metodo permite modificar informacíon sobre computador como
+     * es el fabricante y el número del cargador que corresponde al computador, además 
+     * de contar con sus observsaciones.
      * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
      * @since Revision: 1.0 
      * @param array() $array datos de tipo json que contiene la informacion a registrar del computador 
@@ -118,7 +118,6 @@ class ComputadorDAO {
         } else {
             $respuesta["sucess"] = "no";
         }
-
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
@@ -160,6 +159,13 @@ class ComputadorDAO {
         echo json_encode($respuesta);
     }
 
+    /**
+     * Este metodo valida si el computador ya esta registrado en la base de datos
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene el numero de serial del video beam que desea validar su existencia en la base de datos.
+     * @return array() Se envia la respuesta si el video beam esta registrado o no.
+     * */
     function Filtro($array) {
 
         $computadorVo = new ComputadorVO();
@@ -178,7 +184,6 @@ class ComputadorDAO {
             while ($stmp->fetch()) {
                 $respuesta = $idcomputador;
             }
-
             if ($idcomputador != "") {
                 $respuesta = "ok";
             } else {
@@ -193,6 +198,15 @@ class ComputadorDAO {
         return ($respuesta);
     }
 
+    /**
+     * Este metodo permite registrar un nuevo computador con toda la información
+     * nesesaria como es el fabricante y el numero del cargador que corresponde al computador, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del computador 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa o no 
+     * */
     function SMCrearComputador($array) {
         if ($this->Filtro($array) == "ok") {
             $respuesta = array();
@@ -217,6 +231,15 @@ class ComputadorDAO {
         }
     }
 
+    /**
+     * Este metodo permite registrar un nuevo computador con toda la información
+     * nesesaria como es el fabricante y el numero del cargador que corresponde al computador, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del computador 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa o no 
+     * */
     function insert($array, $stmp) {
 
         $computadorVo = new ComputadorVO();
@@ -233,6 +256,34 @@ class ComputadorDAO {
         $stmp->bind_param("issi", $idcomputador, $fabricante, $observaciones, $cargadorId);
 
         return $stmp;
+    }
+
+    /**
+     * Este metodo carga todos los numero de identificacion de los computadores
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene el numero de serial del video beam que desea validar su existencia en la base de datos.
+     * @return array() el numero de identificacion del computador.
+     * */
+    function CargarComputadores($array) {
+        $sql = "SELECT * FROM `computador`";
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $stmp->execute();
+
+        $stmp->bind_result($idcomputador);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["idcomputador"] = $idcomputador;
+
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
     }
 
 }

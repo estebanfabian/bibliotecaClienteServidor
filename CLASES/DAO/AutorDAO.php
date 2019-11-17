@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Long Desc 
  * */
@@ -15,9 +16,16 @@
  * @version Revision: 1.0 
  * @access publico
  * * */
-
 class AutorDao {
 
+    /**
+     * Este metodo permite registrar un nuevo autor con toda la información
+     * nesesaria como es nombre y alguna obsevacion sobre el autor
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del autor 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa o no 
+     * */
     function CrearAutor($array) {
         if ($this->Filtro($array) == "ok") {
             $respuesta = array();
@@ -29,11 +37,18 @@ class AutorDao {
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
             $stmp = $conn->prepare($sql);
-
             $this->respuesta($conn, $this->insert($array, $stmp));
         }
     }
 
+    /**
+     * Este metodo permite modificar informacíon sobre autor como
+     * son observsaciones del autor.
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del computador 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa o no la modificación 
+     * */
     function ModificarAutor($array) {
 
         $sql = 'call tema(4, ?,?) ;';
@@ -51,6 +66,14 @@ class AutorDao {
         $this->Respuesta($conn, $stmp);
     }
 
+    /**
+     * Este metodo permite eliminar el registro del autor
+     * de la base de datos..
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del computador 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa o no la eliminación del autor 
+     * */
     function EliminarAutor($array) {
         $sql = 'call miprocesos1 (10,?);';
         $BD = new ConectarBD();
@@ -66,6 +89,14 @@ class AutorDao {
         $this->Respuesta($conn, $stmp);
     }
 
+    /**
+     * Este metodo permite modificar informacíon sobre autor como
+     * son observsaciones del autor.
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del computador 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa o no la modificación 
+     * */
     function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
@@ -78,6 +109,13 @@ class AutorDao {
         echo json_encode($respuesta);
     }
 
+    /**
+     * Este metodo permite buscar el autor 
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene el numero de serial del video beam que desea buscar.
+     * @return array() Se envia la respuesta toda la informaciòn del autor
+     * */
     function buscarAutor($array) {
         $sql = "call miprocesos1 (11,?);";
 
@@ -105,13 +143,20 @@ class AutorDao {
         echo json_encode($respuesta);
     }
 
+    /**
+     * Este metodo permite mostrar todos los usuario
+     * nesesaria como es nombre y alguna obsevacion sobre el autor
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del autor 
+     * @return array() Se envia la respuesta del registro de los autores
+     * */
     function ListarAutor() {
         $sql = "SELECT * FROM listarautor";
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
-
         $stmp->execute();
 
         $stmp->bind_result($NombreAutor, $Nota);
@@ -127,10 +172,16 @@ class AutorDao {
         echo json_encode($respuesta);
     }
 
+    /**
+     * Este metodo valida si el autor ya esta registrado en la base de datos
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene el numero de serial del video beam que desea validar su existencia en la base de datos.
+     * @return array() Se envia la respuesta si el video beam esta registrado o no.
+     * */
     function Filtro($array) {
 
         $sql = 'call miprocesos1 (12,?)';
-
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -162,13 +213,21 @@ class AutorDao {
         return ($respuesta);
     }
 
+    /**
+     * Este metodo permite registrar mas de un nuevo autor con toda la información 
+     * nesesaria como es nombre y alguna obsevacion sobre el autor
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del autor 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa o no 
+     * */
     function SMCrearAutor($array) {
         if ($this->Filtro($array) == "ok") {
             $respuesta = array();
             $respuesta["sucess"] = "Reguistro duplicado";
             echo json_encode($respuesta);
         } else {
-             $sql = 'call tema(3, ?,?);';
+            $sql = 'call tema(3, ?,?);';
 
             $BD = new ConectarBD();
             $conn = $BD->getMysqli();
@@ -186,8 +245,15 @@ class AutorDao {
         }
     }
 
+    /**
+     * Este metodo permite registrar un nuevo autor con toda la información
+     * nesesaria como es nombre y alguna obsevacion sobre el autor
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del autor 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa o no 
+     * */
     function insert($array, $stmp) {
-
 
         $Autorvo = new AutorVO();
         $Autorvo->setNombreAutor($array->NombreAutor);

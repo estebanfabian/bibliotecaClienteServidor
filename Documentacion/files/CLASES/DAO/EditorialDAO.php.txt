@@ -1,5 +1,19 @@
 <?php
+/**
+ * Long Desc 
+ * */
 
+/**
+ * Esta clase ejecuta las conusltas relacionadas con la editorial
+ *
+ * 
+ * @package VO
+ * @category Educativo
+ * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+ * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
+ * @version Revision: 1.0 
+ * @access publico
+ * * */
 class EditorialDAO {
 
     function CrearEditorial($array) {
@@ -36,7 +50,7 @@ class EditorialDAO {
         $telefonoEditorial = $editorialVo->getTelefonoEditorial();
         $anoPublicacion = $editorialVo->getAnoPublicacion();
 
-        $stmp->bind_param("ssss", $nombreEditorial,$direccionEditorial, $telefonoEditorial, $anoPublicacion);
+        $stmp->bind_param("ssss", $nombreEditorial, $direccionEditorial, $telefonoEditorial, $anoPublicacion);
 
         $this->Respuesta($conn, $stmp);
     }
@@ -59,6 +73,14 @@ class EditorialDAO {
         $this->Respuesta($conn, $stmp);
     }
 
+    /**
+     * Este metodo permite cerrar la conexiòn con la base de datos y retornar si la query fue exitosa o no
+     * @param array() $conn Variable que establece el driver de conexión 
+     * @param array() $stmp prepara la ejecucion de la sentencia 
+     * @return array() Se envia la respuesta de la actualización donde se indica si fue exitosa o no 
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * */
     function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
@@ -164,6 +186,13 @@ class EditorialDAO {
         return $stmp;
     }
 
+    /**
+     * Este metodo valida si la editorial ya esta registrado en la base de datos
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene el numero de serial del video beam que desea validar su existencia en la base de datos.
+     * @return array() Se envia la respuesta si el video beam esta registrado o no.
+     * */
     function Filtro($array) {
         $sql = 'call miprocesos1 (31,?);';
 

@@ -30,14 +30,14 @@ session_start();
 
         <script src="../assets/js/localization/messages_es.js" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/additional-methods.js"></script>     
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/additional-methods.js"></script> 
     </head> 
     <body>.bg{background-color:red}<!-- Navigation -->
         <div id = cabecera>
             <input type="hidden" size="15" maxlength="30" value="<?php echo $_SESSION["usuario"]["codigo"]; ?>" name="nombre" id="codigo">
             <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color:#A2121C;margin-left: 5px;margin-right: 5px;">
                 <div class="container">
-                    <a class="navbar-brand" href="#">BibloCur</a>
+                    <a class="navbar-brand" href="http://127.0.0.1/ejemplo/Presentacion/index.php">BibloCur</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -191,8 +191,8 @@ session_start();
                                         Reserva
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="view/PrestamoLibro.php">Libro</a>
-                                        <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
+                                        <a class="dropdown-item" href="http://127.0.0.1/ejemplo/Presentacion/catalogo.php">Libro</a>
+                                        <a class="dropdown-item" href="resevavideoBeam.php">Video Beam</a>
                                         <a class="dropdown-item" href="view/videoBeam.php"></a>
                                     </div>
                                 </li>
@@ -202,9 +202,9 @@ session_start();
                                             Prestamo
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="view/PrestamoLibro.php">Libro</a>
-                                            <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
-                                            <a class="dropdown-item" href="#">Prestamo Interbibliotecario</a>
+                                            <a class="dropdown-item" href="http://127.0.0.1/ejemplo/Presentacion/catalogo.php">Libro</a>
+                                            <a class="dropdown-item" href="resevavideoBeam.php">Video Beam</a>
+                                            <a class="dropdown-item" href="http://127.0.0.1/ejemplo/Presentacion/PrestamoInter.php">Prestamo Interbibliotecario</a>
                                         </div>
                                     </li>
                                     <?php if ($_SESSION["usuario"]["perfil"] == "administrador") { ?>
@@ -213,10 +213,10 @@ session_start();
                                                 Gestion
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                <a class="dropdown-item" href="view/registrarUsuario.php">Usuario</a>
-                                                <a class="dropdown-item" href="view/RegistrarLibro.php">Empleados</a>
+                                                <a class="dropdown-item" href="registrarUsuario.php">Usuario</a>
+                                                <a class="dropdown-item" href="RegistrarLibro.php">Libro</a>
                                                 <a class="dropdown-item" href="registrarVideoBeam.php">Video Beam</a>
-                                                <a class="dropdown-item" href="view/RegistrarLibro.php">Material audiovisual</a>
+                                                <a class="dropdown-item" href="SubidaMasiva.php">Subida masiva</a><a class="dropdown-item" href="Plantilla.php">Formato</a>
                                             </div>
                                         </li>
                                         <?php
@@ -231,45 +231,44 @@ session_start();
                                 </li>
                             </ul>
                             <form class="form-inline my-2 my-lg-0">
-                                <select name="Filtro" class="form-control" id="filtro">
+                                <select name="filtroCabecera" class="form-control" id="filtro" name="filtroCabecera">
                                     <option value="" disabled selected>Buscar por:</option>
                                     <option value="Isbn">Isbn</option>
                                     <option value="Autor">Autor</option>
                                     <option value="Titulo">Titulo</option>
                                     <option value="Editorial">Editorial</option>
-                                    <option value="Tema">Tema</option>
+
                                 </select>
-                                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                                <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="txtBuscarEncabezado" name="txtBuscarEncabezado">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnBuscarLibroCabezera">Buscar</button>
                             </form>
                         </div>
                     </div>
                 </nav>
             </header>
-
         </div>
         <!-- Page Content -->
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
-                    <form class="form-inline" onsubmit="return false">
+                    <form class="form-inline" onsubmit="return false" name="buscar" id="buscar">
                         <div class="form-group ">
-                            <label for="exampleFormControlSelect1">Buscar por  :</label> 
+                            <label for="exampleFormControlSelect1">Buscar por :</label> 
                             &nbsp
-                            <select name="Filtro" class="form-control" id="filtro">
+                            <select name="filtro" class="form-control" id="filtro">
                                 <option value="" disabled selected>Seleccione un Filtro de busqueda</option>
                                 <option value="Isbn">Isbn</option>
                                 <option value="Autor">Autor</option>
                                 <option value="Titulo">Titulo</option>
                                 <option value="Editorial">Editorial</option>
-                                <option value="Tema">Tema</option>
+
                             </select>&nbsp
-                            <input type="search" class="input-sm form-control " placeholder="Búsqueda" id = "txtBusqueda">
-                            &nbsp <button type="submit" id ="BtnFiltro" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Buscar</button>
+                            <input type="search" class="input-sm form-control " placeholder="Búsqueda" id = "txtBusqueda" name="txtBusqueda">
+                            &nbsp <button id ="BtnFiltro" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Buscar</button>
                         </div>
                     </form>
                     <br>
-                    <table  id = "PrestamoTabla" class="table table-bordered table-dark"  >
+                    <table id = "PrestamoTabla" class="table table-bordered table-dark" >
                         <thead>
                             <tr>
                                 <th scope="col">isbn</th>
@@ -285,12 +284,12 @@ session_start();
                 <div class="col-md-3">
                     <div class="btn-group-vertical" role="group" aria-label="Basic example">
                         <button type="button" id="btnCatalogoLinea" class="btn btn-secondary">Catalogo en línea</button>
-                        <button type="button" class="btn btn-secondary">Préstamos, consulta y renovación </button>
+                        <button type="button" id="btnHistorial" class="btn btn-secondary">Préstamos, consulta y renovación </button> 
                         <button type="button" class="btn btn-secondary">Sugerir títulos </button>
                         <?php if ($_SESSION) { ?>
                             <button type="button" id="CerrarSesion" class="btn btn-secondary" data-toggle="modal" data-target="#login-modal"> Cerrar sesión </button>
                         <?php } else { ?>
-                            <button  type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat"> Iniciar sesión </button>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat"> Iniciar sesión </button>
                         <?php } ?>
                     </div>
                 </div>
@@ -322,46 +321,102 @@ session_start();
         });
     }
     function catalogo() {
-        var url = "catalogo";
-        var parametro = "z";
-        var metodo = function (respuesta) {
-            var data = $.parseJSON(respuesta);
-            for (var i = 0; i < data.length; i++) {
-                tabla(data[i]);
-            }
-        };
-        fajax(url, parametro, metodo);
+
+<?php if (isset($_GET['entrada'])) { ?>
+            alert("entra");
+            $("#tabla1").empty();
+            filtro('<?php echo $_GET['entrada']; ?>', '<?php echo $_GET['entrada1']; ?>');
+
+<?php } else { ?>
+            var url = "catalogo";
+            var parametro = "";
+            var metodo = function (respuesta) {
+                var data = $.parseJSON(respuesta);
+                for (var i = 0; i < data.length; i++) {
+                    tabla(data[i]);
+                }
+            };
+            fajax(url, parametro, metodo);
+<?php } ?>
     }
     var myJson = new Array();
     function tabla(tmp) {
         var estr = $("<tr></tr>");
         estr.append("<td>" + tmp.isbn + "</td>"
-                + "<td><img src=" + tmp.imagen + " width=100 height=100></td>"
-                + "<td><p> Titulo :" + tmp.titulo + "<br> Autor:" + tmp.autor + " Editorial:" + tmp.editorial + "</p></td>"
-                + "<td><button value=" + tmp.isbn + " type='sumit' id='btnResl' class='btn btn-success' onclick='reserva(" + tmp.isbn + ")'>Resevar</button></td>");
-        //validacionEstado(tmp));
+                + "<td><img src=../assets/img/img/libro/" + tmp.imagen + " width=100 height=100></td>"
+                + "<td><p> Titulo :" + tmp.titulo + "<br> Autor:" + tmp.autor + " Editorial:" + tmp.editorial + "</p>"
+                + "<br> Reseña:" + tmp.resena + "</p></td>" +
+<?php if ($_SESSION) { ?>
+            "<td><button value=" + tmp.isbn + " type='sumit' id='btnResl' class='btn btn-success' onclick= 'location.href= &#039;http://127.0.0.1/ejemplo/Presentacion/resevalibro.php?entrada=" + tmp.isbn + "&imagen=" + tmp.imagen + "&titulo=" + tmp.titulo + "&resena=" + tmp.resena + "&editorial=" + tmp.editorial + "&#039; '>Resevar</button></td>");
+<?php } else { ?>
+            "<td><button id='lost_login_btn' type='button' class='btn btn-secondary' data-toggle='modal' data-target='#exampleModal' data-whatever='@fat'>Resevar</button></td>"
+                    );
+<?php } ?>
         $("#PrestamoTabla").append(estr);
     }
-    function validacionEstado(tmp) {
-        if (tmp.estado == 'libre') {
-            return "<td class ='prestar' post ='" + tmp.isbn + "' >Libre</td>";
-        } else {
-            return "<td class ='no_diponible' post ='" + tmp.isbn + "' >No disponible</td>";
-        }
-    }
     catalogo();
-    function reserva(entrada ) {
-     window.location="http://127.0.0.1/ejemplo/Presentacion/resevalibro.php?entrada="+entrada;
-//        console.log("holamundo");
-//        var url = "reserva";
-//        var parametro = myjson(entrada);
-//        var metodo = function (respuesta) {
-//        }
-//         fajax(url, parametro, metodo);
-    }
-       function myjson(formulario) {
+    function myjson(formulario) {
         myJson.push(formulario);
         var myString = JSON.stringify(formulario);
         return myString;
     }
+    $("#BtnFiltro").click(function () {
+        $("#buscar").validate({
+            rules: {
+                buscar: {
+                    required: true
+                }
+            },
+            submitHandler: function () {
+                alert("entra");
+                $("#tabla1").empty();
+                filtro($('select[name=filtro]').val(), $("#txtBusqueda").val());
+            }
+        });
+    });
+    function filtro(entrada, entrada1) {
+        switch (entrada) {
+            case "Isbn":
+            {
+                busquedaFiltro("tablaXid", entrada1);
+                break;
+            }
+            case "Autor":
+            {
+                busquedaFiltro("tablaXautor", entrada1);
+                break;
+            }
+            case "Titulo":
+            {
+                busquedaFiltro("tablaXtitulo", entrada1);
+                break;
+            }
+            case "Editorial":
+            {
+                busquedaFiltro("tablaXEditorial", entrada1);
+                break;
+            }
+            default:
+            {
+                alert("Escoja un filtro para poder hacer la busqueda");
+                break;
+            }
+        }
+    }
+    function busquedaFiltro(array, entrada1) {
+        var formulario = {
+            Consulta: entrada1
+        };
+        var ur = array;
+        var parametro1 = myjson(formulario);
+        var meto = function (respuesta) {
+            console.log(respuesta);
+            var data = $.parseJSON(respuesta);
+            for (var i = 0; i < data.length; i++) {
+                tabla(data[i]);
+            }
+        };
+        fajax(ur, parametro1, meto);
+    }
+
 </script>

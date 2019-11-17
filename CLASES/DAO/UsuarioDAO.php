@@ -1,11 +1,35 @@
 <?php
 
+/**
+ * Long Desc 
+ * */
+/**
+ * Esta clase ejecuta las conusltas relacionadas con el usuario
+ * realizando 
+ *
+ * 
+ * @package VO
+ * @category Educativo
+ * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+ * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
+ * @version Revision: 1.0 
+ * @access publico
+ * * */
 require("../../PHPMailer-master/src/PHPMailer.php");
 require("../../PHPMailer-master/src/SMTP.php");
 require("../../PHPMailer-master/src/Exception.php");
 
 class UsuarioDAO {
 
+    /**
+     * Este metodo permite registrar un nuevo usuario con toda la información
+     * nesesaria como es el fabricante y los cables que tiene, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del video beam 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa , fallida o ya se encuentra duplicado 
+     * */
     public function CrearUsuario($array) {
         if ($this->Filtro($array) == "ok") {
             $respuesta = array();
@@ -20,15 +44,21 @@ class UsuarioDAO {
         }
     }
 
+    /**
+     * Este metodo permite actualizar informacion del usuario
+     * nesesaria como es el fabricante y los cables que tiene, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del video beam 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa , fallida o ya se encuentra duplicado 
+     * */
     function ActualizarUsuario($array) {
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
-
         $sql = 'UPDATE `tbl_usuario` SET `nombre`= ?,`apellido`= ?,`fechaNacimiento`=?,`sexo`=?,`direccion`=?,`direccion2`=?,`telefonoPrincipal`= ?,`telefonoSecundario`=?,`telefonoOtro`=?,`emailPrincipal`=?,`contactoNombre`=?,`contactoApellido`=?,`contactoDireccion`= ?,`contactoDireccion2`=?,`contactoTelefono`=?,`contrasena`=?,`perfil`=? WHERE `codigo`= ?;';
-
         $stmp = $conn->prepare($sql);
-
         $UsuarioVO = new UsuarioVO();
         $UsuarioVO->setCodigo($array->codigo);
         $UsuarioVO->setNombre($array->nombre);
@@ -72,6 +102,15 @@ class UsuarioDAO {
         $this->respuesta($conn, $stmp);
     }
 
+    /**
+     * Este metodo permite eliminar el registro del usuario
+     * nesesaria como es el fabricante y los cables que tiene, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del video beam 
+     * @return array() Se envia la respuesta si fue eliminado con exito donde se indica si fue exitosa , fallida o ya se encuentra duplicado 
+     * */
     function ElminarUsuario($array) {
         if ($this->Filtro($array) == "no") {
             $respuesta = array();
@@ -93,6 +132,15 @@ class UsuarioDAO {
         }
     }
 
+    /**
+     * Este metodo permite registrar un nuevo usuario con toda la información
+     * nesesaria como es el fabricante y los cables que tiene, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del video beam 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa , fallida o ya se encuentra duplicado 
+     * */
     function BuscarUsuario($array) {
         $sql = "CALL miprocesos1 (9,?)";
         $BD = new ConectarBD();
@@ -140,6 +188,15 @@ class UsuarioDAO {
         echo json_encode($respuesta);
     }
 
+    /**
+     * Este metodo permite registrar un nuevo usuario con toda la información
+     * nesesaria como es el fabricante y los cables que tiene, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del video beam 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa , fallida o ya se encuentra duplicado 
+     * */
     public function Login($array) {
 
         $sql = "CALL tema (5,?,?)";
@@ -172,6 +229,15 @@ class UsuarioDAO {
         echo json_encode($respuesta);
     }
 
+    /**
+     * Este metodo permite registrar un nuevo usuario con toda la información
+     * nesesaria como es el fabricante y los cables que tiene, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del video beam 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa , fallida o ya se encuentra duplicado 
+     * */
     function Correo($array) {
 
         $sql = 'call tema (6,?,?)';
@@ -225,7 +291,7 @@ class UsuarioDAO {
         $mail->Subject = "Recuperacion de su clave";
         $mail->addAddress($correo); /* Add a recipient */
         $mail->isHTML(true); /* Set email format to HTML (default = true) */
-        $mail->Body = "Su clave de acceso para la biblioteca  es: <b> " . $contrasena . " </b> <br> Se le recomienda cambiar su clave por seguridad<br><br><img src ='https://image.ibb.co/hVSO7d/Captura.jpg' width='412' height='122'/>";
+        $mail->Body = "Su clave de acceso para la biblioteca es: <b> " . $contrasena . " </b> <br> Se le recomienda cambiar su clave por seguridad<br><br><img src ='https://image.ibb.co/hVSO7d/Captura.jpg' width='412' height='122'/>";
         if (!$mail->send()) {
             echo 'Message could not be sent.';
             echo 'Mailer Error: ' . $mail->ErrorInfo;
@@ -234,7 +300,7 @@ class UsuarioDAO {
 
     public function Mostrar($array) {
 
-        $sql = "SELECT codigo, `nombre`, `apellido`, `fechaNacimiento`, `sexo`, `direccion`, `telefonoPrincipal`, `emailPrincipal`,  `contrasena`  FROM tbl_usuario  WHERE `codigo`=? ";
+        $sql = "SELECT codigo, `nombre`, `apellido`, `fechaNacimiento`, `sexo`, `direccion`, `telefonoPrincipal`, `emailPrincipal`, `contrasena` FROM tbl_usuario WHERE `codigo`=? ";
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -257,8 +323,6 @@ class UsuarioDAO {
             $tmp["telefonoPrincipal"] = $telefonoPrincipal;
             $tmp["emailPrincipal"] = $emailPrincipal;
             $tmp["contrasena"] = $contrasena;
-
-
             $respuesta[sizeof($respuesta)] = $tmp;
         }
         $stmp->close();
@@ -266,6 +330,15 @@ class UsuarioDAO {
         echo json_encode($respuesta);
     }
 
+    /**
+     * Este metodo permite visualizar si el usuario tiene multas o no
+     * nesesaria como es el fabricante y los cables que tiene, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del video beam 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa , fallida o ya se encuentra duplicado 
+     * */
     public function Mis_multa($array) {
 
         $sql = "call miprocesos1 (17,?);";
@@ -290,6 +363,15 @@ class UsuarioDAO {
         echo json_encode($respuesta);
     }
 
+    /**
+     * Este metodo permite realizar el cambio de clave del usuario
+     * nesesaria como es el fabricante y los cables que tiene, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del video beam 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa , fallida o ya se encuentra duplicado 
+     * */
     public function CambioClave($array) {
 
         $sql = 'call tema (7,?,?)';
@@ -310,9 +392,18 @@ class UsuarioDAO {
         $this->respuesta($conn, $stmp);
     }
 
+    /**
+     * Este metodo permite mostrar el historial de prestamo del usuario
+     * nesesaria como es el fabricante y los cables que tiene, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del video beam 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa , fallida o ya se encuentra duplicado 
+     * */
     function Historial($array) {
-        $sql = "SELECT `diaReserva`,`diaEntrega`,`diaPrestamo`,tbl_libro.titulo,tbl_libro.isbn,`renovacion`,`actividad`   FROM `tbl_prestamo`, tbl_libro WHERE codigo = ? and tbl_libro.isbn = tbl_prestamo.isbn";
 
+        $sql = 'call yyy (?)';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
@@ -325,26 +416,32 @@ class UsuarioDAO {
         $stmp->bind_param("i", $codigo);
 
         $stmp->execute();
-        $stmp->bind_result($Dreserva, $Dentrega, $Dprestamo, $titulo, $isbn, $renovacion, $estado);
+        $stmp->bind_result($idPrestamo, $tipo, $actividad, $dReserva, $dEntrega, $dPrestamo, $id, $renovacion);
         $respuesta = array();
         while ($stmp->fetch()) {
-            $tmp = array();
-            $tmp["Dreserva"] = $Dreserva;
-            $tmp["Dentrega"] = $Dentrega;
-            $tmp["Dprestamo"] = $Dprestamo;
-            $tmp["titulo"] = $titulo;
-            $tmp["isbn"] = $isbn;
-            $tmp["renovacion"] = $renovacion;
-            $tmp["estado"] = $estado;
 
+            $tmp["idPrestamo"] = $idPrestamo;
+            $tmp["tipo"] = $tipo;
+            $tmp["actividad"] = $actividad;
+            $tmp["diaReserva"] = $dReserva;
+            $tmp["diaEntrega"] = $dEntrega;
+            $tmp["diaPrestamo"] = $dPrestamo;
+            $tmp["isbnPrestamoInt"] = $id;
+            $tmp["renovacion"] = $renovacion;
             $respuesta[sizeof($respuesta)] = $tmp;
         }
-
         $stmp->close();
         $conn->close();
         echo json_encode($respuesta);
     }
 
+    /**
+     * Este metodo valida si el usuario ya esta registrado en la base de datos
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene el numero de serial del video beam que desea validar su existencia en la base de datos.
+     * @return array() Se envia la respuesta si el video beam esta registrado o no.
+     * */
     function Filtro($array) {
 
         $Usuariovo = new UsuarioVO();
@@ -378,6 +475,15 @@ class UsuarioDAO {
         return ($respuesta);
     }
 
+    /**
+     * Este metodo permite registrar un nuevo usuario con toda la información para subida masiva de usuario.
+     * nesesaria como es el fabricante y los cables que tiene, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del video beam 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa , fallida o ya se encuentra duplicado 
+     * */
     function SMCrearUsuario($array) {
         if ($this->Filtro($array) == "ok") {
             $respuesta = array();
@@ -401,6 +507,14 @@ class UsuarioDAO {
         }
     }
 
+    /**
+     * Este metodo permite cerrar la conexiòn con la base de datos y retornar si la query fue exitosa o no
+     * @param array() $conn Variable que establece el driver de conexión 
+     * @param array() $stmp prepara la ejecucion de la sentencia 
+     * @return array() Se envia la respuesta de la actualización donde se indica si fue exitosa o no 
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * */
     function Respuesta($conn, $stmp) {
         $respuesta = array();
         if ($stmp->execute() == 1) {
@@ -413,6 +527,15 @@ class UsuarioDAO {
         echo json_encode($respuesta);
     }
 
+    /**
+     * Este metodo permite registrar un nuevo usuario con toda la información
+     * nesesaria como es el fabricante y los cables que tiene, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del video beam 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa , fallida o ya se encuentra duplicado 
+     * */
     function insert($array, $stmp) {
 
         $UsuarioVO = new UsuarioVO();

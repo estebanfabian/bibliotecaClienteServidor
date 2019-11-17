@@ -9,3 +9,4 @@ $json = file_get_contents("php://input");
 $local = json_decode($json);
 $LibroDAO = new LibroDAO();
 $LibroDAO->ListarXPortada($local);
+

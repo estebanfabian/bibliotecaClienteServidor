@@ -47,7 +47,7 @@ class VideoBeamDAO {
      * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
      * @since Revision: 1.0 
      * @param array() $array datos de tipo json que contiene la informacion que se modificara del video beam.
-     * @return array() Se envia la respuesta de la modificacione  si fue exitosa o no 
+     * @return array() Se envia la respuesta de la modificacione si fue exitosa o no 
      * */
     function ModificarVideoBeam($array) {
 
@@ -79,8 +79,8 @@ class VideoBeamDAO {
      * Este metodo permite eliminar el video beam
      * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
      * @since Revision: 1.0 
-     * @param array() $array datos de tipo json que contiene el numero de serial que desea eliminar  del video beam.
-     * @return array() Se envia la respuesta si la eliminacion del video beam  si fue exitosa o no 
+     * @param array() $array datos de tipo json que contiene el numero de serial que desea eliminar del video beam.
+     * @return array() Se envia la respuesta si la eliminacion del video beam si fue exitosa o no 
      * */
     function EliminarVideoBeam($array) {
         if ($this->Filtro($array) == "no") {
@@ -104,11 +104,11 @@ class VideoBeamDAO {
     }
 
     /**
-     * Este metodo permite buscar el video beam a travès del  nùmero de serial del video beam
+     * Este metodo permite buscar el video beam a travès del nùmero de serial del video beam
      * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
      * @since Revision: 1.0 
      * @param array() $array datos de tipo json que contiene el numero de serial del video beam que desea buscar.
-     * @return array() Se envia la respuesta  toda la informaciòn del video beam como  cables que tiene estado y observaciones 
+     * @return array() Se envia la respuesta toda la informaciòn del video beam como cables que tiene estado y observaciones 
      * */
     function BuscarVideoBean($array) {
 
@@ -205,7 +205,7 @@ class VideoBeamDAO {
     }
 
     /**
-     * Este metodo permite registrar varios  nuevos video beams con toda la información
+     * Este metodo permite registrar varios nuevos video beams con toda la información
      * nesesaria como es el fabricante y los cables que tiene, además 
      * de contar con sus observsaciones
      * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
@@ -238,6 +238,15 @@ class VideoBeamDAO {
         }
     }
 
+    /**
+     * Este metodo permite registrar varios nuevos video beams con toda la información
+     * nesesaria como es el fabricante y los cables que tiene, además 
+     * de contar con sus observsaciones
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del video beam 
+     * @return array() Se envia la respuesta del registro donde se indica si fue exitosa , fallida o ya se encuentra duplicado 
+     * */
     function insert($array, $stmp) {
 
         $VideoBeamVo = new VideoBeamVO();
@@ -257,6 +266,35 @@ class VideoBeamDAO {
 
         $stmp->bind_param("isiiis", $idVideoBeam, $fabricante, $cableUSB, $cableHDMI, $cableVGA, $observaciones);
         return $stmp;
+    }
+
+    /**
+     * Este metodo permite mostrar todos video beam
+     * nesesaria como es nombre y alguna obsevacion sobre el autor
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * @param array() $array datos de tipo json que contiene la informacion a registrar del autor 
+     * @return array() Se envia la respuesta del registro de los video beam
+     * */
+    function CargarVideoBeam($array) {
+
+        $sql = "SELECT `idVideoBeam` FROM `tbl_video_beam` ";
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $stmp->execute();
+
+        $stmp->bind_result($idVideoBeam);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["idVideoBeam"] = $idVideoBeam;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
     }
 
 }

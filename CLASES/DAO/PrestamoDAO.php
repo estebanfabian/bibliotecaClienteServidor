@@ -1,126 +1,134 @@
 <?php
 
+/**
+ * Long Desc 
+ * */
+
+/**
+ * Esta clase ejecuta las conusltas relacionadas con el prestamo
+ * 
+ *
+ * 
+ * @package VO
+ * @category Educativo
+ * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
+ * @link https://github.com/estebanfabian/bibliotecaClienteServidor.git 
+ * @version Revision: 1.0 
+ * @access publico
+ * * */
 class PrestamoDAO {
 
     function CrearPrestamo($array) {
-        $PrestamoVo = new PrestamoVO();
-        $PrestamoVo->setIdPrestamo($array->idPrestamo);
-        $PrestamoVo->setEstadoLibro($array->estadoLibro);
-        $PrestamoVo->setDiaPrestamo($array->diaPrestamo);
-        $PrestamoVo->setPreInterBibliotecarios($array->preInterBibliotecarios);
-        $PrestamoVo->setIsbn($array->Isbn);
-        $PrestamoVo->setIdVideoBeam($array->idVideoBeam);
-        $PrestamoVo->setIdcomputador($array->idcomputador);
-        $PrestamoVo->setCodigo($array->codigo);
-
-        if ($PrestamoVo->setIdPrestamo() != "null") {
-            $this->ModificarPrestamo($PrestamoVo);
-        } else {
-            $sql = 'INSERT INTO `tbl_prestamo`(`idPrestamo`, `estadoLibro`, `diaPrestamo`, `preInterBibliotecarios`, `Isbn`, `idVideoBeam`, `idcomputador`, `codigo`, `estado`, `CodigoEmpleado`) VALUES (?,?,?,?,?,?,?,?,?,?);';
-            $BD = new ConectarBD();
-            $conn = $BD->getMysqli();
-            $stmp = $conn->prepare($sql);
-
-            $idPrestamo = $PrestamoVo->getIdPrestamo();
-            $estadoLibro = $PrestamoVo->getEstadoLibro();
-            $diaPrestamo = $PrestamoVo->getDiaPrestamo();
-            $preInterBibliotecarios = $PrestamoVo->getPreInterBibliotecarios();
-            $Isbn = $PrestamoVo->getIsbn();
-            $idVideoBeam = $PrestamoVo->getIdVideoBeam();
-            $idcomputador = $PrestamoVo->getIdcomputador();
-            $codigo = $PrestamoVo->getCodigo();
-            $estado = $PrestamoVo->getEstadoLibro();
-            $CodigoEmpleado = $PrestamoVo->getCodigoEmpleado();
-            $stmp->bind_param("sssssisisi", $idPrestamo, $estadoLibro, $diaPrestamo, $preInterBibliotecarios, $Isbn, $idVideoBeam, $idcomputador, $codigo, $estado, $CodigoEmpleado);
-
-            $this->Respuesta($conn, $stmp);
-        }
-    }
-
-    function ModificarPrestamo($array) {
-
-        $PrestamoVo = new PrestamoVO();
-        $PrestamoVo->setIdPrestamo($array->idPrestamo);
-        $PrestamoVo->setEstadoLibro($array->estadoLibro);
-        $PrestamoVo->setDiaPrestamo($array->diaPrestamo);
-        $PrestamoVo->setPreInterBibliotecarios($array->preInterBibliotecarios);
-        $PrestamoVo->setIsbn($array->Isbn);
-        $PrestamoVo->setIdVideoBeam($array->idVideoBeam);
-        $PrestamoVo->setIdcomputador($array->idcomputador);
-        $PrestamoVo->setCodigo($array->codigo);
-
-        $sql = 'UPDATE `tbl_prestamo` SET `estadoLibro`=?,`diaPrestamo`=?,`preInterBibliotecarios`=?,`Isbn`=?,`idVideoBeam`=?,`idcomputador`=?,`codigo`=?,`estado`=?,`CodigoEmpleado`=? WHERE `idPrestamo`=?;';
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
-        $stmp = $conn->prepare($sql);
 
-        $idPrestamo = $PrestamoVo->getIdPrestamo();
+        $PrestamoVo = new PrestamoVO();
+        $PrestamoVo->setEstadoLibro($array->observaciones);
+        $PrestamoVo->setDiaPrestamo($array->diaPrestamo);
+        $PrestamoVo->setIsbn($array->Isbn);
+        $PrestamoVo->setActividad($array->proceso);
+        $PrestamoVo->setCod_empleado($array->codigo);
+        $PrestamoVo->setCodigo($array->codigoU);
+
+        $Isbn = $PrestamoVo->getIsbn();
         $estadoLibro = $PrestamoVo->getEstadoLibro();
         $diaPrestamo = $PrestamoVo->getDiaPrestamo();
-        $preInterBibliotecarios = $PrestamoVo->getPreInterBibliotecarios();
-        $Isbn = $PrestamoVo->getIsbn();
-        $idVideoBeam = $PrestamoVo->getIdVideoBeam();
-        $idcomputador = $PrestamoVo->getIdcomputador();
-        $codigo = $PrestamoVo->getCodigo();
         $estado = $PrestamoVo->getEstadoLibro();
-        $CodigoEmpleado = $PrestamoVo->getCodigoEmpleado();
-        $stmp->bind_param("ssssisisis", $estadoLibro, $diaPrestamo, $preInterBibliotecarios, $Isbn, $idVideoBeam, $idcomputador, $codigo, $estado, $CodigoEmpleado, $idPrestamo);
-
+        $actividad = $PrestamoVo->getActividad();
+        $CodigoEmpleado = $PrestamoVo->getCod_empleado();
+        $codigo = $PrestamoVo->getCodigo();
+        $sql = 'call prestamos (1,?,?,?,?,?,?)';
+        $stmp = $conn->prepare($sql);
+        $stmp->bind_param("iisiis", $Isbn, $CodigoEmpleado, $estadoLibro, $actividad, $codigo, $diaPrestamo);
         $this->Respuesta($conn, $stmp);
     }
 
-    function EliminarPrestamo($array) {
+    function CrearPrestamoVideoBeam($array) {
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+
         $PrestamoVo = new PrestamoVO();
-        $PrestamoVo->setIdPrestamo($array->idPrestamo);
-        $sql = 'DELETE FROM `tbl_computador` WHERE `idPrestamo`=?;';
-        $BD = new ConectarBD();
-        $conn = $BD->getMysqli();
+        $PrestamoVo->setEstadoLibro($array->observaciones);
+        $PrestamoVo->setDiaPrestamo($array->Fprestamo);
+        $PrestamoVo->setDiaEntrega($array->Fentrega);
+        $PrestamoVo->setIdcomputador($array->Ncomputador);
+        $PrestamoVo->setIdVideoBeam($array->NvideoBeam);
+        $PrestamoVo->setCod_empleado($array->codigo);
+        $PrestamoVo->setCodigo($array->codigoU);
+
+
+        $estadoLibro = $PrestamoVo->getEstadoLibro();
+        $diaPrestamo = $PrestamoVo->getDiaPrestamo();
+        $diaEntrega = $PrestamoVo->getDiaEntrega();
+        $Nvideo = $PrestamoVo->getIdVideoBeam();
+        $Ncomputador = $PrestamoVo->getIdcomputador();
+        $CodigoEmpleado = $PrestamoVo->getCod_empleado();
+        $codigo = $PrestamoVo->getCodigo();
+        $diaPrestamo[10] = " ";
+        $diaEntrega[10] = " ";
+        $sql = 'INSERT INTO `tbl_prestamo`( `estadoLibro`, `actividad`, `diaEntrega`, `diaPrestamo`, `codigo`, `cod_empleado`, `idVideoBeam`, `idcomputador`, `id`) VALUES (?,2,?,?,?,?,?,?,(SELECT `id` FROM `tbl_usuario` WHERE `codigo` = ?))';
         $stmp = $conn->prepare($sql);
-
-        $idPrestamo = $PrestamoVo->getIdPrestamo();
-        $stmp->bind_param("s", $idPrestamo);
-
+        $stmp->bind_param("ssssssss", $estadoLibro, $diaPrestamo, $diaEntrega, $codigo, $CodigoEmpleado, $Nvideo, $Ncomputador, $codigo);
         $this->Respuesta($conn, $stmp);
     }
 
-    function Reservar_libro($array) {
-
-        $sql = 'INSERT INTO `tbl_prestamo` (`diaPrestamo`,  `isbn`,  `codigo`, `diaReserva`,actividad, id) VALUES (?, ?, ?, ?,?,?);'; // cambiar dia de prestamo por dia de reserva
+    function CrearVideoBeam($array) {
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
-        $stmp = $conn->prepare($sql);
 
-        $PrestamoVO = new PrestamoVO();
-        $PrestamoVO->setDiaPrestamo($array->diaPrestamo);
-        $PrestamoVO->setIsbn($array->isbn);
-        $PrestamoVO->setCodigo($array->codigo);
-        $PrestamoVO->setDiaEntrega($array->diaEntrega);
-        $PrestamoVO->setId($this->id_reserva($array->codigo));
-        
-        $diaPrestamo = $PrestamoVO->getDiaPrestamo();
-        $isbn = $PrestamoVO->getIsbn();
-        $codigo = $PrestamoVO->getCodigo();
-        $diaEntrega = $PrestamoVO->getDiaEntrega();
-        $actividad = 1;
-        $id_reserva = $PrestamoVO->getId();
+        $PrestamoVo = new PrestamoVO();
+        $PrestamoVo->setEstadoLibro($array->observaciones);
+        $PrestamoVo->setDiaPrestamo($array->Fprestamo);
+        $PrestamoVo->setDiaEntrega($array->Fentrega);
+        $PrestamoVo->setIdcomputador($array->Ncomputador);
+        $PrestamoVo->setIdVideoBeam($array->NvideoBeam);
+        $PrestamoVo->setCod_empleado($array->codigo);
+        $PrestamoVo->setCodigo($array->codigoU);
 
-        $stmp->bind_param("siisii", $diaPrestamo, $isbn, $codigo, $diaEntrega, $actividad, $id_reserva);
-        $respuesta = array();
-        if ($stmp->execute() == 1) {
-           
-            $sql = "UPDATE `tbl_libro` SET `estado` = 'reservado' WHERE `tbl_libro`.`isbn` = ?";
-            $stmp = $conn->prepare($sql);
-            $stmp->bind_param("i",$isbn);
-            $respuesta = array();
-            if ($stmp->execute() == 1) {
-                 $respuesta["sucess"] = "ok";
-            }
+
+        $estadoLibro = $PrestamoVo->getEstadoLibro();
+        $diaPrestamo = $PrestamoVo->getDiaPrestamo();
+        $diaEntrega = $PrestamoVo->getDiaEntrega();
+        $Nvideo = $PrestamoVo->getIdVideoBeam();
+        $Ncomputador = $PrestamoVo->getIdcomputador();
+        $CodigoEmpleado = $PrestamoVo->getCod_empleado();
+        $codigo = $PrestamoVo->getCodigo();
+        $diaPrestamo[10] = " ";
+        $diaEntrega[10] = " ";
+        if ($array->estado == 2) {
+            $sql = 'INSERT INTO `tbl_prestamo`( `estadoLibro`, `actividad`, `diaEntrega`, `diaPrestamo`, `codigo`, `cod_empleado`, `idVideoBeam`, `idcomputador`, `id`) VALUES (?,2,?,?,?,?,?,?,(SELECT `id` FROM `tbl_usuario` WHERE `codigo` = ?))';
         } else {
-            $respuesta["sucess"] = "no";
+            $sql = 'INSERT INTO `tbl_prestamo`( `estadoLibro`, `actividad`, `diaEntrega`, `diaPrestamo`, `codigo`, `cod_empleado`, `idVideoBeam`, `idcomputador`, `id`) VALUES (?,1,?,?,?,?,?,?,(SELECT `id` FROM `tbl_usuario` WHERE `codigo` = ?))';
         }
-        $stmp->close();
-        $conn->close();
-        echo json_encode($respuesta);
+        $stmp = $conn->prepare($sql);
+        $stmp->bind_param("ssssssss", $estadoLibro, $diaPrestamo, $diaEntrega, $codigo, $CodigoEmpleado, $Nvideo, $Ncomputador, $codigo);
+        $this->Respuesta($conn, $stmp);
+    }
+
+    function CrearReserva($array) {
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+
+        $PrestamoVo = new PrestamoVO();
+        $PrestamoVo->setEstadoLibro($array->observaciones);
+        $PrestamoVo->setDiaPrestamo($array->diaPrestamo);
+        $PrestamoVo->setIsbn($array->Isbn);
+        $PrestamoVo->setActividad($array->proceso);
+        $PrestamoVo->setCod_empleado($array->codigo);
+        $PrestamoVo->setCodigo($array->codigoU);
+
+        $Isbn = $PrestamoVo->getIsbn();
+        $estadoLibro = $PrestamoVo->getEstadoLibro();
+        $diaPrestamo = $PrestamoVo->getDiaPrestamo();
+        $estado = $PrestamoVo->getEstadoLibro();
+        $actividad = $PrestamoVo->getActividad();
+        $CodigoEmpleado = null;
+        $codigo = $PrestamoVo->getCodigo();
+
+        $sql = 'call prestamos (2,?,?,?,?,?,?)';
+        $stmp = $conn->prepare($sql);
+        $stmp->bind_param("iisiis", $Isbn, $CodigoEmpleado, $estadoLibro, $actividad, $codigo, $diaPrestamo);
+        $this->Respuesta($conn, $stmp);
     }
 
     function ValidacionReserva($param) {
@@ -144,6 +152,14 @@ class PrestamoDAO {
         echo json_encode($respuesta);
     }
 
+    /**
+     * Este metodo permite cerrar la conexiòn con la base de datos y retornar si la query fue exitosa o no
+     * @param array() $conn Variable que establece el driver de conexión 
+     * @param array() $stmp prepara la ejecucion de la sentencia 
+     * @return array() Se envia la respuesta de la actualización donde se indica si fue exitosa o no 
+     * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com> 
+     * @since Revision: 1.0 
+     * */
     function Respuesta($conn, $stmp) {
         $respuesta = array();
 
@@ -183,42 +199,34 @@ class PrestamoDAO {
         echo json_encode($respuesta);
     }
 
-    public function Mostrar_tarjeta($array) {
-        $sql = "SELECT l.isbn , l.titulo , l.resena , l.imagen , p.diaPrestamo ,p.diaReserva, p.diaEntrega , p.idPrestamo , p.actividad, u.foto , p.renovacion FROM tbl_prestamo p INNER JOIN tbl_libro l ON p.isbn=l.isbn INNER JOIN tbl_usuario u on u.codigo=p.codigo WHERE p.codigo = ? and (p.actividad=1 or p.actividad=2)";
+    public function Cancelar($array) {
+        $sql = "UPDATE `tbl_prestamo` SET `actividad` = '5' WHERE `idPrestamo`=?";
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
         $PrestamoVO = new PrestamoVO();
-        $PrestamoVO->setCodigo($array->codigo);
-        $codigo = $PrestamoVO->getCodigo();
-        $stmp->bind_param("i", $codigo);
-        $stmp->execute();
-        $stmp->bind_result($isbn, $titulo, $resena, $imagen, $diaPrestamo, $diaReserva, $diaEntrega, $idPrestamo, $actividad, $foto, $renovacion);
-        $respuesta = array();
-        while ($stmp->fetch()) {
-            $tmp = array();
-            $tmp["isbn"] = $isbn;
-            $tmp["titulo"] = $titulo;
-            $tmp["resena"] = $resena;
-            $tmp["imagen"] = $imagen;
-            $tmp["diaPrestamo"] = $diaPrestamo;
-            $tmp["diaReserva"] = $diaReserva;
-            $tmp["diaEntrega"] = $diaEntrega;
-            $tmp["idPrestamo"] = $idPrestamo;
-            $tmp["actividad"] = $actividad;
-            $tmp["foto"] = $foto;
-            $tmp["renovacion"] = $renovacion;
-            $respuesta[sizeof($respuesta)] = $tmp;
+        $PrestamoVO->setIdPrestamo($array->idPrestamo);
+        $idPrestamo = $PrestamoVO->getIdPrestamo();
+
+        $stmp->bind_param("i", $idPrestamo);
+        $resultado = array();
+
+        if ($stmp->execute()) {
+            $respuesta["sucess"] = "ok";
+        } else {
+            $respuesta["sucess"] = "no";
         }
+
         $stmp->close();
         $conn->close();
+
         echo json_encode($respuesta);
     }
 
-    public function Cancelar($array) {
-        $sql = "UPDATE  `tbl_prestamo` SET `actividad` = '0' WHERE `idPrestamo`=?";
+    public function Entrega($array) {
+        $sql = "UPDATE `tbl_prestamo` SET `actividad` = '4' WHERE `idPrestamo`=?";
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
@@ -244,7 +252,7 @@ class PrestamoDAO {
     }
 
     function Renovacion($array) {
-        $sql = "UPDATE `tbl_prestamo` SET `renovacion` = b'0' , diaEntrega = ? WHERE `tbl_prestamo`.`idPrestamo` =?";
+        $sql = "UPDATE `tbl_prestamo` SET `renovacion` = '1' , diaEntrega = ? WHERE `tbl_prestamo`.`idPrestamo` =?";
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
@@ -272,32 +280,93 @@ class PrestamoDAO {
         echo json_encode($respuesta);
     }
 
-    function id_reserva($array) {
+    function ValidarVideoBeam($array) {
 
-        $sql = "SELECT id FROM tbl_usuario WHERE tbl_usuario.codigo = ?";
+        $sql = "select 'idVideoBeam' as computador, idVideoBeam as idcomputador FROM tbl_video_beam WHERE idVideoBeam not in (SELECT `idVideoBeam` FROM `tbl_prestamo` WHERE `isbn` IS NULL and ( diaPrestamo >= ? OR diaReserva >= ? ) AND diaEntrega <= ? and idVideoBeam is not null)";
 
         $BD = new ConectarBD();
         $conn = $BD->getMysqli();
         $stmp = $conn->prepare($sql);
 
-        $idPrestamo = $array;
+        $PrestamoVO = new PrestamoVO();
+        $PrestamoVO->setDiaPrestamo($array->Fprestamo);
+        $PrestamoVO->setDiaEntrega($array->Fentrega);
 
-        $stmp->bind_param("i", $idPrestamo);
-        $stmp->bind_result($id);
+        $diaPrestamo = $PrestamoVO->getDiaPrestamo();
+        $diaEntrega = $PrestamoVO->getDiaEntrega();
+        $diaPrestamo[10] = " ";
+        $diaEntrega[10] = " ";
 
-        $resultado = array();
-
-        if ($stmp->execute() == 1) {
-            while ($stmp->fetch()) {
-                $tmp = array();
-                $tmp["id"] = $id;
-            }
-        } else {
-            $respuesta["sucess"] = "no";
+        $stmp->bind_param("sss", $diaPrestamo, $diaPrestamo, $diaEntrega);
+        $stmp->execute();
+        $stmp->bind_result($tipo, $isbn);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["computador"] = $tipo;
+            $tmp["idcomputador"] = $isbn;
+            $respuesta[sizeof($respuesta)] = $tmp;
         }
         $stmp->close();
         $conn->close();
-        return $id;
+        echo json_encode($respuesta);
+    }
+
+    function ValidarComputador($array) {
+        $sql = "call pvideo (2,?,?)";
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $PrestamoVO = new PrestamoVO();
+        $PrestamoVO->setDiaPrestamo($array->Fprestamo);
+        $PrestamoVO->setDiaEntrega($array->Fentrega);
+
+        $diaPrestamo = $PrestamoVO->getDiaPrestamo();
+        $diaEntrega = $PrestamoVO->getDiaEntrega();
+        $diaPrestamo[10] = " ";
+        $diaEntrega[10] = " ";
+
+        $stmp->bind_param("ss", $diaPrestamo, $diaEntrega);
+        $stmp->execute();
+        $stmp->bind_result($tipo, $isbn);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+            $tmp = array();
+            $tmp["computador"] = $tipo;
+            $tmp["idcomputador"] = $isbn;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
+    }
+
+    function CambioEstado($array) {
+
+        $sql = 'SELECT * FROM `cambioestado`';
+        $BD = new ConectarBD();
+        $conn = $BD->getMysqli();
+        $stmp = $conn->prepare($sql);
+
+        $stmp->execute();
+        $stmp->bind_result($idPrestamo, $tipo, $actividad, $dReserva, $dEntrega, $dPrestamo, $id, $renovacion);
+        $respuesta = array();
+        while ($stmp->fetch()) {
+
+            $tmp["idPrestamo"] = $idPrestamo;
+            $tmp["tipo"] = $tipo;
+            $tmp["actividad"] = $actividad;
+            $tmp["diaReserva"] = $dReserva;
+            $tmp["diaEntrega"] = $dEntrega;
+            $tmp["diaPrestamo"] = $dPrestamo;
+            $tmp["isbnPrestamoInt"] = $id;
+            $tmp["renovacion"] = $renovacion;
+            $respuesta[sizeof($respuesta)] = $tmp;
+        }
+        $stmp->close();
+        $conn->close();
+        echo json_encode($respuesta);
     }
 
 }

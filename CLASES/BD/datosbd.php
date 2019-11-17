@@ -24,7 +24,7 @@ class Datos {
      * @var string Almacena el nombre de hots al que se conectara
      */
     private $hostname = 'localhost';
-   // private $hostname = 'http://192.168.0.18/';
+    // private $hostname = 'http://192.168.0.18/';
 
     /**
      * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>

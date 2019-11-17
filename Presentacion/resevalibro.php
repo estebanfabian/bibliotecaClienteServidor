@@ -1,10 +1,10 @@
-<?php
+no<?php
 /**
  * Long Desc 
  * */
 /**
  * Capa de presentación de reservar libro donde el usuario puede realizar la reserva de un libro 
- * pero solo  un 2 semanas maximo de plazo.
+ * pero solo un 2 semanas maximo de plazo.
  * 
  * @category Educativo
  * @author Esteban fabian patiño montealegre <estebanfabianp@gmail.com>
@@ -30,14 +30,14 @@ session_start();
 
         <script src="../assets/js/localization/messages_es.js" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/additional-methods.js"></script>     
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/additional-methods.js"></script> 
     </head> 
     <body>.bg{background-color:red}<!-- Navigation -->
         <div id = cabecera>
             <input type="hidden" size="15" maxlength="30" value="<?php echo $_SESSION["usuario"]["codigo"]; ?>" name="nombre" id="codigo">
             <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color:#A2121C;margin-left: 5px;margin-right: 5px;">
                 <div class="container">
-                    <a class="navbar-brand" href="#">BibloCur</a>
+                    <a class="navbar-brand" href="http://127.0.0.1/ejemplo/Presentacion/index.php">BibloCur</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -191,8 +191,8 @@ session_start();
                                         Reserva
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="view/PrestamoLibro.php">Libro</a>
-                                        <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
+                                        <a class="dropdown-item" href="http://127.0.0.1/ejemplo/Presentacion/catalogo.php">Libro</a>
+                                        <a class="dropdown-item" href="resevavideoBeam.php">Video Beam</a>
                                         <a class="dropdown-item" href="view/videoBeam.php"></a>
                                     </div>
                                 </li>
@@ -202,9 +202,9 @@ session_start();
                                             Prestamo
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="view/PrestamoLibro.php">Libro</a>
-                                            <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
-                                            <a class="dropdown-item" href="#">Prestamo Interbibliotecario</a>
+                                            <a class="dropdown-item" href="http://127.0.0.1/ejemplo/Presentacion/catalogo.php">Libro</a>
+                                            <a class="dropdown-item" href="resevavideoBeam.php">Video Beam</a>
+                                            <a class="dropdown-item" href="http://127.0.0.1/ejemplo/Presentacion/PrestamoInter.php">Prestamo Interbibliotecario</a>
                                         </div>
                                     </li>
                                     <?php if ($_SESSION["usuario"]["perfil"] == "administrador") { ?>
@@ -213,10 +213,10 @@ session_start();
                                                 Gestion
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                <a class="dropdown-item" href="view/registrarUsuario.php">Usuario</a>
-                                                <a class="dropdown-item" href="view/RegistrarLibro.php">Empleados</a>
+                                                <a class="dropdown-item" href="registrarUsuario.php">Usuario</a>
+                                                <a class="dropdown-item" href="RegistrarLibro.php">Libro</a>
                                                 <a class="dropdown-item" href="registrarVideoBeam.php">Video Beam</a>
-                                                <a class="dropdown-item" href="view/RegistrarLibro.php">Material audiovisual</a>
+                                                <a class="dropdown-item" href="SubidaMasiva.php">Subida masiva</a><a class="dropdown-item" href="Plantilla.php">Formato</a>
                                             </div>
                                         </li>
                                         <?php
@@ -237,10 +237,10 @@ session_start();
                                     <option value="Autor">Autor</option>
                                     <option value="Titulo">Titulo</option>
                                     <option value="Editorial">Editorial</option>
-                                    <option value="Tema">Tema</option>
+
                                 </select>
-                                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                                <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="txtBuscarEncabezado" name="txtBuscarEncabezado">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnBuscarLibroCabezera">Buscar</button>
                             </form>
                         </div>
                     </div>
@@ -256,53 +256,51 @@ session_start();
                         <div class="row right">
 
                             <div class="col-md-3">
-                                <img src= "<?php echo $_GET['imagen']; ?>"  width=200 height=300 >
-                                <?php if ($_SESSION["usuario"]["perfil"] == "administrador") { ?>    
-                                    Codigo: <input type="text"  id ="codigo" value="<?php echo $_SESSION['usuario']['codigo']; ?>" />   <?php } else { ?>
-                                    <input type="hidden"  id ="codigo" value="<?php echo $_SESSION['usuario']['codigo']; ?>" /> <?php } ?>
+                                <img src= "../assets/img/img/libro/<?php echo $_GET['imagen']; ?>" width=200 height=300 >
+                                <?php if ($_SESSION['usuario']['perfil'] == 'administrador' || $_SESSION['usuario']['perfil'] == 'empleado') { ?> 
+                                    Codigo: <input type="text" id ="codigoU" value="0" /> <?php } else { ?>
+                                    <input type="hidden" id ="codigoU" value="0" /> <?php } ?>
                             </div>
 
                             <div class="col-md-6">
-                                <div  class="form-group col-md-12" >
-                                    <p>  Isbn: <samp id = "isbnReserva" > <?php echo $_GET['isbn']; ?></samp></p> 
+                                <div class="form-group col-md-12">
+                                    <p> Titulo: <?php echo $_GET['titulo']; ?></p>
                                 </div>
-                                <div  class="form-group col-md-12">
-                                    <p> Titulo:  <?php echo $_GET['titulo']; ?></p>
+                                <div class="form-group col-md-12">
+                                    <p id ="autor1"></p>
                                 </div>
-                                <div  class="form-group col-md-12">
-                                    <p  id ="autor1"></p>
+                                <div class="form-group col-md-12">
+                                    <p id ="temas1"></p>
                                 </div>
-                                <div  class="form-group col-md-12">
-                                    <p  id ="temas1"></p>
+                                <div class="form-group col-md-12">
+                                    <p id ="categoria1"></p>
                                 </div>
-                                <div  class="form-group col-md-12">
-                                    <p> Editorial:  <?php echo $_GET['editorial']; ?></p>
+                                <div class="form-group col-md-12">
+                                    <p> Editorial: <?php echo $_GET['editorial']; ?></p>
                                 </div>
-                                <div  class="form-group col-md-12">
-                                       <p  id ="categoria1"></p>
-                                </div>
+                                <div id = "isbnReserva" class="form-group col-md-12">
+                                    <p> Reseña: <?php echo $_GET['resena']; ?></p>
+                                </div> 
                             </div>
                         </div>
-                        <div id = "isbnReserva" class="form-group col-md-12">
-                            <p> Reseña:  <?php echo $_GET['resena']; ?></p>
-                        </div> 
-                        <input type="datetime-local" name="datetimepicker1" id="datetimepicker1" value="">    
-
-
-
-                        <button  class="btn btn-primary " id="BtnPrestamo">Prestamo</button>
-
-                        <button  class="btn btn-primary " id="btnResercarLibro">Reservar</button>
-                        <button  class="btn btn-primary " id="btnVolverCatalogo">Volver</button>
-                        <?php echo $_GET['entrada']; ?>
+                        <table id = "ReservaLibro" class="table table-bordered table-dark" >
+                            <thead>
+                                <tr>
+                                    <th scope="col">isbn</th>
+                                    <th scope="col">fecha de reseva</th>
+                                    <th scope="col">Observaciones</th>
+                                    <th scope="col">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id ="tabla1">
+                            </tbody>
+                        </table>
                     </form>
-
-
                 </div>
                 <div class="col-md-3">
                     <div class="btn-group-vertical" role="group" aria-label="Basic example">
                         <button type="button" id="btnCatalogoLinea" class="btn btn-secondary">Catalogo en línea</button>
-                        <button type="button" class="btn btn-secondary">Préstamos, consulta y renovación </button>
+                        <button type="button" id="btnHistorial" class="btn btn-secondary">Préstamos, consulta y renovación </button> 
                         <button type="button" class="btn btn-secondary">Sugerir títulos </button>
                         <?php if ($_SESSION) { ?>
                             <button type="button" id="CerrarSesion" class="btn btn-secondary" data-toggle="modal" data-target="#login-modal"> Cerrar sesión </button>
@@ -312,20 +310,14 @@ session_start();
                     </div>
                 </div>
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container -->
-        <!-- Footer -->
         <footer id="piePagina" class="py-1">
         </footer>
     </body>
 </html>
 <script>
     $(document).ready(function () {
-        var op = 0;
-        var cambio = 0;
         var myJson = new Array();
-        var aux;
         function fajax(URL, parametros, metodo) {
             $.ajax({
                 url: URL,
@@ -344,20 +336,16 @@ session_start();
             });
         }
 
-// funcion para llammar el login y hacer la valicaciones pertinentes
+        // funcion para llammar el login y hacer la valicaciones pertinentes
         function catalogo() {
-            var formulario = {
-                isbn: <?php echo $_GET['entrada']; ?>
-            };
-
+            var formulario = {isbn: <?php echo $_GET['entrada']; ?>};
             var url = "reserva";
             var parametro = myjson(formulario);
-            console.log(parametro);
             var metodo = function (respuesta) {
-                console.log(respuesta);
                 var data = $.parseJSON(respuesta);
-                $("#temas1").text("temas :" + data[0]['temas']);
+                $("#temas1").text("Temas :" + data[0]['temas']);
                 $("#autor1").text("Autor :" + data[0]['autor']);
+                $("#categoria1").text("Categoria :" + data[0]['categoria']);
             };
             fajax(url, parametro, metodo);
         }
@@ -366,6 +354,163 @@ session_start();
             var myString = JSON.stringify(formulario);
             return myString;
         }
+        function listarLibro() {
+            var formulario1 = {titulo: "<?php echo $_GET['titulo']; ?>"};
+            var url1 = "listarLibros";
+            var parametro1 = myjson(formulario1);
+            var metodo1 = function (respuesta) {
+                var data = $.parseJSON(respuesta);
+                for (var i = 0; i < data.length; i++) {
+                    tabla(data[i]);
+                }
+            };
+            fajax(url1, parametro1, metodo1);
+        }
         catalogo();
+        listarLibro();
+        function tabla(tmp) {
+            var estr = $("<tr></tr>");
+            estr.append("<td>" + tmp.isbn + "</td>"
+                    + "<td>" + tmp.estado + "</td>"
+                    + "<td><input type='text' id='txtObservaciones" + tmp.isbn + "'></td>"
+                    + "<td> <input type='date' name='datetimepicker' id='datetimepicker" + tmp.isbn + "' value='tmp.isbn'> " +
+<?php if ($_SESSION['usuario']['perfil'] == 'administrador' || $_SESSION['usuario']['perfil'] == 'empleado') { ?>
+                "<button class = 'btn btn-primary ' id = 'btnprestamo1' onclick= 'Pretamo(" + tmp.isbn + ",2)'> Prestamo </button> "
+                        + "<button class='btn btn-primary' id='btnResercarLibro' onclick= 'Reserva(" + tmp.isbn + ",1)'>Reservar</button>"
+<?php } else { ?>
+                "< button class = 'btn btn-primary ' id = 'btnResercarLibro' onclick= 'Reserva(" + tmp.isbn + ",1)> Reservar < /button>"
+<?php } ?> + "</td>"
+                    );
+            $("#ReservaLibro").append(estr);
+        }
     });
+    var myJson = new Array();
+    function fajax(URL, parametros, metodo) {
+        $.ajax({
+            url: URL,
+            data: parametros,
+            type: 'post',
+            cache: false,
+            dataType: 'html',
+            processData: false,
+            contentType: false,
+            success: function (ZZx) {
+                metodo(ZZx);
+            },
+            error: function (xhr, status) {
+                alert("Existe un problema");
+            }
+        });
+    }
+    var f = new Date();
+    function Pretamo(entrada, entrada1) {
+
+        if ($('#datetimepicker' + entrada).val() === "") {
+            alert("Por favor Selecione una fecha");
+            $('#datetimepicker' + entrada).focus();
+        } else {
+            var formulario = {
+                codigo: $("#codigoU").val(xx),
+                diaPrestamo: $('#datetimepicker' + entrada).val(),
+                Tusuario: '<?php echo $_SESSION["usuario"]["perfil"]; ?>',
+                proceso: entrada1,
+                Isbn: entrada,
+                codigoU: $("#codigo").val(),
+                observaciones: $('#txtObservaciones' + entrada).val()
+            };
+            console.log(formulario);
+            var fecha10 = new Date($('#datetimepicker' + entrada).val());
+            fecha10.setDate(fecha10.getDate() + 1);
+            var fecha1 = f.getFullYear() + "-" + (f.getMonth() + 1).toString().padStart(2, "0") + "-" + f.getDate().toString().padStart(2, "0");
+            if ($('#datetimepicker' + entrada).val() >= fecha1 && fecha10 <= f.setDate(f.getDate() + 8)) {//fecha actual mayor o igual a la selecionada
+                var url = "Conta_res";
+                var parameto = myjson(formulario);
+                var metodo = function (respuesta) {
+                    var data = $.parseJSON(respuesta);
+                    if (data[0]['count'] < 4) {
+                        var ur11 = "prestamo";
+                        var parameto1 = myjson(formulario);
+                        var metodo1 = function (respuesta) {
+                            console.log(respuesta)
+                            var data = $.parseJSON(respuesta);
+                            if (data.sucess === 'ok') {
+                                alert("Reserva exitosa");
+                                LimpiarUsuario();
+                            } else if (data.sucess === 'no') {
+                                alert("Reserva fallida");
+                            }
+                        };
+                        fajax(ur11, parameto1, metodo1);
+                    } else {
+                        alert("tiene el numero maximo de reservas o prestamos")
+                    }
+                };
+                fajax(url, parameto, metodo);
+            } else {
+                alert("El rango de fecha debe estar dentro de 8 dias del dia de hoy hasta el dia de prestamo");
+                $('#datetimepicker' + entrada).val("dd/mm/aaaa");
+                $('#datetimepicker' + entrada).focus();
+            }
+        }
+        f.setDate(f.getDate() - 8)
+    }
+    function Reserva(entrada, entrada1) {
+
+        if ($('#datetimepicker' + entrada).val() === "") {
+            alert("Por favor Selecione una fecha");
+            $('#datetimepicker' + entrada).focus();
+        } else {
+
+            var formulario = {
+                codigo: '<?php echo $_SESSION["usuario"]["codigo"]; ?>',
+                diaPrestamo: $('#datetimepicker' + entrada).val(),
+                Tusuario: '<?php echo $_SESSION["usuario"]["perfil"]; ?>',
+                proceso: entrada1,
+                Isbn: entrada,
+                codigoU: $("#codigo").val(),
+                observaciones: $('#txtObservaciones' + entrada).val()
+            };
+            var fecha10 = new Date($('#datetimepicker' + entrada).val());
+            fecha10.setDate(fecha10.getDate() + 1);
+            var fecha1 = f.getFullYear() + "-" + (f.getMonth() + 1).toString().padStart(2, "0") + "-" + f.getDate().toString().padStart(2, "0");
+            console.log("entra");
+            if ($('#datetimepicker' + entrada).val() >= fecha1 && fecha10 <= f.setDate(f.getDate() + 8)) {//fecha actual mayor o igual a la selecionada
+                var url = "Conta_res";
+                var parameto = myjson(formulario);
+                var metodo = function (respuesta) {
+                    var data = $.parseJSON(respuesta);
+                    if (data[0]['count'] < 4) {
+                        console.log("entra");
+                        var ur11 = "reservaLibro";
+                        var parameto1 = myjson(formulario);
+                        var metodo1 = function (respuesta) {
+                            console.log(respuesta)
+                            var data = $.parseJSON(respuesta);
+
+                            if (data.sucess === 'ok') {
+                                alert("Reserva exitosa");
+                                LimpiarUsuario();
+                            } else if (data.sucess === 'no') {
+                                alert("Reserva fallida");
+                            }
+                        };
+                        fajax(ur11, parameto1, metodo1);
+                    } else {
+                        alert("tiene el numero maximo de reservas o prestamos")
+                    }
+                };
+                fajax(url, parameto, metodo);
+            } else {
+                alert("El rango de fecha debe estar dentro de 8 dias del dia de hoy hasta el dia de prestamo");
+                $('#datetimepicker' + entrada).val("dd/mm/aaaa");
+                $('#datetimepicker' + entrada).focus();
+            }
+        }
+        f.setDate(f.getDate() - 8)
+    }
+    function myjson(formulario) {
+        myJson.push(formulario);
+        var myString = JSON.stringify(formulario);
+        return myString;
+    }
 </script>

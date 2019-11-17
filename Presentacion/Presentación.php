@@ -28,15 +28,15 @@ session_start();
 
 
         <script src="../assets/js/localization/messages_es.js" type="text/javascript"></script>
-               <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
-         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/additional-methods.js"></script>     
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/additional-methods.js"></script> 
     </head> 
     <body>.bg{background-color:red}<!-- Navigation -->
         <div id = cabecera>
             <input type="hidden" size="15" maxlength="30" value="<?php echo $_SESSION["usuario"]["codigo"]; ?>" name="nombre" id="codigo">
             <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color:#A2121C;margin-left: 5px;margin-right: 5px;">
                 <div class="container">
-                    <a class="navbar-brand" href="#">BibloCur</a>
+                    <a class="navbar-brand" href="http://127.0.0.1/ejemplo/Presentacion/index.php">BibloCur</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -190,8 +190,8 @@ session_start();
                                         Reserva
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="view/PrestamoLibro.php">Libro</a>
-                                        <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
+                                        <a class="dropdown-item" href="http://127.0.0.1/ejemplo/Presentacion/catalogo.php">Libro</a>
+                                        <a class="dropdown-item" href="resevavideoBeam.php">Video Beam</a>
                                         <a class="dropdown-item" href="view/videoBeam.php"></a>
                                     </div>
                                 </li>
@@ -201,9 +201,9 @@ session_start();
                                             Prestamo
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="view/PrestamoLibro.php">Libro</a>
-                                            <a class="dropdown-item" href="view/videoBeam.php">Video Beam</a>
-                                            <a class="dropdown-item" href="#">Prestamo Interbibliotecario</a>
+                                            <a class="dropdown-item" href="http://127.0.0.1/ejemplo/Presentacion/catalogo.php">Libro</a>
+                                            <a class="dropdown-item" href="resevavideoBeam.php">Video Beam</a>
+                                            <a class="dropdown-item" href="http://127.0.0.1/ejemplo/Presentacion/PrestamoInter.php">Prestamo Interbibliotecario</a>
                                         </div>
                                     </li>
                                     <?php if ($_SESSION["usuario"]["perfil"] == "administrador") { ?>
@@ -212,10 +212,10 @@ session_start();
                                                 Gestion
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                <a class="dropdown-item" href="view/registrarUsuario.php">Usuario</a>
-                                                <a class="dropdown-item" href="view/RegistrarLibro.php">Empleados</a>
+                                                <a class="dropdown-item" href="registrarUsuario.php">Usuario</a>
+                                                <a class="dropdown-item" href="RegistrarLibro.php">Libro</a>
                                                 <a class="dropdown-item" href="registrarVideoBeam.php">Video Beam</a>
-                                                <a class="dropdown-item" href="view/RegistrarLibro.php">Material audiovisual</a>
+                                                <a class="dropdown-item" href="SubidaMasiva.php">Subida masiva</a><a class="dropdown-item" href="Plantilla.php">Formato</a>
                                             </div>
                                         </li>
                                         <?php
@@ -236,10 +236,10 @@ session_start();
                                     <option value="Autor">Autor</option>
                                     <option value="Titulo">Titulo</option>
                                     <option value="Editorial">Editorial</option>
-                                    <option value="Tema">Tema</option>
+
                                 </select>
-                                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                                <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="txtBuscarEncabezado" name="txtBuscarEncabezado">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnBuscarLibroCabezera">Buscar</button>
                             </form>
                         </div>
                     </div>
@@ -263,7 +263,7 @@ session_start();
                 <div class="col-md-3">
                     <div class="btn-group-vertical" role="group" aria-label="Basic example">
                         <button type="button" id="btnCatalogoLinea" class="btn btn-secondary">Catalogo en línea</button>
-                        <button type="button" class="btn btn-secondary">Préstamos, consulta y renovación </button>
+                        <button type="button" id="btnHistorial" class="btn btn-secondary">Préstamos, consulta y renovación </button> 
                         <button type="button" class="btn btn-secondary">Sugerir títulos </button>
                         <?php if ($_SESSION) { ?>
                             <button type="button" id="CerrarSesion" class="btn btn-secondary" data-toggle="modal" data-target="#login-modal"> Cerrar sesión </button>
